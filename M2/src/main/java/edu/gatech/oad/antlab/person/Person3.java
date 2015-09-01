@@ -8,10 +8,6 @@ package edu.gatech.oad.antlab.person;
  *  @version 1.1
  */
 public class Person3 {
-	public static void main(String[] args) {
-		Person3 a = new Person3("Mike");
-		System.out.println(a.toString("gtg123b"));
-	}
    /** Holds the persons real name */
 	private String name;
 
@@ -49,7 +45,7 @@ public class Person3 {
 	  //Person 3 put your implementation here
 		String reverse = "";
 		for (int i = 0; i < input.length() - 1; i++) {
-			reverse = reverse + input.substring(i, i + 1);
+			reverse = input.substring(i, i + 1) + reverse;
 		}
 	  return reverse;
 	}
