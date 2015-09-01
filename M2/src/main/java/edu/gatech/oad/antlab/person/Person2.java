@@ -1,4 +1,6 @@
-package edu.gatech.oad.antlab.person;
+package main.java.edu.gatech.oad.antlab.person;
+import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  *  A simple class for person 2
@@ -30,9 +32,17 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 2 put your implementation here
-	  return null;
-	}
+        String res = "";
+        LinkedList list = new LinkedList();
+        for (int i = 0; i < input.length(); i++) {
+            list.add(input.charAt(0));
+      }
+        Collections.shuffle(list);
+        for (int i = 0; i < list.size(); i ++) {
+            res += list.get(i);
+        }
+        return res;
+    }
 	/**
 	 * Return a string rep of this object
 	 * that varies with an input string
