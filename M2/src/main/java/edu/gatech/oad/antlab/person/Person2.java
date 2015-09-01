@@ -1,4 +1,4 @@
-package main.java.edu.gatech.oad.antlab.person;
+package edu.gatech.oad.antlab.person;
 import java.util.Collections;
 import java.util.LinkedList;
 
