@@ -7,7 +7,7 @@ import java.util.LinkedList;
  *  returns their name and a
  *  modified string 
  *
- * @author Bob
+ * @author Jatin Nanda
  * @version 1.1
  */
 public class Person2 {
@@ -54,4 +54,9 @@ public class Person2 {
 	public String toString(String input) {
 	  return name + calc(input);
 	}
+    public static void main(String[] args) {
+        String input = "abcdefghijklmnopwrstuvwxyz";
+        Person2 p = new Person2("bleh");
+        System.out.println(p.calc(input));
+    }
 }
