@@ -35,7 +35,7 @@ public class Person2 {
         String res = "";
         LinkedList list = new LinkedList();
         for (int i = 0; i < input.length(); i++) {
-            list.add(input.charAt(0));
+            list.add(input.charAt(i));
       }
         Collections.shuffle(list);
         for (int i = 0; i < list.size(); i ++) {
