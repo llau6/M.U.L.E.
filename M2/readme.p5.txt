@@ -1,10 +1,16 @@
-Lily Lau
-902987359
+Name: Lily Lau
+GTID: llau6
 
-Extra Credit Maybe:
-
-Animation
-Music
-Additional Random Events
-Enhanced Graphics
-Random Maps
+Extra Credit:
+-Original Artwork
+-Music
+-Additional Random Events
+-Round Random Events
+-Random Maps
+-Additional Player Races
+-Additional Difficulty Settings
+-Additional Tile and Mule Types
+-Enhanced Graphics
+-Animation
+-Networked Multiplayer
+-Minigames
