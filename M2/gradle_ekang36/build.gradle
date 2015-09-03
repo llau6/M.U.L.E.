@@ -1,0 +1,16 @@
+defaultTasks  'jar'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+dependencies {
+    compile files("lib/resources.jar")
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Milestone 2 Gradle', 'Implementation-Version': version , 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain', 'Class-Path' : '../../lib/resources.jar'
+    }
+}
