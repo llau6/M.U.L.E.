@@ -3,9 +3,9 @@ package edu.gatech.oad.antlab.person;
 /**
  *  A simple class for person 4
  *  returns their name and a
- *  modified string
- *
- *  @author Ellie Kang
+ *  modified string 
+ *  
+ *  @author Bob
  *  @version 1.1
  */
 public class Person4 {
@@ -21,7 +21,7 @@ public class Person4 {
   }
     /**
      * This method should return a string
-     * where each character is 1 greater
+     * where each character is 1 greater 
      * than its previous value.  So
      * given "abc123" it should return
      * "bcd234".
@@ -30,21 +30,16 @@ public class Person4 {
      * @return the modified string
      */
     private String calc(String input) {
-        String answer = "";
-        for (int i = 0; i < input.length(); i++) {
-          int charVal = input.charAt(i);
-          String nextChar = String.valueOf((char) (charVal + 1));
-          answer += nextChar;
-      }
-      return answer;
+      //Person 4 put your implementation here
+      return null;
     }
-
+    
     /**
      * Return a string rep of this object
      * that varies with an input string
      *
      * @param input the varying string
-     * @return the string representing the
+     * @return the string representing the 
      *         object
      */
     public String toString(String input) {
@@ -52,3 +47,4 @@ public class Person4 {
     }
 
 }
+
