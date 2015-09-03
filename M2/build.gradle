@@ -1,0 +1,21 @@
+//Set a default task, so if I don't give a task, this (these) will be executed
+defaultTasks  'jar'
+
+//Import a bunch of java related tasks like compileJava, compileJavaTest, clean, javadoc, jar
+apply plugin: 'java'
+
+//Set up some variables (properties)
+sourceCompatibility = 1.8
+version = '1.0'
+
+//Set up dependencies
+dependencies {
+    compile files("lib/resources.jar")
+}
+
+//Define the contents of the jar file
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Milestone 2 Gradle', 'Implementation-Version': version , 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain', 'Class-Path' : '../../lib/resources.jar'
+    }
+}
