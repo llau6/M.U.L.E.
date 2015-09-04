@@ -1,5 +1,5 @@
 Name: James Lee
-GTID: 902895001
+GTID: slee863
 
 Extra Credit:
 -Original Artwork
@@ -13,4 +13,4 @@ Extra Credit:
 -Enhanced Graphics
 -Animation
 -Networked Multiplayer
--Minigames
+-Minigamessome useless info that we will delete.
