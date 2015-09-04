@@ -1,0 +1,16 @@
+Name: James Lee
+GTID: slee863
+
+Extra Credit:
+-Original Artwork
+-Music
+-Additional Random Events
+-Round Random Events
+-Random Maps
+-Additional Player Races
+-Additional Difficulty Settings
+-Additional Tile and Mule Types
+-Enhanced Graphics
+-Animation
+-Networked Multiplayer
+-Minigamessome useless info that we will delete.
