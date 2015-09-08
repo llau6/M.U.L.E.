@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+  <children>
+    <Pane prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <children>
+        <MenuBar layoutX="0.0" layoutY="0.0">
+          <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+        <Label layoutX="55.0" layoutY="99.0" text="Name" />
+        <ImageView id="raceImage" fx:id="raceView" fitHeight="150.0" fitWidth="141.33333333333331" layoutX="245.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@images/tentative.png" />
+          </image>
+        </ImageView>
+        <ComboBox fx:id="raceBox" editable="false" layoutX="95.0" layoutY="129.0" mouseTransparent="false" promptText="race">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Packer" />
+              <String fx:value="Spheroid" />
+              <String fx:value="Humanoid" />
+              <String fx:value="Leggite" />
+              <String fx:value="Flapper" />
+              <String fx:value="Bonzoid" />
+              <String fx:value="Mechtron" />
+              <String fx:value="Gollumer" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <TextArea layoutX="95.0" layoutY="99.0" prefHeight="25.0" prefWidth="107.0" promptText="" text="" wrapText="false" />
+        <Label layoutX="58.0" layoutY="129.0" text="Race" />
+        <Label layoutX="58.0" layoutY="172.0" text="Color" />
+        <ComboBox layoutX="110.0" layoutY="169.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Button fx:id="myButton" layoutX="115.0" layoutY="207.0" mnemonicParsing="false" text="Button" />
+      </children>
+      <effect>
+        <Glow />
+      </effect>
+    </Pane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
