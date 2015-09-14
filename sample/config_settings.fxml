@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller_settings">
   <children>
     <Pane prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
@@ -34,7 +34,6 @@
           </menus>
         </MenuBar>
         <Label layoutX="45.0" layoutY="89.0" text="Number of Players" />
-
         <ComboBox fx:id="raceBox" editable="false" layoutX="175.0" layoutY="129.0" mouseTransparent="false" promptText="">
           <items>
             <FXCollections fx:factory="observableArrayList">
@@ -44,10 +43,8 @@
             </FXCollections>
           </items>
         </ComboBox>
-
         <Label layoutX="60.0" layoutY="129.0" text="Select Difficulty" />
         <Label layoutX="55.0" layoutY="172.0" text="Select Map Type" />
-        
         <ComboBox layoutX="175.0" layoutY="169.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
@@ -57,8 +54,7 @@
             </FXCollections>
           </items>
         </ComboBox>
-
-        <Button fx:id="myButton" layoutX="115.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
+        <Button id="myButton" fx:id="done" layoutX="115.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
         <TextField layoutX="175.0" layoutY="89.0" prefWidth="50.19744873046875" />
       </children>
       <effect>
