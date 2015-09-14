@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller2">
   <children>
     <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-      <center>
-        <Label text="Nothing here!" textAlignment="CENTER" textFill="#a300cc" underline="false">
+      <top>
+        <Label fx:id="playerName" text="Nothing here!" textAlignment="CENTER" textFill="#a300cc" underline="false">
           <font>
             <Font size="30.0" />
           </font>
         </Label>
-      </center>
+      </top>
     </BorderPane>
   </children>
   <columnConstraints>

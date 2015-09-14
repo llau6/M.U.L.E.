@@ -9,12 +9,12 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Player Selection");
-        primaryStage.setScene(new Scene(root, 400, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("config_settings.fxml"));
+        primaryStage.setTitle("M.U.L.E.");
+        Scene scene = new Scene(root, 400, 275);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
