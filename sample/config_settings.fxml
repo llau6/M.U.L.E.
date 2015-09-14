@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+  <children>
+    <Pane prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <children>
+        <MenuBar layoutX="0.0" layoutY="0.0">
+          <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+        <Label layoutX="45.0" layoutY="89.0" text="Number of Players" />
+
+        <ComboBox fx:id="raceBox" editable="false" layoutX="175.0" layoutY="129.0" mouseTransparent="false" promptText="">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Beginner" />
+              <String fx:value="Intermediate" />
+              <String fx:value="Expert" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+
+        <Label layoutX="60.0" layoutY="129.0" text="Select Difficulty" />
+        <Label layoutX="55.0" layoutY="172.0" text="Select Map Type" />
+        
+        <ComboBox layoutX="175.0" layoutY="169.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Desert" />
+              <String fx:value="Forest" />
+              <String fx:value="Grasslands" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+
+        <Button fx:id="myButton" layoutX="115.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
+        <TextField layoutX="175.0" layoutY="89.0" prefWidth="50.19744873046875" />
+      </children>
+      <effect>
+        <Glow />
+      </effect>
+    </Pane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
