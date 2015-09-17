@@ -9,10 +9,11 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+<GridPane fx:id="test" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
   <children>
-    <Pane prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <Pane fx:id="pane2" prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
         <MenuBar layoutX="0.0" layoutY="0.0">
           <menus>
@@ -33,13 +34,13 @@
             </Menu>
           </menus>
         </MenuBar>
-        <Label layoutX="55.0" layoutY="89.0" text="Name" />
-        <ImageView id="raceImage" fx:id="raceView" fitHeight="150.0" fitWidth="141.33333333333331" layoutX="245.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+        <Label layoutX="31.0" layoutY="72.0" text="Name" />
+        <ImageView id="raceImage" fx:id="raceView" fitHeight="150.0" fitWidth="141.33333333333331" layoutX="250.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@images/tentative.png" />
           </image>
         </ImageView>
-        <ComboBox fx:id="raceBox" editable="false" layoutX="97.0" layoutY="129.0" mouseTransparent="false" promptText="">
+        <ComboBox fx:id="raceBox" editable="false" layoutX="74.0" layoutY="117.0" mouseTransparent="false" promptText="">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Packer" />
@@ -53,9 +54,9 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Label layoutX="55.0" layoutY="129.0" text="Race" />
-        <Label layoutX="55.0" layoutY="172.0" text="Color" />
-        <ComboBox layoutX="110.0" layoutY="169.0">
+        <Label layoutX="31.0" layoutY="114.0" text="Race" />
+        <Label layoutX="31.0" layoutY="164.0" text="Color" />
+        <ComboBox fx:id="colorBox" layoutX="74.0" layoutY="161.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Red" />
@@ -64,8 +65,15 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Button fx:id="myButton" layoutX="115.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
-        <TextField fx:id="name" layoutX="104.0" layoutY="89.0" prefWidth="92.19744873046875" />
+        <Button fx:id="myButton" layoutX="161.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
+        <TextField fx:id="name" layoutX="74.0" layoutY="72.0" prefWidth="92.19744873046875" />
+        <Label fx:id="require_name" layoutX="173.0" layoutY="74.0" opacity="0.0" prefWidth="107.0" style="&#10;" text="* require name" textFill="RED">
+          <font>
+            <Font name="System Bold" size="11.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label id="require" fx:id="require_race" font="$x1" layoutX="188.0" layoutY="123.0" opacity="0.0" text="* require race" textFill="RED" />
+        <Label fx:id="require_color" font="$x1" layoutX="166.0" layoutY="169.0" opacity="0.0" text="* require color" textFill="RED" />
       </children>
       <effect>
         <Glow />
