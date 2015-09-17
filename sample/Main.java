@@ -12,6 +12,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("config_settings.fxml"));
         primaryStage.setTitle("M.U.L.E.");
         Scene scene = new Scene(root, 400, 275);
+        scene.getStylesheets().add(getClass().getResource("muleStyle.css").toExternalForm());
+        root.getStyleClass().add("pane1");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

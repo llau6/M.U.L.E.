@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.scene.control.TextField;
@@ -25,15 +27,18 @@ import java.util.ResourceBundle;
 //http://code.makery.ch/blog/javafx-8-event-handling-examples/ (ComboBox)
 //https://blogs.oracle.com/jmxetc/entry/connecting_scenebuilder_edited_fxml_to (controller and fxml)
 //pics: http://strategywiki.org/wiki/M.U.L.E./Getting_Started
-//https://us-mg6.mail.yahoo.com/neo/launch#9530  (switching scenes)
+//http://www.javafxtutorials.com/tutorials/switching-to-different-screens-in-javafx-and-fxml/  (switching scenes)
 //https://docs.oracle.com/javafx/2/ui_controls/text-field.htm (Using TextField)
+//http://stackoverflow.com/questions/10134856/javafx-2-0-how-to-application-getparameters-in-a-controller-java-file/10136403#10136403 (static variable to pass to other controller)
 
 public class Controller implements Initializable {
 
     @FXML
     TextField name;
 
-    String playerName;
+    public static String playerName;
+    public static String color;
+    public static Race raceChosen;
 
     @FXML
     Button myButton;
@@ -43,7 +48,22 @@ public class Controller implements Initializable {
     private ObservableList<Race> comboData = FXCollections.observableArrayList();
 
     @FXML
+    private ComboBox colorBox;
+
+    @FXML
     private ImageView raceView;
+
+    @FXML
+    Label require_name;
+    @FXML
+    Label require_race;
+    @FXML
+    Label require_color;
+
+    @FXML
+    Pane pane2;
+    @FXML
+    GridPane test;
 
     /**
      *
@@ -53,6 +73,9 @@ public class Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        test.getStylesheets().add(getClass().getResource("muleStyle.css").toExternalForm());
+        pane2.getStyleClass().add("pane2");
 
         comboData.add(new Race("Packer", "sample/images/MULE_Packer.png"));
         comboData.add(new Race("Spheroid", "sample/images/MULE_Spheroid.png"));
@@ -101,10 +124,6 @@ public class Controller implements Initializable {
             raceView.setImage(selected.getImage());
         });
 
-        //Save name
-        playerName = name.getText();
-        System.out.println("1:  " + playerName);
-
     }
 
     /**
@@ -114,11 +133,14 @@ public class Controller implements Initializable {
      */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
-        if (name.getText() != null && !name.getText().isEmpty()) {
+        if (name.getText() != null && !name.getText().isEmpty()
+                && !colorBox.getSelectionModel().isEmpty() && !raceBox.getSelectionModel().isEmpty()) {
             Stage stage;
             Parent root;
+            //Save name, color, and race
             playerName = name.getText();
-            System.out.println(playerName);
+            color = colorBox.getSelectionModel().getSelectedItem().toString();
+            raceChosen = raceBox.getSelectionModel().getSelectedItem();
             FXMLLoader loader = new FXMLLoader();
             //get reference to the button's stage
             stage = (Stage) myButton.getScene().getWindow();
@@ -129,11 +151,13 @@ public class Controller implements Initializable {
             stage.setScene(scene);
             stage.show();
         } else {
-            System.out.println("Name!");
+            if (name.getText() == null || name.getText().isEmpty()) {
+                require_name.setOpacity(1.0);
+            } else if (raceBox.getSelectionModel().isEmpty()) {
+                require_race.setOpacity(1.0);
+            } else if (colorBox.getSelectionModel().isEmpty()){
+                require_color.setOpacity(1.0);
+            }
         }
-    }
-
-    public String getName() {
-        return playerName;
     }
 }
