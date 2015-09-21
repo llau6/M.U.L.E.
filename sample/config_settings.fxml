@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller_settings">
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ConfigScreen">
   <children>
     <Pane prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
@@ -34,12 +34,12 @@
           </menus>
         </MenuBar>
         <Label layoutX="45.0" layoutY="89.0" text="Number of Players" />
-        <ComboBox fx:id="raceBox" editable="false" layoutX="175.0" layoutY="129.0" mouseTransparent="false" promptText="">
+        <ComboBox fx:id="difficultyBox" editable="false" layoutX="175.0" layoutY="129.0" mouseTransparent="false" promptText="">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Beginner" />
-              <String fx:value="Intermediate" />
-              <String fx:value="Expert" />
+              <String fx:value="Standard" />
+              <String fx:value="Tournament" />
             </FXCollections>
           </items>
         </ComboBox>
@@ -55,7 +55,16 @@
           </items>
         </ComboBox>
         <Button id="myButton" fx:id="done" layoutX="115.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
-        <TextField layoutX="175.0" layoutY="89.0" prefWidth="50.19744873046875" />
+          <ComboBox fx:id = "numPlayers" layoutX="175.0" layoutY="84.0">
+              <items>
+                  <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="1" />
+                      <String fx:value="2" />
+                      <String fx:value="3" />
+                      <String fx:value="4" />
+                  </FXCollections>
+              </items>
+          </ComboBox>
       </children>
       <effect>
         <Glow />
