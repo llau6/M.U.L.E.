@@ -47,11 +47,16 @@ public class PlayerInitScreen implements Initializable {
     Button myButton;
 
     @FXML
+    Label sameName;
+    @FXML
+    Label sameColor;
+
+    @FXML
     private ComboBox<Race> raceBox;
     private ObservableList<Race> comboData = FXCollections.observableArrayList();
 
     @FXML
-    private ComboBox<Color> colorBox;
+    private ComboBox<String> colorBox;
 
     @FXML
     private ImageView raceView;
@@ -137,47 +142,66 @@ public class PlayerInitScreen implements Initializable {
      */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        Object[] playersArray = GameManager.players.toArray();
+        boolean isSameName = false;
+        boolean isSameColor = false;
         if (name.getText() != null && !name.getText().isEmpty()
                 && !colorBox.getSelectionModel().isEmpty() && !raceBox.getSelectionModel().isEmpty()) {
+            for (int i = 0; i < playersArray.length; i++) {
+                if (((Player) playersArray[i]).getName().equals(name.getText())) {
+                    isSameName = true;
+                } else if (((Player) playersArray[i]).getColor().equals(Color.valueOf(colorBox.getSelectionModel().getSelectedItem()))) {
+                    isSameColor = true;
+                }
+            }
             //Save name, color, and race
-            playerName = name.getText();
-            color = (Color) colorBox.getValue();
-            raceChosen = raceBox.getSelectionModel().getSelectedItem();
-            GameManager.players.add(new Player(playerName, raceChosen, color));
-            if (iteration < playernum) {
-                iteration++;
-                Stage stage;
-                Parent root;
-                FXMLLoader loader = new FXMLLoader();
-                //get reference to the button's stage
-                stage = (Stage) myButton.getScene().getWindow();
-                //load up other FXML document
-                root = loader.load(getClass().getResource("playerInitScreen.fxml"));
-                //create a new scene with root and set the stage
-                Scene scene = new Scene(root, 400, 275);
-                stage.setScene(scene);
-                stage.show();
+            if (iteration == 1 || (!isSameName
+                    && !isSameColor)) {
+                playerName = name.getText();
+                color = Color.valueOf(colorBox.getSelectionModel().getSelectedItem());
+                raceChosen = raceBox.getSelectionModel().getSelectedItem();
+                GameManager.players.add(new Player(playerName, raceChosen, color));
+                if (iteration < playernum) {
+                    iteration++;
+                    FXMLLoader loader = new FXMLLoader();
+                    //get reference to the button's stage
+                    stage = (Stage) myButton.getScene().getWindow();
+                    //load up other FXML document
+                    root = loader.load(getClass().getResource("playerInitScreen.fxml"));
+                    //create a new scene with root and set the stage
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    FXMLLoader loader = new FXMLLoader();
+                    //get reference to the button's stage
+                    stage = (Stage) myButton.getScene().getWindow();
+                    //load up other FXML document
+                    root = loader.load(getClass().getResource("MapScreen.fxml"));
+                    //create a new scene with root and set the stage
+                    Scene scene = new Scene(root, 800, 700);
+                    stage.setScene(scene);
+                    stage.show();
+                }
             } else {
-                Stage stage;
-                Parent root;
-                FXMLLoader loader = new FXMLLoader();
-                //get reference to the button's stage
-                stage = (Stage) myButton.getScene().getWindow();
-                //load up other FXML document
-                root = loader.load(getClass().getResource("MapScreen.fxml"));
-                //create a new scene with root and set the stage
-                Scene scene = new Scene(root, 800, 700);
-                stage.setScene(scene);
-                stage.show();
+                if (isSameName) {
+                    sameName.setOpacity(1.0);
+                    sameColor.setOpacity(0);
+                } else if (isSameColor) {
+                    sameName.setOpacity(0.0);
+                    sameColor.setOpacity(1.0);
+                }
             }
         } else {
-            if (name.getText() == null || name.getText().isEmpty()) {
-                require_name.setOpacity(1.0);
-            } else if (raceBox.getSelectionModel().isEmpty()) {
-                require_race.setOpacity(1.0);
-            } else if (colorBox.getSelectionModel().isEmpty()) {
-                require_color.setOpacity(1.0);
+                if (name.getText() == null || name.getText().isEmpty()) {
+                    require_name.setOpacity(1.0);
+                } else if (raceBox.getSelectionModel().isEmpty()) {
+                    require_race.setOpacity(1.0);
+                } else if (colorBox.getSelectionModel().isEmpty()) {
+                    require_color.setOpacity(1.0);
+                }
             }
-        }
     }
 }
