@@ -1,4 +1,4 @@
-package sample;
+package M4;
 
 import javafx.scene.paint.Color;
 
@@ -14,7 +14,7 @@ public class Player implements Comparable<Player> {
     private int oreCount;
     private Race race;
     private Color color;
-    private int score = energyCount + foodCount + 500 * landCount + money;
+    private int score;
 
     public Player(String name, Race race, Color color) {
         this.name = name;
@@ -27,6 +27,7 @@ public class Player implements Comparable<Player> {
             foodCount = 4;
             energyCount = 2;
         }
+        this.score = energyCount + foodCount + 500 * landCount + money;
     }
 
     public String getName() {

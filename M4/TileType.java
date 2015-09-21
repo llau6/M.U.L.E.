@@ -1,7 +1,4 @@
-package sample;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+package M4;
 
 /**
  * Created by jatin1 on 9/20/15.

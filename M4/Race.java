@@ -1,4 +1,4 @@
-package sample;
+package M4;
 
 import javafx.scene.image.Image;
 
