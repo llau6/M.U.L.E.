@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.*?>
 
-<GridPane fx:id="test" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M4.PlayerInitScreen">
+<GridPane fx:id="test" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="M4.PlayerInitScreen">
   <children>
     <Pane fx:id="pane2" prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
@@ -68,17 +68,33 @@
         </Label>
         <Label id="require" fx:id="require_race" font="$x1" layoutX="188.0" layoutY="123.0" opacity="0.0" text="* require race" textFill="RED" />
         <Label fx:id="require_color" font="$x1" layoutX="166.0" layoutY="169.0" opacity="0.0" text="* require color" textFill="RED" />
-            <ComboBox fx:id="colorBox" layoutX="74.0" layoutY="159.0" prefHeight="26.0" prefWidth="107.0">
+        <ComboBox fx:id="colorBox" layoutX="74.0" layoutY="159.0" prefHeight="26.0" prefWidth="107.0">
+          <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+              </items>
+            </ContextMenu>
+          </contextMenu>
           <items>
-              <FXCollections fx:factory="observableArrayList">
-                  <Color fx:value="red" />
-                  <Color fx:value="blue" />
-                  <Color fx:value="green" />
-                  <Color fx:value="white" />
-              </FXCollections>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="red" />
+              <String fx:value="blue" />
+              <String fx:value="green" />
+              <String fx:value="white" />
+            </FXCollections>
           </items>
-      </ComboBox>
-            <Label fx:id= "playerID" layoutX="258.0" layoutY="39.0" prefHeight="16.0" prefWidth="76.0" text= ""/>
+          <tooltip>
+            <Tooltip text="Empty Tooltip" />
+          </tooltip>
+        </ComboBox>
+        <Label fx:id="playerID" layoutX="258.0" layoutY="39.0" prefHeight="16.0" prefWidth="76.0" text="" />
+        <Label fx:id="sameName" layoutX="31.0" layoutY="36.0" opacity="0.0" prefHeight="25.0" prefWidth="209.0" text="Player name already taken" textAlignment="LEFT" textFill="#a300cc">
+          <font>
+            <Font name="System Italic" size="17.0" fx:id="x2" />
+          </font>
+        </Label>
+        <Label id="sameName" fx:id="sameColor" font="$x2" layoutX="31.0" layoutY="36.0" opacity="0.0" prefHeight="25.0" prefWidth="209.0" text="Color already taken" textAlignment="LEFT" textFill="#a300cc" />
       </children>
       <effect>
         <Glow />
