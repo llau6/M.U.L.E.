@@ -195,13 +195,9 @@ public class PlayerInitScreen implements Initializable {
                 }
             }
         } else {
-                if (name.getText() == null || name.getText().isEmpty()) {
-                    require_name.setOpacity(1.0);
-                } else if (raceBox.getSelectionModel().isEmpty()) {
-                    require_race.setOpacity(1.0);
-                } else if (colorBox.getSelectionModel().isEmpty()) {
-                    require_color.setOpacity(1.0);
-                }
+            require_name.setOpacity(1.0);
+            require_race.setOpacity(1.0);
+            require_color.setOpacity(1.0);
             }
     }
 }
