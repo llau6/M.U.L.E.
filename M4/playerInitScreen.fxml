@@ -37,13 +37,13 @@
             </Menu>
           </menus>
         </MenuBar>
-        <Label layoutX="31.0" layoutY="72.0" text="Name" />
+        <Label layoutX="19.0" layoutY="72.0" text="Name" />
         <ImageView id="raceImage" fx:id="raceView" fitHeight="150.0" fitWidth="141.33333333333331" layoutX="250.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@images/tentative.png" />
           </image>
         </ImageView>
-        <ComboBox fx:id="raceBox" editable="false" layoutX="74.0" layoutY="117.0" mouseTransparent="false" promptText="">
+        <ComboBox fx:id="raceBox" editable="false" layoutX="62.0" layoutY="117.0" mouseTransparent="false" promptText="">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Packer" />
@@ -57,18 +57,18 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Label layoutX="31.0" layoutY="114.0" text="Race" />
-        <Label layoutX="31.0" layoutY="164.0" text="Color" />
+        <Label layoutX="19.0" layoutY="114.0" text="Race" />
+        <Label layoutX="19.0" layoutY="164.0" text="Color" />
         <Button fx:id="myButton" layoutX="161.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
-        <TextField fx:id="name" layoutX="74.0" layoutY="72.0" prefHeight="26.0" prefWidth="109.0" />
-        <Label fx:id="require_name" layoutX="173.0" layoutY="74.0" opacity="0.0" prefWidth="107.0" style="&#10;" text="* require name" textFill="RED">
+        <TextField fx:id="name" layoutX="62.0" layoutY="72.0" prefHeight="26.0" prefWidth="109.0" />
+        <Label fx:id="require_name" layoutX="173.0" layoutY="74.0" opacity="0.0" prefWidth="107.0" style="&#10;" text="*required" textFill="RED">
           <font>
             <Font name="System Bold" size="11.0" fx:id="x1" />
           </font>
         </Label>
-        <Label id="require" fx:id="require_race" font="$x1" layoutX="188.0" layoutY="123.0" opacity="0.0" text="* require race" textFill="RED" />
-        <Label fx:id="require_color" font="$x1" layoutX="166.0" layoutY="169.0" opacity="0.0" text="* require color" textFill="RED" />
-        <ComboBox fx:id="colorBox" layoutX="74.0" layoutY="159.0" prefHeight="26.0" prefWidth="107.0">
+        <Label id="require" fx:id="require_race" font="$x1" layoutX="183.0" layoutY="124.0" opacity="0.0" text="*required" textFill="RED" />
+        <Label fx:id="require_color" font="$x1" layoutX="177.0" layoutY="168.0" opacity="0.0" text="*required" textFill="RED" />
+        <ComboBox fx:id="colorBox" layoutX="62.0" layoutY="159.0" prefHeight="26.0" prefWidth="107.0">
           <contextMenu>
             <ContextMenu>
               <items>
@@ -89,12 +89,15 @@
           </tooltip>
         </ComboBox>
         <Label fx:id="playerID" layoutX="258.0" layoutY="39.0" prefHeight="16.0" prefWidth="76.0" text="" />
-        <Label fx:id="sameName" layoutX="31.0" layoutY="36.0" opacity="0.0" prefHeight="25.0" prefWidth="209.0" text="Player name already taken" textAlignment="LEFT" textFill="#a300cc">
+        <Label fx:id="sameName" layoutX="31.0" layoutY="36.0" opacity="0.0" prefHeight="25.0" prefWidth="209.0" text="Player name already taken" textAlignment="LEFT">
           <font>
             <Font name="System Italic" size="17.0" fx:id="x2" />
           </font>
+          <textFill>
+            <Color blue="0.800" green="0.000" red="0.639" fx:id="x3" />
+          </textFill>
         </Label>
-        <Label id="sameName" fx:id="sameColor" font="$x2" layoutX="31.0" layoutY="36.0" opacity="0.0" prefHeight="25.0" prefWidth="209.0" text="Color already taken" textAlignment="LEFT" textFill="#a300cc" />
+        <Label id="sameName" fx:id="sameColor" font="$x2" layoutX="31.0" layoutY="36.0" opacity="0.0" prefHeight="25.0" prefWidth="209.0" text="Color already taken" textAlignment="LEFT" textFill="$x3" />
       </children>
       <effect>
         <Glow />

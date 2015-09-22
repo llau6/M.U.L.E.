@@ -2,14 +2,16 @@ package M4;
 
 import javafx.scene.control.Label;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * Created by jatin1 on 9/18/15.
  */
 public class GameManager {
     public static String difficulty;
-    public static PriorityQueue<Player> players = new PriorityQueue<>();
+    public static Queue<Player> players = new LinkedList<>();
     public static TileType[][] gameMap = new TileType[5][9];
     public static Player currentPlayer;
     public static int currentTurn;
@@ -36,6 +38,10 @@ public class GameManager {
     }
     //initial land selection phase
     public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score) {
+        Object[] playerArray = players.toArray();
+        for (int i = 0; i < playerArray.length; i++) {
+            System.out.print(((Player) playerArray[i]).getName());
+        }
         totalTurnsInitial = players.size() * 2;
         currentPlayer = players.remove();
         currPlayer.setText(currentPlayer.getName());
