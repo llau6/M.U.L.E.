@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,8 +43,10 @@ public class ConfigScreen implements Initializable {
     @FXML
     private ComboBox mapCombo;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        done.getStyleClass().add("button");
     }
 
     @FXML

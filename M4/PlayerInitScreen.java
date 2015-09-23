@@ -198,6 +198,6 @@ public class PlayerInitScreen implements Initializable {
             require_name.setOpacity(1.0);
             require_race.setOpacity(1.0);
             require_color.setOpacity(1.0);
-            }
+        }
     }
 }
