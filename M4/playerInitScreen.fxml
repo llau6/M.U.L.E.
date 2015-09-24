@@ -81,7 +81,7 @@
               <String fx:value="red" />
               <String fx:value="blue" />
               <String fx:value="green" />
-              <String fx:value="white" />
+              <String fx:value="orange" />
             </FXCollections>
           </items>
           <tooltip>

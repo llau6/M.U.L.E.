@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -66,12 +65,26 @@ public class MapScreen implements Initializable{
     @FXML
     private ImageView selectedImage;
 
+    @FXML
+    private Label selectedFood;
+
+    @FXML
+    private Label selectedOre;
+
+    @FXML
+    private Label selectedEnergy;
+
+    @FXML
+    private Label selectedCost;
+
+    @FXML
+    private Button skipButt;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GameManager.initializeMap();
-
+        skipButt.setDisable(true);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
-
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -82,6 +95,10 @@ public class MapScreen implements Initializable{
                         Color awtColor = GameManager.currentPlayer.getColor();
                         ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         riverNode.setDisable(true);
+                        selectedFood.setText(String.valueOf(TileType.RIVER.getFoodCount()));
+                        selectedOre.setText(String.valueOf(TileType.RIVER.getOreCount()));
+                        selectedEnergy.setText(String.valueOf(TileType.RIVER.getEnergyCount()));
+                        selectedCost.setText(String.valueOf(300));
                     });
 
                 } else if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 8)) {
@@ -91,6 +108,10 @@ public class MapScreen implements Initializable{
                         Color awtColor = GameManager.currentPlayer.getColor();
                         ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         mountain1Node.setDisable(true);
+                        selectedFood.setText(String.valueOf(TileType.MOUNTAIN1.getFoodCount()));
+                        selectedOre.setText(String.valueOf(TileType.MOUNTAIN1.getOreCount()));
+                        selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN1.getEnergyCount()));
+                        selectedCost.setText(String.valueOf(300));
                     });
                 } else if ((i == 3 && j == 1) || (i == 3 && j == 6) || (i == 4 && j == 2) && (i == 4 && j == 8)) {
                     Button mountain2Node = (Button)getNodeFromGridPane(map, j,i);
@@ -99,6 +120,10 @@ public class MapScreen implements Initializable{
                         Color awtColor = GameManager.currentPlayer.getColor();
                         ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         mountain2Node.setDisable(true);
+                        selectedFood.setText(String.valueOf(TileType.MOUNTAIN2.getFoodCount()));
+                        selectedOre.setText(String.valueOf(TileType.MOUNTAIN2.getOreCount()));
+                        selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN2.getEnergyCount()));
+                        selectedCost.setText(String.valueOf(300));
                     });
                 } else if ((i == 0 && j == 3) || (i == 1 && j == 4) || (i == 3 && j == 4) || (i == 4 && j == 4)) {
                     Button mountain3Node = (Button)getNodeFromGridPane(map,j,i);
@@ -107,6 +132,10 @@ public class MapScreen implements Initializable{
                         Color awtColor = GameManager.currentPlayer.getColor();
                         ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         mountain3Node.setDisable(true);
+                        selectedFood.setText(String.valueOf(TileType.MOUNTAIN3.getFoodCount()));
+                        selectedOre.setText(String.valueOf(TileType.MOUNTAIN3.getOreCount()));
+                        selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN3.getEnergyCount()));
+                        selectedCost.setText(String.valueOf(300));
                     });
                 } else if (i == 2 && j == 4){
                     Button enterButton = (Button)getNodeFromGridPane(map,j,i);
@@ -127,6 +156,10 @@ public class MapScreen implements Initializable{
                         Color awtColor = GameManager.currentPlayer.getColor();
                         ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         planeNode.setDisable(true);
+                        selectedFood.setText(String.valueOf(TileType.PLAIN.getFoodCount()));
+                        selectedOre.setText(String.valueOf(TileType.PLAIN.getOreCount()));
+                        selectedEnergy.setText(String.valueOf(TileType.PLAIN.getEnergyCount()));
+                        selectedCost.setText(String.valueOf(300));
                     });
                 }
             }
@@ -134,28 +167,32 @@ public class MapScreen implements Initializable{
 
 
         nextPlayer.setOnAction((event) -> {
-            if (GameManager.currentTurn < GameManager.totalTurnsInitial + 1) {
+            if (GameManager.currentTurn < GameManager.totalTurnsInitial) {
                 GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
-            } else if (GameManager.currentTurn >= GameManager.totalTurnsInitial - 1){
-                GameManager.buyLandSelection(currPlayer, energy, money, ore, food, score);
             } else {
-                try {
-                    Stage stage;
-                    Parent root;
-                    FXMLLoader loader = new FXMLLoader();
-                    //get reference to the button's stage
-                    stage = (Stage) nextPlayer.getScene().getWindow();
-                    //load up other FXML document
-                    root = loader.load(getClass().getResource("Map2.fxml"));
-                    //create a new scene with root and set the stage
-
-                    Scene scene = new Scene(root, 800, 700);
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    System.out.println("Pls");
-                }
+                skipButt.setDisable(false);
+                GameManager.buyLandSelection(currPlayer, energy, money, ore, food, score);
+//            } else {
+//                try {
+//                    Stage stage;
+//                    Parent root;
+//                    FXMLLoader loader = new FXMLLoader();
+//                    //get reference to the button's stage
+//                    stage = (Stage) nextPlayer.getScene().getWindow();
+//                    //load up other FXML document
+//                    root = loader.load(getClass().getResource("Map2.fxml"));
+//                    //create a new scene with root and set the stage
+//
+//                    Scene scene = new Scene(root, 800, 700);
+//                    stage.setScene(scene);
+//                    stage.show();
+//                } catch (IOException e) {
+//                    System.out.println("Pls");
+//                }
             }
+        });
+        skipButt.setOnAction((event) -> {
+            GameManager.buyLandSelection(currPlayer, energy, money, ore, food, score);
         });
     }
 

@@ -15,4 +15,16 @@ public enum TileType {
         this.energyCount = energyCount;
         this.oreCount = oreCount;
     }
+
+    public int getOreCount() {
+        return oreCount;
+    }
+
+    public int getFoodCount() {
+        return foodCount;
+    }
+
+    public int getEnergyCount() {
+        return energyCount;
+    }
 }
