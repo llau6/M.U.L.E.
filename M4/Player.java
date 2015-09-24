@@ -9,7 +9,7 @@ public class Player implements Comparable<Player> {
     private String name;
     private int foodCount;
     private int energyCount;
-    private int money;
+    private int money = 1000;
     private int landCount;
     private int oreCount;
     private Race race;
@@ -80,6 +80,10 @@ public class Player implements Comparable<Player> {
 
     public void setLandCount(int landCount) {
         this.landCount = landCount;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     public int compareTo(Player other) {
