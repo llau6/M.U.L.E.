@@ -1,6 +1,8 @@
 package M4;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -36,6 +38,8 @@ public class GameManager {
             }
         }
     }
+
+
     //initial land selection phase
     public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score) {
         Object[] playerArray = players.toArray();
@@ -44,6 +48,27 @@ public class GameManager {
         }
         totalTurnsInitial = players.size() * 2;
         currentPlayer = players.remove();
+        currentTurn++;
+
+        currPlayer.setText(currentPlayer.getName());
+        energy.setText("" + currentPlayer.getEnergyCount());
+        money.setText("" + currentPlayer.getMoney());
+        ore.setText("" + currentPlayer.getOreCount());
+        food.setText("" + currentPlayer.getFoodCount());
+        score.setText("" + currentPlayer.getScore());
+        players.add(currentPlayer);
+    }
+
+    //initial land selection phase after first two turn
+    public static void buyLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score) {
+        totalTurnsInitial = players.size() * 2;
+        currentPlayer = players.remove();
+        currentTurn++;
+
+        int curMoney = currentPlayer.getMoney();
+        if (curMoney >= 300) {
+            currentPlayer.setMoney( curMoney - 300);
+        }
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
