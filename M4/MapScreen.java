@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
  */
 public class MapScreen implements Initializable{
 
-    private static int passCount = 0, playerCount = -1;
+    private int playerCount = 0, skipCount = 0;
 
     @FXML
     public static Button townButton;
@@ -62,6 +62,8 @@ public class MapScreen implements Initializable{
     @FXML
     public Label score;
 
+    public TileType selectedTile;
+
     @FXML
     private ImageView selectedImage;
 
@@ -80,6 +82,8 @@ public class MapScreen implements Initializable{
     @FXML
     private Button skipButt;
 
+    private Button selectedLand;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GameManager.initializeMap();
@@ -92,50 +96,42 @@ public class MapScreen implements Initializable{
                     Button riverNode = (Button)getNodeFromGridPane(map, j, i);
                     riverNode.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (riverNode.getGraphic())).getImage());
-                        Color awtColor = GameManager.currentPlayer.getColor();
-                        ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
-                        riverNode.setDisable(true);
                         selectedFood.setText(String.valueOf(TileType.RIVER.getFoodCount()));
                         selectedOre.setText(String.valueOf(TileType.RIVER.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.RIVER.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedLand = riverNode;
                     });
 
                 } else if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 8)) {
                     Button mountain1Node = (Button)getNodeFromGridPane(map, j, i);
                     mountain1Node.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (mountain1Node.getGraphic())).getImage());
-                        Color awtColor = GameManager.currentPlayer.getColor();
-                        ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
-                        mountain1Node.setDisable(true);
                         selectedFood.setText(String.valueOf(TileType.MOUNTAIN1.getFoodCount()));
                         selectedOre.setText(String.valueOf(TileType.MOUNTAIN1.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN1.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedLand = mountain1Node;
                     });
                 } else if ((i == 3 && j == 1) || (i == 3 && j == 6) || (i == 4 && j == 2) && (i == 4 && j == 8)) {
                     Button mountain2Node = (Button)getNodeFromGridPane(map, j,i);
                     mountain2Node.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (mountain2Node.getGraphic())).getImage());
-                        Color awtColor = GameManager.currentPlayer.getColor();
-                        ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
-                        mountain2Node.setDisable(true);
                         selectedFood.setText(String.valueOf(TileType.MOUNTAIN2.getFoodCount()));
                         selectedOre.setText(String.valueOf(TileType.MOUNTAIN2.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN2.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedLand = mountain2Node;
                     });
                 } else if ((i == 0 && j == 3) || (i == 1 && j == 4) || (i == 3 && j == 4) || (i == 4 && j == 4)) {
                     Button mountain3Node = (Button)getNodeFromGridPane(map,j,i);
                     mountain3Node.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (mountain3Node.getGraphic())).getImage());
-                        Color awtColor = GameManager.currentPlayer.getColor();
-                        ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
-                        mountain3Node.setDisable(true);
                         selectedFood.setText(String.valueOf(TileType.MOUNTAIN3.getFoodCount()));
                         selectedOre.setText(String.valueOf(TileType.MOUNTAIN3.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN3.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedLand = mountain3Node;
                     });
                 } else if (i == 2 && j == 4){
                     Button enterButton = (Button)getNodeFromGridPane(map,j,i);
@@ -153,40 +149,54 @@ public class MapScreen implements Initializable{
                     Button planeNode = (Button)getNodeFromGridPane(map, j,i);
                     planeNode.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (planeNode.getGraphic())).getImage());
-                        Color awtColor = GameManager.currentPlayer.getColor();
-                        ((Button) event.getTarget()).setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
-                        planeNode.setDisable(true);
                         selectedFood.setText(String.valueOf(TileType.PLAIN.getFoodCount()));
                         selectedOre.setText(String.valueOf(TileType.PLAIN.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.PLAIN.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedLand = planeNode;
                     });
                 }
             }
         }
 
         nextPlayer.setOnAction((event) -> {
-            //resets every round
-            if (GameManager.currentTurn < GameManager.totalTurnsInitial) {
-                GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
-            } else {
-                skipButt.setDisable(false);
-                playerCount++;
-                GameManager.buyLandSelection(currPlayer, energy, money, ore, food, score);
-                if (playerCount + passCount >= GameManager.players.size()) {
-                    playerCount = 0;
-                    passCount = 0;
+            if (GameManager.currentPlayer.getMoney() >= 300) {
+                if (selectedLand != null) {
+                    if (!selectedLand.isDisable()) {
+                        //sets the land to player's color after player buys the territory
+                        Color awtColor = GameManager.currentPlayer.getColor();
+                        selectedLand.setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
+                        //prevents players to buy already owned property
+                        selectedLand.setDisable(true);
+                    }
                 }
-                System.out.println("passCount " + passCount);
-                System.out.println("playerCount " + playerCount);
+                if (GameManager.currentTurn <= GameManager.totalTurnsInitial) {
+                    if (GameManager.currentTurn == GameManager.totalTurnsInitial) {
+                        skipButt.setDisable(false);
+                    }
+                    GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
+                } else {
+                    playerCount++;
+                    if (playerCount + skipCount >= GameManager.players.size()) {
+                        playerCount = 0;
+                        skipCount = 0;
+                    }
+                    GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, true);
+                }
+            } else {
+                nextPlayer.setDisable(true);
+                nextPlayer.setText("Insufficient Funds!");
             }
         });
+
         skipButt.setOnAction((event) -> {
-            GameManager.buyLandSelection(currPlayer, energy, money, ore, food, score);
-            passCount++;
-            System.out.println("passCount " + passCount);
-            System.out.println("playerCount " + playerCount);
-            if ((playerCount == 0  && passCount >= GameManager.players.size())) {
+            GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false);
+            skipCount++;
+            if (nextPlayer.isDisable()) {
+                nextPlayer.setText("Claim Land!");
+                nextPlayer.setDisable(false);
+            }
+            if ((playerCount == 0  && skipCount >= GameManager.players.size())) {
                 try {
                     Stage stage;
                     Parent root;
@@ -202,10 +212,10 @@ public class MapScreen implements Initializable{
                 } catch (IOException e) {
                     System.out.println("pls");
                 }
-            } else if (playerCount + passCount >= GameManager.players.size()) {
-                    playerCount = 0;
-                    passCount = 0;
-                }
+            } else if (playerCount + skipCount >= GameManager.players.size()) {
+                playerCount = 0;
+                skipCount = 0;
+            }
         });
     }
 
