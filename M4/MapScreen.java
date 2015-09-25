@@ -33,6 +33,8 @@ import java.util.ResourceBundle;
  */
 public class MapScreen implements Initializable{
 
+    private static int passCount = 0, playerCount = -1;
+
     @FXML
     public static Button townButton;
 
@@ -59,8 +61,6 @@ public class MapScreen implements Initializable{
 
     @FXML
     public Label score;
-
-    public TileType selectedTile;
 
     @FXML
     private ImageView selectedImage;
@@ -165,34 +165,47 @@ public class MapScreen implements Initializable{
             }
         }
 
-
         nextPlayer.setOnAction((event) -> {
+            //resets every round
             if (GameManager.currentTurn < GameManager.totalTurnsInitial) {
                 GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
             } else {
                 skipButt.setDisable(false);
+                playerCount++;
                 GameManager.buyLandSelection(currPlayer, energy, money, ore, food, score);
-//            } else {
-//                try {
-//                    Stage stage;
-//                    Parent root;
-//                    FXMLLoader loader = new FXMLLoader();
-//                    //get reference to the button's stage
-//                    stage = (Stage) nextPlayer.getScene().getWindow();
-//                    //load up other FXML document
-//                    root = loader.load(getClass().getResource("Map2.fxml"));
-//                    //create a new scene with root and set the stage
-//
-//                    Scene scene = new Scene(root, 800, 700);
-//                    stage.setScene(scene);
-//                    stage.show();
-//                } catch (IOException e) {
-//                    System.out.println("Pls");
-//                }
+                if (playerCount + passCount >= GameManager.players.size()) {
+                    playerCount = 0;
+                    passCount = 0;
+                }
+                System.out.println("passCount " + passCount);
+                System.out.println("playerCount " + playerCount);
             }
         });
         skipButt.setOnAction((event) -> {
             GameManager.buyLandSelection(currPlayer, energy, money, ore, food, score);
+            passCount++;
+            System.out.println("passCount " + passCount);
+            System.out.println("playerCount " + playerCount);
+            if ((playerCount == 0  && passCount >= GameManager.players.size())) {
+                try {
+                    Stage stage;
+                    Parent root;
+                    FXMLLoader loader = new FXMLLoader();
+                    //get reference to the button's stage
+                    stage = (Stage) nextPlayer.getScene().getWindow();//load up other FXML document
+                    root = loader.load(getClass().getResource("Map2.fxml"));
+                    //create a new scene with root and set the stage
+
+                    Scene scene = new Scene(root, 800, 700);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    System.out.println("pls");
+                }
+            } else if (playerCount + passCount >= GameManager.players.size()) {
+                    playerCount = 0;
+                    passCount = 0;
+                }
         });
     }
 
