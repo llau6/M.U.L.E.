@@ -7,6 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.util.*;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by jatin1 on 9/18/15.
@@ -112,5 +116,41 @@ public class GameManager {
         food.setText("" + currentPlayer.getFoodCount());
         score.setText("" + currentPlayer.getScore());
         players.add(currentPlayer);
+    }
+
+    //For Pub
+    //Money Bonus = Round Bonus + random(0, Time Bonus)
+    public static int calculateBonus() {
+        int round = currentPlayer.getRound();
+        int time = currentPlayer.getTime();
+        int moneyBonus = 0;
+        int roundBonus = 50;
+        int timeBonus = 50;
+        //calculate Round Bonus
+        //1	   2	3	 4	 5	 6	 7	 8	 9	 10	 11	 12
+        //50   50	50	100	100	100	100	150	150	150	150	200
+        for (int i = 0; i < round + 1; i++) {
+            if ((i / 4) != (i - 1) / 4) {
+                roundBonus += 50;
+            }
+        }
+        //calculate Time Bonus
+        //39-50 seconds left : 200
+        //26-38 seconds left : 150
+        //13-25 seconds left : 100
+        //0-12 seconds left : 50
+        for (int i = 0; i < time; i++) {
+            if ((i / 13) != (i - 1) / 13) {
+                timeBonus += 50;
+            }
+        }
+        //randomize Time Bonus
+        timeBonus = ThreadLocalRandom.current().nextInt(0, timeBonus + 1);
+        moneyBonus = roundBonus + timeBonus;
+        if (moneyBonus > 250) {
+            moneyBonus = 250;
+        }
+        currentPlayer.setMoney(currentPlayer.getMoney() + moneyBonus);
+        return moneyBonus;
     }
 }
