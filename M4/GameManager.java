@@ -42,10 +42,13 @@ public class GameManager {
 
     //initial land selection phase
     public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score) {
+
         totalTurnsInitial = players.size() * 2;
         currentPlayer = players.remove();
         currentTurn++;
 
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500) +
+                currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
@@ -64,6 +67,7 @@ public class GameManager {
         if (bought) {
             prevPlayer.setMoney(curMoney - 300);
         }
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500));
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());

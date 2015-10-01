@@ -2,6 +2,8 @@ package M4;
 
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 /**
  * Created by jatin1 on 9/18/15.
  */
@@ -15,11 +17,14 @@ public class Player implements Comparable<Player> {
     private Race race;
     private Color color;
     private int score;
+    private ArrayList<TileType> lands;
+
 
     public Player(String name, Race race, Color color) {
         this.name = name;
         this.race = race;
         this.color = color;
+        this.lands = new ArrayList<>();
         if (GameManager.difficulty.equals("Beginner")) {
             foodCount = 8;
             energyCount = 4;
@@ -27,7 +32,9 @@ public class Player implements Comparable<Player> {
             foodCount = 4;
             energyCount = 2;
         }
-        this.score = energyCount + foodCount + 500 * landCount + money;
+        this.score = 0;
+        this.landCount = 0;
+        this.oreCount = 0;
     }
 
     public String getName() {
@@ -66,6 +73,10 @@ public class Player implements Comparable<Player> {
         return score;
     }
 
+    public ArrayList<TileType> getLands() {
+        return lands;
+    }
+
     public void setEnergyCount(int energyCount) {
         this.energyCount = energyCount;
     }
@@ -84,6 +95,14 @@ public class Player implements Comparable<Player> {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setLands(ArrayList<TileType> lands) {
+        this.lands = lands;
     }
 
     public int compareTo(Player other) {

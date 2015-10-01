@@ -11,8 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -82,6 +80,8 @@ public class MapScreen implements Initializable{
     @FXML
     private Button skipButt;
 
+    private TileType selectedTileType;
+
     private Button selectedLand;
 
     @Override
@@ -100,6 +100,7 @@ public class MapScreen implements Initializable{
                         selectedOre.setText(String.valueOf(TileType.RIVER.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.RIVER.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedTileType = TileType.RIVER;
                         selectedLand = riverNode;
                     });
 
@@ -111,6 +112,7 @@ public class MapScreen implements Initializable{
                         selectedOre.setText(String.valueOf(TileType.MOUNTAIN1.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN1.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedTileType = TileType.MOUNTAIN1;
                         selectedLand = mountain1Node;
                     });
                 } else if ((i == 3 && j == 1) || (i == 3 && j == 6) || (i == 4 && j == 2) && (i == 4 && j == 8)) {
@@ -121,6 +123,7 @@ public class MapScreen implements Initializable{
                         selectedOre.setText(String.valueOf(TileType.MOUNTAIN2.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN2.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedTileType = TileType.MOUNTAIN2;
                         selectedLand = mountain2Node;
                     });
                 } else if ((i == 0 && j == 3) || (i == 1 && j == 4) || (i == 3 && j == 4) || (i == 4 && j == 4)) {
@@ -131,6 +134,7 @@ public class MapScreen implements Initializable{
                         selectedOre.setText(String.valueOf(TileType.MOUNTAIN3.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.MOUNTAIN3.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedTileType = TileType.MOUNTAIN3;
                         selectedLand = mountain3Node;
                     });
                 } else if (i == 2 && j == 4){
@@ -153,6 +157,7 @@ public class MapScreen implements Initializable{
                         selectedOre.setText(String.valueOf(TileType.PLAIN.getOreCount()));
                         selectedEnergy.setText(String.valueOf(TileType.PLAIN.getEnergyCount()));
                         selectedCost.setText(String.valueOf(300));
+                        selectedTileType = TileType.PLAIN;
                         selectedLand = planeNode;
                     });
                 }
@@ -161,8 +166,9 @@ public class MapScreen implements Initializable{
 
         nextPlayer.setOnAction((event) -> {
             if (GameManager.currentPlayer.getMoney() >= 300) {
-                if (selectedLand != null) {
+                if (selectedTileType != null) {
                     if (!selectedLand.isDisable()) {
+                        GameManager.currentPlayer.setLandCount(GameManager.currentPlayer.getLandCount()+1);
                         //sets the land to player's color after player buys the territory
                         Color awtColor = GameManager.currentPlayer.getColor();
                         selectedLand.setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
