@@ -15,6 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 /**
@@ -84,11 +86,14 @@ public class MapScreen implements Initializable{
 
     private Button selectedLand;
 
+    private final SoundManager soundManager = new SoundManager(3);
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GameManager.initializeMap();
-        skipButt.setDisable(true);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
+        soundManager.playMusic();
+        skipButt.setDisable(true);
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
