@@ -77,11 +77,16 @@
         </Label>
         <Label id="required" fx:id="requiredDifficulty" font="$x1" layoutX="318.0" layoutY="125.0" opacity="0.0" text="* required" textFill="RED" />
         <Label id="required" fx:id="requiredMap" font="$x1" layoutX="306.0" layoutY="167.0" opacity="0.0" text="* required" textFill="RED" />
-        <Label fx:id="mule" layoutX="245.0" layoutY="20.0" opacity="0.77" text="M.U.L.E" textFill="#009962" textOverrun="ELLIPSIS">
+        <Label fx:id="mule" layoutX="245.0" layoutY="35.0" opacity="0.77" text="M.U.L.E" textFill="#009962" textOverrun="ELLIPSIS">
           <font>
             <Font name="Berlin Sans FB Bold" size="18.0" />
           </font>
         </Label>
+        <ImageView fx:id="muleCat" fitHeight="65.75000012685017" fitWidth="95.28985595703125" layoutX="305.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@images/catMule.gif" />
+          </image>
+        </ImageView>
       </children>
       <effect>
         <Glow />

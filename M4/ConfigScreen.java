@@ -1,17 +1,21 @@
 package M4;
 
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,13 +46,33 @@ public class ConfigScreen implements Initializable {
 
     @FXML
     private ComboBox mapCombo;
+    @FXML
+    private Label mule;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         done.getStyleClass().add("button");
+        animateLabel();
     }
+    public void animateLabel() {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), mule);
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(950), mule);
 
+        rotateTransition.setToAngle(40);
+        rotateTransition.setFromAngle(-40);
+        rotateTransition.setCycleCount(16);
+        rotateTransition.setAutoReverse(true);
+
+        translateTransition.setFromX(10);
+        translateTransition.setToX(-240);
+        translateTransition.setAutoReverse(true);
+        translateTransition.setCycleCount(2);
+
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(translateTransition, rotateTransition);
+        parallelTransition.play();
+    }
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         GameManager.difficulty = (String) difficultyBox.getSelectionModel().getSelectedItem();

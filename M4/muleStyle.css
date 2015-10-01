@@ -1,8 +1,8 @@
 .pane1 {
     -fx-background-color: cornsilk;
-    -fx-background-image: url(images/catMule.gif);
+   /* -fx-background-image: url(images/catMule.gif);
     -fx-background-repeat: no-repeat;
-    -fx-background-position: right top;
+    -fx-background-position: right top;*/
 }
 
 .pane2 {-fx-background-color: cornsilk;}
