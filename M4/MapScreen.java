@@ -17,6 +17,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -36,7 +37,10 @@ public class MapScreen implements Initializable{
     private int playerCount = 0, skipCount = 0;
 
     @FXML
-    public static Button townButton;
+    public Text countDownText;
+
+    @FXML
+    private static Button townButton;
 
     @FXML
     public Button nextPlayer;
@@ -91,6 +95,8 @@ public class MapScreen implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GameManager.initializeMap();
+        skipButt.setDisable(true);
+        GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
         soundManager.playMusic();
         skipButt.setDisable(true);
@@ -170,6 +176,7 @@ public class MapScreen implements Initializable{
         }
 
         nextPlayer.setOnAction((event) -> {
+            GameManager.timer.cancel();
             if (GameManager.currentPlayer.getMoney() >= 300) {
                 if (selectedTileType != null) {
                     if (!selectedLand.isDisable()) {
@@ -185,14 +192,14 @@ public class MapScreen implements Initializable{
                     if (GameManager.currentTurn == GameManager.totalTurnsInitial) {
                         skipButt.setDisable(false);
                     }
-                    GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
+                    GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText);
                 } else {
                     playerCount++;
                     if (playerCount + skipCount >= GameManager.players.size()) {
                         playerCount = 0;
                         skipCount = 0;
                     }
-                    GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, true);
+                    GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, true, countDownText);
                 }
             } else {
                 nextPlayer.setDisable(true);
@@ -201,7 +208,8 @@ public class MapScreen implements Initializable{
         });
 
         skipButt.setOnAction((event) -> {
-            GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false);
+            GameManager.timer.cancel();
+            GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false, countDownText);
             skipCount++;
             if (nextPlayer.isDisable()) {
                 nextPlayer.setText("Claim Land!");

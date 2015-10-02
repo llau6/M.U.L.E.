@@ -713,10 +713,14 @@
         <Label fx:id="selectedFood" layoutX="467.0" layoutY="38.0" text="--" />
         <Label fx:id="selectedEnergy" layoutX="467.0" layoutY="66.0" text="--" />
         <Label fx:id="selectedOre" layoutX="467.0" layoutY="92.0" text="--" />
-        <ImageView fx:id="selectedImage" fitHeight="78.0" fitWidth="56.0" layoutX="557.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="selectedImage" fitHeight="78.0" fitWidth="56.0" layoutX="501.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="410.0" layoutY="115.0" text="Cost" />
             <Label fx:id="selectedCost" layoutX="467.0" layoutY="115.0" text="--" />
             <Button fx:id="skipButt" layoutX="382.0" layoutY="148.0" mnemonicParsing="false" text="Skip Turn" />
+            <Text fx:id="countDownText" fill="#eb0101" layoutX="575.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="136.27844831347466">
+               <font>
+                  <Font size="21.0" />
+               </font></Text>
       </children>
     </Pane>
   </children>

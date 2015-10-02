@@ -18,7 +18,8 @@ public class Player implements Comparable<Player> {
     private Color color;
     private int score;
     private ArrayList<TileType> lands;
-
+    private int round = 4;
+    private int time = 36;
 
     public Player(String name, Race race, Color color) {
         this.name = name;
@@ -37,17 +38,11 @@ public class Player implements Comparable<Player> {
         this.oreCount = 0;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public int getFoodCount() {
-        return foodCount;
-    }
+    public int getFoodCount() { return foodCount; }
 
-    public int getEnergyCount() {
-        return energyCount;
-    }
+    public int getEnergyCount() { return energyCount; }
 
     public int getOreCount() {
         return oreCount;
@@ -57,21 +52,17 @@ public class Player implements Comparable<Player> {
         return race;
     }
 
-    public Color getColor() {
-        return color;
-    }
+    public Color getColor() { return color; }
 
-    public int getMoney() {
-        return money;
-    }
+    public int getMoney() { return money; }
 
-    public int getLandCount() {
-        return landCount;
-    }
+    public int getLandCount() { return landCount; }
 
-    public int getScore() {
-        return score;
-    }
+    public int getScore() {return score; }
+
+    public int getRound() { return round; }
+
+    public int getTime() { return time; }
 
     public ArrayList<TileType> getLands() {
         return lands;
@@ -104,6 +95,12 @@ public class Player implements Comparable<Player> {
     public void setLands(ArrayList<TileType> lands) {
         this.lands = lands;
     }
+
+    public void setRound() {
+        this.round = round; }
+
+    public void setTime() {
+        this.time = time; }
 
     public int compareTo(Player other) {
         return this.score - other.getScore();
