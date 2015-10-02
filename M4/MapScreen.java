@@ -112,6 +112,7 @@ public class MapScreen implements Initializable{
         GameManager.totalTurnsInitial = GameManager.players.size() * 2;
         System.out.println(GameManager.totalTurnsInitial);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
+        GameManager.totalTurnsInitial++;
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -192,7 +193,6 @@ public class MapScreen implements Initializable{
             playerCount++;
             System.out.println("Skip count: " + skipCount);
             System.out.println("Player count " + playerCount);
-            System.out.println(GameManager.totalTurnsInitial);
             if (playerCount + skipCount >= GameManager.players.size()) {
                 playerCount = 0;
                 skipCount = 0;
