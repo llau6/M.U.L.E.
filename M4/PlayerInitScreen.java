@@ -162,8 +162,9 @@ public class PlayerInitScreen implements Initializable {
                 playerName = name.getText();
                 color = Color.valueOf(colorBox.getSelectionModel().getSelectedItem());
                 raceChosen = raceBox.getSelectionModel().getSelectedItem();
-                GameManager.players.add(new Player(playerName, raceChosen, color));
-                GameManager.orderedPlayers.add(new Player(playerName, raceChosen, color));
+                Player player = new Player(playerName, raceChosen, color);
+                GameManager.players.add(player);
+                GameManager.orderedPlayers.add(player);
                 if (iteration < playernum) {
                     iteration++;
                     FXMLLoader loader = new FXMLLoader();
