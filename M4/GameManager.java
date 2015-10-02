@@ -125,7 +125,8 @@ public class GameManager {
         if (bought) {
             prevPlayer.setMoney(curMoney - 300);
         }
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500));
+        System.out.println("name: " + currentPlayer.getName());
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500) + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());

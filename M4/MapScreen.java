@@ -110,7 +110,9 @@ public class MapScreen implements Initializable{
         GameManager.initializeMap();
         skipButt.setDisable(true);
         GameManager.totalTurnsInitial = GameManager.players.size() * 2;
+        System.out.println(GameManager.totalTurnsInitial);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
+        GameManager.totalTurnsInitial++;
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -199,6 +201,7 @@ public class MapScreen implements Initializable{
             if (GameManager.currentPlayer.getMoney() >= 300) {
                 if (selectedTileType != null) {
                     if (!selectedLand.isDisable()) {
+                        System.out.println("player: "+ GameManager.currentPlayer.getName());
                         GameManager.currentPlayer.setLandCount(GameManager.currentPlayer.getLandCount() + 1);
                         //sets the land to player's color after player buys the territory
                         Color awtColor = GameManager.currentPlayer.getColor();
