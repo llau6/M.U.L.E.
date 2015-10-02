@@ -2,6 +2,8 @@ package M4;
 
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+
 /**
  * Created by jatin1 on 9/18/15.
  */
@@ -15,13 +17,16 @@ public class Player implements Comparable<Player> {
     private Race race;
     private Color color;
     private int score;
-    private int round = 4;
-    private int time = 36;
+    private ArrayList<TileType> lands;
+    private boolean hasGone = false;
+
+
 
     public Player(String name, Race race, Color color) {
         this.name = name;
         this.race = race;
         this.color = color;
+        this.lands = new ArrayList<>();
         if (GameManager.difficulty.equals("Beginner")) {
             foodCount = 8;
             energyCount = 4;
@@ -29,14 +34,22 @@ public class Player implements Comparable<Player> {
             foodCount = 4;
             energyCount = 2;
         }
-        this.score = energyCount + foodCount + 500 * landCount + money;
+        this.score = 0;
+        this.landCount = 0;
+        this.oreCount = 0;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public int getFoodCount() { return foodCount; }
+    public int getFoodCount() {
+        return foodCount;
+    }
 
-    public int getEnergyCount() { return energyCount; }
+    public int getEnergyCount() {
+        return energyCount;
+    }
 
     public int getOreCount() {
         return oreCount;
@@ -46,17 +59,25 @@ public class Player implements Comparable<Player> {
         return race;
     }
 
-    public Color getColor() { return color; }
+    public Color getColor() {
+        return color;
+    }
 
-    public int getMoney() { return money; }
+    public int getMoney() {
+        return money;
+    }
 
-    public int getLandCount() { return landCount; }
+    public int getLandCount() {
+        return landCount;
+    }
 
-    public int getScore() {return score; }
+    public int getScore() {
+        return score;
+    }
 
-    public int getRound() { return round; }
-
-    public int getTime() { return time; }
+    public ArrayList<TileType> getLands() {
+        return lands;
+    }
 
     public void setEnergyCount(int energyCount) {
         this.energyCount = energyCount;
@@ -78,11 +99,13 @@ public class Player implements Comparable<Player> {
         this.money = money;
     }
 
-    public void setRound() {
-        this.round = round; }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-    public void setTime() {
-        this.time = time; }
+    public void setLands(ArrayList<TileType> lands) {
+        this.lands = lands;
+    }
 
     public int compareTo(Player other) {
         return this.score - other.getScore();

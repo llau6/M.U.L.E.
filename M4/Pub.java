@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,27 +33,40 @@ public class Pub implements Initializable {
     @FXML
     public Label bonus;
 
+    private boolean hasGambled;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gamble_button.setOnAction((event) -> {
             youWin.setOpacity(1.0);
             bonus.setText("$" + GameManager.calculateBonus());
             gamble_button.setDisable(true);
+            hasGambled = true;
+            back_button.setText("End Turn");
         });
 
         back_button.setOnAction((event) -> {
-            try {
+            if (hasGambled) {
+                GameManager.timer.cancel();
                 Stage stage = (Stage) back_button.getScene().getWindow();
-                if (gamble_button.isDisabled()) {
-                    stage.close();
-                } else {
-                    Parent root = FXMLLoader.load(getClass().getResource("TownOptions.fxml"));
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
+                // do what you have to do
+                stage.close();
+                MapScreen.gamePlayBuffer();
+            } else {
+                try {
+                    Stage stage = (Stage) back_button.getScene().getWindow();
+                    if (gamble_button.isDisabled()) {
+                        stage.close();
+                    } else {
+                        Parent root = FXMLLoader.load(getClass().getResource("TownOptions.fxml"));
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Oops, something went wrong!");
                 }
-            } catch (IOException e) {
-                System.out.println("Oops, something went wrong!");
             }
         });
     }

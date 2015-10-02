@@ -58,13 +58,4 @@ public class Town implements Initializable {
             }
         });
     }
-//    @FXML
-//    private void handleButtonAction(ActionEvent event) throws IOException {
-//        Stage stage = new Stage();
-//        Parent root = FXMLLoader.load(getClass().getResource("TownOptions.fxml"));
-//        stage.setScene(new Scene(root));
-//        stage.setTitle("Town Actions");
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.show();
-//    }
 }

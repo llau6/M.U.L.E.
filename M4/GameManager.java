@@ -24,7 +24,6 @@ public class GameManager {
     public static int totalTurnsInitial;
     public static Timer timer;
 
-
     //creates the 2D array with the appropriate tiles for the default map
     public static void initializeMap() {
         for (int i = 0; i < 5; i++) {
@@ -71,6 +70,8 @@ public class GameManager {
         currentPlayer = players.remove();
         currentTurn++;
 
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500) +
+                currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
@@ -109,6 +110,7 @@ public class GameManager {
         if (bought) {
             prevPlayer.setMoney(curMoney - 300);
         }
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500));
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());

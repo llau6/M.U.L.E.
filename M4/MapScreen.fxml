@@ -666,7 +666,7 @@
           <children>
             <VBox prefHeight="200.0" prefWidth="335.0">
               <children>
-                <Label alignment="CENTER" prefHeight="24.0" prefWidth="334.0" text="Initial Land Selection Phase" textAlignment="CENTER">
+                <Label fx:id="turnType" alignment="CENTER" prefHeight="24.0" prefWidth="334.0" text="FREE LAND GRANTS">
                   <font>
                     <Font name="System Bold" size="17.0" />
                   </font>
@@ -706,7 +706,7 @@
           </children>
         </HBox>
         <Label layoutX="368.0" layoutY="6.0" prefHeight="24.0" prefWidth="302.0" text="Click on a plot to view its resources and claim it!" />
-        <Button fx:id="nextPlayer" layoutX="485.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Claim Selected Land!" />
+        <Button fx:id="claimLand" layoutX="485.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Claim Selected Land!" />
         <Label layoutX="411.0" layoutY="38.0" text="Food" />
         <Label layoutX="405.0" layoutY="66.0" text="Energy" />
         <Label layoutX="415.0" layoutY="92.0" text="Ore" />
@@ -721,6 +721,8 @@
                <font>
                   <Font size="21.0" />
                </font></Text>
+            <Label fx:id="roundLabel" layoutX="575.0" layoutY="113.0" text=" " />
+            <Label fx:id="round" layoutX="632.0" layoutY="113.0" prefHeight="16.0" prefWidth="33.0" />
       </children>
     </Pane>
   </children>

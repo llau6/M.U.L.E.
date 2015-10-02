@@ -35,9 +35,9 @@
           </menus>
         </MenuBar>
         <ImageView fitHeight="60.000022888183594" fitWidth="60.000022888183594" layoutX="130.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="file:/C:/Users/Lily/Documents/untitled1/src/M4/images/Food.png" />
-          </image>
+          <!--<image>-->
+            <!--<Image url="file:/C:/Users/Lily/Documents/untitled1/src/M4/images/Food.png" />-->
+          <!--</image>-->
         </ImageView>
         <ComboBox layoutX="67.0" layoutY="117.0" minWidth="48.0" prefWidth="48.0">
           <items>
@@ -57,9 +57,9 @@
         <RadioButton layoutX="190.0" layoutY="324.0" mnemonicParsing="false" text="Sell" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="235.99996948242188" layoutX="348.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
         <ImageView fitHeight="102.12" fitWidth="148.0" layoutX="372.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-            <Image url="file:/C:/Users/Lily/Documents/untitled1/src/M4/images/catMule.gif" />
-          </image>
+          <!--<image>-->
+            <!--<Image url="file:/C:/Users/Lily/Documents/untitled1/src/M4/images/catMule.gif" />-->
+          <!--</image>-->
         </ImageView>
         <Label layoutX="371.0" layoutY="56.0" text="Purchase Mule">
           <font>
