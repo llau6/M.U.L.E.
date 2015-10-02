@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M4.Pub">
+  <children>
+    <Pane layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0">
+      <children>
+        <MenuBar layoutX="0.0" layoutY="0.0">
+          <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+        <Button id="pub_button" fx:id="gamble_button" layoutX="94.0" layoutY="313.0" mnemonicParsing="false" prefHeight="46.89404296875" prefWidth="125.93939208984375" text="Gamble!">
+          <font>
+            <Font name="Franklin Gothic Demi" size="22.0" />
+          </font>
+        </Button>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3385ff" height="219.00010681152344" layoutX="47.0" layoutY="69.0" stroke="#0052cc" strokeType="INSIDE" strokeWidth="9.9" width="226.125" />
+        <Ellipse fill="#ccfff9" layoutX="162.0" layoutY="177.0" radiusX="100.375" radiusY="99.0" stroke="#33b6ff" strokeType="INSIDE" strokeWidth="6.4" />
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="90.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@images/Dice.png" />
+          </image>
+        </ImageView>
+        <Button id="pub_button" fx:id="back_button" layoutX="496.0" layoutY="346.0" mnemonicParsing="false" prefHeight="36.999977929684974" prefWidth="89.93939208984375" text="Go Back" textOverrun="ELLIPSIS">
+          <font>
+            <Font name="Franklin Gothic Demi" size="16.0" />
+          </font>
+        </Button>
+        <Label id="gamble_results" fx:id="youWin" layoutX="328.0" layoutY="111.0" opacity="0.0" prefHeight="105.0" prefWidth="255.0" text="YOU WIN" visible="true">
+          <font>
+            <Font size="47.0" />
+          </font>
+        </Label>
+        <Label id="gamble_results" fx:id="bonus" layoutX="390.0" layoutY="177.0" minHeight="61.0" prefHeight="105.0" prefWidth="149.0" text="">
+          <font>
+            <Font name="Microsoft Uighur" size="60.0" />
+          </font>
+        </Label>
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>

@@ -12,15 +12,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="M4.MapScreen">
+<VBox xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="M4.MapScreen">
   <children>
     <GridPane fx:id="map" gridLinesVisible="true" prefHeight="507.0" prefWidth="676.0">
       <children>
-        <Button fx:id="townButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="101.0" prefWidth="89.0" text="Enter Town" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+        <Button fx:id="townButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="48.0" text="Enter Town" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
           <font>
-            <Font name="Arial" size="18.0" />
+            <Font size="7.0" />
           </font>
         </Button>
+
         <ImageView fx:id="00" fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
           <image>
             <Image url="@images/plains.png" />
@@ -241,6 +242,8 @@
             <Image url="@images/plains.png" />
           </image>
         </ImageView>
+
+
         <Button fx:id="button_00" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
@@ -259,7 +262,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_03" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="75.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="0">
+        <Button fx:id="button_03" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="0">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -286,7 +289,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_02" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="75.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="0">
+        <Button fx:id="button_02" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="0">
           <graphic>
             <ImageView>
               <image>
@@ -358,10 +361,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="75.0" text="" GridPane.columnIndex="0" GridPane.rowIndex="1">
-          <font>
-            <Font size="15.0" />
-          </font>
+        <Button fx:id="button_10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="0" GridPane.rowIndex="1">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -406,7 +406,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_33" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
+        <Button fx:id="button_33" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -415,7 +415,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_43" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="4">
+        <Button fx:id="button_43" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="4">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -433,7 +433,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_23" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
+        <Button fx:id="button_23" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -442,7 +442,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_13" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="75.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
+        <Button fx:id="button_13" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -451,7 +451,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_12" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="75.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <Button fx:id="button_12" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -469,7 +469,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_24" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="81.99990000000253" text="" GridPane.columnIndex="5" GridPane.rowIndex="2">
+        <Button fx:id="button_24" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="5" GridPane.rowIndex="2">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -532,7 +532,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_27" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="7" GridPane.rowIndex="2">
+        <Button fx:id="button_27" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="7" GridPane.rowIndex="2">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -541,7 +541,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_26" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="2">
+        <Button fx:id="button_26" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="2">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -559,7 +559,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_17" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="75.0" text="" GridPane.columnIndex="7" GridPane.rowIndex="1">
+        <Button fx:id="button_17" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="7" GridPane.rowIndex="1">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -568,7 +568,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_31" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <Button fx:id="button_31" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -577,7 +577,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_42" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="4">
+        <Button fx:id="button_42" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="4">
           <graphic>
             <ImageView id="28" fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -586,7 +586,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_36" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="3">
+        <Button fx:id="button_36" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="6" GridPane.rowIndex="3">
           <graphic>
             <ImageView id="28" fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -604,7 +604,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_05" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="75.0" text="" GridPane.columnIndex="5" GridPane.rowIndex="0">
+        <Button fx:id="button_05" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="5" GridPane.rowIndex="0">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -631,7 +631,7 @@
             </ImageView>
           </graphic>
         </Button>
-        <Button fx:id="button_21" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="75.0" mnemonicParsing="false" prefHeight="101.0" prefWidth="75.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Button fx:id="button_21" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="56.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <graphic>
             <ImageView fitHeight="78.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -666,7 +666,7 @@
           <children>
             <VBox prefHeight="200.0" prefWidth="335.0">
               <children>
-                <Label alignment="CENTER" prefHeight="24.0" prefWidth="334.0" text="Initial Land Selection Phase" textAlignment="CENTER">
+                <Label fx:id="turnType" alignment="CENTER" prefHeight="24.0" prefWidth="334.0" text="FREE LAND GRANTS">
                   <font>
                     <Font name="System Bold" size="17.0" />
                   </font>
@@ -706,17 +706,23 @@
           </children>
         </HBox>
         <Label layoutX="368.0" layoutY="6.0" prefHeight="24.0" prefWidth="302.0" text="Click on a plot to view its resources and claim it!" />
-        <Button fx:id="nextPlayer" layoutX="485.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Claim Selected Land!" />
+        <Button fx:id="claimLand" layoutX="485.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Claim Selected Land!" />
         <Label layoutX="411.0" layoutY="38.0" text="Food" />
         <Label layoutX="405.0" layoutY="66.0" text="Energy" />
         <Label layoutX="415.0" layoutY="92.0" text="Ore" />
         <Label fx:id="selectedFood" layoutX="467.0" layoutY="38.0" text="--" />
         <Label fx:id="selectedEnergy" layoutX="467.0" layoutY="66.0" text="--" />
         <Label fx:id="selectedOre" layoutX="467.0" layoutY="92.0" text="--" />
-        <ImageView fx:id="selectedImage" fitHeight="78.0" fitWidth="56.0" layoutX="557.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-        <Label layoutX="410.0" layoutY="115.0" text="Cost" />
-        <Label fx:id="selectedCost" layoutX="467.0" layoutY="115.0" text="--" />
-        <Button fx:id="skipButt" layoutX="382.0" layoutY="148.0" mnemonicParsing="false" text="Skip Turn" />
+        <ImageView fx:id="selectedImage" fitHeight="78.0" fitWidth="56.0" layoutX="501.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="410.0" layoutY="115.0" text="Cost" />
+            <Label fx:id="selectedCost" layoutX="467.0" layoutY="115.0" text="--" />
+            <Button fx:id="skipButt" layoutX="382.0" layoutY="148.0" mnemonicParsing="false" text="Skip Turn" />
+            <Text fx:id="countDownText" fill="#eb0101" layoutX="575.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="136.27844831347466">
+               <font>
+                  <Font size="21.0" />
+               </font></Text>
+            <Label fx:id="roundLabel" layoutX="575.0" layoutY="113.0" text=" " />
+            <Label fx:id="round" layoutX="632.0" layoutY="113.0" prefHeight="16.0" prefWidth="33.0" />
       </children>
     </Pane>
   </children>
