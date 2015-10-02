@@ -37,69 +37,80 @@ public class MapScreen implements Initializable{
     private int playerCount = 0, skipCount = 0;
 
     @FXML
+    public Label turnType;
+    @FXML
     public Text countDownText;
-
     @FXML
-    private static Button townButton;
-
-    @FXML
-    public Button nextPlayer;
-
+    public Button claimLand;
     @FXML
     public GridPane map;
-
     @FXML
     public Label currPlayer;
-
     @FXML
     public Label money;
-
     @FXML
     public Label ore;
-
     @FXML
     public Label energy;
-
     @FXML
     public Label food;
-
     @FXML
     public Label score;
-
+    @FXML
+    public Label round;
+    @FXML
+    public Label roundLabel;
     public TileType selectedTile;
-
     @FXML
     private ImageView selectedImage;
-
     @FXML
     private Label selectedFood;
-
     @FXML
     private Label selectedOre;
-
     @FXML
     private Label selectedEnergy;
-
     @FXML
     private Label selectedCost;
-
     @FXML
     private Button skipButt;
-
+    @FXML
+    private Button townButton;
+    @FXML
     private TileType selectedTileType;
-
     private Button selectedLand;
 
     private final SoundManager soundManager = new SoundManager(3);
+    private int roundNum = 1;
+    public static Label sCurrPlayer;
+    public static Label sEnergy;
+    public static Label sMoney;
+    public static Label sOre;
+    public static Label sFood;
+    public static Label sScore;
+    public static Text sCountDownText;
+    public static Label sTurnType;
+    public static Label sRound;
+    public static Button sTownButton;
+    public static Button sSkipButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        sCurrPlayer = currPlayer;
+        sEnergy = energy;
+        sMoney = money;
+        sOre = ore;
+        sFood = food;
+        sScore = score;
+        sCountDownText = countDownText;
+        sTurnType = turnType;
+        sRound = round;
+        sTownButton = townButton;
+        sSkipButton = skipButt;
+
         GameManager.initializeMap();
         skipButt.setDisable(true);
-        GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText);
-        GameManager.initLandSelection(currPlayer, energy, money, ore, food, score);
-        soundManager.playMusic();
-        skipButt.setDisable(true);
+        GameManager.totalTurnsInitial = GameManager.players.size() * 2;
+        GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -175,12 +186,20 @@ public class MapScreen implements Initializable{
             }
         }
 
-        nextPlayer.setOnAction((event) -> {
+        claimLand.setOnAction((event) -> {
             GameManager.timer.cancel();
+            playerCount++;
+            System.out.println("Skip count: " + skipCount);
+            System.out.println("Player count " + playerCount);
+            if (playerCount + skipCount >= GameManager.players.size()) {
+                playerCount = 0;
+                skipCount = 0;
+                System.out.println("RESET");
+            }
             if (GameManager.currentPlayer.getMoney() >= 300) {
                 if (selectedTileType != null) {
                     if (!selectedLand.isDisable()) {
-                        GameManager.currentPlayer.setLandCount(GameManager.currentPlayer.getLandCount()+1);
+                        GameManager.currentPlayer.setLandCount(GameManager.currentPlayer.getLandCount() + 1);
                         //sets the land to player's color after player buys the territory
                         Color awtColor = GameManager.currentPlayer.getColor();
                         selectedLand.setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -188,52 +207,35 @@ public class MapScreen implements Initializable{
                         selectedLand.setDisable(true);
                     }
                 }
-                if (GameManager.currentTurn <= GameManager.totalTurnsInitial) {
-                    if (GameManager.currentTurn == GameManager.totalTurnsInitial) {
-                        skipButt.setDisable(false);
-                    }
-                    GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText);
+                if (GameManager.totalTurnsInitial != 0) {
+                    GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
                 } else {
-                    playerCount++;
-                    if (playerCount + skipCount >= GameManager.players.size()) {
-                        playerCount = 0;
-                        skipCount = 0;
-                    }
-                    GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, true, countDownText);
+                    skipButt.setDisable(false);
+                    GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, true, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
                 }
             } else {
-                nextPlayer.setDisable(true);
-                nextPlayer.setText("Insufficient Funds!");
+                claimLand.setDisable(true);
+                claimLand.setText("Insufficient Funds!");
             }
         });
 
         skipButt.setOnAction((event) -> {
             GameManager.timer.cancel();
-            GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false, countDownText);
-            skipCount++;
-            if (nextPlayer.isDisable()) {
-                nextPlayer.setText("Claim Land!");
-                nextPlayer.setDisable(false);
+            if (claimLand.isDisable()) {
+                claimLand.setText("Claim Land!");
+                claimLand.setDisable(false);
             }
-            if ((playerCount == 0  && skipCount >= GameManager.players.size())) {
-                try {
-                    Stage stage;
-                    Parent root;
-                    FXMLLoader loader = new FXMLLoader();
-                    //get reference to the button's stage
-                    stage = (Stage) nextPlayer.getScene().getWindow();//load up other FXML document
-                    root = loader.load(getClass().getResource("Map2.fxml"));
-                    //create a new scene with root and set the stage
-
-                    Scene scene = new Scene(root, 800, 700);
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    System.out.println("pls");
+            skipCount++;
+            System.out.println("Skip count: " + skipCount);
+            if (skipCount >= GameManager.players.size()) {
+                claimLand.setDisable(true);
+                GameManager.gamePlay(currPlayer, energy, money, ore, food, score, countDownText, turnType, round, townButton, skipButt);
+            } else {
+                if (playerCount + skipCount == GameManager.players.size()) {
+                    playerCount = 0;
+                    skipCount = 0;
                 }
-            } else if (playerCount + skipCount >= GameManager.players.size()) {
-                playerCount = 0;
-                skipCount = 0;
+                GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
             }
         });
     }
@@ -259,4 +261,7 @@ public class MapScreen implements Initializable{
         stage.show();
     }
 
+    public static void gamePlayBuffer() {
+        GameManager.gamePlay(sCurrPlayer, sEnergy, sMoney, sOre, sFood, sScore, sCountDownText, sTurnType, sRound, sTownButton, sSkipButton);
+    }
 }

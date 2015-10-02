@@ -2,6 +2,7 @@ package M4;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -18,12 +19,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GameManager {
     public static String difficulty;
     public static Queue<Player> players = new LinkedList<>();
+    public static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
+    public static PriorityQueue<Player> visitedPlayers = new PriorityQueue<>();
     public static TileType[][] gameMap = new TileType[5][9];
     public static Player currentPlayer;
-    public static int currentTurn;
     public static int totalTurnsInitial;
     public static Timer timer;
-
+    public static int currentTurnNumber = 1;
+    public static int currentRoundNumber = 1;
+    public static int timerLeft;
 
     //creates the 2D array with the appropriate tiles for the default map
     public static void initializeMap() {
@@ -47,9 +51,9 @@ public class GameManager {
 
 
     //initial land selection phase
-    public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText) {
-
-        totalTurnsInitial = players.size() * 2;
+    public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Button townButton) {
+        townButton.setDisable(true);
+        totalTurnsInitial--;
         final int[] countDown = {50};
         countDownText.setText("Time left: " + countDown[0]);
         timer = new Timer();
@@ -60,6 +64,7 @@ public class GameManager {
                     public void run() {
                         countDown[0]--;
                         countDownText.setText("Time left: " + countDown[0]);
+                        timerLeft = countDown[0];
 
                         if (countDown[0] <= 0) {
                             timer.cancel();
@@ -70,7 +75,6 @@ public class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = players.remove();
-        currentTurn++;
 
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500) +
                 currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
@@ -84,7 +88,13 @@ public class GameManager {
     }
 
     //initial land selection phase after first two turn
-    public static void buyLandSelection(Player prevPlayer, Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Boolean bought, Text countDownText) {
+    public static void buyLandSelection(Player prevPlayer, Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Boolean bought, Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton, Button townButton) {
+        turnType.setText("INITIAL LAND SELECTION");
+        claimLand.setDisable(false);
+        claimLand.setText("Claim Land!");
+        skipButton.setText("Skip Turn");
+        roundLabel.setText("ROUND");
+        round.setText("" + currentRoundNumber);
         final int[] countDown = {50};
         countDownText.setText("Time left: " + countDown[0]);
         timer = new Timer();
@@ -96,44 +106,102 @@ public class GameManager {
                         countDownText.setText("Time left: " + countDown[0]);
                         countDown[0]--;
                         countDownText.setText("Time left: " + countDown[0]);
+                        timerLeft = countDown[0];
 
                         if (countDown[0] <= 0) {
                             timer.cancel();
                             countDownText.setText("Out of time!");
+                            claimLand.setText("Too late!");
+                            claimLand.setDisable(true);
+                            skipButton.setText("You're done");
                         }
                     }
                 });
             }
         }, 1000, 1000); //Every 1 second
-        currentPlayer = players.remove();
-        currentTurn++;
+        currentPlayer = orderedPlayers.remove();
 
         int curMoney = prevPlayer.getMoney();
         if (bought) {
             prevPlayer.setMoney(curMoney - 300);
         }
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500));
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500));
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
         ore.setText("" + currentPlayer.getOreCount());
         food.setText("" + currentPlayer.getFoodCount());
         score.setText("" + currentPlayer.getScore());
-        players.add(currentPlayer);
+        visitedPlayers.add(currentPlayer);
+        if (currentTurnNumber == players.size()) {
+            currentRoundNumber++;
+            //new round
+            orderedPlayers = visitedPlayers;
+            visitedPlayers = new PriorityQueue<>();
+            currentTurnNumber = 1;
+        } else {
+            currentTurnNumber++;
+        }
+    }
+    public static void gamePlay(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Label turnType, Label round, Button townButton, Button skipButton) {
+        townButton.setDisable(false);
+        round.setDisable(false);
+        skipButton.setText("End Turn");
+        turnType.setText("TURN-BASED GAMEPLAY");
+        round.setText("" + currentRoundNumber);
+        final int[] countDown = {50};
+        countDownText.setText("Time left: " + countDown[0]);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        countDownText.setText("Time left: " + countDown[0]);
+                        countDown[0]--;
+                        countDownText.setText("Time left: " + countDown[0]);
+                        timerLeft = countDown[0];
+
+                        if (countDown[0] <= 0) {
+                            timer.cancel();
+                            countDownText.setText("Out of time!");
+                            townButton.setDisable(true);
+                            skipButton.setText("You're Done");
+                        }
+                    }
+                });
+            }
+        }, 1000, 1000); //Every 1 second
+        currentPlayer = orderedPlayers.remove();
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500));
+        currPlayer.setText(currentPlayer.getName());
+        energy.setText("" + currentPlayer.getEnergyCount());
+        money.setText("" + currentPlayer.getMoney());
+        ore.setText("" + currentPlayer.getOreCount());
+        food.setText("" + currentPlayer.getFoodCount());
+        score.setText("" + currentPlayer.getScore());
+        visitedPlayers.add(currentPlayer);
+        if (currentTurnNumber == players.size()) {
+            currentRoundNumber++;
+            //new round
+            orderedPlayers = visitedPlayers;
+            visitedPlayers = new PriorityQueue<>();
+            currentTurnNumber = 1;
+        } else {
+            currentTurnNumber++;
+        }
     }
 
     //For Pub
     //Money Bonus = Round Bonus + random(0, Time Bonus)
     public static int calculateBonus() {
-        int round = currentPlayer.getRound();
-        int time = currentPlayer.getTime();
         int moneyBonus = 0;
         int roundBonus = 50;
         int timeBonus = 50;
         //calculate Round Bonus
         //1	   2	3	 4	 5	 6	 7	 8	 9	 10	 11	 12
         //50   50	50	100	100	100	100	150	150	150	150	200
-        for (int i = 0; i < round + 1; i++) {
+        for (int i = 0; i < currentRoundNumber + 1; i++) {
             if ((i / 4) != (i - 1) / 4) {
                 roundBonus += 50;
             }
@@ -143,7 +211,7 @@ public class GameManager {
         //26-38 seconds left : 150
         //13-25 seconds left : 100
         //0-12 seconds left : 50
-        for (int i = 0; i < time; i++) {
+        for (int i = 0; i < timerLeft; i++) {
             if ((i / 13) != (i - 1) / 13) {
                 timeBonus += 50;
             }
