@@ -28,6 +28,7 @@ public class GameManager {
     public static int currentTurnNumber = 1;
     public static int currentRoundNumber = 1;
     public static int timerLeft;
+    public static boolean isFree = true;
 
     //creates the 2D array with the appropriate tiles for the default map
     public static void initializeMap() {
@@ -89,6 +90,7 @@ public class GameManager {
 
     //initial land selection phase after first two turn
     public static void buyLandSelection(Player prevPlayer, Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Boolean bought, Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton, Button townButton) {
+        isFree = false;
         turnType.setText("INITIAL LAND SELECTION");
         claimLand.setDisable(false);
         claimLand.setText("Claim Land!");
@@ -121,11 +123,13 @@ public class GameManager {
         }, 1000, 1000); //Every 1 second
         currentPlayer = orderedPlayers.remove();
 
-        int curMoney = prevPlayer.getMoney();
-        if (bought) {
-            prevPlayer.setMoney(curMoney - 300);
-        }
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500));
+        System.out.println("name GameManager: " + currentPlayer.getName());
+//        int curMoney = prevPlayer.getMoney();
+//        if (bought) {
+//            prevPlayer.setMoney(curMoney - 300);
+//        }
+        System.out.println("name: " + currentPlayer.getName());
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500) + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());

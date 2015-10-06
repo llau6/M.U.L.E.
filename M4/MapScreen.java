@@ -93,6 +93,8 @@ public class MapScreen implements Initializable{
     public static Button sTownButton;
     public static Button sSkipButton;
 
+    int count = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sCurrPlayer = currPlayer;
@@ -111,6 +113,7 @@ public class MapScreen implements Initializable{
         soundManager.playMusic();
         skipButt.setDisable(true);
         GameManager.totalTurnsInitial = GameManager.players.size() * 2;
+        System.out.println(GameManager.totalTurnsInitial);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
 
         for (int i = 0; i < 5; i++) {
@@ -186,7 +189,6 @@ public class MapScreen implements Initializable{
                 }
             }
         }
-
         claimLand.setOnAction((event) -> {
             GameManager.timer.cancel();
             playerCount++;
@@ -200,15 +202,20 @@ public class MapScreen implements Initializable{
             if (GameManager.currentPlayer.getMoney() >= 300) {
                 if (selectedTileType != null) {
                     if (!selectedLand.isDisable()) {
+                        System.out.println("player: "+ GameManager.currentPlayer.getName());
                         GameManager.currentPlayer.setLandCount(GameManager.currentPlayer.getLandCount() + 1);
                         //sets the land to player's color after player buys the territory
                         Color awtColor = GameManager.currentPlayer.getColor();
                         selectedLand.setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         //prevents players to buy already owned property
                         selectedLand.setDisable(true);
+                        if (!GameManager.isFree) {
+                            GameManager.currentPlayer.setMoney(GameManager.currentPlayer.getMoney() - 300);
+                        }
                     }
                 }
                 if (GameManager.totalTurnsInitial != 0) {
+                    System.out.println("initSelection!" + ++count);
                     GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
                 } else {
                     skipButt.setDisable(false);
