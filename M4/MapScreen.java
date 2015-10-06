@@ -93,6 +93,8 @@ public class MapScreen implements Initializable{
     public static Button sTownButton;
     public static Button sSkipButton;
 
+    int count = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sCurrPlayer = currPlayer;
@@ -112,7 +114,6 @@ public class MapScreen implements Initializable{
         GameManager.totalTurnsInitial = GameManager.players.size() * 2;
         System.out.println(GameManager.totalTurnsInitial);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
-        GameManager.totalTurnsInitial++;
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -187,7 +188,6 @@ public class MapScreen implements Initializable{
                 }
             }
         }
-
         claimLand.setOnAction((event) -> {
             GameManager.timer.cancel();
             playerCount++;
@@ -208,9 +208,13 @@ public class MapScreen implements Initializable{
                         selectedLand.setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         //prevents players to buy already owned property
                         selectedLand.setDisable(true);
+                        if (!GameManager.isFree) {
+                            GameManager.currentPlayer.setMoney(GameManager.currentPlayer.getMoney() - 300);
+                        }
                     }
                 }
                 if (GameManager.totalTurnsInitial != 0) {
+                    System.out.println("initSelection!" + ++count);
                     GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
                 } else {
                     skipButt.setDisable(false);
