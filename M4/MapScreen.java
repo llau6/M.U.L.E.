@@ -108,6 +108,7 @@ public class MapScreen implements Initializable{
         sSkipButton = skipButt;
 
         GameManager.initializeMap();
+        soundManager.playMusic();
         skipButt.setDisable(true);
         GameManager.totalTurnsInitial = GameManager.players.size() * 2;
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
