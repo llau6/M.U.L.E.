@@ -87,6 +87,10 @@ public class Player implements Comparable<Player> {
         this.foodCount = foodCount;
     }
 
+    public void setOreCount(int oreCount) {
+        this.oreCount = oreCount;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
