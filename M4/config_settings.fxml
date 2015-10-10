@@ -84,6 +84,11 @@
         </Label>
         <ImageView fx:id="muleCat" fitHeight="65.75000012685017" fitWidth="95.28985595703125" layoutX="305.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
           <image>
+            <Image url="@images/walkingCatMule.gif" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="staticMule" fitHeight="65.75" fitWidth="87.66666666666666" layoutX="307.0" layoutY="16.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+          <image>
             <Image url="@images/catMule.gif" />
           </image>
         </ImageView>
