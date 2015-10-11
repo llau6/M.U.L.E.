@@ -19,6 +19,7 @@ public class Player implements Comparable<Player> {
     private Color color;
     private int score;
     private ArrayList<Button> lands;
+    private ArrayList<Mule> mules;
     private boolean hasGone = false;
 
 
@@ -29,6 +30,7 @@ public class Player implements Comparable<Player> {
         this.race = race;
         this.color = color;
         this.lands = new ArrayList<>();
+        this.mules = new ArrayList<>();
         if (GameManager.difficulty.equals("Beginner")) {
             foodCount = 8;
             energyCount = 4;
@@ -108,7 +110,7 @@ public class Player implements Comparable<Player> {
     public void setScore(int score) {
         this.score = score;
     }
-
+    public ArrayList<Mule> getMules() {return mules;}
     //why do we have this???????
     public void setLands(ArrayList<Button> lands) {
         this.lands = lands;

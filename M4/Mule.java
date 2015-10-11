@@ -26,14 +26,15 @@ public class Mule {
     public void setLand(Button land) {
         onLand = land;
     }
+
     public boolean isInOwnedLand(Button selected, Player currPlayer) {
         ArrayList<Button> ownedLands = currPlayer.getLands();
-        boolean isInOwned = false;
+        System.out.println(ownedLands.size());
         for (Button land : ownedLands) {
             if (land.equals(selected)) {
-                isInOwned = true;
+                return true;
             }
         }
-        return isInOwned;
+        return false;
     }
 }
