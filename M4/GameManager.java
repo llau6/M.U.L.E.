@@ -29,6 +29,8 @@ public class GameManager {
     public static int currentRoundNumber = 1;
     public static int timerLeft;
     public static boolean isFree = true;
+    // really bad way to do it...
+    public static GridPane mapGrid;
 
     //creates the 2D array with the appropriate tiles for the default map
     public static void initializeMap() {

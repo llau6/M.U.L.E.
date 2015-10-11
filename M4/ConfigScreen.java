@@ -54,8 +54,8 @@ public class ConfigScreen implements Initializable {
     private Label mule;
     @FXML
     private ImageView muleCat;
-    @FXML
-    private ImageView staticMule;
+//    @FXML
+//    private ImageView staticMule;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

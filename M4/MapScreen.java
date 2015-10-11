@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -93,7 +95,9 @@ public class MapScreen implements Initializable{
     public static Button sTownButton;
     public static Button sSkipButton;
 
-    int count = 0;
+    public static int muleCount = 0;
+
+    private static int clickCount = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,7 +114,7 @@ public class MapScreen implements Initializable{
         sSkipButton = skipButt;
 
         GameManager.initializeMap();
-        soundManager.playMusic();
+//        soundManager.playMusic();
         skipButt.setDisable(true);
         GameManager.totalTurnsInitial = GameManager.players.size() * 2;
         System.out.println(GameManager.totalTurnsInitial);
@@ -154,6 +158,7 @@ public class MapScreen implements Initializable{
                     });
                 } else if ((i == 0 && j == 3) || (i == 1 && j == 4) || (i == 3 && j == 4) || (i == 4 && j == 4)) {
                     Button mountain3Node = (Button)getNodeFromGridPane(map,j,i);
+                    System.out.println(mountain3Node.getLayoutBounds());
                     mountain3Node.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (mountain3Node.getGraphic())).getImage());
                         selectedFood.setText(String.valueOf(TileType.MOUNTAIN3.getFoodCount()));
@@ -209,13 +214,13 @@ public class MapScreen implements Initializable{
                         selectedLand.setBackground(new Background(new BackgroundFill(awtColor, CornerRadii.EMPTY, Insets.EMPTY)));
                         //prevents players to buy already owned property
                         selectedLand.setDisable(true);
+                        GameManager.currentPlayer.getLands().add(selectedLand);
                         if (!GameManager.isFree) {
                             GameManager.currentPlayer.setMoney(GameManager.currentPlayer.getMoney() - 300);
                         }
                     }
                 }
                 if (GameManager.totalTurnsInitial != 0) {
-                    System.out.println("initSelection!" + ++count);
                     GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
                 } else {
                     skipButt.setDisable(false);
@@ -246,9 +251,11 @@ public class MapScreen implements Initializable{
                 GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
             }
         });
+
+        GameManager.mapGrid = map;
     }
 
-    private javafx.scene.Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+    protected static javafx.scene.Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
         ObservableList<Node> childrens = gridPane.getChildren();
         for (javafx.scene.Node node : childrens) {
             if (node instanceof Button && GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
@@ -271,5 +278,48 @@ public class MapScreen implements Initializable{
 
     public static void gamePlayBuffer() {
         GameManager.gamePlay(sCurrPlayer, sEnergy, sMoney, sOre, sFood, sScore, sCountDownText, sTurnType, sRound, sTownButton, sSkipButton);
+    }
+
+    public static void placeMule(Mule mule) {
+        // change this so that it doesn't change the button's mouseClicked method
+        // maybe make it dependent on ImageView instead?
+        // Preferably find some way to do something when mouse clicked but don't let that continue through the rest of the game
+
+        // if want to test, buy only the Energy mule cuz I haven't made pics for others yet
+        for (Node node : GameManager.mapGrid.getChildren()) {
+            if (node instanceof Button) {
+                if (node.isDisable()) {
+                    node.setDisable(false);
+                }
+                node.setOnMouseClicked(event -> {
+                    if (node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+                        // mule is deciding if it's in the owned land b/c I think professor said to do it this way
+                        if (mule.isInOwnedLand((Button) node, GameManager.currentPlayer)) {
+                            if (clickCount == 0)
+                                System.out.println("Wee!");
+                                mule.setLand((Button) node);
+                                Image muleImage = new Image("M4/images/mule"+ mule.getType() +".gif");
+                                ImageView mImageView = new ImageView(muleImage);
+                                mImageView.setPreserveRatio(true);
+                                mImageView.setFitWidth(50);
+                                //Make the location random
+//                                mImageView.setX(100);
+//                                mImageView.setY(Math.random()*60);
+                                GameManager.mapGrid.add(mImageView, GameManager.mapGrid.getColumnIndex(node), GameManager.mapGrid.getRowIndex(node));
+                                clickCount++;
+                            } else {
+                                System.out.println("Already placed!");
+                            }
+                        } else {
+                            if (clickCount == 0) {
+                                GameManager.mapGrid.setCursor(new ImageCursor(new Image("M4/images/catMuleDestroyedCursor.gif")));
+                                // do something else
+                            }
+                        }
+                    });
+            }
+        }
+        clickCount = 0;
+        System.out.println("I'm done");
     }
 }
