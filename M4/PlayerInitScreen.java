@@ -4,10 +4,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -157,8 +160,7 @@ public class PlayerInitScreen implements Initializable {
                 }
             }
             //Save name, color, and race
-            if (iteration == 1 || (!isSameName
-                    && !isSameColor)) {
+            if (iteration == 1 || (!isSameName && !isSameColor)) {
                 playerName = name.getText();
                 color = Color.valueOf(colorBox.getSelectionModel().getSelectedItem());
                 raceChosen = raceBox.getSelectionModel().getSelectedItem();

@@ -1,5 +1,6 @@
 package M4;
 
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -17,8 +18,9 @@ public class Player implements Comparable<Player> {
     private Race race;
     private Color color;
     private int score;
-    private ArrayList<TileType> lands;
+    private ArrayList<Button> lands;
     private boolean hasGone = false;
+
 
 
 
@@ -75,7 +77,7 @@ public class Player implements Comparable<Player> {
         return score;
     }
 
-    public ArrayList<TileType> getLands() {
+    public ArrayList<Button> getLands() {
         return lands;
     }
 
@@ -107,7 +109,8 @@ public class Player implements Comparable<Player> {
         this.score = score;
     }
 
-    public void setLands(ArrayList<TileType> lands) {
+    //why do we have this???????
+    public void setLands(ArrayList<Button> lands) {
         this.lands = lands;
     }
 
