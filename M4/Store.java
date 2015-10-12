@@ -148,10 +148,10 @@ public class Store implements Initializable {
 //                    try {
                         System.out.println(boughtMule);
                         Image image = new Image("M4/images/walkingCatMuleCursor.gif");
-//                    System.out.println(new ImageCursor(image));
-//                    GameManager.mapGrid.getScene().setCursor(new ImageCursor(new Image("M4/images/walkingCatMule.ani")));
                         GameManager.mapGrid.setCursor(new ImageCursor(image));
-                        MapScreen.placeMule(new Mule((String) muleCombo.getSelectionModel().getSelectedItem()));
+                        GameManager.currentPlayer.getMules().add(new Mule((String) muleCombo.getSelectionModel().getSelectedItem()));
+                        MapScreen.clickCount = 0;
+//                        MapScreen.placeMule(new Mule((String) muleCombo.getSelectionModel().getSelectedItem()));
 //                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MapScreen.fxml"));
 //                        Parent root = (Parent) fxmlLoader.load();
 //                        MapScreen mapScreen = (MapScreen) fxmlLoader.getController();
