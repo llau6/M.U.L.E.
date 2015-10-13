@@ -16,9 +16,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.MainApp;
-import application.model.GameManager;
-
 /**
  * Created by Lily on 9/30/2015.
  */

@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
-
-import application.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -103,12 +102,9 @@ public class ControllerWampusGrounds implements Initializable {
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view/TownScreen.fxml"));
-        AnchorPane nextScreen = (AnchorPane) loader.load();
-
+        Parent root = FXMLLoader.load(getClass().getResource("TownOptions.fxml"));
         Stage stage = (Stage) townButton.getScene().getWindow();
-        Scene scene = new Scene(nextScreen, 840, 640);
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.show();
     }
 
@@ -117,7 +113,7 @@ public class ControllerWampusGrounds implements Initializable {
         //add code here to give currentPlayer some amount of money    --James
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("view/TownScreen.fxml"));
+        loader.setLocation(getClass().getResource("TownScreen.fxml"));
         AnchorPane nextScreen = (AnchorPane) loader.load();
 
         Stage stage = (Stage) claimButton.getScene().getWindow();
