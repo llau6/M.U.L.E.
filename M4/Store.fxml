@@ -50,7 +50,7 @@
         <RadioButton fx:id="buyRadio" layoutX="91.0" layoutY="324.0" mnemonicParsing="false" text="Buy" />
         <RadioButton fx:id="sellRadio" layoutX="190.0" layoutY="324.0" mnemonicParsing="false" text="Sell" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="247.00003051757812" layoutX="348.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
-        <ImageView fx:id="purchaseMule" fitHeight="102.12" fitWidth="148.0" layoutX="372.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="102.12" fitWidth="148.0" layoutX="372.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
           <!--<image>-->
           <!--<Image url="file:/C:/Users/Lily/Documents/untitled1/src/M4/images/catMule.gif" />-->
           <!--</image>-->
