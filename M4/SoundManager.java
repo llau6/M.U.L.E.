@@ -60,17 +60,17 @@ public class SoundManager {
         soundPool.execute(soundPlay);
     }
 
-//    public void playMusic() {
-//        javafx.scene.media.Media media = new javafx.scene.media.Media(Paths.get("music.mp3").toUri().toString());
-//        MediaPlayer player = new MediaPlayer(media);
-//        player.setAutoPlay(true);
-//    }
+    public void playMusic() {
+        javafx.scene.media.Media media = new javafx.scene.media.Media(Paths.get("music.mp3").toUri().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setAutoPlay(true);
+    }
 
     /**
      * Stop all threads and media players.
      */
-//    public void shutdown() {
-//        soundPool.shutdown();
-//    }
+    public void shutdown() {
+        soundPool.shutdown();
+    }
 
 }
