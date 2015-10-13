@@ -2,6 +2,7 @@ package M4;
 
 import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -49,6 +52,10 @@ public class ConfigScreen implements Initializable {
 
     @FXML
     private Label mule;
+    @FXML
+    private ImageView muleCat;
+//    @FXML
+//    private ImageView staticMule;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,6 +65,7 @@ public class ConfigScreen implements Initializable {
 
     public void animateLabel() {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), mule);
+        TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(3), muleCat);
         RotateTransition rotateTransition = new RotateTransition(Duration.millis(950), mule);
 
         rotateTransition.setToAngle(40);
@@ -65,16 +73,28 @@ public class ConfigScreen implements Initializable {
         rotateTransition.setCycleCount(14);
         rotateTransition.setAutoReverse(true);
 
+        // move the label
         translateTransition.setFromX(10);
         translateTransition.setToX(-240);
         translateTransition.setAutoReverse(true);
         translateTransition.setCycleCount(2);
 
-        ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().addAll(translateTransition, rotateTransition);
-        parallelTransition.play();
-    }
+        //move the image
+        translateTransition2.setFromX(10);
+        translateTransition2.setToX(-360);
+        translateTransition2.setAutoReverse(true);
+        translateTransition2.setCycleCount(4);
 
+        ParallelTransition parallelTransition = new ParallelTransition();
+        parallelTransition.getChildren().addAll(translateTransition, translateTransition2, rotateTransition);
+        parallelTransition.play();
+
+        parallelTransition.setOnFinished(event -> {
+            muleCat.setImage(new Image("M4/images/catMule.gif"));
+//            muleCat.setOpacity(0);
+//            staticMule.setOpacity(1);
+        });
+    }
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         GameManager.difficulty = (String) difficultyBox.getSelectionModel().getSelectedItem();
