@@ -3,13 +3,9 @@ package M4;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -76,10 +72,6 @@ public class Store implements Initializable {
 
     @FXML
     public RadioButton sellRadio;
-    @FXML
-    private ImageView purchaseMule;
-
-    private boolean boughtMule;
 
 //    @FXML
 //    public Button tryAgainButton;
@@ -105,15 +97,6 @@ public class Store implements Initializable {
             } else {
                 netCostLabel.setText("-" + String.valueOf(StoreManager.getMulePrice() + StoreManager.getResourcesPrice()));
             }
-            String selected = (String) muleCombo.getSelectionModel().getSelectedItem();
-            if (!selected.equals("(No Mule)")) {
-                purchaseMule.setImage(new Image("M4/images/mule"+ muleCombo.getSelectionModel().getSelectedItem() +".gif"));
-                boughtMule = true;
-            } else {
-                purchaseMule.setImage(null);
-            }
-
-
         });
 
         sellRadio.setOnAction((event) -> {
@@ -145,20 +128,6 @@ public class Store implements Initializable {
                 StoreManager.completeTransaction(!buyRadio.isDisabled(), !sellRadio.isDisabled());
                 Stage stage = (Stage) completeButton.getScene().getWindow();
                 stage.close();
-                if (boughtMule) {
-//                    try {
-                        System.out.println(boughtMule);
-                        Image image = new Image("M4/images/walkingCatMuleCursor.gif");
-                        GameManager.mapGrid.setCursor(new ImageCursor(image));
-                        GameManager.currentPlayer.getMules().add(new Mule((String) muleCombo.getSelectionModel().getSelectedItem()));
-                        MapScreen.clickCount = 0;
-//                        MapScreen.placeMule(new Mule((String) muleCombo.getSelectionModel().getSelectedItem()));
-//                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MapScreen.fxml"));
-//                        Parent root = (Parent) fxmlLoader.load();
-//                        MapScreen mapScreen = (MapScreen) fxmlLoader.getController();
-//                        mapScreen.placeMule(new Mule((String) muleCombo.getSelectionModel().getSelectedItem()));
-//                    } catch(IOException e){}
-                }
             } else {
                 try {
                     Stage stage = new Stage();
