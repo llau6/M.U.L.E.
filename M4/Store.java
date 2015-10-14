@@ -158,7 +158,7 @@ public class Store implements Initializable {
                     plusSign = "";
                 }
                 int netCost = Integer.parseInt(netGainLabel.getText());
-                if (storeItem.getId().equals("enterFood") && ((StoreManager.buy && Integer.parseInt(newFood.getText()) - 1 >= 0)
+                if (storeItem.getId().equals("enterFood") && ((StoreManager.buy && Integer.parseInt(foodQuantityLabel.getText()) - 1 >= 0)
                         || (StoreManager.sell && Integer.parseInt(newFood.getText()) - 1 >= 0))
                         && Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice >= 0) {
                     restricted = false;
@@ -167,7 +167,7 @@ public class Store implements Initializable {
                     netGainLabel.setText(plusSign + (netCost + multiplier * StoreManager.foodPrice));
                     newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice));
                 }
-                if (storeItem.getId().equals("enterEnergy") && ((StoreManager.buy && Integer.parseInt(newEnergy.getText()) - 1 >= 0)
+                if (storeItem.getId().equals("enterEnergy") && ((StoreManager.buy && Integer.parseInt(energyQuantityLabel.getText()) - 1 >= 0)
                         ||  (StoreManager.sell && Integer.parseInt(newEnergy.getText()) - 1 >= 0))
                         && Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice >= 0) {
                     restricted = false;
