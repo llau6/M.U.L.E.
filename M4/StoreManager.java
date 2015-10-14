@@ -23,7 +23,6 @@ public class StoreManager {
     protected static int energyPrice = 25;
     protected static int orePrice = 50;
     private static int mulePrice;
-    protected static int prevMule;
     protected static boolean firstMule = true;
     protected static boolean buy;
     protected static boolean sell;
@@ -44,7 +43,7 @@ public class StoreManager {
         }
     }
 
-    public static int getMulePrice(String type) {
+    public static int calculateMulePrice(String type) {
         mulePrice = 0;
         int base = -100;
         if (type.equals("Food")) {
@@ -82,6 +81,22 @@ public class StoreManager {
 
     public static int getOrePrice() { return orePrice; }
 
-    public static int getMulePrice() { return mulePrice; }
+    public static int isPrevMule() {
+        return prevMule;
+    }
+
+    public static void setPrevMule(int prevMule) {
+        StoreManager.prevMule = prevMule;
+    }
+
+    protected static int prevMule;
+
+    public static boolean isFirstMule() {
+        return firstMule;
+    }
+
+    public static void setFirstMule(boolean firstMule) {
+        StoreManager.firstMule = firstMule;
+    }
 
 }
