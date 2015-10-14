@@ -22,9 +22,6 @@ public class Player implements Comparable<Player> {
     private ArrayList<Mule> mules;
     private boolean hasGone = false;
 
-
-
-
     public Player(String name, Race race, Color color) {
         this.name = name;
         this.race = race;

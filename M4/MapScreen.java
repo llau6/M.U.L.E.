@@ -110,6 +110,8 @@ public class MapScreen implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+
         sCurrPlayer = currPlayer;
         sEnergy = energy;
         sMoney = money;
@@ -198,8 +200,19 @@ public class MapScreen implements Initializable{
                 }
                 GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
             }
+            //so next player can purchase mule
+            StoreManager.boughtMule = false;
         });
         GameManager.mapGrid = map;
+    }
+
+    public static void updateResources() {
+        sMoney.setText("" + GameManager.currentPlayer.getMoney());
+        sFood.setText("" + GameManager.currentPlayer.getFoodCount());
+        sEnergy.setText("" + GameManager.currentPlayer.getEnergyCount());
+        sOre.setText("" + GameManager.currentPlayer.getOreCount());
+        GameManager.updateCurrentScore();
+        sScore.setText("" + GameManager.currentPlayer.getScore());
     }
 
     private void handleMapButtons() {

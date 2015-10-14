@@ -42,7 +42,10 @@ public class ControllerWampusGrounds implements Initializable {
 
     private int numTurns;
 
+    public static Button sClaimButton;
+
     public void initialize(URL url, ResourceBundle rb) {
+        sClaimButton = claimButton;
         claimButton.setDisable(true);
 
         Random rand = new Random();
