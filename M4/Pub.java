@@ -35,15 +35,20 @@ public class Pub implements Initializable {
 
     private boolean hasGambled;
 
+    public static Button sGambleButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sGambleButton = gamble_button;
+
         gamble_button.setOnAction((event) -> {
             youWin.setOpacity(1.0);
             bonus.setText("$" + GameManager.calculateBonus());
             gamble_button.setDisable(true);
             hasGambled = true;
             back_button.setText("End Turn");
+            //so next player can purchase mule
+            StoreManager.boughtMule = false;
         });
 
         back_button.setOnAction((event) -> {

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.util.*;
 import java.util.LinkedList;
@@ -29,6 +30,9 @@ public class GameManager {
     public static int currentRoundNumber = 1;
     public static int timerLeft;
     public static boolean isFree = true;
+
+    //really bad way to do it
+    public static GridPane mapGrid;
 
     //creates the 2D array with the appropriate tiles for the default map
     public static void initializeMap() {
@@ -78,9 +82,9 @@ public class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = players.remove();
+        //currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500) +
+         //           currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
 
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500) +
-                currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
@@ -89,7 +93,10 @@ public class GameManager {
         score.setText("" + currentPlayer.getScore());
         players.add(currentPlayer);
     }
-
+    public static void updateCurrentScore() {
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
+                + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
+    }
     //initial land selection phase after first two turn
     public static void buyLandSelection(Player prevPlayer, Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Boolean bought, Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton, Button townButton) {
         isFree = false;
@@ -173,11 +180,13 @@ public class GameManager {
                             countDownText.setText("Out of time!");
                             townButton.setDisable(true);
                             skipButton.setText("You're Done");
+                            closeAll();
                         }
                     }
                 });
             }
         }, 1000, 1000); //Every 1 second
+
         currentPlayer = orderedPlayers.remove();
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500));
         currPlayer.setText(currentPlayer.getName());
@@ -198,6 +207,24 @@ public class GameManager {
         }
     }
 
+    private static void closeAll() {
+        ArrayList<Button> staticButts = new ArrayList<>();
+        staticButts.add(Store.sCompleteButton);
+        staticButts.add(Pub.sGambleButton);
+        staticButts.add(ControllerWampusGrounds.sClaimButton);
+        staticButts.add(Town.sPubButton);
+
+        for (Button b: staticButts) {
+            try {
+                if (b != null) {
+                    Stage stage = (Stage) b.getScene().getWindow();
+                    stage.close();
+                }
+            } catch (Exception e) {;
+            }
+        }
+
+    }
     //For Pub
     //Money Bonus = Round Bonus + random(0, Time Bonus)
     public static int calculateBonus() {

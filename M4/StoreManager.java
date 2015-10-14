@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,16 +19,16 @@ public class StoreManager {
     private static int energyQty;
     private static int oreQty;
     private static int muleQty;
-    private static int foodPrice = 30;
-    private static int energyPrice = 25;
-    private static int orePrice = 50;
-    private static int resourcesPrice;
+    protected static int foodPrice = 30;
+    protected static int energyPrice = 25;
+    protected static int orePrice = 50;
     private static int mulePrice;
-    private static int deltaFood;
-    private static int deltaEnergy;
-    private static int deltaOre;
-    private static int deltaMule;
-
+    protected static int prevMule;
+    protected static boolean firstMule = true;
+    protected static boolean buy;
+    protected static boolean sell;
+    protected static boolean almostBought;
+    protected static boolean boughtMule;
 
     public static void initializeStore() {
         if (GameManager.difficulty.equals("Beginner")) {
@@ -43,64 +44,20 @@ public class StoreManager {
         }
     }
 
-    public static int setMulePrice(Object type) {
+    public static int getMulePrice(String type) {
         mulePrice = 0;
-        int base = 100;
-        deltaMule++;
+        int base = -100;
         if (type.equals("Food")) {
-            mulePrice = base + foodPrice;
+            mulePrice = base - foodPrice;
         } else if (type.equals("Energy")) {
-            mulePrice = base + energyPrice;
+            mulePrice = base - energyPrice;
         } else if (type.equals("Ore")) {
-            mulePrice = base + orePrice;
+            mulePrice = base - orePrice;
         } else {
-            deltaMule--;
+            mulePrice = 0;
         }
+        prevMule = mulePrice;
         return mulePrice;
-    }
-
-    public static boolean checkSufficiency(boolean buy, boolean sell) {
-        if (sell && !buy) {
-            if (GameManager.currentPlayer.getFoodCount() - deltaFood < 0
-                    || GameManager.currentPlayer.getEnergyCount() - deltaEnergy < 0
-                    || GameManager.currentPlayer.getOreCount() - deltaOre < 0) {
-                return false;
-            }
-        } else if (buy && !sell){
-            if (foodQty - deltaFood < 0
-                    || energyQty - deltaEnergy < 0
-                    || oreQty - deltaOre < 0
-                    || GameManager.currentPlayer.getMoney() - (mulePrice + resourcesPrice) < 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static int calculateResources() {
-        int calcFood = deltaFood * foodPrice;
-        int calcEnergy = deltaEnergy * energyPrice;
-        int calcOre = deltaOre * orePrice;
-        resourcesPrice = calcFood + calcEnergy + calcOre;
-        return resourcesPrice;
-    }
-
-    public static void completeTransaction(boolean buy, boolean sell) {
-        if (sell && !buy) {
-            deltaFood *= -1;
-            deltaEnergy *= -1;
-            deltaOre *= -1;
-            mulePrice *= -1;
-            resourcesPrice *= -1;
-        }
-        foodQty -= deltaFood;
-        energyQty -= deltaEnergy;
-        oreQty -= deltaOre;
-        muleQty -= deltaMule;
-        GameManager.currentPlayer.setMoney(GameManager.currentPlayer.getMoney() - mulePrice - resourcesPrice);
-        GameManager.currentPlayer.setFoodCount(GameManager.currentPlayer.getFoodCount() + deltaFood);
-        GameManager.currentPlayer.setEnergyCount(GameManager.currentPlayer.getEnergyCount() + deltaEnergy);
-        GameManager.currentPlayer.setOreCount(GameManager.currentPlayer.getOreCount() + deltaOre);
     }
 
     public static int getFoodQuantity() { return foodQty; }
@@ -108,6 +65,14 @@ public class StoreManager {
     public static int getEnergyQuantity() { return energyQty; }
 
     public static int getOreQuantity() { return oreQty; }
+
+    public static void setFoodQuantity(int f) { foodQty = f; }
+
+    public static void setEnergyQuantity(int e) { energyQty = e; }
+
+    public static void setOreQuantity(int o) { oreQty = o; }
+
+    public static void setMuleQuantity(int m) { muleQty = m; }
 
     public static int getMuleQuantity() { return muleQty; }
 
@@ -117,15 +82,6 @@ public class StoreManager {
 
     public static int getOrePrice() { return orePrice; }
 
-    public static int getResourcesPrice() { return resourcesPrice; }
-
     public static int getMulePrice() { return mulePrice; }
-
-    public static void setDeltaFood(int f) { deltaFood = f; }
-
-    public static void setDeltaEnergy(int e) { deltaEnergy = e; }
-
-    public static void setDeltaOre(int o) { deltaOre = o; }
-
 
 }
