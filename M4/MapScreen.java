@@ -328,8 +328,8 @@ public class MapScreen implements Initializable{
                 if (node instanceof Button) {
                     if (node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
                         // mule is deciding if it's in the owned land b/c I think professor said to do it this way
-                        System.out.println(mule.isInOwnedLand((Button) node, GameManager.currentPlayer));
-                        if (mule.isInOwnedLand((Button) node, GameManager.currentPlayer)) {
+                        System.out.println(mule.isInOwnedLand_noMuleExist((Button) node, GameManager.currentPlayer));
+                        if (mule.isInOwnedLand_noMuleExist((Button) node, GameManager.currentPlayer)) {
                             if (clickCount == 0) {
                                 System.out.println("Wee!");
                                 mule.setLand((Button) node);
@@ -341,16 +341,27 @@ public class MapScreen implements Initializable{
 //                                mImageView.setX(100);
 //                                mImageView.setY(Math.random()*60);
                                 map.add(mImageView, map.getColumnIndex(node), map.getRowIndex(node));
+                                map.setCursor(Cursor.DEFAULT);
                                 clickCount++;
                             } else {
                                 System.out.println("Already placed!");
                             }
                         } else {
-                            System.out.println("hi!");
                             if (clickCount == 0) {
                                 map.setCursor(new ImageCursor(new Image("M4/images/catMuleDestroyedCursor.gif")));
                                 clickCount++;
                                 // do something else
+                                try {
+                                    Stage stage = new Stage();
+                                    Parent root = FXMLLoader.load(getClass().getResource("muleDestroyed.fxml"));
+                                    stage.setScene(new Scene(root));
+                                    root.setCursor(new ImageCursor(new Image("M4/images/catMuleDestroyedCursor.gif")));
+                                    stage.setTitle("You Suck!!");
+                                    stage.initModality(Modality.APPLICATION_MODAL);
+                                    stage.show();
+                                } catch(IOException e) {
+                                    System.out.println("hi!!!!");
+                                }
                             }
                         }
                     }
