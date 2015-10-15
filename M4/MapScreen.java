@@ -318,6 +318,7 @@ public class MapScreen implements Initializable{
     }
 
     public void handleGrid(MouseEvent event) {
+        StoreManager.almostBought = false;
         ArrayList<Node> mapChildren = new ArrayList<>();
         if (!map.getCursor().equals(Cursor.DEFAULT)) {
             Mule mule = GameManager.currentPlayer.getMules().get(GameManager.currentPlayer.getMules().size() - 1);
@@ -350,6 +351,7 @@ public class MapScreen implements Initializable{
                             if (clickCount == 0) {
                                 map.setCursor(new ImageCursor(new Image("M4/images/catMuleDestroyedCursor.gif")));
                                 clickCount++;
+                                GameManager.currentPlayer.getMules().remove(GameManager.currentPlayer.getMules().size() -1);
                                 // do something else
                                 try {
                                     Stage stage = new Stage();
