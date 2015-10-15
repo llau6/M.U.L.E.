@@ -43,4 +43,8 @@ public class Mule {
         }
         return ownedLand_noMuleExist;
     }
+
+    public Button getOnLand() {
+        return onLand;
+    }
 }
