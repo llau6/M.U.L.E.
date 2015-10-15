@@ -120,14 +120,7 @@ public class Store implements Initializable {
     public static Button sCompleteButton;
 
     public void initialize(URL location, ResourceBundle resources) {
-        if (StoreManager.boughtMule) {
-            muleCombo.setDisable(true);
-        } else {
-            muleCombo.setDisable(false);
-        }
-
-        sCompleteButton = completeButton;
-
+        //initialize labels
         newMoney.setText(String.valueOf(GameManager.currentPlayer.getMoney()));
         newFood.setText(String.valueOf(GameManager.currentPlayer.getFoodCount()));
         newEnergy.setText(String.valueOf(GameManager.currentPlayer.getEnergyCount()));
@@ -139,7 +132,14 @@ public class Store implements Initializable {
         foodPrice.setText(String.valueOf(StoreManager.getFoodPrice()));
         energyPrice.setText(String.valueOf(StoreManager.getEnergyPrice()));
         orePrice.setText(String.valueOf(StoreManager.getOrePrice()));
+        //reference for timer to close store
+        sCompleteButton = completeButton;
 
+        if (StoreManager.boughtMule) {
+            muleCombo.setDisable(true);
+        } else {
+            muleCombo.setDisable(false);
+        }
         //creating and implementing "+" and "-" buttons
         ArrayList<ButtonEntry<ButtPackage, Label>> buttons =  new ArrayList<>();
         buttons.add(new ButtonEntry<>(new ButtPackage(foodUp, foodDown), enterFood));
@@ -150,128 +150,149 @@ public class Store implements Initializable {
             Button minusButton = x.getKey().getMinus();
             Label storeItem = x.getValue();
             plusButton.setOnAction((event) -> {
+                String plusSign = "";
+                boolean validEntry = false;
                 int multiplier = 1;
-                String plusSign = "+";
-                boolean restricted = true;
+                int newNet = 0;
+                int oldNet = Integer.parseInt(netGainLabel.getText());
+                int storeNum = Integer.parseInt(storeItem.getText());
                 if (StoreManager.buy) {
                     multiplier = -1;
-                    plusSign = "";
                 }
-                int netCost = Integer.parseInt(netGainLabel.getText());
+                //checks to see if sufficient funds/quantities in store/player inventory
+                //sets money label, item quantity label, and player inventory label
                 if (storeItem.getId().equals("enterFood") && ((StoreManager.buy && Integer.parseInt(foodQuantityLabel.getText()) - 1 >= 0)
                         || (StoreManager.sell && Integer.parseInt(newFood.getText()) - 1 >= 0))
                         && Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice >= 0) {
-                    restricted = false;
-                    newFood.setText(String.valueOf((Integer.parseInt(newFood.getText())) - multiplier));
                     foodQuantityLabel.setText(String.valueOf(Integer.parseInt(foodQuantityLabel.getText()) + multiplier));
-                    netGainLabel.setText(plusSign + (netCost + multiplier * StoreManager.foodPrice));
+                    newFood.setText(String.valueOf((Integer.parseInt(newFood.getText())) - multiplier));
                     newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice));
-                }
-                if (storeItem.getId().equals("enterEnergy") && ((StoreManager.buy && Integer.parseInt(energyQuantityLabel.getText()) - 1 >= 0)
+                    newNet = oldNet + multiplier * StoreManager.foodPrice;
+                    validEntry = true;
+                } else if (storeItem.getId().equals("enterEnergy") && ((StoreManager.buy && Integer.parseInt(energyQuantityLabel.getText()) - 1 >= 0)
                         ||  (StoreManager.sell && Integer.parseInt(newEnergy.getText()) - 1 >= 0))
                         && Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice >= 0) {
-                    restricted = false;
-                    newEnergy.setText(String.valueOf((Integer.parseInt(newEnergy.getText())) - multiplier));
                     energyQuantityLabel.setText(String.valueOf(Integer.parseInt(energyQuantityLabel.getText()) + multiplier));
-                    netGainLabel.setText(plusSign + (netCost + multiplier * StoreManager.energyPrice));
+                    newEnergy.setText(String.valueOf((Integer.parseInt(newEnergy.getText())) - multiplier));
                     newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.energyPrice));
-                }
-                if (storeItem.getId().equals("enterOre") && ((StoreManager.buy && Integer.parseInt(oreQuantityLabel.getText()) - 1 >= 0)
+                    newNet = oldNet + multiplier * StoreManager.energyPrice;
+                    validEntry = true;
+                } else if (storeItem.getId().equals("enterOre") && ((StoreManager.buy && Integer.parseInt(oreQuantityLabel.getText()) - 1 >= 0)
                         ||  (StoreManager.sell && Integer.parseInt(newOre.getText()) - 1 >= 0))
                         && Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice >= 0) {
-                    restricted = false;
-                    newOre.setText(String.valueOf((Integer.parseInt(newOre.getText())) - multiplier));
                     oreQuantityLabel.setText(String.valueOf(Integer.parseInt(oreQuantityLabel.getText()) + multiplier));
-                    netGainLabel.setText(plusSign + (netCost + multiplier * StoreManager.orePrice));
+                    newOre.setText(String.valueOf((Integer.parseInt(newOre.getText())) - multiplier));
                     newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.orePrice));
+                    newNet = oldNet + multiplier * StoreManager.orePrice;
+                    validEntry = true;
                 }
-                if (!restricted) {
-                    int storeNum = Integer.parseInt(storeItem.getText());
+                //sets netGain label if there are sufficient funds/quantities in store/player inventory
+                if (validEntry) {
+                    if (newNet > 0) {
+                        plusSign = "+";
+                        netGainLabel.setTextFill(Color.GREEN);
+                    } else if (newNet == 0) {
+                        netGainLabel.setTextFill(Color.BLACK);
+                    } else {
+                        netGainLabel.setTextFill(Color.RED);
+                    }
+                    netGainLabel.setText(plusSign + newNet);
                     storeItem.setText("" + (storeNum + 1));
                 }
             });
 
             minusButton.setOnAction((event) -> {
+                String plusSign = "";
                 int multiplier = -1;
-                String plusSign = "+";
+                int newNet = 0;
+                int oldNet = Integer.parseInt(netGainLabel.getText());
+                int storeNum = Integer.parseInt(storeItem.getText());
                 if (StoreManager.buy) {
                     multiplier = 1;
-                    plusSign = "";
                 }
-                boolean restricted = true;
-                int storeNum = Integer.parseInt(storeItem.getText());
-                int netCost = Integer.parseInt(netGainLabel.getText());
+                //executes if store quantity is greater than 0
+                //sets money label, netGain label, store quantity label, and player inventory quantity label
                 if (storeNum > 0) {
                     if (storeItem.getId().equals("enterFood")) {
-                        restricted = false;
-                        newFood.setText(String.valueOf((Integer.parseInt(newFood.getText())) - multiplier));
                         foodQuantityLabel.setText(String.valueOf(Integer.parseInt(foodQuantityLabel.getText()) + multiplier));
-                        netGainLabel.setText(plusSign + (netCost + multiplier * StoreManager.foodPrice));
+                        newFood.setText(String.valueOf((Integer.parseInt(newFood.getText())) - multiplier));
                         newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.foodPrice));
+                        newNet = oldNet + multiplier * StoreManager.foodPrice;
                     } else if (storeItem.getId().equals("enterEnergy")) {
-                        restricted = false;
-                        newEnergy.setText(String.valueOf((Integer.parseInt(newEnergy.getText())) - multiplier));
                         energyQuantityLabel.setText(String.valueOf(Integer.parseInt(energyQuantityLabel.getText()) + multiplier));
-                        netGainLabel.setText(plusSign + (netCost + multiplier * StoreManager.energyPrice));
+                        newEnergy.setText(String.valueOf((Integer.parseInt(newEnergy.getText())) - multiplier));
                         newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.energyPrice));
+                        newNet = oldNet + multiplier * StoreManager.energyPrice;
                     } else if (storeItem.getId().equals("enterOre")) {
-                        restricted = false;
-                        newOre.setText(String.valueOf((Integer.parseInt(newOre.getText())) - multiplier));
                         oreQuantityLabel.setText(String.valueOf(Integer.parseInt(oreQuantityLabel.getText()) + multiplier));
-                        netGainLabel.setText(plusSign + (netCost + multiplier * StoreManager.orePrice));
+                        newOre.setText(String.valueOf((Integer.parseInt(newOre.getText())) - multiplier));
                         newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) + multiplier * StoreManager.orePrice));
+                        newNet = oldNet + multiplier * StoreManager.orePrice;
                     }
-                    if (!restricted) {
-                        storeItem.setText("" + (storeNum - 1));
+                    if (newNet > 0) {
+                        plusSign = "+";
+                        netGainLabel.setTextFill(Color.GREEN);
+                    } else if (newNet == 0) {
+                        netGainLabel.setTextFill(Color.BLACK);
+                    } else {
+                        netGainLabel.setTextFill(Color.RED);
                     }
+                    netGainLabel.setText(plusSign + newNet);
+                    storeItem.setText("" + (storeNum - 1));
                 }
             });
         }
 
         muleCombo.setOnAction((event) -> {
+            String plusSign = "";
+            int netGain;
             String selected = (String) muleCombo.getSelectionModel().getSelectedItem();
-            int previous = StoreManager.prevMule;
-            if (StoreManager.firstMule) {
+            int previous = StoreManager.isPrevMule();
+            int mulePrice = StoreManager.calculateMulePrice(selected);
+            mulePriceLabel.setText(String.valueOf(mulePrice));
+            //selecting the first mule does not require subtracting out previous mule prices
+            if (StoreManager.isFirstMule()) {
                 previous = 0;
+                StoreManager.setFirstMule(false);
             }
-            StoreManager.firstMule = false;
-            int price = StoreManager.getMulePrice(selected);
-            mulePriceLabel.setText(String.valueOf(price));
-
-                //in case no resources are being purchased
-                if (!StoreManager.buy) {
-                    netGainLabel.setTextFill(Color.RED);
-                    netGainLabel.setText("" + price);
-                    StoreManager.prevMule = price;
-                    System.out.println(StoreManager.prevMule);
-                    //if resources are also being purchased
-                } else {
-                    netGainLabel.setText(String.valueOf(Integer.parseInt(netGainLabel.getText()) - previous + price));
-
-                }
-                newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) - previous + price));
-                if (Integer.parseInt(newMoney.getText()) < 0) {
-                    muleRestriction.setOpacity(1.0);
-                    completeButton.setDisable(true);
-                } else {
-                    muleRestriction.setOpacity(0.0);
-                    completeButton.setDisable(false);
-                }
+            //setting netGain after choosing a Mule
+            if (!StoreManager.buy && !StoreManager.sell) {
+                netGain = mulePrice;
+                StoreManager.setPrevMule(mulePrice);
+            } else {
+                //netGain has to subtract out the previous Mule price
+                netGain = Integer.parseInt(netGainLabel.getText()) - previous + mulePrice;
+            }
+            //setting color and sign of the netGain depending if neg/pos
+            if (netGain > 0) {
+                netGainLabel.setTextFill(Color.GREEN);
+                plusSign = "+";
+            } else if (netGain == 0) {
+                netGainLabel.setTextFill(Color.BLACK);
+            } else {
+                netGainLabel.setTextFill(Color.RED);
+            }
+            netGainLabel.setText(plusSign + netGain);
+            newMoney.setText(String.valueOf(Integer.parseInt(newMoney.getText()) - previous + mulePrice));
+            //if there is not enough funds for a mule
+            if (Integer.parseInt(newMoney.getText()) < 0) {
+                muleRestriction.setOpacity(1.0);
+                completeButton.setDisable(true);
+            } else {
+                muleRestriction.setOpacity(0.0);
+                completeButton.setDisable(false);
+            }
             if (selected.equals("Energy")) {
                 purchaseMule.setImage(new Image("M4/images/muleEnergy.gif"));
             }
-            if (!selected.equals("(No Mule)")) {
-                StoreManager.almostBought = true;
-            } else {
-                StoreManager.almostBought = false;
-            }
+            StoreManager.almostBought = !selected.equals("(No Mule)");
         });
 
         buyButton.setOnAction((event) -> {
             StoreManager.buy = true;
             StoreManager.sell = false;
-            netGainLabel.setTextFill(Color.RED);
             if (netGainLabel.getText().equals("")) {
+                netGainLabel.setTextFill(Color.RED);
                 netGainLabel.setText("-0");
             }
             buySellStack.setVisible(false);
@@ -280,8 +301,10 @@ public class Store implements Initializable {
         sellButton.setOnAction((event) -> {
             StoreManager.sell = true;
             StoreManager.buy = false;
-            netGainLabel.setTextFill(Color.GREEN);
-            netGainLabel.setText("+0");
+            if (netGainLabel.getText().equals("")) {
+                netGainLabel.setTextFill(Color.GREEN);
+                netGainLabel.setText("+0");
+            }
             buySellStack.setVisible(false);
         });
 
