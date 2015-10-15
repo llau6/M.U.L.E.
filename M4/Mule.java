@@ -37,4 +37,8 @@ public class Mule {
         }
         return false;
     }
+
+    public Button getOnLand() {
+        return onLand;
+    }
 }

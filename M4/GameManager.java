@@ -199,7 +199,11 @@ public class GameManager {
         if (currentTurnNumber == players.size()) {
             currentRoundNumber++;
             //new round
-            orderedPlayers = visitedPlayers;
+            orderedPlayers = new PriorityQueue<>();
+
+            //UPDATE PRODUCTION METHOD
+            updateProduction();
+
             visitedPlayers = new PriorityQueue<>();
             currentTurnNumber = 1;
         } else {
@@ -257,5 +261,32 @@ public class GameManager {
         }
         currentPlayer.setMoney(currentPlayer.getMoney() + moneyBonus);
         return moneyBonus;
+    }
+
+    private static void updateProduction() {
+        for (Player player : visitedPlayers) {
+            if (player.getEnergyCount() >= 1) {
+                for (Mule mule : player.getMules()) {
+                    String muleType = mule.getType();
+                    Button b = mule.getOnLand();
+                    int row = mapGrid.getRowIndex(b);
+                    int col = mapGrid.getColumnIndex(b);
+                    TileType tileType = gameMap[row][col];
+                    int updateNum;
+                    if (muleType.equals("Food")) {
+                        updateNum = tileType.getFoodCount();
+                        player.setFoodCount(player.getFoodCount() + updateNum);
+                    } else if (muleType.equals("Ore")) {
+                        updateNum = tileType.getOreCount();
+                        player.setOreCount(player.getOreCount() + updateNum);
+                    } else if (muleType.equals("Energy")) {
+                        updateNum = tileType.getEnergyCount();
+                        player.setEnergyCount(player.getEnergyCount() + updateNum - 1);
+                    }
+                }
+                orderedPlayers.add(player);
+            }
+        }
+
     }
 }
