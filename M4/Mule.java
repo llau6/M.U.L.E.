@@ -23,18 +23,24 @@ public class Mule {
     public String getType() {
         return type;
     }
+    public Button getLand() { return onLand;}
     public void setLand(Button land) {
         onLand = land;
     }
 
-    public boolean isInOwnedLand(Button selected, Player currPlayer) {
+    public boolean isInOwnedLand_noMuleExist(Button selected, Player currPlayer) {
         ArrayList<Button> ownedLands = currPlayer.getLands();
-        System.out.println(ownedLands.size());
+        boolean ownedLand_noMuleExist = false;
         for (Button land : ownedLands) {
             if (land.equals(selected)) {
-                return true;
+                ownedLand_noMuleExist =  true;
             }
         }
-        return false;
+        for (int i = 0; i < currPlayer.getMules().size(); i++) {
+            if (currPlayer.getMules().get(i).getLand() != null && currPlayer.getMules().get(i).getLand().equals(selected)) {
+                ownedLand_noMuleExist = false;
+            }
+        }
+        return ownedLand_noMuleExist;
     }
 }

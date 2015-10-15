@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="344.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="M4.PopUp">
+  <children>
+    <Button fx:id="okay" layoutX="94.0" layoutY="127.0" mnemonicParsing="false" onAction="#okayButtonHandle" prefWidth="158.0" text="Okay..." />
+    <Label layoutX="31.0" layoutY="44.0" text="Mule Destroyed! :D">
+      <font>
+        <Font name="Comic Sans MS Bold" size="30.0" />
+      </font>
+    </Label>
+  </children>
+</Pane>
