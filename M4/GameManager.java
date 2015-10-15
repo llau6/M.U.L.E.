@@ -265,8 +265,8 @@ public class GameManager {
 
     private static void updateProduction() {
         for (Player player : visitedPlayers) {
-            if (player.getEnergyCount() >= 1) {
-                for (Mule mule : player.getMules()) {
+            for (Mule mule : player.getMules()) {
+                if (player.getEnergyCount() >= 1) {
                     String muleType = mule.getType();
                     Button b = mule.getOnLand();
                     int row = mapGrid.getRowIndex(b);
@@ -284,8 +284,9 @@ public class GameManager {
                         player.setEnergyCount(player.getEnergyCount() + updateNum - 1);
                     }
                 }
-                orderedPlayers.add(player);
+
             }
+            orderedPlayers.add(player);
         }
 
     }
