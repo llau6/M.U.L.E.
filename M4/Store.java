@@ -119,8 +119,7 @@ public class Store implements Initializable {
 
     public static Button sCompleteButton;
 
-    public void initialize(URL location, ResourceBundle resources) {
-        //initialize labels
+    public void initialize(URL location, ResourceBundle resources) {;
         newMoney.setText(String.valueOf(GameManager.currentPlayer.getMoney()));
         newFood.setText(String.valueOf(GameManager.currentPlayer.getFoodCount()));
         newEnergy.setText(String.valueOf(GameManager.currentPlayer.getEnergyCount()));
@@ -282,10 +281,13 @@ public class Store implements Initializable {
                 muleRestriction.setOpacity(0.0);
                 completeButton.setDisable(false);
             }
-            if (selected.equals("Energy")) {
-                purchaseMule.setImage(new Image("M4/images/muleEnergy.gif"));
+            if (!selected.equals("(No Mule)")) {
+                purchaseMule.setImage(new Image("M4/images/mule"+ muleCombo.getSelectionModel().getSelectedItem() +".gif"));
+                StoreManager.almostBought = true;
+            } else {
+                purchaseMule.setImage(null);
+                StoreManager.almostBought = false;
             }
-            StoreManager.almostBought = !selected.equals("(No Mule)");
         });
 
         buyButton.setOnAction((event) -> {
