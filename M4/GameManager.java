@@ -267,6 +267,7 @@ public class GameManager {
         for (Player player : visitedPlayers) {
             for (Mule mule : player.getMules()) {
                 if (player.getEnergyCount() >= 1) {
+                    player.setEnergyCount(player.getEnergyCount() - 1);
                     String muleType = mule.getType();
                     Button b = mule.getOnLand();
                     int row = mapGrid.getRowIndex(b);
@@ -281,7 +282,7 @@ public class GameManager {
                         player.setOreCount(player.getOreCount() + updateNum);
                     } else if (muleType.equals("Energy")) {
                         updateNum = tileType.getEnergyCount();
-                        player.setEnergyCount(player.getEnergyCount() + updateNum - 1);
+                        player.setEnergyCount(player.getEnergyCount() + updateNum);
                     }
                 }
 
