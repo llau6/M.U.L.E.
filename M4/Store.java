@@ -133,7 +133,6 @@ public class Store implements Initializable {
         orePrice.setText(String.valueOf(StoreManager.getOrePrice()));
         //reference for timer to close store
         sCompleteButton = completeButton;
-
         if (StoreManager.boughtMule) {
             muleCombo.setDisable(true);
         } else {
@@ -326,7 +325,7 @@ public class Store implements Initializable {
             if (StoreManager.almostBought) {
                 StoreManager.boughtMule = true;
             }
-            if (StoreManager.boughtMule) {
+            if (!muleCombo.isDisabled() && StoreManager.boughtMule) {
                      StoreManager.setMuleQuantity(Integer.parseInt(muleQuantityLabel.getText()) - 1);
                     Image image = new Image("M4/images/walkingCatMuleCursor.gif");
                     GameManager.mapGrid.setCursor(new ImageCursor(image));
