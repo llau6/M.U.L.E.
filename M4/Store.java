@@ -133,8 +133,6 @@ public class Store implements Initializable {
         orePrice.setText(String.valueOf(StoreManager.getOrePrice()));
         //reference for timer to close store
         sCompleteButton = completeButton;
-
-        ;
         if (StoreManager.boughtMule) {
             muleCombo.setDisable(true);
         } else {
