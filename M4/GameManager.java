@@ -41,11 +41,11 @@ public class GameManager {
                 if (i == 2 && j == 4) {
                 } else if (j == 4) {
                     gameMap[i][j] = TileType.RIVER;
-                } else if ((i == 0 && j == 2) || (i == 1 && j == 1) && (i == 2 || j == 8)) {
+                } else if ((i == 0 && j == 2) || (i == 1 && j == 1) || (i == 2 && j == 8)) {
                     gameMap[i][j] = TileType.MOUNTAIN1;
-                } else if ((i == 3 && j == 1) || (i == 3 && j == 6) && (i == 4 || j == 2) && (i == 4 || j == 8)) {
+                } else if ((i == 3 && j == 1) || (i == 3 && j == 6) || (i == 4 && j == 2) || (i == 4 && j == 8)) {
                     gameMap[i][j] = TileType.MOUNTAIN2;
-                } else if ((i == 0 && j == 6) || (i == 1 && j == 8) && (i == 2 || j == 0)) {
+                } else if ((i == 0 && j == 6) || (i == 1 && j == 8) || (i == 2 && j == 0)) {
                     gameMap[i][j] = TileType.MOUNTAIN3;
                 } else {
                     gameMap[i][j] = TileType.PLAIN;
@@ -94,6 +94,11 @@ public class GameManager {
         players.add(currentPlayer);
     }
     public static void updateCurrentScore() {
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
+                + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
+    }
+
+    public static void updateCurrentScore(Player currentPlayer) {
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
@@ -188,7 +193,6 @@ public class GameManager {
         }, 1000, 1000); //Every 1 second
 
         currentPlayer = orderedPlayers.remove();
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500));
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
@@ -287,6 +291,7 @@ public class GameManager {
                 }
 
             }
+            GameManager.updateCurrentScore(player);
             orderedPlayers.add(player);
         }
 
