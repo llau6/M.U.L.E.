@@ -190,6 +190,9 @@ public class MapScreen implements Initializable{
                         node.setDisable(true);
                     }
                 }
+                if (GameManager.newRound) {
+                    GameManager.updateProduction();
+                }
                 GameManager.gamePlay(currPlayer, energy, money, ore, food, score, countDownText, turnType, round, townButton, skipButt);
                 //done
                 map.setCursor(Cursor.DEFAULT);

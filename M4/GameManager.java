@@ -21,7 +21,7 @@ public class GameManager {
     public static String difficulty;
     public static Queue<Player> players = new LinkedList<>();
     public static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
-    public static PriorityQueue<Player> visitedPlayers = new PriorityQueue<>();
+    public static List<Player> visitedPlayers = new LinkedList<>();
     public static TileType[][] gameMap = new TileType[5][9];
     public static Player currentPlayer;
     public static int totalTurnsInitial;
@@ -30,6 +30,7 @@ public class GameManager {
     public static int currentRoundNumber = 1;
     public static int timerLeft;
     public static boolean isFree = true;
+    public static boolean newRound;
 
     //really bad way to do it
     public static GridPane mapGrid;
@@ -136,12 +137,6 @@ public class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = orderedPlayers.remove();
-
-        System.out.println("name GameManager: " + currentPlayer.getName());
-//        int curMoney = prevPlayer.getMoney();
-//        if (bought) {
-//            prevPlayer.setMoney(curMoney - 300);
-//        }
         System.out.println("name: " + currentPlayer.getName());
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500) + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
@@ -154,8 +149,10 @@ public class GameManager {
         if (currentTurnNumber == players.size()) {
             currentRoundNumber++;
             //new round
-            orderedPlayers = visitedPlayers;
-            visitedPlayers = new PriorityQueue<>();
+            for (Player p : visitedPlayers) {
+                orderedPlayers.add(p);
+            }
+            visitedPlayers = new LinkedList<>();
             currentTurnNumber = 1;
         } else {
             currentTurnNumber++;
@@ -163,6 +160,7 @@ public class GameManager {
     }
     public static void gamePlay(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Label turnType, Label round, Button townButton, Button skipButton) {
         townButton.setDisable(false);
+        newRound = false;
         round.setDisable(false);
         skipButton.setText("End Turn");
         turnType.setText("TURN-BASED GAMEPLAY");
@@ -202,14 +200,8 @@ public class GameManager {
         visitedPlayers.add(currentPlayer);
         if (currentTurnNumber == players.size()) {
             currentRoundNumber++;
-            //new round
-            orderedPlayers = new PriorityQueue<>();
-
-            //UPDATE PRODUCTION METHOD
-            updateProduction();
-
-            visitedPlayers = new PriorityQueue<>();
             currentTurnNumber = 1;
+            newRound = true;
         } else {
             currentTurnNumber++;
         }
@@ -267,7 +259,8 @@ public class GameManager {
         return moneyBonus;
     }
 
-    private static void updateProduction() {
+    public static void updateProduction() {
+        orderedPlayers = new PriorityQueue<>();
         for (Player player : visitedPlayers) {
             for (Mule mule : player.getMules()) {
                 if (player.getEnergyCount() >= 1) {
@@ -294,6 +287,6 @@ public class GameManager {
             GameManager.updateCurrentScore(player);
             orderedPlayers.add(player);
         }
-
+        visitedPlayers = new LinkedList<>();
     }
 }
