@@ -295,7 +295,7 @@ public class MapScreen implements Initializable{
         }
     }
 
-    protected static javafx.scene.Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+    protected static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
         ObservableList<Node> childrens = gridPane.getChildren();
         for (javafx.scene.Node node : childrens) {
             if (node instanceof Button && GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {

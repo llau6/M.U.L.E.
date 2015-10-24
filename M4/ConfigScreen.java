@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -91,8 +92,6 @@ public class ConfigScreen implements Initializable {
 
         parallelTransition.setOnFinished(event -> {
             muleCat.setImage(new Image("M4/images/catMule.gif"));
-//            muleCat.setOpacity(0);
-//            staticMule.setOpacity(1);
         });
     }
     @FXML
@@ -118,6 +117,24 @@ public class ConfigScreen implements Initializable {
             requiredNum.setOpacity(1.0);
             requiredDifficulty.setOpacity(1.0);
             requiredMap.setOpacity(1.0);
+        }
+    }
+
+
+
+    // checking random event; TO DO get rid of this or put this somewhere where you handle randomly pop up thing
+    @FXML
+    Button randomButton;
+    public void randomHandle(ActionEvent event) {
+        try {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("randomEvent.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Random Event!!");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch(IOException e) {
+            System.out.println("hi!!!!");
         }
     }
 }
