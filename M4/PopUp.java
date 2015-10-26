@@ -16,6 +16,8 @@ public class PopUp{
     @FXML
     public void okayButtonHandle(ActionEvent event) {
         ((Stage) okay.getScene().getWindow()).close();
-        GameManager.mapGrid.setCursor(Cursor.DEFAULT);
+        if (GameManager.mapGrid != null) {
+            GameManager.mapGrid.setCursor(Cursor.DEFAULT);
+        }
     }
 }

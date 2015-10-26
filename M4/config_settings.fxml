@@ -92,6 +92,7 @@
             <Image url="@images/catMule.gif" />
           </image>
         </ImageView>
+        <Button fx:id="randomButton" layoutX="305.0" layoutY="225.0" mnemonicParsing="false" onAction="#randomHandle" text="random" />
       </children>
       <effect>
         <Glow />

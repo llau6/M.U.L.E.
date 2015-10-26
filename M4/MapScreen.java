@@ -190,6 +190,9 @@ public class MapScreen implements Initializable{
                         node.setDisable(true);
                     }
                 }
+                if (GameManager.newRound) {
+                    GameManager.updateProduction();
+                }
                 GameManager.gamePlay(currPlayer, energy, money, ore, food, score, countDownText, turnType, round, townButton, skipButt);
                 //done
                 map.setCursor(Cursor.DEFAULT);
@@ -218,7 +221,7 @@ public class MapScreen implements Initializable{
     private void handleMapButtons() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
-                if ((i == 0 && j == 6) || (i == 2 && j == 0) || (i == 1 && j == 8)) {
+                if ((i == 0 && j == 4) || (i == 1 && j == 4) || (i == 3 && j == 4) ||(i == 4 && j == 4)) {
                     Button riverNode = (Button)getNodeFromGridPane(map, j, i);
                     riverNode.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (riverNode.getGraphic())).getImage());
@@ -241,7 +244,7 @@ public class MapScreen implements Initializable{
                         selectedTileType = TileType.MOUNTAIN1;
                         selectedLand = mountain1Node;
                     });
-                } else if ((i == 3 && j == 1) || (i == 3 && j == 6) || (i == 4 && j == 2) && (i == 4 && j == 8)) {
+                } else if ((i == 3 && j == 1) || (i == 3 && j == 6) || (i == 4 && j == 2) || (i == 4 && j == 8)) {
                     Button mountain2Node = (Button)getNodeFromGridPane(map, j,i);
                     mountain2Node.setOnAction(event -> {
                         selectedImage.setImage(((ImageView) (mountain2Node.getGraphic())).getImage());
@@ -252,7 +255,7 @@ public class MapScreen implements Initializable{
                         selectedTileType = TileType.MOUNTAIN2;
                         selectedLand = mountain2Node;
                     });
-                } else if ((i == 0 && j == 3) || (i == 1 && j == 4) || (i == 3 && j == 4) || (i == 4 && j == 4)) {
+                } else if ((i == 0 && j == 6) || (i == 1 && j == 8) || (i == 2 && j == 0)) {
                     Button mountain3Node = (Button)getNodeFromGridPane(map,j,i);
                     System.out.println(mountain3Node.getLayoutBounds());
                     mountain3Node.setOnAction(event -> {
@@ -292,7 +295,7 @@ public class MapScreen implements Initializable{
         }
     }
 
-    protected static javafx.scene.Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+    protected static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
         ObservableList<Node> childrens = gridPane.getChildren();
         for (javafx.scene.Node node : childrens) {
             if (node instanceof Button && GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
@@ -318,6 +321,7 @@ public class MapScreen implements Initializable{
     }
 
     public void handleGrid(MouseEvent event) {
+        StoreManager.almostBought = false;
         ArrayList<Node> mapChildren = new ArrayList<>();
         if (!map.getCursor().equals(Cursor.DEFAULT)) {
             Mule mule = GameManager.currentPlayer.getMules().get(GameManager.currentPlayer.getMules().size() - 1);
@@ -350,6 +354,7 @@ public class MapScreen implements Initializable{
                             if (clickCount == 0) {
                                 map.setCursor(new ImageCursor(new Image("M4/images/catMuleDestroyedCursor.gif")));
                                 clickCount++;
+                                GameManager.currentPlayer.getMules().remove(GameManager.currentPlayer.getMules().size() -1);
                                 // do something else
                                 try {
                                     Stage stage = new Stage();
