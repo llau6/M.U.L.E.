@@ -125,7 +125,7 @@ public class MapScreen implements Initializable{
         sSkipButton = skipButt;
 
         GameManager.initializeMap();
-//        soundManager.playMusic();
+        soundManager.playMusic();
         skipButt.setDisable(true);
         GameManager.totalTurnsInitial = GameManager.players.size() * 2;
         System.out.println(GameManager.totalTurnsInitial);

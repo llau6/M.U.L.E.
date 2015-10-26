@@ -26,7 +26,7 @@ public class GameManager {
     public static Player currentPlayer;
     public static int totalTurnsInitial;
     public static Timer timer;
-    public static int currentTurnNumber = 1;
+    public static int currentTurnNumber = 1; //when current turn number, it's the first person. First person can't get the bad event
     public static int currentRoundNumber = 1;
     public static int timerLeft;
     public static boolean isFree = true;
@@ -186,6 +186,8 @@ public class GameManager {
                 });
             }
         }, 1000, 1000); //Every 1 second
+
+        //call to random manager update
 
         currentPlayer = orderedPlayers.remove();
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500));
