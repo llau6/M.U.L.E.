@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="344.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="M4.PopUp">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="944.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="M4.RandomEvent">
   <children>
     <Button fx:id="okay" layoutX="94.0" layoutY="127.0" mnemonicParsing="false" onAction="#okayButtonHandle" prefWidth="158.0" text="Okay..." />
-    <Label layoutX="31.0" layoutY="44.0" fx:id="destroyedLabel" text="Mule Destroyed! :D">
+    <Label layoutX="51.0" layoutY="64.0" fx:id="label" text="Random Event Triggered! :D">
       <font>
-        <Font name="Comic Sans MS Bold" size="30.0" />
+        <Font name="Comic Sans MS Bold" size="20.0" />
       </font>
     </Label>
   </children>
