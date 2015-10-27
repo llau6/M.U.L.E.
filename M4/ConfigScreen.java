@@ -119,22 +119,4 @@ public class ConfigScreen implements Initializable {
             requiredMap.setOpacity(1.0);
         }
     }
-
-
-
-    // checking random event; TO DO get rid of this or put this somewhere where you handle randomly pop up thing
-    @FXML
-    Button randomButton;
-    public void randomHandle(ActionEvent event) {
-        try {
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("randomEvent.fxml"));
-            stage.setScene(new Scene(root));
-            stage.setTitle("Random Event!!");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-        } catch(IOException e) {
-            System.out.println("hi!!!!");
-        }
-    }
 }
