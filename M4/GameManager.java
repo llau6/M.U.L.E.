@@ -2,12 +2,19 @@ package M4;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -97,6 +104,27 @@ public class GameManager {
     public static void updateCurrentScore() {
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
+    }
+
+
+    public static void initiateRandom() {
+        int chance = (int) (Math.random() * 100 + 1);
+        System.out.println(chance);
+        //int chance = 27;
+        if (chance <= 27) {
+            RandomEvent randomEvent = new RandomEvent();
+            randomEvent.initialize();
+            try {
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(GameManager.class.getResource("randomEvent.fxml"));
+                stage.setScene(new Scene(root));
+                stage.setTitle("Random Event!!");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch(IOException e) {
+                System.out.println("hi!!!!");
+            }
+        }
     }
 
     public static void updateCurrentScore(Player currentPlayer) {
@@ -189,6 +217,8 @@ public class GameManager {
                 });
             }
         }, 1000, 1000); //Every 1 second
+
+        initiateRandom();
 
         currentPlayer = orderedPlayers.remove();
         currPlayer.setText(currentPlayer.getName());
