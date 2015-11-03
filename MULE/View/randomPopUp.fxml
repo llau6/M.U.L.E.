@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="944.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.RandomEvent">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.RandomEvent">
   <children>
-    <Button fx:id="okay" layoutX="94.0" layoutY="127.0" mnemonicParsing="false" onAction="#okayButtonHandle" prefWidth="158.0" text="Okay..." />
-    <Label layoutX="51.0" layoutY="64.0" fx:id="label" text="Random Event Triggered! :D">
+    <Button fx:id="okay" layoutX="338.0" layoutY="127.0" mnemonicParsing="false" onAction="#okayButtonHandle" prefWidth="158.0" text="Okay" />
+    <Label fx:id="label" alignment="TOP_CENTER" layoutX="14.0" layoutY="30.0" prefHeight="77.87109375" prefWidth="765.0" text="Random Event Triggered! :D" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true">
       <font>
         <Font name="Comic Sans MS Bold" size="20.0" />
       </font>
