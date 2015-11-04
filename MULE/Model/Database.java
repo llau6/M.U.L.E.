@@ -1,16 +1,18 @@
 package MULE.Model;
 
-import javafx.scene.control.Label;
+
 import javafx.scene.paint.Color;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.PriorityQueue;
+
 
 /**
  * Created by jatin1 on 10/31/15.
  */
 public class Database {
+    private Database() {
+
+    }
     private static Connection getConnection() throws Exception {
         try {
             String driver = "com.mysql.jdbc.Driver";
@@ -32,8 +34,8 @@ public class Database {
             clearTable();
             Connection con = getConnection();
             String ownershipArr = serializeBool();
-            PreparedStatement info = con.prepareStatement("INSERT INTO gameData (difficulty, round, boolArr) VALUES ('" + GameManager.difficulty + "', " +
-                    "'" + GameManager.currentRoundNumber + "', '" + ownershipArr + "')");
+            PreparedStatement info = con.prepareStatement("INSERT INTO gameData (difficulty, round, boolArr) VALUES ('" + GameManager.getDifficulty() + "', " +
+                    "'" + GameManager.getCurrentRoundNumber() + "', '" + ownershipArr + "')");
             info.executeUpdate();
             for (Player p : GameManager.players) {
                 savePlayerInfo(p);
@@ -94,8 +96,8 @@ public class Database {
         PreparedStatement gameStatement = con.prepareStatement("SELECT * FROM gameData");
         ResultSet queryGame = gameStatement.executeQuery();
         while (queryGame.next()) {
-            GameManager.difficulty = queryGame.getString("difficulty");
-            GameManager.currentRoundNumber = queryGame.getInt("round");
+            GameManager.setDifficulty(queryGame.getString("difficulty"));
+            GameManager.setCurrentRoundNumber(queryGame.getInt("round"));
             deserializeBool(queryGame.getString("boolArr"));
         }
 
@@ -125,9 +127,9 @@ public class Database {
             //adds them to the priority queue
             GameManager.players.add(p);
         }
-        GameManager.currentPlayer = GameManager.players.peek();
+        GameManager.setCurrentPlayer(GameManager.players.peek());
         for (Player p : GameManager.players) {
-            GameManager.orderedPlayers.add(p);
+            GameManager.getOrderedPlayers().add(p);
         }
     }
 
