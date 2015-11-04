@@ -34,6 +34,18 @@ public class Player implements Comparable<Player> {
             energyCount = 2;
         }
     }
+
+    public Player() {
+        this.name = null;
+        this.race = null;
+        this.color = null;
+        this.score = 0;
+        this.landCount = 0;
+        this.oreCount = 0;
+        foodCount = 8;
+        energyCount = 4;
+    }
+
     public String getName() { return name; }
 
     public Color getColor() { return color; }
