@@ -79,8 +79,8 @@ public class PlayerInitScreen implements Initializable {
     /**
      *
      *
-     * @param url
-     * @param rb
+     * @param url URL of css
+     * @param rb Resource Bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
