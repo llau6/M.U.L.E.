@@ -23,7 +23,7 @@ public final class GameManager {
     private GameManager() {}
     private static int landPoints = 500;
     private static String difficulty;
-    public static final Queue<Player> players = new LinkedList<>();
+    public static  Queue<Player> players = new LinkedList<>();
     private static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
     private static List<Player> visitedPlayers = new LinkedList<>();
     private static Player currentPlayer;
@@ -38,7 +38,7 @@ public final class GameManager {
     public static void initializeMap() {
         StoreManager.initializeStore();
     }
-//////////////
+
     public static String getDifficulty() {
         return difficulty;
     }
@@ -92,6 +92,14 @@ public final class GameManager {
     }
     public static PriorityQueue<Player> getOrderedPlayers() {
         return orderedPlayers;
+    }
+
+    public static Queue<Player> getPlayersQueue() {
+        return players;
+    }
+
+    public static void setPlayersQueue(Queue<Player> playersQ) {
+        players = playersQ;
     }
 
     public static void setOrderedPlayers(PriorityQueue<Player> orderedPlayers) {
