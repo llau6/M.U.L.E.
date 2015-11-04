@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
  */
 public class Player implements Comparable<Player> {
     private String name;
-    private Race race;
     private Color color;
     private int money = 1000;
     private int foodCount;
@@ -19,14 +18,13 @@ public class Player implements Comparable<Player> {
     private int[][] lands = new int[5][9];
     private boolean clicked = false;
 
-    public Player(String name, Race race, Color color) {
+    public Player(String name, Color color) {
         this.name = name;
-        this.race = race;
         this.color = color;
         this.score = 0;
         this.landCount = 0;
         this.oreCount = 0;
-        if (GameManager.difficulty.equals("Beginner")) {
+        if (GameManager.getDifficulty().equals("Beginner")) {
             foodCount = 8;
             energyCount = 4;
         } else {
@@ -34,77 +32,65 @@ public class Player implements Comparable<Player> {
             energyCount = 2;
         }
     }
+    public final String getName() { return name; }
 
-    public Player() {
-        this.name = null;
-        this.race = null;
-        this.color = null;
-        this.score = 0;
-        this.landCount = 0;
-        this.oreCount = 0;
-        foodCount = 8;
-        energyCount = 4;
-    }
+    public final Color getColor() { return color; }
 
-    public String getName() { return name; }
+    public final int getMoney() { return money; }
 
-    public Color getColor() { return color; }
+    public final int getFoodCount() { return foodCount; }
 
-    public int getMoney() { return money; }
+    public final int getEnergyCount() { return energyCount; }
 
-    public int getFoodCount() { return foodCount; }
+    public final int getOreCount() { return oreCount; }
 
-    public int getEnergyCount() { return energyCount; }
+    public final int getLandCount() { return landCount; }
 
-    public int getOreCount() { return oreCount; }
+    public final int getScore() { return score; }
 
-    public int getLandCount() { return landCount; }
+    public final int[][] getLands() { return lands; }
 
-    public int getScore() { return score; }
+    public final String getCurMule() { return curMule; }
 
-    public int[][] getLands() { return lands; }
+    public final boolean isClicked() { return clicked; }
 
-    public String getCurMule() { return curMule; }
-
-    public boolean isClicked() { return clicked; }
-
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
-    public void setMoney(int money) {
+    public final void setMoney(int money) {
         this.money = money;
     }
 
-    public void setFoodCount(int foodCount) {
+    public final void setFoodCount(int foodCount) {
         this.foodCount = foodCount;
     }
 
-    public void setEnergyCount(int energyCount) {
+    public final void setEnergyCount(int energyCount) {
         this.energyCount = energyCount;
     }
 
-    public void setOreCount(int oreCount) {
+    public final void setOreCount(int oreCount) {
         this.oreCount = oreCount;
     }
 
-    public void setLandCount() {
+    public final void setLandCount() {
         this.landCount = landCount + 1;
     }
 
-    public void setScore(int score) {
+    public final void setScore(int score) {
         this.score = score;
     }
 
-    public void setCurMule(String curMule) {
+    public final void setCurMule(String curMule) {
         this.curMule = curMule;
     }
 
-    public void setClicked(boolean clicked) {
+    public final void setClicked(boolean clicked) {
         this.clicked = clicked;
     }
 
-    public void setLands(String s, int i, int j) {
+    public final void setLands(String s, int i, int j) {
         int set = 0;
         if (s.equals("No mule")) {
             set = 1;
@@ -118,7 +104,8 @@ public class Player implements Comparable<Player> {
         this.lands[i][j] = set;
     }
 
-    public int compareTo(Player other) {
+    // ASK JATIN
+    public final int compareTo(Player other) {
         return this.score - other.getScore();
     }
 }

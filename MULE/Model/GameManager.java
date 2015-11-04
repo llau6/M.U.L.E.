@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.LinkedList;
@@ -20,27 +19,99 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by jatin1 on 9/18/15.
  */
-public class GameManager {
-    public static String difficulty;
-    public static Queue<Player> players = new LinkedList<>();
-    public static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
-    public static List<Player> visitedPlayers = new LinkedList<>();
-    public static TileType[][] gameMap = new TileType[5][9];
-    public static Player currentPlayer;
-    public static int totalTurnsInitial;
-    public static Timer timer;
-    public static int currentTurnNumber = 1;
-    public static int currentRoundNumber = 1;
-    public static int timerLeft;
-    public static boolean isFree = true;
-    public static boolean newRound;
-
-    public static GridPane mapGrid;
+public final class GameManager {
+    private GameManager() {}
+    private static int landPoints = 500;
+    private static String difficulty;
+    public static final Queue<Player> players = new LinkedList<>();
+    private static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
+    private static List<Player> visitedPlayers = new LinkedList<>();
+    private static Player currentPlayer;
+    private static int totalTurnsInitial;
+    private static Timer timer;
+    private static int currentTurnNumber = 1;
+    private static int currentRoundNumber = 1;
+    private static int timerLeft;
+    private static boolean isFree = true;
+    private static boolean newRound;
+    private static GridPane mapGrid;
     public static void initializeMap() {
         StoreManager.initializeStore();
-
+    }
+//////////////
+    public static String getDifficulty() {
+        return difficulty;
     }
 
+    public static void setDifficulty(String difficulty) {
+        GameManager.difficulty = difficulty;
+    }
+    public static int getTotalTurnsInitial() {
+        return totalTurnsInitial;
+    }
+
+    public static void setTotalTurnsInitial(int totalTurnsInitial) {
+        GameManager.totalTurnsInitial = totalTurnsInitial;
+    }
+
+    public static Timer getTimer() {
+        return timer;
+    }
+
+    public static void setTimer(Timer timer) {
+        GameManager.timer = timer;
+    }
+    public static Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public static void setCurrentPlayer(Player currentPlayer) {
+        GameManager.currentPlayer = currentPlayer;
+    }
+    public static boolean isFree() {
+        return isFree;
+    }
+
+    public static void setIsFree(boolean isFree) {
+        GameManager.isFree = isFree;
+    }
+
+    public static boolean isNewRound() {
+        return newRound;
+    }
+
+    public static void setNewRound(boolean newRound) {
+        GameManager.newRound = newRound;
+    }
+    public static GridPane getMapGrid() {
+        return mapGrid;
+    }
+
+    public static void setMapGrid(GridPane mapGrid) {
+        GameManager.mapGrid = mapGrid;
+    }
+    public static PriorityQueue<Player> getOrderedPlayers() {
+        return orderedPlayers;
+    }
+
+    public static void setOrderedPlayers(PriorityQueue<Player> orderedPlayers) {
+        GameManager.orderedPlayers = orderedPlayers;
+    }
+    public static int getCurrentTurnNumber() {
+        return currentTurnNumber;
+    }
+
+    public static void setCurrentTurnNumber(int currentTurnNumber) {
+        GameManager.currentTurnNumber = currentTurnNumber;
+    }
+
+    public static int getCurrentRoundNumber() {
+        return currentRoundNumber;
+    }
+
+    public static void setCurrentRoundNumber(int currentRoundNumber) {
+        GameManager.currentRoundNumber = currentRoundNumber;
+    }
     //initial land selection phase
     public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Button townButton) {
         townButton.setDisable(true);
@@ -78,12 +149,12 @@ public class GameManager {
         players.add(currentPlayer);
     }
     public static void updateCurrentScore() {
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * GameManager.landPoints)
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
 
     public static void updateCurrentScore(Player currentPlayer) {
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * landPoints)
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
     //initial land selection phase after first two turn
@@ -120,7 +191,6 @@ public class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = orderedPlayers.remove();
-        //currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500) + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
@@ -143,7 +213,6 @@ public class GameManager {
 
     public static void initiateRandom() {
         int chance = (int) (Math.random() * 100 + 1);
-        System.out.println(chance);
         //int chance = 27;
         if (chance <= 27) {
             RandomEvent randomEvent = new RandomEvent();
@@ -214,9 +283,9 @@ public class GameManager {
     private static void closeAll() {
         ArrayList<Button> staticButts = new ArrayList<>();
         staticButts.add(Store.sCompleteButton);
-        staticButts.add(Pub.sGambleButton);
-        staticButts.add(ControllerWampusGrounds.sClaimButton);
-        staticButts.add(Town.sPubButton);
+        staticButts.add(Pub.getsGambleButton());
+        staticButts.add(ControllerWampusGrounds.getsClaimButton());
+        staticButts.add(Town.getsPubButton());
 
         for (Button b: staticButts) {
             try {
@@ -224,7 +293,8 @@ public class GameManager {
                     Stage stage = (Stage) b.getScene().getWindow();
                     stage.close();
                 }
-            } catch (Exception e) {;
+            } catch (Exception e) {
+                System.out.println("oops");
             }
         }
 
@@ -276,7 +346,6 @@ public class GameManager {
                     int landNum = lands[i][j];
                     TileType tileType = TileManager.getTileType(i, j);
                     if (player.getEnergyCount() >= 1) {
-                        System.out.println(player.getEnergyCount());
                         if (landNum == 2) {
                             player.setFoodCount(player.getFoodCount() + tileType.getFoodCount());
                             player.setEnergyCount(player.getEnergyCount() - 1);

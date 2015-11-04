@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
-
-import MULE.Model.GameManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +23,9 @@ public class ControllerWampusGrounds implements Initializable {
     @FXML
     public GridPane map;
 
-    public static boolean[][] minigameMap = new boolean[5][9];
-    public static int row;
-    public static int col;
+    private final static boolean[][] minigameMap = new boolean[5][9];
+    private int row;
+    private int col;
 
     @FXML
     private Label rowsLabel;
@@ -44,7 +42,11 @@ public class ControllerWampusGrounds implements Initializable {
 
     private int numTurns;
 
-    public static Button sClaimButton;
+    public static Button getsClaimButton() {
+        return sClaimButton;
+    }
+
+    private static Button sClaimButton;
 
     public void initialize(URL url, ResourceBundle rb) {
         sClaimButton = claimButton;
@@ -65,7 +67,7 @@ public class ControllerWampusGrounds implements Initializable {
                 if (i == row && j == col){
                     Button wampusNode = (Button)getNodeFromGridPane(map,i,j);
                     wampusNode.setOnAction(event -> {
-                        wampusNode.setGraphic(new ImageView(new Image("MULE/View/Images/wampus.png")));
+                        wampusNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("MULE/View/Images/wampus.png"))));
                         rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
                         colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
                         numTurns++;
@@ -80,7 +82,7 @@ public class ControllerWampusGrounds implements Initializable {
                 } else {
                     Button notNode = (Button)getNodeFromGridPane(map,i,j);
                     notNode.setOnAction(event -> {
-                        notNode.setGraphic(new ImageView(new Image("MULE/View/Images/empty.png")));
+                        notNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("MULE/View/Images/empty.png"))));
                         rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
                         colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
                         numTurns++;
@@ -106,22 +108,22 @@ public class ControllerWampusGrounds implements Initializable {
 
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
-        MapScreen.updateResources();
-        Stage stage = (Stage) claimButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        Stage stage = (Stage) townButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
         stage.show();
     }
 
     @FXML
     private void handleClaimAction(ActionEvent event) throws IOException {
         //add code here to give currentPlayer some amount of money    --James
-        GameManager.currentPlayer.setMoney(GameManager.currentPlayer.getMoney() + 50);
-        MapScreen.updateResources();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("townScreen.fxml"));
+        AnchorPane nextScreen = (AnchorPane) loader.load();
+
         Stage stage = (Stage) claimButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(nextScreen, 840, 640);
         stage.setScene(scene);
         stage.show();
     }

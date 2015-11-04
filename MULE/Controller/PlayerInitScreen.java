@@ -39,11 +39,11 @@ public class PlayerInitScreen implements Initializable {
     @FXML
     Label playerID;
 
-    public static String playerName;
-    public static Color color;
+    private static String playerName;
+    private static Color color;
     public static Race raceChosen;
-    public static int playernum = ConfigScreen.playernum;
-    public static int iteration = 1;
+    public final static int playernum = ConfigScreen.getPlayernum();
+    private static int iteration = 1;
 
     public static int count;
     @FXML
@@ -79,8 +79,8 @@ public class PlayerInitScreen implements Initializable {
     /**
      *
      *
-     * @param url URL of css
-     * @param rb Resource Bundle
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -164,9 +164,9 @@ public class PlayerInitScreen implements Initializable {
                 playerName = name.getText();
                 color = Color.valueOf(colorBox.getSelectionModel().getSelectedItem());
                 raceChosen = raceBox.getSelectionModel().getSelectedItem();
-                Player player = new Player(playerName, raceChosen, color);
+                Player player = new Player(playerName, color);
                 GameManager.players.add(player);
-                GameManager.orderedPlayers.add(player);
+                GameManager.getOrderedPlayers().add(player);
                 if (iteration < playernum) {
                     iteration++;
                     FXMLLoader loader = new FXMLLoader();
@@ -183,7 +183,7 @@ public class PlayerInitScreen implements Initializable {
                     //get reference to the button's stage
                     stage = (Stage) myButton.getScene().getWindow();
                     //load up other FXML document
-                    root = loader.load(getClass().getResource("../View/MapScreen2.fxml"));
+                    root = loader.load(getClass().getResource("../View/MapScreen.fxml"));
                     //create a new scene with root and set the stage
                     Scene scene = new Scene(root);
                     stage.setScene(scene);

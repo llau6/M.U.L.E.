@@ -3,7 +3,8 @@ package MULE.Model;
 /**
  * Created by Lily on 10/7/2015.
  */
-public class StoreManager {
+public final class StoreManager {
+    private StoreManager() {}
     private static int foodQty;
     private static int energyQty;
     private static int oreQty;
@@ -11,51 +12,15 @@ public class StoreManager {
     private static int foodPrice = 30;
     private static int energyPrice = 25;
     private static int orePrice = 50;
-    private static int mulePrice;
+    private static boolean buy;
+    private static boolean sell;
+    private static boolean almostBought;
+    private static boolean boughtMule;
+    private static int prevMule;
     private static boolean firstMule = true;
 
-    public static boolean isBuy() {
-        return buy;
-    }
-
-    public static void setBuy(boolean buy) {
-        StoreManager.buy = buy;
-    }
-
-    private static boolean buy;
-
-    public static boolean isSell() {
-        return sell;
-    }
-
-    public static void setSell(boolean sell) {
-        StoreManager.sell = sell;
-    }
-
-    private static boolean sell;
-
-    public static boolean isAlmostBought() {
-        return almostBought;
-    }
-
-    public static void setAlmostBought(boolean almostBought) {
-        StoreManager.almostBought = almostBought;
-    }
-
-    private static boolean almostBought;
-
-    public static boolean isBoughtMule() {
-        return boughtMule;
-    }
-
-    public static void setBoughtMule(boolean boughtMule) {
-        StoreManager.boughtMule = boughtMule;
-    }
-
-    private static boolean boughtMule;
-
     public static void initializeStore() {
-        if (GameManager.difficulty.equals("Beginner")) {
+        if (GameManager.getDifficulty().equals("Beginner")) {
             foodQty = 16;
             energyQty = 16;
             oreQty = 0;
@@ -69,7 +34,7 @@ public class StoreManager {
     }
 
     public static int calculateMulePrice(String type) {
-        mulePrice = 0;
+        int mulePrice;
         int base = -100;
         if (type.equals("Food")) {
             mulePrice = base - foodPrice;
@@ -83,20 +48,11 @@ public class StoreManager {
         prevMule = mulePrice;
         return mulePrice;
     }
-
     public static int getFoodQuantity() { return foodQty; }
 
     public static int getEnergyQuantity() { return energyQty; }
 
     public static int getOreQuantity() { return oreQty; }
-
-    public static void setFoodQuantity(int f) { foodQty = f; }
-
-    public static void setEnergyQuantity(int e) { energyQty = e; }
-
-    public static void setOreQuantity(int o) { oreQty = o; }
-
-    public static void setMuleQuantity(int m) { muleQty = m; }
 
     public static int getMuleQuantity() { return muleQty; }
 
@@ -106,18 +62,51 @@ public class StoreManager {
 
     public static int getOrePrice() { return orePrice; }
 
-    public static int isPrevMule() {
-        return prevMule;
+    public static boolean isBuy() { return buy; }
+
+    public static boolean isSell() { return sell; }
+
+    public static boolean isAlmostBought() { return almostBought; }
+
+    public static boolean isBoughtMule() { return boughtMule; }
+
+    public static int isPrevMule() { return prevMule; }
+
+    public static boolean isFirstMule() { return firstMule; }
+
+    public static void setFoodQuantity(int f) {
+        foodQty = f;
     }
 
+    public static void setEnergyQuantity(int e) {
+        energyQty = e;
+    }
+
+    public static void setOreQuantity(int o) {
+        oreQty = o;
+    }
+
+    public static void setMuleQuantity(int m) {
+        muleQty = m;
+    }
+
+    public static void setBuy(boolean buy) {
+        StoreManager.buy = buy;
+    }
+
+    public static void setSell(boolean sell) {
+        StoreManager.sell = sell;
+    }
+
+    public static void setAlmostBought(boolean almostBought) {
+        StoreManager.almostBought = almostBought;
+    }
+
+    public static void setBoughtMule(boolean boughtMule) {
+        StoreManager.boughtMule = boughtMule;
+    }
     public static void setPrevMule(int prevMule) {
         StoreManager.prevMule = prevMule;
-    }
-
-    protected static int prevMule;
-
-    public static boolean isFirstMule() {
-        return firstMule;
     }
 
     public static void setFirstMule(boolean firstMule) {
