@@ -1,16 +1,18 @@
 package MULE.Model;
 
-import javafx.scene.control.Label;
+
 import javafx.scene.paint.Color;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.PriorityQueue;
+
 
 /**
  * Created by jatin1 on 10/31/15.
  */
 public class Database {
+    private Database() {
+
+    }
     private static Connection getConnection() throws Exception {
         try {
             String driver = "com.mysql.jdbc.Driver";
