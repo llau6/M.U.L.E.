@@ -1,7 +1,7 @@
 package MULE.Model;
 
 /**
- * Created by jatin1 on 9/20/15.
+ * Type of Tiles in grid
  */
 public enum TileType {
     RIVER(4, 2, 0, "River", "MULE/View/Images/River.png"),
@@ -16,6 +16,14 @@ public enum TileType {
     private String name;
     private String src;
 
+    /**
+     * TileType constructor
+     * @param name of tile
+     * @param foodCount food count of tile
+     * @param energyCount energy count of tile
+     * @param oreCount ore count of tile
+     * @param src source of tile
+     */
     TileType(int foodCount, int energyCount, int oreCount, String name, String src) {
         this.foodCount = foodCount;
         this.energyCount = energyCount;
@@ -24,16 +32,36 @@ public enum TileType {
         this.src = src;
     }
 
+    /**
+     * Retrieves the name of tile
+     * @return Name of Tile
+     */
     public String getName() { return name; }
 
+    /**
+     * Retrieves the food count of tile
+     * @return Food count of Tile
+     */
     public int getFoodCount() { return foodCount; }
 
+    /**
+     * Retrieves the energy count of tile
+     * @return Energy Count of Tile
+     */
     public int getEnergyCount() {
         return energyCount;
     }
 
+    /**
+     * Retrieves the ore of tile
+     * @return Ore Count of Tile
+     */
     public int getOreCount() { return oreCount; }
 
+    /**
+     * Retrieves the src of tile
+     * @return Src of Tile
+     */
     public String getSrc() {
         return src;
     }

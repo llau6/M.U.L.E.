@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 10/1/2015.
+ * Pub Conditions
  */
 public class Pub implements Initializable {
     @FXML

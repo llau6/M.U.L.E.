@@ -1,7 +1,7 @@
 package MULE.Model;
 
 /**
- * Created by elliekang on 10/1/15.
+ * Manages Sound Effects and Music
  */
 import javafx.scene.media.AudioClip;
 
@@ -14,8 +14,6 @@ import java.util.concurrent.Executors;
 /**
  * Responsible for loading sound media to be played using an id or key.
  * Contains all sounds for use later.
- *</pre>
- <pre> * User: cdea
  */
 public class SoundManager {
     ExecutorService soundPool = Executors.newFixedThreadPool(2);

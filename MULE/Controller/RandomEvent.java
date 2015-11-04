@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by SeYeon on 10/23/2015.
+ * Initiates Random Events
  */
 public class RandomEvent {
     @FXML
@@ -35,6 +35,9 @@ public class RandomEvent {
     private boolean lowestScorePerson;
     private int randomNum;
 
+    /**
+     * Intializes the random event
+     */
     public void initialize() {
         randomLabel = label;
         randomEvents = new ArrayList<>();
@@ -59,6 +62,10 @@ public class RandomEvent {
         randomEvents.add("YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"+ 6*m + " TO CLEAN IT UP");
     }
 
+    /**
+     * Sets updated resources based on index
+     * @param index Indicator of random event
+     */
     public void initiateEvent(int index) {
         Player p = GameManager.currentPlayer;
         if (index == 0) {
@@ -79,6 +86,10 @@ public class RandomEvent {
         }
     }
 
+    /**
+     * Updates the resources upon button press
+     * @param event Button Press Event
+     */
     @FXML
     public void okayButtonHandle(ActionEvent event) {
         ((Stage) okay.getScene().getWindow()).close();
@@ -86,6 +97,10 @@ public class RandomEvent {
         MapScreen.updateResources();
     }
 
+    /**
+     * Shows the treasure image and initiate random event
+     * @param event Mouse Click
+     */
     @FXML
     private void handleTreasure(MouseEvent event) {
         treasureImage.setImage(new Image("MULE/View/Images/openingChest.gif"));

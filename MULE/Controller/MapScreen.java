@@ -30,7 +30,7 @@ import java.util.Queue;
 import java.util.ResourceBundle;
 
 /**
- * Created by SeYeon on 9/12/2015.
+ * Manages Map Screen and Configurations
  */
 public class MapScreen implements Initializable {
     @FXML
@@ -187,6 +187,9 @@ public class MapScreen implements Initializable {
         GameManager.mapGrid = map;
     } // End of initializing
 
+    /**
+     * Updates the resources
+     */
     public static void updateResources() {
         sMoney.setText("" + GameManager.currentPlayer.getMoney());
         sFood.setText("" + GameManager.currentPlayer.getFoodCount());
@@ -196,6 +199,11 @@ public class MapScreen implements Initializable {
         sScore.setText("" + GameManager.currentPlayer.getScore());
     }
 
+    /**
+     * Handles the button press action
+     * @param event Action Event
+     * @throws java.io.IOException IOException might be thrown
+     */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -206,6 +214,10 @@ public class MapScreen implements Initializable {
         stage.show();
     }
 
+    /**
+     * Loads the map
+     * @param q Player Queue
+     */
     public void loadMap(Queue<Player> q) {
         ObservableList<Node> children = map.getChildren();
         for (Node node : children) {
@@ -239,6 +251,9 @@ public class MapScreen implements Initializable {
         }
     }
 
+    /**
+     * Initializes the grid
+     */
     // Selecting/deselecting land & placing mules on the tiles
     public void initializeGridPane() {
         ObservableList<Node> children = map.getChildren();

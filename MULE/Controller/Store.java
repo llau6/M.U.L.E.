@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 10/1/2015.
+ * Store conditions
  */
 public class Store implements Initializable {
     @FXML
@@ -116,6 +116,11 @@ public class Store implements Initializable {
 
     public static Button sCompleteButton;
 
+    /**
+     * Initializes the Store
+     * @param location URL resource
+     * @param resources FXML file
+     */
     public void initialize(URL location, ResourceBundle resources) {;
         newMoney.setText(String.valueOf(GameManager.currentPlayer.getMoney()));
         newFood.setText(String.valueOf(GameManager.currentPlayer.getFoodCount()));
@@ -355,15 +360,28 @@ public class Store implements Initializable {
         private ButtPackage b;
         private Label l;
 
+        /**
+         * Constructor for ButtonEntry class
+         * @param b Button
+         * @param l Label
+         */
         public ButtonEntry(ButtPackage b, Label l) {
             this.b = b;
             this.l = l;
         }
 
+        /**
+         * Retrieves the key of button entry
+         * @return the button package
+         */
         public ButtPackage getKey() {
             return b;
         }
 
+        /**
+         * Retrieves the label of the button entry
+         * @return label
+         */
         public Label getValue() {
             return l;
         }
@@ -372,15 +390,29 @@ public class Store implements Initializable {
     private class ButtPackage {
         private Button plus;
         private Button minus;
+
+        /**
+         * Constructor for ButtonEntry class
+         * @param plus Plus Button
+         * @param minus Minus Button
+         */
         public ButtPackage(Button plus, Button minus) {
             this.plus = plus;
             this.minus = minus;
         }
 
+        /**
+         * Retrieves the plus button
+         * @return Plus Button
+         */
         public Button getPlus() {
             return plus;
         }
 
+        /**
+         * Retrieves the minus button
+         * @return Minus Button
+         */
         public Button getMinus() {
             return minus;
         }

@@ -19,6 +19,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * Manages Wampus Ground Screen
+ */
 public class ControllerWampusGrounds implements Initializable {
     @FXML
     public GridPane map;
@@ -44,6 +47,11 @@ public class ControllerWampusGrounds implements Initializable {
 
     public static Button sClaimButton;
 
+    /**
+     * Initialized
+     * @param url URL of the image
+     * @param rb Resource Bundle
+     */
     public void initialize(URL url, ResourceBundle rb) {
         sClaimButton = claimButton;
         claimButton.setDisable(true);
@@ -93,6 +101,13 @@ public class ControllerWampusGrounds implements Initializable {
         }
     }
 
+    /**
+     * Retrieves the node from grid
+     * @param gridPane Grid
+     * @param row Row of grid
+     * @param col Column of grid
+     * @return node from grid
+     */
     private Node getNodeFromGridPane(GridPane gridPane, final int row, final int col) {
         for (Node node : gridPane.getChildren()) {
             if (node instanceof Button && GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
@@ -102,6 +117,11 @@ public class ControllerWampusGrounds implements Initializable {
         return null;
     }
 
+    /**
+     * Shows the Town Screen upon action
+     * @param event Event of town action
+     * @throws java.io.IOException IOException might be thrown
+     */
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -111,6 +131,11 @@ public class ControllerWampusGrounds implements Initializable {
         stage.show();
     }
 
+    /**
+     * Shows the Town Screen upon claim action
+     * @param event Event of town action
+     * @throws java.io.IOException IOException might be thrown
+     */
     @FXML
     private void handleClaimAction(ActionEvent event) throws IOException {
         //add code here to give currentPlayer some amount of money    --James

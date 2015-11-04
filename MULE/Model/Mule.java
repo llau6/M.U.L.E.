@@ -3,24 +3,48 @@ package MULE.Model;
 import javafx.scene.control.Button;
 
 /**
- * Created by SeYeon on 10/10/2015.
+ * Mule Condtions
  */
 public class Mule {
     String type;
     Button onLand;
 
+    /**
+     * Mule constructor
+     * @param type Mule Type
+     */
     public Mule(String type) {
         this.type = type;
     }
 
+    /**
+     * Mule constructor
+     * @param type Mule Type
+     * @param onLand Land Button the mule is on
+     */
     public Mule(String type, Button onLand) {
         this.type = type;
         this.onLand = onLand;
     }
+
+    /**
+     * Retrieves the type of mule
+     * @return type of mule
+     */
     public String getType() {
         return type;
     }
+
+    /**
+     * Gets the land of mule
+     * @return land of mule
+     */
     public Button getLand() { return onLand;}
+
+    /**
+     * Sets the land of which mule is placed on
+     * @param land Land Button Pressed
+     */
     public void setLand(Button land) {
         onLand = land;
     }
@@ -41,6 +65,10 @@ public class Mule {
 //        return ownedLand_noMuleExist;
 //    }
 
+    /**
+     * Retrieves what land mule is on
+     * @return Land Button placed
+     */
     public Button getOnLand() {
         return onLand;
     }

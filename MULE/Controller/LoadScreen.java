@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 11/2/2015.
+ * Load Screen to start the settings
  */
 public class LoadScreen implements Initializable {
     @FXML

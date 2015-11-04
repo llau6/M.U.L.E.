@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 11/2/2015.
+ * Initial Splash Screen
  */
 public class SplashScreen implements Initializable {
     @FXML

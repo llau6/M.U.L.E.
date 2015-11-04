@@ -31,6 +31,9 @@ import java.util.ResourceBundle;
 //https://docs.oracle.com/javafx/2/ui_controls/text-field.htm (Using TextField)
 //http://stackoverflow.com/questions/10134856/javafx-2-0-how-to-application-getparameters-in-a-controller-java-file/10136403#10136403 (static variable to pass to other controller)
 
+/**
+ * Manages Initial Player Conditions and Selections Screen
+ */
 public class PlayerInitScreen implements Initializable {
 
     @FXML
@@ -141,7 +144,7 @@ public class PlayerInitScreen implements Initializable {
     /**
      * When button is clicked, show a new scene
      * @param event button is clicked
-     * @throws java.io.IOException
+     * @throws java.io.IOException IOException might be thrown
      */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {

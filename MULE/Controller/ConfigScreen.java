@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by SeYeon on 9/14/2015.
+ * Manages the configuration and selection of players and difficulty screen
  */
 public class ConfigScreen implements Initializable {
     @FXML
@@ -52,6 +52,9 @@ public class ConfigScreen implements Initializable {
         animateLabel();
     }
 
+    /**
+     * Animates Map Label
+     */
     public void animateLabel() {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), mule);
         TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(3), muleCat);

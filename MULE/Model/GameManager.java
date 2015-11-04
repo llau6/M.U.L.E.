@@ -18,7 +18,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 /**
- * Created by jatin1 on 9/18/15.
+ * Manages Game and Map
  */
 public class GameManager {
     public static String difficulty;
@@ -36,11 +36,26 @@ public class GameManager {
     public static boolean newRound;
 
     public static GridPane mapGrid;
+
+    /**
+     * Intializes the map
+     */
     public static void initializeMap() {
         StoreManager.initializeStore();
 
     }
 
+    /**
+     * Intializes the lands with timers
+     * @param currPlayer Current Player
+     * @param energy Energy Label
+     * @param money Money Label
+     * @param ore Ore Label
+     * @param food Food Label
+     * @param score Score Label
+     * @param countDownText timer Text
+     * @param townButton Button to go town
+     */
     //initial land selection phase
     public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Button townButton) {
         townButton.setDisable(true);
@@ -77,15 +92,42 @@ public class GameManager {
         score.setText("" + currentPlayer.getScore());
         players.add(currentPlayer);
     }
+
+    /**
+     * Updates current score of current player
+     */
     public static void updateCurrentScore() {
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
 
+    /**
+     * Updates current score of the player
+     * @param currentPlayer Current Player
+     */
     public static void updateCurrentScore(Player currentPlayer) {
         currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500)
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
+
+    /**
+     * Intializes land selection
+     * @param prevPlayer Previous Player
+     * @param currPlayer Current Player
+     * @param energy Energy Label
+     * @param money Money Label
+     * @param ore Ore Label
+     * @param food Food Label
+     * @param score Score Label
+     * @param bought indicate whether land is already bought
+     * @param countDownText timer Text
+     * @param round Label indicating what round it is
+     * @param roundLabel Round Text Label
+     * @param turnType Type of the turn
+     * @param claimLand Claim Button
+     * @param skipButton Button to skip turn
+     * @param townButton Button to go town
+     */
     //initial land selection phase after first two turn
     public static void buyLandSelection(Player prevPlayer, Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Boolean bought, Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton, Button townButton) {
         isFree = false;
@@ -141,6 +183,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * Intializes the random events
+     */
     public static void initiateRandom() {
         int chance = (int) (Math.random() * 100 + 1);
         System.out.println(chance);
@@ -160,6 +205,21 @@ public class GameManager {
             }
         }
     }
+
+    /**
+     * Starts the game play
+     * @param currPlayer Current Player
+     * @param energy Energy Label
+     * @param money Money Label
+     * @param ore Ore Label
+     * @param food Food Label
+     * @param score Score Label
+     * @param countDownText timer Text
+     * @param round Label indicating what round it is
+     * @param turnType Type of the turn
+     * @param skipButton Button to skip turn
+     * @param townButton Button to go town
+     */
     public static void gamePlay(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Label turnType, Label round, Button townButton, Button skipButton) {
         townButton.setDisable(false);
         newRound = false;
@@ -211,6 +271,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * Closes the screen upon button press
+     */
     private static void closeAll() {
         ArrayList<Button> staticButts = new ArrayList<>();
         staticButts.add(Store.sCompleteButton);
@@ -229,8 +292,14 @@ public class GameManager {
         }
 
     }
+
+
     //For Pub
     //Money Bonus = Round Bonus + random(0, Time Bonus)
+    /**
+     * Calculates the bonus on each round
+     * @return bonus
+     */
     public static int calculateBonus() {
         int moneyBonus = 0;
         int roundBonus = 50;
@@ -263,6 +332,9 @@ public class GameManager {
         return moneyBonus;
     }
 
+    /**
+     * Updates the production of each visited players
+     */
     public static void updateProduction() {
         orderedPlayers = new PriorityQueue<>();
         for (Player player : visitedPlayers) {

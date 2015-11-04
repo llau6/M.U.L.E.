@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 11/2/2015.
+ * Manages transition between rounds
  */
 public class RoundScores implements Initializable {
     @FXML

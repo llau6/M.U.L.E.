@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 9/30/2015.
+ * Town conditions
  */
 public class Town implements Initializable {
     @FXML
@@ -73,6 +73,11 @@ public class Town implements Initializable {
         });
     }
 
+    /**
+     * Loads the Wampus Ground FXML
+     * @param event Intiate upon action
+     * @throws IOException Might throw IOException
+     */
     @FXML
     private void handleWampusAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) wampusButton.getScene().getWindow();

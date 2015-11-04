@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Main Class to Start the Application
+ */
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -20,6 +23,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Launches the argument
+     * @param args System console arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }
