@@ -3,7 +3,8 @@ package MULE.Model;
 /**
  * Created by Lily on 10/25/2015.
  */
-public class TileManager {
+public final class TileManager {
+    private TileManager() {}
     private static boolean[][] tiles = new boolean[5][9];
     private static int currRow;
     private static int currCol;
@@ -33,7 +34,7 @@ public class TileManager {
     }
 
     public static void setPlayerLand() {
-        GameManager.currentPlayer.setLands("No mule", currRow, currCol);
+        GameManager.getCurrentPlayer().setLands("No mule", currRow, currCol);
     }
 
     public static TileType getTileType (int i, int j) {

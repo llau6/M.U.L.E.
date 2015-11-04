@@ -9,20 +9,20 @@ public class Race {
     private String name;
     private Image image;
 
-    public Race (String name, String filename) {
-        this.name = name;
-        this.image = new Image(filename);
+    public  Race (String nameInput, String filenameInput) {
+        this.name = nameInput;
+        this.image = new Image(filenameInput);
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public Image getImage() {
+    public final Image getImage() {
         return image;
     }
 
-    public String toString() {
+    public final String toString() {
         return name;
     }
 }

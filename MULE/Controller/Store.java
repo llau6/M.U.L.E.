@@ -24,8 +24,12 @@ import java.util.ResourceBundle;
  * Created by Lily on 10/1/2015.
  */
 public class Store implements Initializable {
+    public Button getCompleteButton() {
+        return completeButton;
+    }
+
     @FXML
-    public Button completeButton;
+    private Button completeButton;
 
     @FXML
     public Button backButton;
@@ -117,10 +121,10 @@ public class Store implements Initializable {
     public static Button sCompleteButton;
 
     public void initialize(URL location, ResourceBundle resources) {;
-        newMoney.setText(String.valueOf(GameManager.currentPlayer.getMoney()));
-        newFood.setText(String.valueOf(GameManager.currentPlayer.getFoodCount()));
-        newEnergy.setText(String.valueOf(GameManager.currentPlayer.getEnergyCount()));
-        newOre.setText(String.valueOf(GameManager.currentPlayer.getOreCount()));
+        newMoney.setText(String.valueOf(GameManager.getCurrentPlayer().getMoney()));
+        newFood.setText(String.valueOf(GameManager.getCurrentPlayer().getFoodCount()));
+        newEnergy.setText(String.valueOf(GameManager.getCurrentPlayer().getEnergyCount()));
+        newOre.setText(String.valueOf(GameManager.getCurrentPlayer().getOreCount()));
         foodQuantityLabel.setText(String.valueOf(StoreManager.getFoodQuantity()));
         energyQuantityLabel.setText(String.valueOf(StoreManager.getEnergyQuantity()));
         oreQuantityLabel.setText(String.valueOf(StoreManager.getOreQuantity()));
@@ -311,10 +315,10 @@ public class Store implements Initializable {
             StoreManager.setSell(false);
             StoreManager.setFirstMule(true);
             StoreManager.setPrevMule(0);
-            GameManager.currentPlayer.setMoney(Integer.parseInt(newMoney.getText()));
-            GameManager.currentPlayer.setFoodCount(Integer.parseInt(newFood.getText()));
-            GameManager.currentPlayer.setEnergyCount(Integer.parseInt(newEnergy.getText()));
-            GameManager.currentPlayer.setOreCount(Integer.parseInt(newOre.getText()));
+            GameManager.getCurrentPlayer().setMoney(Integer.parseInt(newMoney.getText()));
+            GameManager.getCurrentPlayer().setFoodCount(Integer.parseInt(newFood.getText()));
+            GameManager.getCurrentPlayer().setEnergyCount(Integer.parseInt(newEnergy.getText()));
+            GameManager.getCurrentPlayer().setOreCount(Integer.parseInt(newOre.getText()));
             StoreManager.setFoodQuantity(Integer.parseInt(foodQuantityLabel.getText()));
             StoreManager.setEnergyQuantity(Integer.parseInt(energyQuantityLabel.getText()));
             StoreManager.setOreQuantity(Integer.parseInt(oreQuantityLabel.getText()));
@@ -325,10 +329,10 @@ public class Store implements Initializable {
             if (!muleCombo.isDisabled() && StoreManager.isBoughtMule()) {
                 StoreManager.setMuleQuantity(Integer.parseInt(muleQuantityLabel.getText()) - 1);
                 Image image = new Image("MULE/View/Images/walkingCatMuleCursor.gif");
-                GameManager.mapGrid.setCursor(new ImageCursor(image));
+                GameManager.getMapGrid().setCursor(new ImageCursor(image));
                 //GameManager.currentPlayer.getMules().add(new Mule((String) muleCombo.getSelectionModel().getSelectedItem()));
-                GameManager.currentPlayer.setCurMule((String) muleCombo.getSelectionModel().getSelectedItem());
-                MapScreen.clickCount = 0;
+                GameManager.getCurrentPlayer().setCurMule((String) muleCombo.getSelectionModel().getSelectedItem());
+                MapScreen.setClickCount(0);
             }
             Stage stage = (Stage) completeButton.getScene().getWindow();
             stage.close();
@@ -351,7 +355,7 @@ public class Store implements Initializable {
         });
     }
 
-    private class ButtonEntry<ButtPackage, Label> {
+    private static class ButtonEntry<ButtPackage, Label> {
         private ButtPackage b;
         private Label l;
 
@@ -369,7 +373,7 @@ public class Store implements Initializable {
         }
     }
 
-    private class ButtPackage {
+    private static class ButtPackage {
         private Button plus;
         private Button minus;
         public ButtPackage(Button plus, Button minus) {

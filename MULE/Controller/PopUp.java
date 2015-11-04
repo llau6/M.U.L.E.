@@ -13,10 +13,10 @@ import javafx.stage.Stage;
  */
 public class PopUp{
     @FXML
-    Button okay;
-    @FXML
-    public void okayButtonHandle(ActionEvent event) {
+    private Button okay;
+
+    public final void okayButtonHandle(ActionEvent event) {
         ((Stage) okay.getScene().getWindow()).close();
-        GameManager.mapGrid.setCursor(Cursor.DEFAULT);
+        GameManager.getMapGrid().setCursor(Cursor.DEFAULT);
     }
 }
