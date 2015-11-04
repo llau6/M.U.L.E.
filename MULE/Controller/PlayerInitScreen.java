@@ -183,7 +183,7 @@ public class PlayerInitScreen implements Initializable {
                     //get reference to the button's stage
                     stage = (Stage) myButton.getScene().getWindow();
                     //load up other FXML document
-                    root = loader.load(getClass().getResource("../View/MapScreen2.fxml"));
+                    root = loader.load(getClass().getResource("../View/MapScreen.fxml"));
                     //create a new scene with root and set the stage
                     Scene scene = new Scene(root);
                     stage.setScene(scene);

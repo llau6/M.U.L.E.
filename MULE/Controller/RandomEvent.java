@@ -8,16 +8,27 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayerBuilder;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
+import java.awt.Label;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by SeYeon on 10/23/2015.
@@ -34,8 +45,10 @@ public class RandomEvent {
     private static javafx.scene.control.Label randomLabel;
     private boolean lowestScorePerson;
     private int randomNum;
+    private static boolean alreadyClicked;
 
     public void initialize() {
+        alreadyClicked = false;
         randomLabel = label;
         randomEvents = new ArrayList<>();
         if (GameManager.getCurrentTurnNumber() == 1) {
@@ -67,15 +80,15 @@ public class RandomEvent {
         } else if (index == 1) {
             p.setOreCount(p.getOreCount() + 2);
         } else if (index == 2) {
-            p.setMoney(p.getMoney() + (8*m));
+            p.setMoney(p.getMoney() + (8 * m));
         } else if (index == 3) {
-            p.setMoney(p.getMoney() + (2*m));
+            p.setMoney(p.getMoney() + (2 * m));
         } else if (index == 4) {
-            p.setMoney(p.getMoney() - 4*m);
+            p.setMoney(p.getMoney() - 4 * m);
         } else if (index == 5) {
             p.setFoodCount(p.getFoodCount()/2);
         } else {
-            p.setFoodCount(p.getFoodCount() - 6*m);
+            p.setFoodCount(p.getFoodCount() - 6 * m);
         }
     }
 
@@ -88,42 +101,45 @@ public class RandomEvent {
 
     @FXML
     private void handleTreasure(MouseEvent event) {
-        treasureImage.setImage(new Image("MULE/View/Images/openingChest.gif"));
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1.5), treasureImage);
-        translateTransition.setCycleCount(1);
-        translateTransition.play();
-        File file = new File("M4/music/walkingCatMule.gif");
-        if (!file.exists()) {
-            System.out.println("File does not exist");
-        }
-//        URL resource = getClass().getResource("M4/music/openChest.wav");
-//        Paths.get("M4/music/openChest.wav").toUri().toString();
-//        AudioClip openingChest = new AudioClip(resource.toString());
-//        openingChest.play();
-        translateTransition.setOnFinished(event2 -> {
-            treasureImage.setImage(new Image("MULE/View/Images/openedChest.gif"));
-            try {
-                Stage stage = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("../View/randomPopUp.fxml"));
-                stage.setScene(new Scene(root));
-                stage.setTitle("Random Event For You!");
-
-                stage.initModality(Modality.APPLICATION_MODAL);
-
-                if (lowestScorePerson) {
-                    randomNum = (int) (Math.random() * 3);
-                } else {
-                    randomNum = (int) (Math.random() * 6);
-                }
-                randomLabel.setText(randomEvents.get(randomNum));
-
-                initiateEvent(randomNum);
-                stage.show();
-                ((Stage) treasureImage.getScene().getWindow()).close();
-            } catch(IOException e) {
-                System.out.println("hi!!!!");
+        if (!alreadyClicked) {
+            treasureImage.setImage(new Image("MULE/View/Images/openingChest.gif"));
+            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1.5), treasureImage);
+            translateTransition.setCycleCount(1);
+            translateTransition.play();
+            File file = new File("MULE/View/Images/walkingCatMule.gif");
+            if (!file.exists()) {
+                System.out.println("File does not exist");
             }
-        });
+            //        URL resource = getClass().getResource("M4/music/openChest.wav");
+            //        Paths.get("M4/music/openChest.wav").toUri().toString();
+            //        AudioClip openingChest = new AudioClip(resource.toString());
+            //        openingChest.play();
+            translateTransition.setOnFinished(event2 -> {
+                treasureImage.setImage(new Image("MULE/View/Images/openedChest.gif"));
+                try {
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/randomPopUp.fxml"));
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Random Event For You!");
+
+                    stage.initModality(Modality.APPLICATION_MODAL);
+
+                    if (lowestScorePerson) {
+                        randomNum = (int) (Math.random() * 3);
+                    } else {
+                        randomNum = (int) (Math.random() * 6);
+                    }
+                    randomLabel.setText(randomEvents.get(randomNum));
+
+                    initiateEvent(randomNum);
+                    stage.show();
+                    ((Stage) treasureImage.getScene().getWindow()).close();
+                } catch (IOException e) {
+                    System.out.println("hi!!!!");
+                }
+            });
+            alreadyClicked = true;
+        }
         //NEED TO FIGURE OUT A WAY TO DISALLOW THE PLAYER TO RE-DO RANDOM EVENT AGAIN
 //        ((Stage)(treasureImage.getScene().getWindow())).close();
     }

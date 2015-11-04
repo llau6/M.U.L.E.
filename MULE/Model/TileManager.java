@@ -37,6 +37,14 @@ public final class TileManager {
         GameManager.getCurrentPlayer().setLands("No mule", currRow, currCol);
     }
 
+    public static boolean[][] getTiles() {
+        return tiles;
+    }
+
+    public static void setTiles(boolean[][] updatedTiles) {
+        tiles = updatedTiles;
+    }
+
     public static TileType getTileType (int i, int j) {
         TileType tile;
         if ((i == 0 && j == 4)

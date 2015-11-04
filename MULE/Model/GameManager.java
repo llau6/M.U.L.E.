@@ -191,7 +191,6 @@ public final class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = orderedPlayers.remove();
-        //currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500) + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
         currPlayer.setText(currentPlayer.getName());
         energy.setText("" + currentPlayer.getEnergyCount());
         money.setText("" + currentPlayer.getMoney());
