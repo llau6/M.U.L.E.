@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+
+import MULE.Model.GameManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,7 +65,7 @@ public class ControllerWampusGrounds implements Initializable {
                 if (i == row && j == col){
                     Button wampusNode = (Button)getNodeFromGridPane(map,i,j);
                     wampusNode.setOnAction(event -> {
-                        wampusNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("images/wampus.png"))));
+                        wampusNode.setGraphic(new ImageView(new Image("MULE/View/Images/wampus.png")));
                         rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
                         colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
                         numTurns++;
@@ -78,7 +80,7 @@ public class ControllerWampusGrounds implements Initializable {
                 } else {
                     Button notNode = (Button)getNodeFromGridPane(map,i,j);
                     notNode.setOnAction(event -> {
-                        notNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("images/empty.png"))));
+                        notNode.setGraphic(new ImageView(new Image("MULE/View/Images/empty.png")));
                         rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
                         colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
                         numTurns++;
@@ -104,23 +106,22 @@ public class ControllerWampusGrounds implements Initializable {
 
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
+        MapScreen.updateResources();
+        Stage stage = (Stage) claimButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
-        Stage stage = (Stage) townButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
 
     @FXML
     private void handleClaimAction(ActionEvent event) throws IOException {
         //add code here to give currentPlayer some amount of money    --James
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("townScreen.fxml"));
-        AnchorPane nextScreen = (AnchorPane) loader.load();
-
+        GameManager.currentPlayer.setMoney(GameManager.currentPlayer.getMoney() + 50);
+        MapScreen.updateResources();
         Stage stage = (Stage) claimButton.getScene().getWindow();
-        Scene scene = new Scene(nextScreen, 840, 640);
+        Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
