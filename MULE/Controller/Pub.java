@@ -33,7 +33,11 @@ public class Pub implements Initializable {
 
     private boolean hasGambled;
 
-    public static Button sGambleButton;
+    public static Button getsGambleButton() {
+        return sGambleButton;
+    }
+
+    private static Button sGambleButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,7 +55,7 @@ public class Pub implements Initializable {
 
         back_button.setOnAction((event) -> {
             if (hasGambled) {
-                GameManager.timer.cancel();
+                GameManager.getTimer().cancel();
                 Stage stage = (Stage) back_button.getScene().getWindow();
                 stage.close();
                 MapScreen.updateResources();

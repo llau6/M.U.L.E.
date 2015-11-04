@@ -23,9 +23,9 @@ public class ControllerWampusGrounds implements Initializable {
     @FXML
     public GridPane map;
 
-    public static boolean[][] minigameMap = new boolean[5][9];
-    public static int row;
-    public static int col;
+    private final static boolean[][] minigameMap = new boolean[5][9];
+    private int row;
+    private int col;
 
     @FXML
     private Label rowsLabel;
@@ -42,7 +42,11 @@ public class ControllerWampusGrounds implements Initializable {
 
     private int numTurns;
 
-    public static Button sClaimButton;
+    public static Button getsClaimButton() {
+        return sClaimButton;
+    }
+
+    private static Button sClaimButton;
 
     public void initialize(URL url, ResourceBundle rb) {
         sClaimButton = claimButton;
@@ -63,7 +67,7 @@ public class ControllerWampusGrounds implements Initializable {
                 if (i == row && j == col){
                     Button wampusNode = (Button)getNodeFromGridPane(map,i,j);
                     wampusNode.setOnAction(event -> {
-                        wampusNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("images/wampus.png"))));
+                        wampusNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("MULE/View/Images/wampus.png"))));
                         rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
                         colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
                         numTurns++;
@@ -78,7 +82,7 @@ public class ControllerWampusGrounds implements Initializable {
                 } else {
                     Button notNode = (Button)getNodeFromGridPane(map,i,j);
                     notNode.setOnAction(event -> {
-                        notNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("images/empty.png"))));
+                        notNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("MULE/View/Images/empty.png"))));
                         rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
                         colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
                         numTurns++;
@@ -104,7 +108,6 @@ public class ControllerWampusGrounds implements Initializable {
 
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
         Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
         Stage stage = (Stage) townButton.getScene().getWindow();
         stage.setScene(new Scene(root));

@@ -44,7 +44,12 @@ public class ConfigScreen implements Initializable {
     private Label requiredMap;
     @FXML
     private Label mule;
-    public static int playernum;
+
+    public static int getPlayernum() {
+        return playernum;
+    }
+
+    private static int playernum;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,7 +91,7 @@ public class ConfigScreen implements Initializable {
     }
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
-        GameManager.difficulty = (String) difficultyBox.getSelectionModel().getSelectedItem();
+        GameManager.setDifficulty((String) difficultyBox.getSelectionModel().getSelectedItem());
         Object o;
         if (!numPlayers.getSelectionModel().isEmpty() && !difficultyBox.getSelectionModel().isEmpty()
                 && !mapCombo.getSelectionModel().isEmpty()) {

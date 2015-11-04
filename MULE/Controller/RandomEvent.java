@@ -38,14 +38,14 @@ public class RandomEvent {
     public void initialize() {
         randomLabel = label;
         randomEvents = new ArrayList<>();
-        if (GameManager.currentTurnNumber == 1) {
+        if (GameManager.getCurrentTurnNumber() == 1) {
             lowestScorePerson = true;
         }
-        if (GameManager.currentRoundNumber < 4) {
+        if (GameManager.getCurrentRoundNumber() < 4) {
             m = 25;
-        } else if (GameManager.currentRoundNumber < 8) {
+        } else if (GameManager.getCurrentRoundNumber() < 8) {
             m = 50;
-        } else if (GameManager.currentRoundNumber < 12) {
+        } else if (GameManager.getCurrentRoundNumber() < 12) {
             m = 75;
         } else {
             m = 100;
@@ -60,7 +60,7 @@ public class RandomEvent {
     }
 
     public void initiateEvent(int index) {
-        Player p = GameManager.currentPlayer;
+        Player p = GameManager.getCurrentPlayer();
         if (index == 0) {
             p.setFoodCount(p.getFoodCount() + 3);
             p.setEnergyCount(p.getEnergyCount() + 2);

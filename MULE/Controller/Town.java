@@ -29,7 +29,11 @@ public class Town implements Initializable {
     @FXML
     public Button backButton;
 
-    public static Button sPubButton;
+    public static Button getsPubButton() {
+        return sPubButton;
+    }
+
+    private static Button sPubButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

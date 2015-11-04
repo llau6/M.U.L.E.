@@ -75,11 +75,11 @@ public class MapScreen implements Initializable {
     public Text countDownText;
 
     public static Label sCurrPlayer;
-    public static Label sEnergy;
-    public static Label sMoney;
-    public static Label sOre;
-    public static Label sFood;
-    public static Label sScore;
+    private static Label sEnergy;
+    private static Label sMoney;
+    private static Label sOre;
+    private static Label sFood;
+    private static Label sScore;
     public static Text sCountDownText;
     public static Label sTurnType;
     public static Label sRound;
@@ -87,7 +87,12 @@ public class MapScreen implements Initializable {
     public static Button sSkipButton;
     private int playerCount = 0;
     private int skipCount = 0;
-    public static int clickCount = 0;
+
+    public static void setClickCount(int clickCount) {
+        MapScreen.clickCount = clickCount;
+    }
+
+    private static int clickCount = 0;
     private final SoundManager soundManager = new SoundManager(3);
 
     @Override
@@ -105,14 +110,14 @@ public class MapScreen implements Initializable {
         sSkipButton = skipButt;
 
         skipButt.setDisable(true);
-        GameManager.totalTurnsInitial = GameManager.players.size() * 2;
+        GameManager.setTotalTurnsInitial(GameManager.players.size() * 2);
         GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
         GameManager.initializeMap();
         initializeGridPane();
 //        soundManager.playMusic();
 
         claimLand.setOnAction((event) -> {
-            GameManager.timer.cancel();
+            GameManager.getTimer().cancel();
             playerCount++;
             if (playerCount + skipCount >= GameManager.players.size()) {
                 playerCount = 0;
@@ -120,27 +125,27 @@ public class MapScreen implements Initializable {
                 System.out.println("RESET");
             }
             // Purchasing property
-            if (GameManager.currentPlayer.getMoney() >= 300) {
+            if (GameManager.getCurrentPlayer().getMoney() >= 300) {
                 // If property is not owned by anyone
                 if (!TileManager.isTaken()) {
                     // Set property to owned
                     TileManager.setTaken(true);
                     // Player's land count++
-                    GameManager.currentPlayer.setLandCount();
+                    GameManager.getCurrentPlayer().setLandCount();
                     // Add current property tile to player's array of owned land
                     TileManager.setPlayerLand();
                     // If not during Free Land Grant phase, deduct money
-                    if (!GameManager.isFree) {
-                        GameManager.currentPlayer.setMoney(GameManager.currentPlayer.getMoney() - 300);
+                    if (!GameManager.isFree()) {
+                        GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() - 300);
                     }
                     // So that player can select property again next turn
-                    GameManager.currentPlayer.setClicked(false);
+                    GameManager.getCurrentPlayer().setClicked(false);
                 }
-                if (GameManager.totalTurnsInitial != 0) {
+                if (GameManager.getTotalTurnsInitial() != 0) {
                     GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
                 } else {
                     skipButt.setDisable(false);
-                    GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, true, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
+                    GameManager.buyLandSelection(GameManager.getCurrentPlayer(), currPlayer, energy, money, ore, food, score, true, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
                 }
             } else {
                 claimLand.setDisable(true);
@@ -149,7 +154,7 @@ public class MapScreen implements Initializable {
         });
 
         skipButt.setOnAction((event) -> {
-            GameManager.timer.cancel();
+            GameManager.getTimer().cancel();
             if (claimLand.isDisable()) {
                 claimLand.setText("Claim Land!");
                 claimLand.setDisable(false);
@@ -157,7 +162,7 @@ public class MapScreen implements Initializable {
             skipCount++;
             if (skipCount >= GameManager.players.size()) {
                 claimLand.setDisable(true);
-                if (GameManager.newRound) {
+                if (GameManager.isNewRound()) {
                     GameManager.updateProduction();
                     //IFFFY
                     Stage stage = new Stage();
@@ -179,21 +184,21 @@ public class MapScreen implements Initializable {
                     playerCount = 0;
                     skipCount = 0;
                 }
-                GameManager.buyLandSelection(GameManager.currentPlayer, currPlayer, energy, money, ore, food, score, false, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
+                GameManager.buyLandSelection(GameManager.getCurrentPlayer(), currPlayer, energy, money, ore, food, score, false, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
             }
             // So next player can purchase mule
             StoreManager.setBoughtMule(false);
         });
-        GameManager.mapGrid = map;
+        GameManager.setMapGrid(map);
     } // End of initializing
 
     public static void updateResources() {
-        sMoney.setText("" + GameManager.currentPlayer.getMoney());
-        sFood.setText("" + GameManager.currentPlayer.getFoodCount());
-        sEnergy.setText("" + GameManager.currentPlayer.getEnergyCount());
-        sOre.setText("" + GameManager.currentPlayer.getOreCount());
+        sMoney.setText("" + GameManager.getCurrentPlayer().getMoney());
+        sFood.setText("" + GameManager.getCurrentPlayer().getFoodCount());
+        sEnergy.setText("" + GameManager.getCurrentPlayer().getEnergyCount());
+        sOre.setText("" + GameManager.getCurrentPlayer().getOreCount());
         GameManager.updateCurrentScore();
-        sScore.setText("" + GameManager.currentPlayer.getScore());
+        sScore.setText("" + GameManager.getCurrentPlayer().getScore());
     }
 
     @FXML
@@ -211,28 +216,30 @@ public class MapScreen implements Initializable {
         for (Node node : children) {
             int i = GridPane.getRowIndex(node);
             int j = GridPane.getColumnIndex(node);
-            Rectangle currNode = (Rectangle) node;
-            for (Player player: q) {
-                Image muleImage = null;
-                int landVal = player.getLands()[i][j];
-                if (landVal == 2) {
-                    muleImage = new Image("MULE/View/Images/muleFood.gif");
-                } else if (landVal == 3) {
-                    muleImage = new Image("MULE/View/Images/muleEnergy.gif");
-                } else if (landVal == 4) {
-                    muleImage = new Image("MULE/View/Images/muleOre.gif");
-                }
-                if (landVal != 0) {
-                    TileManager.setTaken(i, j);
-                    currNode.setStrokeWidth(4.4);
-                    currNode.setFill(Color.TRANSPARENT);
-                    currNode.setStroke(GameManager.currentPlayer.getColor());
-                    currNode.setOpacity(1);
-                    if (landVal != 1) {
-                        ImageView mImageView = new ImageView(muleImage);
-                        mImageView.setPreserveRatio(true);
-                        mImageView.setFitWidth(50);
-                        map.add(mImageView, j, i);
+            if (!(i == 2 && j == 4)) {
+                Rectangle currNode = (Rectangle) node;
+                for (Player player: q) {
+                    Image muleImage = null;
+                    int landVal = player.getLands()[i][j];
+                    if (landVal == 2) {
+                        muleImage = new Image("MULE/View/Images/muleFood.gif");
+                    } else if (landVal == 3) {
+                        muleImage = new Image("MULE/View/Images/muleEnergy.gif");
+                    } else if (landVal == 4) {
+                        muleImage = new Image("MULE/View/Images/muleOre.gif");
+                    }
+                    if (landVal != 0) {
+                        TileManager.setTaken(i, j);
+                        currNode.setStrokeWidth(4.4);
+                        currNode.setFill(Color.TRANSPARENT);
+                        currNode.setStroke(GameManager.getCurrentPlayer().getColor());
+                        currNode.setOpacity(1);
+                        if (landVal != 1) {
+                            ImageView mImageView = new ImageView(muleImage);
+                            mImageView.setPreserveRatio(true);
+                            mImageView.setFitWidth(50);
+                            map.add(mImageView, j, i);
+                        }
                     }
                 }
             }
@@ -256,8 +263,8 @@ public class MapScreen implements Initializable {
                         // 1) No property is currently selected
                         // 2) Property is not owned by anyone
                         // 3) It is still the land selection phase
-                        if ((!(GameManager.currentPlayer.isClicked()) && !TileManager.isTaken(i, j) && !claimLand.isDisabled()
-                                || (StoreManager.isAlmostBought() && GameManager.currentPlayer.getLands()[i][j] == 1))) {
+                        if ((!(GameManager.getCurrentPlayer().isClicked()) && !TileManager.isTaken(i, j) && !claimLand.isDisabled()
+                                || (StoreManager.isAlmostBought() && GameManager.getCurrentPlayer().getLands()[i][j] == 1))) {
                             currNode.setFill(Color.WHITE);
                             currNode.setOpacity(.34);
                             // Set labels so players can see what is being purchased
@@ -273,13 +280,13 @@ public class MapScreen implements Initializable {
                     // When the mouse moves off of a tile
                     currNode.setOnMouseExited(event -> {
                         // Same conditions from when a square is being highlighted ^^
-                        if (!(GameManager.currentPlayer.isClicked()) && !TileManager.isTaken(i, j) && !claimLand.isDisabled()) {
+                        if (!(GameManager.getCurrentPlayer().isClicked()) && !TileManager.isTaken(i, j) && !claimLand.isDisabled()) {
                             currNode.setFill(Color.TRANSPARENT);
                             currNode.setOpacity(0);
-                        } else if (StoreManager.isAlmostBought() && GameManager.currentPlayer.getLands()[i][j] == 1) {
+                        } else if (StoreManager.isAlmostBought() && GameManager.getCurrentPlayer().getLands()[i][j] == 1) {
                             currNode.setStrokeWidth(4.4);
                             currNode.setFill(Color.TRANSPARENT);
-                            currNode.setStroke(GameManager.currentPlayer.getColor());
+                            currNode.setStroke(GameManager.getCurrentPlayer().getColor());
                             currNode.setOpacity(1);
                         }
                     });
@@ -288,12 +295,12 @@ public class MapScreen implements Initializable {
                         // 1) No property is selected
                         // 2) Property is not owned by anyone
                         // 3) It is still the land selection phase
-                        if (!(GameManager.currentPlayer.isClicked()) && !TileManager.isTaken(i, j) && !claimLand.isDisabled()) {
+                        if (!(GameManager.getCurrentPlayer().isClicked()) && !TileManager.isTaken(i, j) && !claimLand.isDisabled()) {
                             currNode.setStrokeWidth(4.4);
                             currNode.setFill(Color.TRANSPARENT);
-                            currNode.setStroke(GameManager.currentPlayer.getColor());
+                            currNode.setStroke(GameManager.getCurrentPlayer().getColor());
                             currNode.setOpacity(1);
-                            GameManager.currentPlayer.setClicked(true);
+                            GameManager.getCurrentPlayer().setClicked(true);
                             //Tile Manager keeps track of selected tile
                             TileManager.setCurrRow(i);
                             TileManager.setCurrCol(j);
@@ -302,11 +309,11 @@ public class MapScreen implements Initializable {
                             // 2) Property is not taken
                             // 3) It is still the land selection phase
                             // 4) It is your color
-                        } else if (GameManager.currentPlayer.isClicked()
+                        } else if (GameManager.getCurrentPlayer().isClicked()
                                 && !TileManager.isTaken(i, j)
                                 && !claimLand.isDisabled()
                                 && currNode.getStroke() != null
-                                && currNode.getStroke().equals(GameManager.currentPlayer.getColor())) {
+                                && currNode.getStroke().equals(GameManager.getCurrentPlayer().getColor())) {
                             currNode.setStrokeWidth(0);
                             currNode.setFill(Color.TRANSPARENT);
                             currNode.setStroke(Color.WHITE);
@@ -314,15 +321,15 @@ public class MapScreen implements Initializable {
                             TileManager.setCurrRow(i);
                             TileManager.setCurrCol(j);
                             // Needed so players can select land again next round
-                            GameManager.currentPlayer.setClicked(false);
+                            GameManager.getCurrentPlayer().setClicked(false);
                         }
                         // If you need to place a mule
                         if (StoreManager.isAlmostBought()) {
                             StoreManager.setAlmostBought(false);
-                            String mule = GameManager.currentPlayer.getCurMule();
+                            String mule = GameManager.getCurrentPlayer().getCurMule();
                             if (!map.getCursor().equals(Cursor.DEFAULT)) {
                                 // If player owns land and there's no mule on it
-                                if (GameManager.currentPlayer.getLands()[i][j] == 1 && clickCount == 0) {
+                                if (GameManager.getCurrentPlayer().getLands()[i][j] == 1 && clickCount == 0) {
                                     Image muleImage = new Image("MULE/View/Images/mule" + mule + ".gif");
                                     ImageView mImageView = new ImageView(muleImage);
                                     mImageView.setPreserveRatio(true);
@@ -332,10 +339,10 @@ public class MapScreen implements Initializable {
                                     // Takes highlight off of tile
                                     currNode.setStrokeWidth(4.4);
                                     currNode.setFill(Color.TRANSPARENT);
-                                    currNode.setStroke(GameManager.currentPlayer.getColor());
+                                    currNode.setStroke(GameManager.getCurrentPlayer().getColor());
                                     currNode.setOpacity(1);
                                     // Set player's land array to the type of mule they own
-                                    GameManager.currentPlayer.setLands(mule, i, j);
+                                    GameManager.getCurrentPlayer().setLands(mule, i, j);
                                     clickCount++;
                                     // If mule needs to be destroyed
                                 } else if (clickCount == 0) {

@@ -39,11 +39,11 @@ public class PlayerInitScreen implements Initializable {
     @FXML
     Label playerID;
 
-    public static String playerName;
-    public static Color color;
+    private static String playerName;
+    private static Color color;
     public static Race raceChosen;
-    public static int playernum = ConfigScreen.playernum;
-    public static int iteration = 1;
+    public final static int playernum = ConfigScreen.getPlayernum();
+    private static int iteration = 1;
 
     public static int count;
     @FXML
@@ -164,9 +164,9 @@ public class PlayerInitScreen implements Initializable {
                 playerName = name.getText();
                 color = Color.valueOf(colorBox.getSelectionModel().getSelectedItem());
                 raceChosen = raceBox.getSelectionModel().getSelectedItem();
-                Player player = new Player(playerName, raceChosen, color);
+                Player player = new Player(playerName, color);
                 GameManager.players.add(player);
-                GameManager.orderedPlayers.add(player);
+                GameManager.getOrderedPlayers().add(player);
                 if (iteration < playernum) {
                     iteration++;
                     FXMLLoader loader = new FXMLLoader();
