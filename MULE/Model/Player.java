@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 public class Player implements Comparable<Player> {
     private String name;
     private Color color;
+    private Race race;
     private int money = 1000;
     private int foodCount;
     private int energyCount;
@@ -18,9 +19,10 @@ public class Player implements Comparable<Player> {
     private int[][] lands = new int[5][9];
     private boolean clicked = false;
 
-    public Player(String name, Color color) {
+    public Player(String name, Race race, Color color) {
         this.name = name;
         this.color = color;
+        this.race = race;
         this.score = 0;
         this.landCount = 0;
         this.oreCount = 0;
@@ -45,6 +47,10 @@ public class Player implements Comparable<Player> {
     public final int getOreCount() { return oreCount; }
 
     public final int getLandCount() { return landCount; }
+
+    public final Race getRace() {
+        return this.race;
+    }
 
     public final int getScore() { return score; }
 
@@ -88,6 +94,10 @@ public class Player implements Comparable<Player> {
 
     public final void setClicked(boolean clicked) {
         this.clicked = clicked;
+    }
+
+    public final void setLands(int[][] lands) {
+        this.lands = lands;
     }
 
     public final void setLands(String s, int i, int j) {

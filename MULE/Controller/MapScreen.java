@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
  * Created by SeYeon on 9/12/2015.
  */
 public class MapScreen implements Initializable {
+    private static boolean isLoadingFromDB = false;
     @FXML
     public GridPane map;
     @FXML
@@ -92,6 +93,14 @@ public class MapScreen implements Initializable {
         MapScreen.clickCount = clickCount;
     }
 
+    public static void setIsLoadingFromDB(boolean val) {
+        isLoadingFromDB = val;
+    }
+
+    public static boolean isLoadingFromDB() {
+        return isLoadingFromDB;
+    }
+
     private static int clickCount = 0;
     private final SoundManager soundManager = new SoundManager(3);
 
@@ -108,51 +117,57 @@ public class MapScreen implements Initializable {
         sRound = round;
         sTownButton = townButton;
         sSkipButton = skipButt;
+        if (isLoadingFromDB) {
+            MapScreen.updateResources();
+            loadMap(GameManager.getPlayersQueue());
+            claimLand.setDisable(true);
+            GameManager.gamePlay(currPlayer, energy, money, ore, food, score, countDownText, turnType, round, townButton, skipButt);
+            initializeGridPane();
+        } else {
+            skipButt.setDisable(true);
+            GameManager.setTotalTurnsInitial(GameManager.getPlayersQueue().size() * 2);
+            GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
+            GameManager.initializeMap();
+            initializeGridPane();
+            //        soundManager.playMusic();
 
-        skipButt.setDisable(true);
-        GameManager.setTotalTurnsInitial(GameManager.players.size() * 2);
-        GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
-        GameManager.initializeMap();
-        initializeGridPane();
-//        soundManager.playMusic();
-
-        claimLand.setOnAction((event) -> {
-            GameManager.getTimer().cancel();
-            playerCount++;
-            if (playerCount + skipCount >= GameManager.players.size()) {
-                playerCount = 0;
-                skipCount = 0;
-                System.out.println("RESET");
-            }
-            // Purchasing property
-            if (GameManager.getCurrentPlayer().getMoney() >= 300) {
-                // If property is not owned by anyone
-                if (!TileManager.isTaken()) {
-                    // Set property to owned
-                    TileManager.setTaken(true);
-                    // Player's land count++
-                    GameManager.getCurrentPlayer().setLandCount();
-                    // Add current property tile to player's array of owned land
-                    TileManager.setPlayerLand();
-                    // If not during Free Land Grant phase, deduct money
-                    if (!GameManager.isFree()) {
-                        GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() - 300);
+            claimLand.setOnAction((event) -> {
+                GameManager.getTimer().cancel();
+                playerCount++;
+                if (playerCount + skipCount >= GameManager.getPlayersQueue().size()) {
+                    playerCount = 0;
+                    skipCount = 0;
+                    System.out.println("RESET");
+                }
+                // Purchasing property
+                if (GameManager.getCurrentPlayer().getMoney() >= 300) {
+                    // If property is not owned by anyone
+                    if (!TileManager.isTaken()) {
+                        // Set property to owned
+                        TileManager.setTaken(true);
+                        // Player's land count++
+                        GameManager.getCurrentPlayer().setLandCount();
+                        // Add current property tile to player's array of owned land
+                        TileManager.setPlayerLand();
+                        // If not during Free Land Grant phase, deduct money
+                        if (!GameManager.isFree()) {
+                            GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() - 300);
+                        }
+                        // So that player can select property again next turn
+                        GameManager.getCurrentPlayer().setClicked(false);
                     }
-                    // So that player can select property again next turn
-                    GameManager.getCurrentPlayer().setClicked(false);
-                }
-                if (GameManager.getTotalTurnsInitial() != 0) {
-                    GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
+                    if (GameManager.getTotalTurnsInitial() != 0) {
+                        GameManager.initLandSelection(currPlayer, energy, money, ore, food, score, countDownText, townButton);
+                    } else {
+                        skipButt.setDisable(false);
+                        GameManager.buyLandSelection(GameManager.getCurrentPlayer(), currPlayer, energy, money, ore, food, score, true, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
+                    }
                 } else {
-                    skipButt.setDisable(false);
-                    GameManager.buyLandSelection(GameManager.getCurrentPlayer(), currPlayer, energy, money, ore, food, score, true, countDownText, round, roundLabel, turnType, claimLand, skipButt, townButton);
+                    claimLand.setDisable(true);
+                    claimLand.setText("Insufficient Funds!");
                 }
-            } else {
-                claimLand.setDisable(true);
-                claimLand.setText("Insufficient Funds!");
-            }
-        });
-
+            });
+        }
         skipButt.setOnAction((event) -> {
             GameManager.getTimer().cancel();
             if (claimLand.isDisable()) {
@@ -160,7 +175,7 @@ public class MapScreen implements Initializable {
                 claimLand.setDisable(false);
             }
             skipCount++;
-            if (skipCount >= GameManager.players.size()) {
+            if (skipCount >= GameManager.getPlayersQueue().size() || isLoadingFromDB) {
                 claimLand.setDisable(true);
                 if (GameManager.isNewRound()) {
                     GameManager.updateProduction();
@@ -170,7 +185,7 @@ public class MapScreen implements Initializable {
                     try {
                         root = FXMLLoader.load(getClass().getResource("../View/saveScreen.fxml"));
                         stage.setScene(new Scene(root));
-                        stage.setTitle("Town Actions");
+                        stage.setTitle("Save Screen");
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.show();
                     } catch (Exception e) {
@@ -180,7 +195,7 @@ public class MapScreen implements Initializable {
                 GameManager.gamePlay(currPlayer, energy, money, ore, food, score, countDownText, turnType, round, townButton, skipButt);
                 map.setCursor(Cursor.DEFAULT);
             } else {
-                if (playerCount + skipCount == GameManager.players.size()) {
+                if (playerCount + skipCount == GameManager.getPlayersQueue().size()) {
                     playerCount = 0;
                     skipCount = 0;
                 }
@@ -213,12 +228,12 @@ public class MapScreen implements Initializable {
 
     public void loadMap(Queue<Player> q) {
         ObservableList<Node> children = map.getChildren();
-        for (Node node : children) {
-            int i = GridPane.getRowIndex(node);
-            int j = GridPane.getColumnIndex(node);
-            if (!(i == 2 && j == 4)) {
-                Rectangle currNode = (Rectangle) node;
-                for (Player player: q) {
+        for (int z = 0; z < children.size(); z++) {
+            int i = GridPane.getRowIndex(children.get(z));
+            int j = GridPane.getColumnIndex(children.get(z));
+            if ((children.get(z) instanceof Rectangle)) {
+                Rectangle currNode = (Rectangle) children.get(z);
+                for (Player player : q) {
                     Image muleImage = null;
                     int landVal = player.getLands()[i][j];
                     if (landVal == 2) {
@@ -232,7 +247,7 @@ public class MapScreen implements Initializable {
                         TileManager.setTaken(i, j);
                         currNode.setStrokeWidth(4.4);
                         currNode.setFill(Color.TRANSPARENT);
-                        currNode.setStroke(GameManager.getCurrentPlayer().getColor());
+                        currNode.setStroke(player.getColor());
                         currNode.setOpacity(1);
                         if (landVal != 1) {
                             ImageView mImageView = new ImageView(muleImage);
@@ -253,7 +268,7 @@ public class MapScreen implements Initializable {
             int i = GridPane.getRowIndex(node);
             int j = GridPane.getColumnIndex(node);
             //If not the Town
-            if (!(i == 2 && j == 4)) {
+            if (node instanceof Rectangle) {
                 Rectangle currNode = (Rectangle) node;
                 // If statement to get rid of stupid yellow squiggly lines.
                 if (currNode != null) {
