@@ -34,32 +34,47 @@ public class RandomEvent {
     private static javafx.scene.control.Label randomLabel;
     private boolean lowestScorePerson;
     private int randomNum;
+    private static boolean alreadyClicked;
 
     /**
      * Intializes the random event
      */
     public void initialize() {
+        alreadyClicked = false;
         randomLabel = label;
         randomEvents = new ArrayList<>();
-        if (GameManager.currentTurnNumber == 1) {
+        if (GameManager.getCurrentTurnNumber() == 1) {
             lowestScorePerson = true;
         }
-        if (GameManager.currentRoundNumber < 4) {
+        if (GameManager.getCurrentRoundNumber() < 4) {
             m = 25;
-        } else if (GameManager.currentRoundNumber < 8) {
+        } else if (GameManager.getCurrentRoundNumber() < 8) {
             m = 50;
-        } else if (GameManager.currentRoundNumber < 12) {
+        } else if (GameManager.getCurrentRoundNumber() < 12) {
             m = 75;
         } else {
             m = 100;
         }
-        randomEvents.add("YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI CONTAINING 3 FOOD AND 2 ENERGY UNITS.");
-        randomEvents.add("A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY LEAVING TWO BARS OF ORE.");
-        randomEvents.add("THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $" + 8*m);
-        randomEvents.add("YOU FOUND A DEAD MOOSE RAT AND SOLD THE HIDE FOR $"+2*m);
-        randomEvents.add("FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $"+4*m);
-        randomEvents.add("MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.");
-        randomEvents.add("YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"+ 6*m + " TO CLEAN IT UP");
+        randomEvents.add(
+                "YOU JUST RECEIVED A PACKAGE FROM THE GT ALUMNI "
+                        + "CONTAINING 3 FOOD AND 2 ENERGY UNITS.");
+        randomEvents.add(
+                "A WANDERING TECH STUDENT REPAID YOUR HOSPITALITY BY "
+                        + "LEAVING TWO BARS OF ORE.");
+        randomEvents.add(
+                "THE MUSEUM BOUGHT YOUR ANTIQUE PERSONAL COMPUTER FOR $"
+                        + 8 * m);
+        randomEvents.add(
+                "YOU FOUND A DEAD MOOSE RAT AND SOLD THE HIDE FOR $" + 2 * m);
+        randomEvents.add(
+                "FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $"
+                + 4 * m);
+        randomEvents.add(
+                "MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND "
+                        + "STOLE HALF YOUR FOOD.");
+        randomEvents.add(
+                "YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $"
+                        + 6 * m + " TO CLEAN IT UP");
     }
 
     /**
@@ -67,22 +82,22 @@ public class RandomEvent {
      * @param index Indicator of random event
      */
     public void initiateEvent(int index) {
-        Player p = GameManager.currentPlayer;
+        Player p = GameManager.getCurrentPlayer();
         if (index == 0) {
             p.setFoodCount(p.getFoodCount() + 3);
             p.setEnergyCount(p.getEnergyCount() + 2);
         } else if (index == 1) {
             p.setOreCount(p.getOreCount() + 2);
         } else if (index == 2) {
-            p.setMoney(p.getMoney() + (8*m));
+            p.setMoney(p.getMoney() + (8 * m));
         } else if (index == 3) {
-            p.setMoney(p.getMoney() + (2*m));
+            p.setMoney(p.getMoney() + (2 * m));
         } else if (index == 4) {
-            p.setMoney(p.getMoney() - 4*m);
+            p.setMoney(p.getMoney() - 4 * m);
         } else if (index == 5) {
-            p.setFoodCount(p.getFoodCount()/2);
+            p.setFoodCount(p.getFoodCount() / 2);
         } else {
-            p.setFoodCount(p.getFoodCount() - 6*m);
+            p.setFoodCount(p.getFoodCount() - 6 * m);
         }
     }
 
@@ -103,43 +118,58 @@ public class RandomEvent {
      */
     @FXML
     private void handleTreasure(MouseEvent event) {
-        treasureImage.setImage(new Image("MULE/View/Images/openingChest.gif"));
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1.5), treasureImage);
-        translateTransition.setCycleCount(1);
-        translateTransition.play();
-        File file = new File("M4/music/walkingCatMule.gif");
-        if (!file.exists()) {
-            System.out.println("File does not exist");
-        }
-//        URL resource = getClass().getResource("M4/music/openChest.wav");
-//        Paths.get("M4/music/openChest.wav").toUri().toString();
-//        AudioClip openingChest = new AudioClip(resource.toString());
-//        openingChest.play();
-        translateTransition.setOnFinished(event2 -> {
-            treasureImage.setImage(new Image("MULE/View/Images/openedChest.gif"));
-            try {
-                Stage stage = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("../View/randomPopUp.fxml"));
-                stage.setScene(new Scene(root));
-                stage.setTitle("Random Event For You!");
-
-                stage.initModality(Modality.APPLICATION_MODAL);
-
-                if (lowestScorePerson) {
-                    randomNum = (int) (Math.random() * 3);
-                } else {
-                    randomNum = (int) (Math.random() * 6);
-                }
-                randomLabel.setText(randomEvents.get(randomNum));
-
-                initiateEvent(randomNum);
-                stage.show();
-                ((Stage) treasureImage.getScene().getWindow()).close();
-            } catch(IOException e) {
-                System.out.println("hi!!!!");
+        if (!alreadyClicked) {
+            treasureImage.setImage(new Image(
+                    "MULE/View/Images/openingChest.gif"));
+            TranslateTransition translateTransition
+                    = new TranslateTransition(
+                    Duration.seconds(1.5), treasureImage);
+            translateTransition.setCycleCount(1);
+            translateTransition.play();
+            File file = new File(
+                    "MULE/View/Images/walkingCatMule.gif");
+            if (!file.exists()) {
+                System.out.println("File does not exist");
             }
-        });
-        //NEED TO FIGURE OUT A WAY TO DISALLOW THE PLAYER TO RE-DO RANDOM EVENT AGAIN
-//        ((Stage)(treasureImage.getScene().getWindow())).close();
+            //        URL resource = getClass()
+            // .getResource("M4/music/openChest.wav");
+            //        Paths.get("M4/music/openChest.wav")
+            // .toUri().toString();
+            //        AudioClip openingChest
+            // = new AudioClip(resource.toString());
+            //        openingChest.play();
+            translateTransition.setOnFinished(event2 -> {
+                    treasureImage.setImage(
+                            new Image("MULE/View/Images/openedChest.gif"));
+                    try {
+                        Stage stage = new Stage();
+                        Parent root = FXMLLoader.load(
+                                getClass().getResource(
+                                        "../View/randomPopUp.fxml"));
+                        stage.setScene(new Scene(root));
+                        stage.setTitle("Random Event For You!");
+
+                        stage.initModality(Modality.APPLICATION_MODAL);
+
+                        if (lowestScorePerson) {
+                            randomNum = (int) (Math.random() * 3);
+                        } else {
+                            randomNum = (int) (Math.random() * 6);
+                        }
+                        randomLabel.setText(randomEvents.get(randomNum));
+
+                        initiateEvent(randomNum);
+                        stage.show();
+                        ((Stage) treasureImage.getScene().getWindow()).close();
+                    } catch (IOException e) {
+                        System.out.println("hi!!!!");
+                    }
+                });
+            alreadyClicked = true;
+        }
+        //NEED TO FIGURE OUT A WAY TO DISALLOW
+        // THE PLAYER TO RE-DO RANDOM EVENT AGAIN
+//        ((Stage)(treasureImage.getScene()
+//         .getWindow())).close();
     }
 }

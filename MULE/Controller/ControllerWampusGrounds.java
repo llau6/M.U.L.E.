@@ -26,9 +26,9 @@ public class ControllerWampusGrounds implements Initializable {
     @FXML
     public GridPane map;
 
-    public static boolean[][] minigameMap = new boolean[5][9];
-    public static int row;
-    public static int col;
+    private final static boolean[][] MINIGAME_MAP = new boolean[5][9];
+    private int row;
+    private int col;
 
     @FXML
     private Label rowsLabel;
@@ -45,7 +45,15 @@ public class ControllerWampusGrounds implements Initializable {
 
     private int numTurns;
 
-    public static Button sClaimButton;
+    private static Button sClaimButton;
+
+    /**
+     * Gets Claims Button
+     * @return Claim Button
+     */
+    public static Button getsClaimButton() {
+        return sClaimButton;
+    }
 
     /**
      * Initialized
@@ -61,41 +69,55 @@ public class ControllerWampusGrounds implements Initializable {
         row = rand.nextInt(5);
         col = rand.nextInt(9);
 
-        minigameMap[row][col] = true;
+        MINIGAME_MAP[row][col] = true;
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
                 int checkI = i;
                 int checkJ = j;
 
-                if (i == row && j == col){
-                    Button wampusNode = (Button)getNodeFromGridPane(map,i,j);
+                if (i == row && j == col) {
+                    Button wampusNode = (Button) getNodeFromGridPane(map, i, j);
                     wampusNode.setOnAction(event -> {
-                        wampusNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("images/wampus.png"))));
-                        rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
-                        colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
-                        numTurns++;
-                        guessLabel.setText("Number of Shots Left: " + (4 - numTurns));
-                        if (numTurns <= 4) {
-                            conditionLabel.setText("You've caught the Wampus! He gives you money to go away.");
-                            claimButton.setDisable(false);
-                        }
+                            wampusNode.setGraphic(new ImageView(new Image(
+                                    getClass().getResourceAsStream(
+                                            "MULE/View/Images/wampus.png"))));
+                            rowsLabel.setText("Number of Rows Away: "
+                                    + Math.abs(row - checkI));
+                            colsLabel.setText("Number of Columns Away: "
+                                    + Math.abs(col - checkJ));
+                            numTurns++;
+                            guessLabel.setText("Number of Shots Left: "
+                                    + (4 - numTurns));
+                            if (numTurns <= 4) {
+                                conditionLabel.setText(
+                                        "You've caught the Wampus! "
+                                        + "He gives you money to go away.");
+                                claimButton.setDisable(false);
+                            }
 
-                        wampusNode.setDisable(true);
-                    });
+                            wampusNode.setDisable(true);
+                        });
                 } else {
-                    Button notNode = (Button)getNodeFromGridPane(map,i,j);
+                    Button notNode = (Button) getNodeFromGridPane(map, i, j);
                     notNode.setOnAction(event -> {
-                        notNode.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("images/empty.png"))));
-                        rowsLabel.setText("Number of Rows Away: " + Math.abs(row - checkI));
-                        colsLabel.setText("Number of Columns Away: " + Math.abs(col - checkJ));
-                        numTurns++;
-                        guessLabel.setText("Number of Shots Left: " + (4 - numTurns));
-                        notNode.setDisable(true);
-                        if (numTurns >= 4) {
-                            conditionLabel.setText("You've failed to catch the Wampus!");
-                        }
-                    });
+                            notNode.setGraphic(new ImageView(new Image(
+                                    getClass().getResourceAsStream(
+                                            "MULE/View/Images/empty.png"))));
+                            rowsLabel.setText(
+                                    "Number of Rows Away: "
+                                    + Math.abs(row - checkI));
+                            colsLabel.setText("Number of Columns Away: "
+                                    + Math.abs(col - checkJ));
+                            numTurns++;
+                            guessLabel.setText(
+                                    "Number of Shots Left: " + (4 - numTurns));
+                            notNode.setDisable(true);
+                            if (numTurns >= 4) {
+                                conditionLabel.setText(
+                                        "You've failed to catch the Wampus!");
+                            }
+                        });
                 }
             }
         }
@@ -108,9 +130,13 @@ public class ControllerWampusGrounds implements Initializable {
      * @param col Column of grid
      * @return node from grid
      */
-    private Node getNodeFromGridPane(GridPane gridPane, final int row, final int col) {
+    private Node getNodeFromGridPane(GridPane gridPane
+            , final int row
+            , final int col) {
         for (Node node : gridPane.getChildren()) {
-            if (node instanceof Button && GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+            if (node instanceof Button
+                    && GridPane.getColumnIndex(node) == col
+                    && GridPane.getRowIndex(node) == row) {
                 return node;
             }
         }
@@ -124,8 +150,9 @@ public class ControllerWampusGrounds implements Initializable {
      */
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
+        Parent root = FXMLLoader.load(
+                getClass().getResource(
+                        "../View/townScreen.fxml"));
         Stage stage = (Stage) townButton.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -142,7 +169,7 @@ public class ControllerWampusGrounds implements Initializable {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("townScreen.fxml"));
-        AnchorPane nextScreen = (AnchorPane) loader.load();
+        AnchorPane nextScreen = loader.load();
 
         Stage stage = (Stage) claimButton.getScene().getWindow();
         Scene scene = new Scene(nextScreen, 840, 640);

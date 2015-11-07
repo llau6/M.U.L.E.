@@ -3,7 +3,8 @@ package MULE.Model;
 /**
  * Manages Store and transactions
  */
-public class StoreManager {
+public final class StoreManager {
+
     private static int foodQty;
     private static int energyQty;
     private static int oreQty;
@@ -12,7 +13,14 @@ public class StoreManager {
     private static int energyPrice = 25;
     private static int orePrice = 50;
     private static int mulePrice;
+    private static boolean boughtMule;
+    private static int prevMule;
     private static boolean firstMule = true;
+
+    /**
+     * Parameter of StoreManager
+     */
+    private StoreManager() { }
 
     /**
      * Retrieves the buy mule condition
@@ -84,13 +92,11 @@ public class StoreManager {
         StoreManager.boughtMule = boughtMule;
     }
 
-    private static boolean boughtMule;
-
     /**
      * Intializes the store based on default quantity
      */
     public static void initializeStore() {
-        if (GameManager.difficulty.equals("Beginner")) {
+        if (GameManager.getDifficulty().equals("Beginner")) {
             foodQty = 16;
             energyQty = 16;
             oreQty = 0;
@@ -109,7 +115,7 @@ public class StoreManager {
      * @return mule price
      */
     public static int calculateMulePrice(String type) {
-        mulePrice = 0;
+        int mulePrice;
         int base = -100;
         if (type.equals("Food")) {
             mulePrice = base - foodPrice;
@@ -128,68 +134,89 @@ public class StoreManager {
      * Gets the food quantity
      * @return food quantity
      */
-    public static int getFoodQuantity() { return foodQty; }
+    public static int getFoodQuantity() {
+        return foodQty;
+    }
 
     /**
      * Gets the energy quantity
      * @return energy quantity
      */
-    public static int getEnergyQuantity() { return energyQty; }
+    public static int getEnergyQuantity() {
+        return energyQty;
+    }
 
     /**
      * Gets the ore quantity
      * @return ore quantity
      */
-    public static int getOreQuantity() { return oreQty; }
+    public static int getOreQuantity() {
+        return oreQty;
+    }
 
     /**
      * Sets the food quantity
      * @param f Food Quantity
      */
-    public static void setFoodQuantity(int f) { foodQty = f; }
+    public static void setFoodQuantity(int f) {
+        foodQty = f;
+    }
 
     /**
      * Sets the energy quantity
      * @param e Ore Quantity
      */
-    public static void setEnergyQuantity(int e) { energyQty = e; }
+    public static void setEnergyQuantity(int e) {
+        energyQty = e;
+    }
 
     /**
      * Sets the ore quantity
      * @param o Ore Quantity
      */
-    public static void setOreQuantity(int o) { oreQty = o; }
+    public static void setOreQuantity(int o) {
+        oreQty = o;
+    }
 
     /**
      * Sets the mule quantity
      * @param m Mule Quantity
      */
-    public static void setMuleQuantity(int m) { muleQty = m; }
+    public static void setMuleQuantity(int m) {
+        muleQty = m;
+    }
 
     /**
      * Gets the mule quantity
      * @return Mule Quantity
      */
-    public static int getMuleQuantity() { return muleQty; }
+    public static int getMuleQuantity() {
+        return muleQty;
+    }
 
     /**
      * Gets the food price
      * @return food price
      */
-    public static int getFoodPrice() { return foodPrice; }
+    public static int getFoodPrice() {
+        return foodPrice;
+    }
 
     /**
      * Gets the energy price
      * @return energy price
      */
-    public static int getEnergyPrice() { return energyPrice; }
+    public static int getEnergyPrice() {
+        return energyPrice;
+    }
 
     /**
      * Gets the ore price
      * @return ore price
      */
-    public static int getOrePrice() { return orePrice; }
-
+    public static int getOrePrice() {
+        return orePrice;
+    }
     /**
      * Gets the previous mule condition
      * @return boolean condition of previous mule
@@ -206,8 +233,6 @@ public class StoreManager {
         StoreManager.prevMule = prevMule;
     }
 
-    protected static int prevMule;
-
     /**
      * Gets the first mule condition
      * @return boolean condition of first mule
@@ -218,10 +243,10 @@ public class StoreManager {
 
     /**
      * Sets the first mule
-     * @param firstMule boolean condition of first mule
+     * @param boolFirstMule boolean condition of first mule
      */
-    public static void setFirstMule(boolean firstMule) {
-        StoreManager.firstMule = firstMule;
+    public static void setFirstMule(boolean boolFirstMule) {
+        StoreManager.firstMule = boolFirstMule;
     }
 
 }

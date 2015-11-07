@@ -3,12 +3,12 @@ package MULE.Model;
 import javafx.scene.paint.Color;
 
 /**
- * Player conditions
+ * Created by jatin1 on 9/18/15.
  */
 public class Player implements Comparable<Player> {
     private String name;
-    private Race race;
     private Color color;
+    private Race race;
     private int money = 1000;
     private int foodCount;
     private int energyCount;
@@ -27,12 +27,12 @@ public class Player implements Comparable<Player> {
      */
     public Player(String name, Race race, Color color) {
         this.name = name;
-        this.race = race;
         this.color = color;
+        this.race = race;
         this.score = 0;
         this.landCount = 0;
         this.oreCount = 0;
-        if (GameManager.difficulty.equals("Beginner")) {
+        if (GameManager.getDifficulty().equals("Beginner")) {
             foodCount = 8;
             energyCount = 4;
         } else {
@@ -59,73 +59,101 @@ public class Player implements Comparable<Player> {
      * Retrieves the name of the player
      * @return Name of player
      */
-    public String getName() { return name; }
-
-    /**
-     * Retrieves the color of the player
-     * @return Color of player
-     */
-    public Color getColor() { return color; }
-
-    /**
-     * Retrieves the money of the player
-     * @return Money of player
-     */
-    public int getMoney() { return money; }
+    public final String getName() {
+        return name;
+    }
 
     /**
      * Retrieves the food count of the player
      * @return Food count of player
      */
-    public int getFoodCount() { return foodCount; }
+    public final int getFoodCount() {
+        return foodCount;
+    }
+    /**
+     * Retrieves the color of the player
+     * @return Color of player
+     */
+    public final Color getColor() {
+        return color;
+    }
 
     /**
      * Retrieves the energy count of the player
      * @return Energy count of player
      */
-    public int getEnergyCount() { return energyCount; }
+    public final int getEnergyCount() {
+        return energyCount;
+    }
+    /**
+     * Retrieves the money of the player
+     * @return Money of player
+     */
+    public final int getMoney() {
+        return money;
+    }
 
     /**
      * Retrieves the ore of the player
      * @return Ore of player
      */
-    public int getOreCount() { return oreCount; }
+    public final int getOreCount() {
+        return oreCount;
+    }
 
     /**
      * Retrieves the Land Count of the player
      * @return Land count of player
      */
-    public int getLandCount() { return landCount; }
+    public final int getLandCount() {
+        return landCount;
+    }
+
+    /**
+     * Gets race of the player
+     * @return player race
+     */
+    public final Race getRace() {
+        return this.race;
+    }
 
     /**
      * Retrieves the Score of the player
      * @return Score of player
      */
-    public int getScore() { return score; }
+    public final int getScore() {
+        return score;
+    }
 
     /**
      * Retrieves the lands of the player
      * @return Lands of player
      */
-    public int[][] getLands() { return lands; }
+    public final int[][] getLands() {
+        return lands;
+    }
 
     /**
      * Retrieves the current mule of the player
      * @return Current mule of player
      */
-    public String getCurMule() { return curMule; }
+    public final String getCurMule() {
+        return curMule;
+    }
 
     /**
      * Retrieves whether is clicked
      * @return boolean condition of clicked
      */
-    public boolean isClicked() { return clicked; }
+    public final boolean isClicked() {
+        return clicked;
+    }
 
     /**
      * Sets the name of the player
      * @param name of player
      */
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
@@ -133,7 +161,7 @@ public class Player implements Comparable<Player> {
      * Sets the money of the player
      * @param money of player
      */
-    public void setMoney(int money) {
+    public final void setMoney(int money) {
         this.money = money;
     }
 
@@ -141,7 +169,7 @@ public class Player implements Comparable<Player> {
      * Sets the food count of the player
      * @param foodCount of player
      */
-    public void setFoodCount(int foodCount) {
+    public final void setFoodCount(int foodCount) {
         this.foodCount = foodCount;
     }
 
@@ -149,7 +177,7 @@ public class Player implements Comparable<Player> {
      * Sets the energy of the player
      * @param energyCount of player
      */
-    public void setEnergyCount(int energyCount) {
+    public final void setEnergyCount(int energyCount) {
         this.energyCount = energyCount;
     }
 
@@ -157,14 +185,14 @@ public class Player implements Comparable<Player> {
      * Sets the ore of the player
      * @param oreCount of player
      */
-    public void setOreCount(int oreCount) {
+    public final void setOreCount(int oreCount) {
         this.oreCount = oreCount;
     }
 
     /**
      * Sets the land count of the player
      */
-    public void setLandCount() {
+    public final void setLandCount() {
         this.landCount = landCount + 1;
     }
 
@@ -172,7 +200,7 @@ public class Player implements Comparable<Player> {
      * Sets the score of the player
      * @param score of player
      */
-    public void setScore(int score) {
+    public final void setScore(int score) {
         this.score = score;
     }
 
@@ -180,7 +208,7 @@ public class Player implements Comparable<Player> {
      * Sets the current mule of the player
      * @param curMule of player
      */
-    public void setCurMule(String curMule) {
+    public final void setCurMule(String curMule) {
         this.curMule = curMule;
     }
 
@@ -188,8 +216,16 @@ public class Player implements Comparable<Player> {
      * Sets whether player is clicked
      * @param clicked condition of player
      */
-    public void setClicked(boolean clicked) {
+    public final void setClicked(boolean clicked) {
         this.clicked = clicked;
+    }
+
+    /**
+     * Sets lands
+     * @param lands Player's lands
+     */
+    public final void setLands(int[][] lands) {
+        this.lands = lands;
     }
 
     /**
@@ -198,7 +234,7 @@ public class Player implements Comparable<Player> {
      * @param i row
      * @param j column
      */
-    public void setLands(String s, int i, int j) {
+    public final void setLands(String s, int i, int j) {
         int set = 0;
         if (s.equals("No mule")) {
             set = 1;
@@ -215,8 +251,10 @@ public class Player implements Comparable<Player> {
     /**
      * Compares each players' scores
      * @param other Other Player
+     * @return current player's score minus the other's
      */
-    public int compareTo(Player other) {
+    // ASK JATIN
+    public final int compareTo(Player other) {
         return this.score - other.getScore();
     }
 }

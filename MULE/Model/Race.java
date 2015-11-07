@@ -14,7 +14,7 @@ public class Race {
      * @param name of race
      * @param filename Image of race
      */
-    public Race (String name, String filename) {
+    public Race(String name, String filename) {
         this.name = name;
         this.image = new Image(filename);
     }
@@ -23,7 +23,7 @@ public class Race {
      * Gets the name of the race
      * @return  name of race
      */
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
@@ -31,7 +31,7 @@ public class Race {
      * Gets the image of the race
      * @return  image of race
      */
-    public Image getImage() {
+    public final Image getImage() {
         return image;
     }
 
@@ -39,7 +39,7 @@ public class Race {
      * Convert race name to string
      * @return name of race as a string
      */
-    public String toString() {
+    public final String toString() {
         return name;
     }
 }

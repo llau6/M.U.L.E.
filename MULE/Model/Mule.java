@@ -39,7 +39,9 @@ public class Mule {
      * Gets the land of mule
      * @return land of mule
      */
-    public Button getLand() { return onLand;}
+    public Button getLand() {
+        return onLand;
+    }
 
     /**
      * Sets the land of which mule is placed on
@@ -49,7 +51,8 @@ public class Mule {
         onLand = land;
     }
 
-//    public boolean isInOwnedLand_noMuleExist(Button selected, Player currPlayer) {
+//    public boolean isInOwnedLand_noMuleExist(
+// Button selected, Player currPlayer) {
 //        ArrayList<Button> ownedLands = currPlayer.getLands();
 //        boolean ownedLand_noMuleExist = false;
 //        for (Button land : ownedLands) {
@@ -58,7 +61,8 @@ public class Mule {
 //            }
 //        }
 //        for (int i = 0; i < currPlayer.getMules().size(); i++) {
-//            if (currPlayer.getMules().get(i).getLand() != null && currPlayer.getMules().get(i).getLand().equals(selected)) {
+//            if (currPlayer.getMules().get(i).getLand() != null
+// && currPlayer.getMules().get(i).getLand().equals(selected)) {
 //                ownedLand_noMuleExist = false;
 //            }
 //        }

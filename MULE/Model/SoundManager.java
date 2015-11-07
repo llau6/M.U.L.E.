@@ -16,13 +16,14 @@ import java.util.concurrent.Executors;
  * Contains all sounds for use later.
  */
 public class SoundManager {
-    ExecutorService soundPool = Executors.newFixedThreadPool(2);
-    Map<String, AudioClip> soundEffectsMap = new HashMap<>();
+    private ExecutorService soundPool = Executors.newFixedThreadPool(2);
+    private Map<String, AudioClip> soundEffectsMap = new HashMap<>();
 
     /**
      * Constructor to create a simple thread pool.
      *
-     * @param numberOfThreads - number of threads to use media players in the map.
+     * @param numberOfThreads
+     * - number of threads to use media players in the map.
      */
     public SoundManager(int numberOfThreads) {
         soundPool = Executors.newFixedThreadPool(numberOfThreads);
@@ -32,9 +33,10 @@ public class SoundManager {
      * Load a sound into a map to later be played based on the id.
      *
      * @param id  - The identifier for a sound.
-     * @param url - The url location of the media or audio resource. Usually in src/main/resources directory.
+     * @param url - The url location of the media or audio resource.
+     *            Usually in src/main/resources directory.
      */
-    public void loadSoundEffects(String id, URL url) {
+    public final void loadSoundEffects(String id, URL url) {
         AudioClip sound = new AudioClip(url.toExternalForm());
         soundEffectsMap.put(id, sound);
     }
@@ -44,7 +46,7 @@ public class SoundManager {
      *
      * @param id identifier for a sound to be played.
      */
-    public void playSound(final String id) {
+    public final void playSound(final String id) {
         Runnable soundPlay = new Runnable() {
             @Override
             public void run() {
@@ -55,7 +57,8 @@ public class SoundManager {
     }
 
 //    public void playMusic() {
-//        javafx.scene.media.Media media = new javafx.scene.media.Media(Paths.get("music.mp3").toUri().toString());
+//        javafx.scene.media.Media media =
+// new javafx.scene.media.Media(Paths.get("music.mp3").toUri().toString());
 //        MediaPlayer player = new MediaPlayer(media);
 //        player.setAutoPlay(true);
 //    }

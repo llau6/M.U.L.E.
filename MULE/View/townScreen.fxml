@@ -27,13 +27,13 @@
       </font>
     </Label>
     <Label alignment="TOP_LEFT" font="$x1" layoutX="72.0" layoutY="569.0" prefHeight="59.0" prefWidth="439.0" text="Please choose your destination." />
-    <Button fx:id="pub_button" layoutX="483.0" layoutY="64.0" mnemonicParsing="false" text="Pub">
+    <Button fx:id="pubButton" layoutX="483.0" layoutY="64.0" mnemonicParsing="false" text="Pub">
       <font>
         <Font name="Berlin Sans FB" size="15.0" fx:id="x2" />
       </font>
     </Button>
-    <Button fx:id="store_button" font="$x2" layoutX="474.0" layoutY="267.0" mnemonicParsing="false" text="Store" />
+    <Button fx:id="storeButton" font="$x2" layoutX="474.0" layoutY="267.0" mnemonicParsing="false" text="Store" />
     <Button fx:id="wampusButton" font="$x2" layoutX="84.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleWampusAction" text="Wampus" />
-    <Button id="pub_button" fx:id="backButton" font="$x2" layoutX="247.0" layoutY="426.0" mnemonicParsing="false" text="Back" />
+    <Button id="pubButton" fx:id="backButton" font="$x2" layoutX="247.0" layoutY="426.0" mnemonicParsing="false" text="Back" />
   </children>
 </AnchorPane>

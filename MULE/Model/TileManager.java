@@ -3,11 +3,16 @@ package MULE.Model;
 /**
  * Manage tile selection and conditions
  */
-public class TileManager {
+public final class TileManager {
+
     private static boolean[][] tiles = new boolean[5][9];
     private static int currRow;
     private static int currCol;
 
+    /**
+     * Parameter of TileManager
+     */
+    private TileManager() { }
     /**
      * Sets the current land's condition of taken
      * @return boolean condition of taken in current row column
@@ -63,7 +68,23 @@ public class TileManager {
      * Sets the current player's land
      */
     public static void setPlayerLand() {
-        GameManager.currentPlayer.setLands("No mule", currRow, currCol);
+        GameManager.getCurrentPlayer().setLands("No mule", currRow, currCol);
+    }
+
+    /**
+     * Gets the tiles
+     * @return tiles
+     */
+    public static boolean[][] getTiles() {
+        return tiles;
+    }
+
+    /**
+     * Sets the tiles
+     * @param updatedTiles Tiles with updated values
+     */
+    public static void setTiles(boolean[][] updatedTiles) {
+        tiles = updatedTiles;
     }
 
     /**
@@ -72,7 +93,7 @@ public class TileManager {
      * @param j Column
      * @return Tile type
      */
-    public static TileType getTileType (int i, int j) {
+    public static TileType getTileType(int i, int j) {
         TileType tile;
         if ((i == 0 && j == 4)
                 || (i == 1 && j == 4)
