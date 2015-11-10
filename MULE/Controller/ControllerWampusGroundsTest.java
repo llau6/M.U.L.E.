@@ -29,7 +29,7 @@ public class ControllerWampusGroundsTest {
         testMap = new GridPane();
     }
     //GridPane.add(Node, col, row)
-    //getNodeFromGrid(GridPane, row, col)
+    //getButtonFromGrid(GridPane, row, col)
     public void makeGridPane (int n) {
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
@@ -46,13 +46,6 @@ public class ControllerWampusGroundsTest {
         testMap.add(new TestNode("Jeremy"), 2, 1);
     }
 
-    public void makeGridPaneButtons(int n) {
-        for (int i = 0; i < n; n++) {
-            for (int j = 0; j < n; j++) {
-                testMap.add(new Button(i + "th row " + j + "th col Button!"), i, j);
-            }
-        }
-    }
     @Test
     public void testGetTestNode10() {
         makeGridPane(10);
@@ -82,8 +75,19 @@ public class ControllerWampusGroundsTest {
     }
     @Test
     public void testGetButtons() {
-        testMap.add(new Button("hello"), 0, 0);
+        Button button1 = new Button("hello");
+        Button button2 = new Button("hi");
+        Button button3 = new Button("nihao");
+        testMap.add(button1, 0, 0);
+        testMap.add(button2, 0, 1);
+        testMap.add(button3, 10, 5);
         assertEquals("hello", ((Button) ControllerWampusGrounds.getButtonFromGridPane(testMap, 0, 0)).getText());
+        assertEquals(button1, ControllerWampusGrounds.getButtonFromGridPane(testMap, 0, 0));
+        assertEquals("hi", ((Button) ControllerWampusGrounds.getButtonFromGridPane(testMap, 1, 0)).getText());
+        assertEquals(button2, ControllerWampusGrounds.getButtonFromGridPane(testMap, 1, 0));
+        assertEquals("nihao", ((Button) ControllerWampusGrounds.getButtonFromGridPane(testMap, 5, 10)).getText());
+        assertEquals(button3, ControllerWampusGrounds.getButtonFromGridPane(testMap, 5, 10));
+
     }
     @Test
     public void testGetButtoneNames() {
