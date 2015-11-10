@@ -61,13 +61,13 @@
         <Label layoutX="19.0" layoutY="164.0" text="Color" />
         <Button fx:id="myButton" layoutX="161.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS" />
         <TextField fx:id="name" layoutX="62.0" layoutY="72.0" prefHeight="26.0" prefWidth="109.0" />
-        <Label fx:id="require_name" layoutX="173.0" layoutY="74.0" opacity="0.0" prefWidth="107.0" style="&#10;" text="*required" textFill="RED">
+        <Label fx:id="requireName" layoutX="173.0" layoutY="74.0" opacity="0.0" prefWidth="107.0" style="&#10;" text="*required" textFill="RED">
           <font>
             <Font name="System Bold" size="11.0" fx:id="x1" />
           </font>
         </Label>
-        <Label id="require" fx:id="require_race" font="$x1" layoutX="183.0" layoutY="124.0" opacity="0.0" text="*required" textFill="RED" />
-        <Label fx:id="require_color" font="$x1" layoutX="177.0" layoutY="168.0" opacity="0.0" text="*required" textFill="RED" />
+        <Label id="require" fx:id="requireRace" font="$x1" layoutX="183.0" layoutY="124.0" opacity="0.0" text="*required" textFill="RED" />
+        <Label fx:id="requireColor" font="$x1" layoutX="177.0" layoutY="168.0" opacity="0.0" text="*required" textFill="RED" />
         <ComboBox fx:id="colorBox" layoutX="62.0" layoutY="159.0" prefHeight="26.0" prefWidth="107.0">
           <contextMenu>
             <ContextMenu>

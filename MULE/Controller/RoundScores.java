@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 11/2/2015.
+ * Manages transition between rounds
  */
 public class RoundScores implements Initializable {
     @FXML
@@ -23,17 +23,17 @@ public class RoundScores implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         saveButton.setDisable(false);
         nextRoundButton.setOnAction((event) -> {
-            Stage stage = (Stage) nextRoundButton.getScene().getWindow();
-            stage.close();
-        });
+                Stage stage = (Stage) nextRoundButton.getScene().getWindow();
+                stage.close();
+            });
 
         saveButton.setOnAction((event) -> {
-           try {
-               Database.saveGameInfo();
-           } catch (Exception e){
-                System.out.println(e);
-            }
-            saveButton.setDisable(true);
-        });
+                try {
+                    Database.saveGameInfo();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                saveButton.setDisable(true);
+            });
     }
 }

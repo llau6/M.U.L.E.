@@ -32,7 +32,7 @@
             </Menu>
           </menus>
         </MenuBar>
-        <Button id="pub_button" fx:id="gamble_button" layoutX="94.0" layoutY="313.0" mnemonicParsing="false" prefHeight="46.89404296875" prefWidth="125.93939208984375" text="Gamble!">
+        <Button id="pubButton" fx:id="gambleButton" layoutX="94.0" layoutY="313.0" mnemonicParsing="false" prefHeight="46.89404296875" prefWidth="125.93939208984375" text="Gamble!">
           <font>
             <Font name="Franklin Gothic Demi" size="22.0" />
           </font>
@@ -44,7 +44,7 @@
             <Image url="@Images/Dice.png" />
           </image>
         </ImageView>
-        <Button id="pub_button" fx:id="back_button" layoutX="496.0" layoutY="346.0" mnemonicParsing="false" prefHeight="36.999977929684974" prefWidth="89.93939208984375" text="Go Back" textOverrun="ELLIPSIS">
+        <Button id="pubButton" fx:id="backButton" layoutX="496.0" layoutY="346.0" mnemonicParsing="false" prefHeight="36.999977929684974" prefWidth="89.93939208984375" text="Go Back" textOverrun="ELLIPSIS">
           <font>
             <Font name="Franklin Gothic Demi" size="16.0" />
           </font>

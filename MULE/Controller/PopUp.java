@@ -9,12 +9,17 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by SeYeon on 10/14/2015.
+ * Manages Pop up conditions
  */
-public class PopUp{
+public class PopUp {
     @FXML
     private Button okay;
 
+    /**
+     * Sets the cursor to default upon button press
+     * @param event Action event
+     */
+    @FXML
     public final void okayButtonHandle(ActionEvent event) {
         ((Stage) okay.getScene().getWindow()).close();
         GameManager.getMapGrid().setCursor(Cursor.DEFAULT);

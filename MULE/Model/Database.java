@@ -7,12 +7,21 @@ import java.sql.*;
 
 
 /**
- * Created by jatin1 on 10/31/15.
+ * Database Manager
  */
 public class Database {
+    /**
+     * Database Constructor
+     */
     private Database() {
 
     }
+
+    /**
+     * Gets the connection
+     * @throws Exception Server Exception
+     * @return established connection
+     */
     private static Connection getConnection() throws Exception {
         try {
             String driver = "com.mysql.jdbc.Driver";
@@ -20,22 +29,33 @@ public class Database {
             String username = "root";
             String password = "wildcats123";
             Class.forName(driver);
-            Connection conn = DriverManager.getConnection(url, username, password);
+            Connection conn = DriverManager.getConnection(
+                    url, username, password);
             return conn;
         } catch (Exception e) {
-            System.out.println("Jatin probably doesn't have the server running right now");
+            System.out.println(
+                    "Jatin probably doesn't have the server running right now");
         }
         return null;
     }
 
-    //method to load everything relevant into the db, should only be called at the END of a round, BEFORE the next one starts
+    /**
+     * load everything relevant into the db
+     * @throws Exception Server Exception
+     */
+    //method to load everything relevant into the db,
+    // should only be called at the END of a round, BEFORE the next one starts
     public static void saveGameInfo() throws Exception {
         try {
             clearTable();
             Connection con = getConnection();
             String ownershipArr = serializeBool();
-            PreparedStatement info = con.prepareStatement("INSERT INTO gameData (difficulty, round, boolArr) VALUES ('" + GameManager.getDifficulty() + "', " +
-                    "'" + GameManager.getCurrentRoundNumber() + "', '" + ownershipArr + "')");
+            PreparedStatement info = con.prepareStatement(
+                    "INSERT INTO gameData (difficulty, round"
+                            + ", boolArr) VALUES ('"
+                            + GameManager.getDifficulty() + "', "
+                            + "'" + GameManager.getCurrentRoundNumber()
+                            + "', '" + ownershipArr + "')");
             info.executeUpdate();
             for (Player p : GameManager.players) {
                 savePlayerInfo(p);
@@ -48,13 +68,21 @@ public class Database {
         }
     }
 
-
-    //helper method to save store quantities
+    /**
+     * helper method to save store quantities
+     * @throws Exception Server Exception
+     */
     private static void saveStoreInfo() throws Exception {
         try {
             Connection con = getConnection();
-            PreparedStatement info = con.prepareStatement("INSERT INTO storeData (foodQuantity, oreQuantity, energyQuantity, muleQuantity) VALUES ('" + StoreManager.getFoodQuantity() + "', " +
-                    "'" + StoreManager.getOreQuantity() + "', '" + StoreManager.getEnergyQuantity() + "', '" + StoreManager.getMuleQuantity() + "')");
+            PreparedStatement info = con.prepareStatement(
+                    "INSERT INTO storeData (foodQuantity"
+                            + ", oreQuantity, energyQuantity"
+                            + ", muleQuantity) VALUES ('"
+                            + StoreManager.getFoodQuantity()
+                            + "', " + "'" + StoreManager.getOreQuantity()
+                            + "', '" + StoreManager.getEnergyQuantity()
+                            + "', '" + StoreManager.getMuleQuantity() + "')");
             info.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -63,23 +91,36 @@ public class Database {
         }
     }
 
-    //helper method to load player info into the db
+    /**
+     * helper method to load player info into the db
+     * @throws Exception Server Exception
+     * @param toSave Player to save info
+     */
     private static void savePlayerInfo(Player toSave) throws Exception {
         try {
             Connection con = getConnection();
             String muleArr = serializeMule(toSave);
-            PreparedStatement info = con.prepareStatement("INSERT INTO players (name, foodCount, energyCount, oreCount, score, race, color, mules) VALUES ('" + toSave.getName() + "', " +
-                    "'" + toSave.getFoodCount() + "', '" + toSave.getEnergyCount() + "', '" + toSave.getOreCount() + "', '" + toSave.getScore() + "', '" + toSave.getRace() + "', '" + toSave.getColor() + "', '" + muleArr + "')");
+            PreparedStatement info
+                    = con.prepareStatement("INSERT INTO players ("
+                    + "" + "name, foodCount, energyCount, oreCount, score"
+                    + ", race, color, mules) VALUES ('" + toSave.getName()
+                    + "', " + "'" + toSave.getFoodCount() + "', '"
+                    + toSave.getEnergyCount() + "', '" + toSave.getOreCount()
+                    + "', '" + toSave.getScore() + "', '" + toSave.getRace()
+                    + "', '" + toSave.getColor() + "', '" + muleArr + "')");
             info.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            System.out.println("We updated the DB for the player named " + toSave);
+            System.out.println(
+                    "We updated the DB for the player named " + toSave);
         }
     }
 
-
-    //deletes every table of the db to avoid duplicate rows
+    /**
+     * deletes every table of the db to avoid duplicate rows
+     * @throws Exception Server Exception
+     */
     private static void clearTable() throws Exception {
         Connection con = getConnection();
 
@@ -89,11 +130,16 @@ public class Database {
         clearMe.executeUpdate("TRUNCATE storeData");
     }
 
+    /**
+     * Loads game from database
+     * @throws Exception Server Exception
+     */
     public static void loadGameFromDB() throws Exception {
         Connection con = getConnection();
 
         //loads game info
-        PreparedStatement gameStatement = con.prepareStatement("SELECT * FROM gameData");
+        PreparedStatement gameStatement
+                = con.prepareStatement("SELECT * FROM gameData");
         ResultSet queryGame = gameStatement.executeQuery();
         while (queryGame.next()) {
             GameManager.setDifficulty(queryGame.getString("difficulty"));
@@ -102,7 +148,8 @@ public class Database {
         }
 
         //loads store info
-        PreparedStatement storeStatement = con.prepareStatement("SELECT * FROM storeData");
+        PreparedStatement storeStatement
+                = con.prepareStatement("SELECT * FROM storeData");
         ResultSet queryStore = storeStatement.executeQuery();
         if (queryStore.next()) {
             StoreManager.setFoodQuantity(queryStore.getInt("foodQuantity"));
@@ -112,12 +159,16 @@ public class Database {
         }
 
         //loads player info
-        PreparedStatement playersStatement = con.prepareStatement("SELECT * FROM players");
+        PreparedStatement playersStatement
+                = con.prepareStatement("SELECT * FROM players");
         ResultSet query = playersStatement.executeQuery();
         while (query.next()) {
             //creates each player
             String raceName = query.getString("race");
-            Player p = new Player(query.getString("name"), new Race(raceName, "MULE/View/images/MULE_" + raceName + ".png"), Color.web(query.getString("color")));
+            Player p = new Player(query.getString("name")
+                    , new Race(raceName, "MULE/View/images/MULE_"
+                    + raceName + ".png")
+                    , Color.web(query.getString("color")));
             p.setFoodCount(query.getInt("foodCount"));
             p.setEnergyCount(query.getInt("energyCount"));
             p.setOreCount(query.getInt("oreCount"));
@@ -134,7 +185,10 @@ public class Database {
     }
 
 
-    //creates a stromg representation of the land ownership array
+    /**
+     * creates a string representation of the land ownership array
+     * @return string land ownership
+     */
     private static String serializeBool() {
         String res = "";
         boolean[][] tiles = TileManager.getTiles();
@@ -150,7 +204,10 @@ public class Database {
         return res;
     }
 
-    //takes the string representation and updates the TileManager attribute
+    /**
+     * takes the string representation and updates the TileManager attribute
+     * @param bool tile manager attribute
+     */
     private static void deserializeBool(String bool) {
         boolean[][] tiles = TileManager.getTiles();
         int k = 0;
@@ -164,10 +221,14 @@ public class Database {
         TileManager.setTiles(tiles);
     }
 
-    //creates a string representation of the lands/mules owned by each player
+    /**
+     * creates a string representation of the lands/mules owned by each player
+     * @param p Player
+     * @return string mule attribute
+     */
     private static String serializeMule(Player p) {
         String res = "";
-        int [][] lands = p.getLands();
+        int[][] lands = p.getLands();
         for (int i = 0; i < lands.length; i++) {
             for (int j = 0; j < lands[i].length; j++) {
                 res += lands[i][j];
@@ -177,7 +238,12 @@ public class Database {
     }
 
 
-    //takes the string representation and sets the players lands/mules
+    /**
+     * takes the string representation and sets the players lands/mules
+     * @param mule Mule
+     * @param p Player
+     */
+    //
     private static void deserializeMule(String mule, Player p) {
         int[][] lands = p.getLands();
         int k = 0;

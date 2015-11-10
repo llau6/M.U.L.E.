@@ -24,13 +24,25 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//http://code.makery.ch/blog/javafx-8-event-handling-examples/ (ComboBox)
-//https://blogs.oracle.com/jmxetc/entry/connecting_scenebuilder_edited_fxml_to (controller and fxml)
-//pics: http://strategywiki.org/wiki/M.U.L.E./Getting_Started
-//http://www.javafxtutorials.com/tutorials/switching-to-different-screens-in-javafx-and-fxml/  (switching scenes)
-//https://docs.oracle.com/javafx/2/ui_controls/text-field.htm (Using TextField)
-//http://stackoverflow.com/questions/10134856/javafx-2-0-how-to-application-getparameters-in-a-controller-java-file/10136403#10136403 (static variable to pass to other controller)
+//http://code.makery.ch/blog/
+// javafx-8-event-handling-examples/ (ComboBox)
+//https://blogs.oracle.com/jmxetc/entry/
+// connecting_scenebuilder_edited_fxml_to
+// (controller and fxml)
+//pics: http://strategywiki.org/wiki/M.U.L.E./
+// Getting_Started
+//http://www.javafxtutorials.com/tutorials/
+// switching-to-different-screens-in-javafx-and-fxml/
+//  (switching scenes)
+//https://docs.oracle.com/javafx/2/ui_controls/
+// text-field.htm (Using TextField)
+//http://stackoverflow.com/questions/10134856/
+// javafx-2-0-how-to-application-getparameters-in-a-controller-java-file/
+// 10136403#10136403 (static variable to pass to other controller)
 
+/**
+ * Manages Initial Player Conditions and Selections Screen
+ */
 public class PlayerInitScreen implements Initializable {
 
     @FXML
@@ -42,7 +54,8 @@ public class PlayerInitScreen implements Initializable {
     private static String playerName;
     private static Color color;
     public static Race raceChosen;
-    public final static int playernum = ConfigScreen.getPlayernum();
+    public final static int PLAYERNUM
+            = ConfigScreen.getPlayernum();
     private static int iteration = 1;
 
     public static int count;
@@ -56,7 +69,8 @@ public class PlayerInitScreen implements Initializable {
 
     @FXML
     private ComboBox<Race> raceBox;
-    private ObservableList<Race> comboData = FXCollections.observableArrayList();
+    private ObservableList<Race> comboData
+            = FXCollections.observableArrayList();
 
     @FXML
     private ComboBox<String> colorBox;
@@ -65,11 +79,11 @@ public class PlayerInitScreen implements Initializable {
     private ImageView raceView;
 
     @FXML
-    Label require_name;
+    Label requireName;
     @FXML
-    Label require_race;
+    Label requireRace;
     @FXML
-    Label require_color;
+    Label requireColor;
 
     @FXML
     Pane pane2;
@@ -77,71 +91,80 @@ public class PlayerInitScreen implements Initializable {
     GridPane test;
 
     /**
-     *
-     *
-     * @param url
-     * @param rb
+     * Initializes the player set-up screen
+     * @param url URL of image
+     * @param rb Resource Bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        test.getStylesheets().add(getClass().getResource("muleStyle.css").toExternalForm());
+        test.getStylesheets().add(getClass().getResource(
+                "muleStyle.css").toExternalForm());
         pane2.getStyleClass().add("pane2");
 
         playerID.setText("Player: " + iteration);
 
-        comboData.add(new Race("Packer", "MULE/View/Images/MULE_Packer.png"));
-        comboData.add(new Race("Spheroid", "MULE/View/Images/MULE_Spheroid.png"));
-        comboData.add(new Race("Humanoid", "MULE/View/Images/MULE_Humanoid.png"));
-        comboData.add(new Race("Leggite", "MULE/View/Images/MULE_Leggite.png"));
-        comboData.add(new Race("Flapper", "MULE/View/Images/MULE_Flapper.png"));
-        comboData.add(new Race("Bonzoid", "MULE/View/Images/MULE_Bonzoid.png"));
-        comboData.add(new Race("Mechtron", "MULE/View/Images/MULE_Mechtron.png"));
-        comboData.add(new Race("Gollumer", "MULE/View/Images/MULE_Gollumer.png"));
+        comboData.add(new Race("Packer"
+                , "MULE/View/Images/MULE_Packer.png"));
+        comboData.add(new Race("Spheroid"
+                , "MULE/View/Images/MULE_Spheroid.png"));
+        comboData.add(new Race("Humanoid"
+                , "MULE/View/Images/MULE_Humanoid.png"));
+        comboData.add(new Race("Leggite"
+                , "MULE/View/Images/MULE_Leggite.png"));
+        comboData.add(new Race("Flapper"
+                , "MULE/View/Images/MULE_Flapper.png"));
+        comboData.add(new Race("Bonzoid"
+                , "MULE/View/Images/MULE_Bonzoid.png"));
+        comboData.add(new Race("Mechtron"
+                , "MULE/View/Images/MULE_Mechtron.png"));
+        comboData.add(new Race("Gollumer"
+                , "MULE/View/Images/MULE_Gollumer.png"));
         raceBox.setItems(comboData);
 
         //how to use Race data
         raceBox.setCellFactory((combobox) -> {
-            return new ListCell<Race>() {
-                @Override
-                protected void updateItem(Race item, boolean empty) {
-                    super.updateItem(item, empty);
+                return new ListCell<Race>() {
+                    @Override
+                    protected void updateItem(Race item, boolean empty) {
+                        super.updateItem(item, empty);
 
-                    if (item == null || empty) {
-                        setText(null);
-                    } else {
-                        setText(item.getName());
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item.getName());
+                        }
                     }
-                }
-            };
-        });
+                };
+            });
 
         //rendering of selected value in ComboBox
         raceBox.setConverter(new StringConverter<Race>() {
-            @Override
-            public String toString(Race object) {
-                if (object == null) {
-                    return null;
-                } else {
-                    return object.getName();
+                @Override
+                public String toString(Race object) {
+                    if (object == null) {
+                        return null;
+                    } else {
+                        return object.getName();
+                    }
                 }
-            }
-            @Override
-            public Race fromString(String string) {
+                @Override
+                public Race fromString(String string) {
                     return null;
                 }
-        });
+            });
 
         raceBox.setOnAction((event) -> {
-            Race selected = raceBox.getSelectionModel().getSelectedItem();
-            raceView.setImage(selected.getImage());
-        });
+                Race selected = raceBox.getSelectionModel()
+                        .getSelectedItem();
+                raceView.setImage(selected.getImage());
+            });
     }
 
     /**
      * When button is clicked, show a new scene
      * @param event button is clicked
-     * @throws java.io.IOException
+     * @throws java.io.IOException IOException might be thrown
      */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
@@ -151,29 +174,35 @@ public class PlayerInitScreen implements Initializable {
         boolean isSameName = false;
         boolean isSameColor = false;
         if (name.getText() != null && !name.getText().isEmpty()
-                && !colorBox.getSelectionModel().isEmpty() && !raceBox.getSelectionModel().isEmpty()) {
+                && !colorBox.getSelectionModel().isEmpty()
+                && !raceBox.getSelectionModel().isEmpty()) {
             for (int i = 0; i < playersArray.length; i++) {
-                if (((Player) playersArray[i]).getName().equals(name.getText())) {
+                if (((Player) playersArray[i]).getName()
+                        .equals(name.getText())) {
                     isSameName = true;
-                } else if (((Player) playersArray[i]).getColor().equals(Color.valueOf(colorBox.getSelectionModel().getSelectedItem()))) {
+                } else if (((Player) playersArray[i]).getColor().equals(
+                        Color.valueOf(colorBox.getSelectionModel()
+                                .getSelectedItem()))) {
                     isSameColor = true;
                 }
             }
             //Save name, color, and race
             if (iteration == 1 || (!isSameName && !isSameColor)) {
                 playerName = name.getText();
-                color = Color.valueOf(colorBox.getSelectionModel().getSelectedItem());
+                color = Color.valueOf(
+                        colorBox.getSelectionModel().getSelectedItem());
                 raceChosen = raceBox.getSelectionModel().getSelectedItem();
-                Player player = new Player(playerName,raceChosen, color);
+                Player player = new Player(playerName, raceChosen, color);
                 GameManager.players.add(player);
                 GameManager.getOrderedPlayers().add(player);
-                if (iteration < playernum) {
+                if (iteration < PLAYERNUM) {
                     iteration++;
                     FXMLLoader loader = new FXMLLoader();
                     //get reference to the button's stage
                     stage = (Stage) myButton.getScene().getWindow();
                     //load up other FXML document
-                    root = loader.load(getClass().getResource("../View/playerInitScreen.fxml"));
+                    root = FXMLLoader.load(getClass().getResource(
+                            "../View/playerInitScreen.fxml"));
                     //create a new scene with root and set the stage
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
@@ -183,7 +212,8 @@ public class PlayerInitScreen implements Initializable {
                     //get reference to the button's stage
                     stage = (Stage) myButton.getScene().getWindow();
                     //load up other FXML document
-                    root = loader.load(getClass().getResource("../View/MapScreen.fxml"));
+                    root = FXMLLoader.load(getClass().getResource(
+                            "../View/MapScreen.fxml"));
                     //create a new scene with root and set the stage
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
@@ -199,9 +229,9 @@ public class PlayerInitScreen implements Initializable {
                 }
             }
         } else {
-            require_name.setOpacity(1.0);
-            require_race.setOpacity(1.0);
-            require_color.setOpacity(1.0);
+            requireName.setOpacity(1.0);
+            requireRace.setOpacity(1.0);
+            requireColor.setOpacity(1.0);
         }
     }
 }

@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by Lily on 11/2/2015.
+ * Initial Splash Screen
  */
 public class SplashScreen implements Initializable {
     @FXML
@@ -26,16 +26,17 @@ public class SplashScreen implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         startRectangle.setOnMouseClicked((event) -> {
-            try {
-                Stage stage = (Stage) startRectangle.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("../View/LoadScreen.fxml"));
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                System.out.println("Oops, something went wrong!");
-            }
-        });
+                try {
+                    Stage stage = (Stage) startRectangle.getScene().getWindow();
+                    Parent root = FXMLLoader.load(
+                            getClass().getResource("../View/LoadScreen.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    System.out.println("Oops, something went wrong!");
+                }
+            });
     }
 }
 

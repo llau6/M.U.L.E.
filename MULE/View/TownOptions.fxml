@@ -6,10 +6,10 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MULE.Controller.Town">
   <children>
-    <Button fx:id="pub_button" mnemonicParsing="false" prefHeight="92.0" prefWidth="141.0" text="Pub" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+    <Button fx:id="pubButton" mnemonicParsing="false" prefHeight="92.0" prefWidth="141.0" text="Pub" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
     <Button mnemonicParsing="false" prefHeight="92.0" prefWidth="141.0" text="Land Offices" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
     <Button fx:id="wampusButton" mnemonicParsing="false" onAction="#handleWampusAction" prefHeight="92.0" prefWidth="141.0" text="Hunting Grounds" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-    <Button fx:id="store_button" mnemonicParsing="false" prefHeight="92.0" prefWidth="141.0" text="Store" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+    <Button fx:id="storeButton" mnemonicParsing="false" prefHeight="92.0" prefWidth="141.0" text="Store" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
