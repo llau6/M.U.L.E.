@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.238037109375" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.Configuration">
+  <children>
+    <ImageView fitHeight="449.2500915527344" fitWidth="599.0001220703125" layoutX="1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULE/View/Images/grassBG.png" />
+      </image>
+    </ImageView>
+    <RadioButton fx:id="rad1" layoutX="190.0" layoutY="93.0" mnemonicParsing="false" text="1">
+      <font>
+        <Font name="System Bold" size="18.0" fx:id="x1" />
+      </font>
+    </RadioButton>
+    <Label layoutX="190.0" layoutY="46.0" minHeight="20.0" prefHeight="41.0" text="Number of Players:">
+      <font>
+        <Font name="System Bold Italic" size="25.0" fx:id="x2" />
+      </font>
+    </Label>
+    <RadioButton fx:id="rad2" font="$x1" layoutX="254.0" layoutY="93.0" mnemonicParsing="false" text="2" />
+    <RadioButton fx:id="rad3" font="$x1" layoutX="315.0" layoutY="93.0" mnemonicParsing="false" text="3" />
+    <RadioButton fx:id="rad4" font="$x1" layoutX="377.0" layoutY="93.0" mnemonicParsing="false" text="4" />
+    <Label font="$x2" layoutX="244.0" layoutY="142.0" minHeight="20.0" prefHeight="41.0" text="Difficulty:" />
+    <Label font="$x2" layoutX="246.0" layoutY="249.0" minHeight="20.0" prefHeight="41.0" text="Map Type:" />
+    <RadioButton fx:id="radBeginner" font="$x1" layoutX="131.0" layoutY="193.0" mnemonicParsing="false" text="Beginner" />
+    <RadioButton fx:id="radStandard" font="$x1" layoutX="244.0" layoutY="193.0" mnemonicParsing="false" text="Standard" />
+    <RadioButton fx:id="radTournament" font="$x1" layoutX="363.0" layoutY="193.0" mnemonicParsing="false" text="Tournament" />
+    <RadioButton fx:id="radSomething1" font="$x1" layoutX="118.0" layoutY="300.0" mnemonicParsing="false" text="Something" />
+    <RadioButton fx:id="radSomething2" font="$x1" layoutX="254.0" layoutY="300.0" mnemonicParsing="false" text="Something" />
+    <RadioButton fx:id="radSomething3" font="$x1" layoutX="385.0" layoutY="300.0" mnemonicParsing="false" text="Something" />
+    <Button fx:id="submitButton" layoutX="256.0" layoutY="352.0" mnemonicParsing="false" text="Submit">
+      <font>
+        <Font name="System Bold" size="20.0" />
+      </font>
+    </Button>
+  </children>
+</AnchorPane>
