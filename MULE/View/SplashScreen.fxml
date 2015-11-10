@@ -7,13 +7,13 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.13108144531" prefWidth="598.853515625" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.SplashScreen">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="807.12451171875" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.SplashScreen">
   <children>
-    <ImageView fx:id="splashScreen" fitHeight="437.1310186899043" fitWidth="598.8534545898438" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fitHeight="637.0" fitWidth="849.3333333333333" layoutX="0.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="@Images/muleStart.png" />
+        <Image url="@Images/splash.png" />
       </image>
     </ImageView>
-    <Rectangle id="startSquare" fx:id="startRect" arcHeight="5.0" arcWidth="5.0" fill="#003314" height="32.0" layoutX="234.0" layoutY="306.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="124.0" />
+    <Rectangle id="startSquare" fx:id="startRectangle" arcHeight="5.0" arcWidth="5.0" fill="#003314" height="54.0" layoutX="293.0" layoutY="506.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="186.0" />
   </children>
 </AnchorPane>

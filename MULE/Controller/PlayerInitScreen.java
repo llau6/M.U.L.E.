@@ -42,6 +42,7 @@ public class PlayerInitScreen implements Initializable {
     private static String playerName;
     private static Color color;
     public static Race raceChosen;
+    public final static int playernum = ConfigScreen.getPlayernum();
     private static int iteration = 1;
 
     public static int count;
@@ -166,7 +167,7 @@ public class PlayerInitScreen implements Initializable {
                 Player player = new Player(playerName,raceChosen, color);
                 GameManager.players.add(player);
                 GameManager.getOrderedPlayers().add(player);
-                if (iteration < GameManager.getPlayerNum()) {
+                if (iteration < playernum) {
                     iteration++;
                     FXMLLoader loader = new FXMLLoader();
                     //get reference to the button's stage

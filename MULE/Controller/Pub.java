@@ -1,7 +1,6 @@
 package MULE.Controller;
 
 import MULE.Model.GameManager;
-import MULE.Model.PubManager;
 import MULE.Model.StoreManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,57 +20,49 @@ import java.util.ResourceBundle;
  */
 public class Pub implements Initializable {
     @FXML
-    private Button back_button;
+    public Button gamble_button;
+
     @FXML
-    private Label youWin;
+    public Button back_button;
+
     @FXML
-    private Label bonus;
+    public Label youWin;
+
     @FXML
-    private Rectangle gambleRect;
-    @FXML
-    private ImageView pubImg;
+    public Label bonus;
 
     private boolean hasGambled;
-    private static Button sGambleButton;
+
     public static Button getsGambleButton() {
         return sGambleButton;
     }
 
+    private static Button sGambleButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        sGambleButton = back_button;
-        gambleRect.setOnMouseEntered(event -> {
-            if (!hasGambled) {
-                pubImg.setImage(new Image("MULE/View/Images/pubClick.png"));
-            }
+        sGambleButton = gamble_button;
+
+        gamble_button.setOnAction((event) -> {
+            youWin.setOpacity(1.0);
+            bonus.setText("$" + GameManager.calculateBonus());
+            gamble_button.setDisable(true);
+            hasGambled = true;
+            back_button.setText("End Turn");
+            //So next player can purchase mule
+            StoreManager.setBoughtMule(false);
         });
-        gambleRect.setOnMouseExited(event -> {
-            pubImg.setImage(new Image("MULE/View/Images/pubBG.png"));
-        });
-        gambleRect.setOnMouseClicked((event) -> {
-            if (!hasGambled) {
-                pubImg.setImage(new Image("MULE/View/Images/pubBG.png"));
-                youWin.setOpacity(1.0);
-                bonus.setOpacity(1.0);
-                bonus.setText("$" + PubManager.calculateBonus());
-                back_button.setText("End Turn");
-                //So next player can purchase mule
-                StoreManager.setBoughtMule(false);
-                hasGambled = true;
-            }
-        });
+
         back_button.setOnAction((event) -> {
             if (hasGambled) {
-                MapScreen.updateResources();
-                GameManager.setTownOpen(false);
-                MapScreen.updateTown();
                 GameManager.getTimer().cancel();
                 Stage stage = (Stage) back_button.getScene().getWindow();
                 stage.close();
+                MapScreen.updateResources();
             } else {
                 try {
                     Stage stage = (Stage) back_button.getScene().getWindow();
-                    if (hasGambled) {
+                    if (gamble_button.isDisabled()) {
                         stage.close();
                     } else {
                         Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
