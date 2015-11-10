@@ -1,5 +1,4 @@
 package MULE.Model;
-
 import MULE.Controller.*;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -16,35 +15,114 @@ import java.util.*;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
-
+import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by jatin1 on 9/18/15.
  */
 public final class GameManager {
     private GameManager() {}
-    private static boolean isFree = true;
-    private static boolean newRound;
-    private static boolean townOpen;
-    private static int playerNum;
-    private static int timerLeft;
-    private static int totalTurnsInitial;
-    private static int currentTurnNumber = 1;
-    private static int currentRoundNumber = 1;
-    private static GridPane mapGrid;
+    private static int landPoints = 500;
     private static String difficulty;
-    private static Player currentPlayer;
     public static  Queue<Player> players = new LinkedList<>();
     private static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
     private static List<Player> visitedPlayers = new LinkedList<>();
+    private static Player currentPlayer;
+    private static int totalTurnsInitial;
     private static Timer timer;
-
+    private static int currentTurnNumber = 1;
+    private static int currentRoundNumber = 1;
+    private static int timerLeft;
+    private static boolean isFree = true;
+    private static boolean newRound;
+    private static GridPane mapGrid;
     public static void initializeMap() {
         StoreManager.initializeStore();
     }
 
+    public static String getDifficulty() {
+        return difficulty;
+    }
+
+    public static void setDifficulty(String difficulty) {
+        GameManager.difficulty = difficulty;
+    }
+    public static int getTotalTurnsInitial() {
+        return totalTurnsInitial;
+    }
+
+    public static void setTotalTurnsInitial(int totalTurnsInitial) {
+        GameManager.totalTurnsInitial = totalTurnsInitial;
+    }
+
+    public static Timer getTimer() {
+        return timer;
+    }
+
+    public static void setTimer(Timer timer) {
+        GameManager.timer = timer;
+    }
+    public static Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public static void setCurrentPlayer(Player currentPlayer) {
+        GameManager.currentPlayer = currentPlayer;
+    }
+    public static boolean isFree() {
+        return isFree;
+    }
+
+    public static void setIsFree(boolean isFree) {
+        GameManager.isFree = isFree;
+    }
+
+    public static boolean isNewRound() {
+        return newRound;
+    }
+
+    public static void setNewRound(boolean newRound) {
+        GameManager.newRound = newRound;
+    }
+    public static GridPane getMapGrid() {
+        return mapGrid;
+    }
+
+    public static void setMapGrid(GridPane mapGrid) {
+        GameManager.mapGrid = mapGrid;
+    }
+    public static PriorityQueue<Player> getOrderedPlayers() {
+        return orderedPlayers;
+    }
+
+    public static Queue<Player> getPlayersQueue() {
+        return players;
+    }
+
+    public static void setPlayersQueue(Queue<Player> playersQ) {
+        players = playersQ;
+    }
+
+    public static void setOrderedPlayers(PriorityQueue<Player> orderedPlayers) {
+        GameManager.orderedPlayers = orderedPlayers;
+    }
+    public static int getCurrentTurnNumber() {
+        return currentTurnNumber;
+    }
+
+    public static void setCurrentTurnNumber(int currentTurnNumber) {
+        GameManager.currentTurnNumber = currentTurnNumber;
+    }
+
+    public static int getCurrentRoundNumber() {
+        return currentRoundNumber;
+    }
+
+    public static void setCurrentRoundNumber(int currentRoundNumber) {
+        GameManager.currentRoundNumber = currentRoundNumber;
+    }
     //initial land selection phase
-    public static void initLandSelection(Label currPlayer, Text countDownText) {
-        townOpen = false;
+    public static void initLandSelection(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Button townButton) {
+        townButton.setDisable(true);
         totalTurnsInitial--;
         final int[] countDown = {50};
         countDownText.setText("Time left: " + countDown[0]);
@@ -67,13 +145,28 @@ public final class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = players.remove();
+        //currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount()*500) +
+         //           currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
+
         currPlayer.setText(currentPlayer.getName());
-        MapScreen.updateResources();
+        energy.setText("" + currentPlayer.getEnergyCount());
+        money.setText("" + currentPlayer.getMoney());
+        ore.setText("" + currentPlayer.getOreCount());
+        food.setText("" + currentPlayer.getFoodCount());
+        score.setText("" + currentPlayer.getScore());
         players.add(currentPlayer);
     }
+    public static void updateCurrentScore() {
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * GameManager.landPoints)
+                + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
+    }
 
+    public static void updateCurrentScore(Player currentPlayer) {
+        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * landPoints)
+                + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
+    }
     //initial land selection phase after first two turn
-    public static void buyLandSelection(Label currPlayer, Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton) {
+    public static void buyLandSelection(Player prevPlayer, Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Boolean bought, Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton, Button townButton) {
         isFree = false;
         turnType.setText("INITIAL LAND SELECTION");
         claimLand.setDisable(false);
@@ -93,6 +186,7 @@ public final class GameManager {
                         countDown[0]--;
                         countDownText.setText("Time left: " + countDown[0]);
                         timerLeft = countDown[0];
+
                         if (countDown[0] <= 0) {
                             timer.cancel();
                             countDownText.setText("Out of time!");
@@ -106,7 +200,11 @@ public final class GameManager {
         }, 1000, 1000); //Every 1 second
         currentPlayer = orderedPlayers.remove();
         currPlayer.setText(currentPlayer.getName());
-        MapScreen.updateResources();
+        energy.setText("" + currentPlayer.getEnergyCount());
+        money.setText("" + currentPlayer.getMoney());
+        ore.setText("" + currentPlayer.getOreCount());
+        food.setText("" + currentPlayer.getFoodCount());
+        score.setText("" + currentPlayer.getScore());
         visitedPlayers.add(currentPlayer);
         if (currentTurnNumber == players.size()) {
             currentRoundNumber++;
@@ -119,62 +217,6 @@ public final class GameManager {
         } else {
             currentTurnNumber++;
         }
-    }
-
-    public static void gamePlay(Label currPlayer, Text countDownText, Label turnType, Label round, Button skipButton) {
-        townOpen = true;
-        MapScreen.updateTown();
-        newRound = false;
-        round.setDisable(false);
-        skipButton.setText("End Turn");
-        turnType.setText("TURN-BASED GAMEPLAY");
-        round.setText("" + currentRoundNumber);
-        final int[] countDown = {50};
-        countDownText.setText("Time left: " + countDown[0]);
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        countDownText.setText("Time left: " + countDown[0]);
-                        countDown[0]--;
-                        countDownText.setText("Time left: " + countDown[0]);
-                        timerLeft = countDown[0];
-                        if (countDown[0] <= 0) {
-                            timer.cancel();
-                            countDownText.setText("Out of time!");
-                            townOpen = false;
-                            MapScreen.updateTown();
-                            skipButton.setText("You're Done");
-                            closeAll();
-                        }
-                    }
-                });
-            }
-        }, 1000, 1000); //Every 1 second
-        currentPlayer = orderedPlayers.remove();
-        currPlayer.setText(currentPlayer.getName());
-        MapScreen.updateResources();
-        visitedPlayers.add(currentPlayer);
-        if (currentTurnNumber == players.size()) {
-            currentRoundNumber++;
-            currentTurnNumber = 1;
-            newRound = true;
-        } else {
-            currentTurnNumber++;
-        }
-    }
-
-    public static void updateCurrentScore() {
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500)
-                + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
-    }
-
-    // For mule production method
-    public static void updateCurrentScore(Player currentPlayer) {
-        currentPlayer.setScore(currentPlayer.getMoney() + (currentPlayer.getLandCount() * 500)
-                + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
 
     public static void initiateRandom() {
@@ -194,6 +236,109 @@ public final class GameManager {
                 System.out.println("hi!!!!");
             }
         }
+    }
+    public static void gamePlay(Label currPlayer, Label energy, Label money, Label ore, Label food, Label score, Text countDownText, Label turnType, Label round, Button townButton, Button skipButton) {
+        townButton.setDisable(false);
+        newRound = false;
+        round.setDisable(false);
+        skipButton.setText("End Turn");
+        turnType.setText("TURN-BASED GAMEPLAY");
+        round.setText("" + currentRoundNumber);
+        final int[] countDown = {50};
+        countDownText.setText("Time left: " + countDown[0]);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        countDownText.setText("Time left: " + countDown[0]);
+                        countDown[0]--;
+                        countDownText.setText("Time left: " + countDown[0]);
+                        timerLeft = countDown[0];
+
+                        if (countDown[0] <= 0) {
+                            timer.cancel();
+                            countDownText.setText("Out of time!");
+                            townButton.setDisable(true);
+                            skipButton.setText("You're Done");
+                            closeAll();
+                        }
+                    }
+                });
+            }
+        }, 1000, 1000); //Every 1 second
+
+        initiateRandom();
+
+        currentPlayer = orderedPlayers.remove();
+        currPlayer.setText(currentPlayer.getName());
+        energy.setText("" + currentPlayer.getEnergyCount());
+        money.setText("" + currentPlayer.getMoney());
+        ore.setText("" + currentPlayer.getOreCount());
+        food.setText("" + currentPlayer.getFoodCount());
+        score.setText("" + currentPlayer.getScore());
+        visitedPlayers.add(currentPlayer);
+        if (currentTurnNumber == players.size()) {
+            currentRoundNumber++;
+            currentTurnNumber = 1;
+            newRound = true;
+        } else {
+            currentTurnNumber++;
+        }
+    }
+
+    private static void closeAll() {
+        ArrayList<Button> staticButts = new ArrayList<>();
+        staticButts.add(Store.sCompleteButton);
+        staticButts.add(Pub.getsGambleButton());
+        staticButts.add(ControllerWampusGrounds.getsClaimButton());
+        staticButts.add(Town.getsPubButton());
+
+        for (Button b: staticButts) {
+            try {
+                if (b != null) {
+                    Stage stage = (Stage) b.getScene().getWindow();
+                    stage.close();
+                }
+            } catch (Exception e) {
+                System.out.println("oops");
+            }
+        }
+
+    }
+    //For Pub
+    //Money Bonus = Round Bonus + random(0, Time Bonus)
+    public static int calculateBonus() {
+        int moneyBonus = 0;
+        int roundBonus = 50;
+        int timeBonus = 50;
+        //calculate Round Bonus
+        //1	   2	3	 4	 5	 6	 7	 8	 9	 10	 11	 12
+        //50   50	50	100	100	100	100	150	150	150	150	200
+        for (int i = 0; i < currentRoundNumber + 1; i++) {
+            if ((i / 4) != (i - 1) / 4) {
+                roundBonus += 50;
+            }
+        }
+        //calculate Time Bonus
+        //39-50 seconds left : 200
+        //26-38 seconds left : 150
+        //13-25 seconds left : 100
+        //0-12 seconds left : 50
+        for (int i = 0; i < timerLeft; i++) {
+            if ((i / 13) != (i - 1) / 13) {
+                timeBonus += 50;
+            }
+        }
+        //randomize Time Bonus
+        timeBonus = ThreadLocalRandom.current().nextInt(0, timeBonus + 1);
+        moneyBonus = roundBonus + timeBonus;
+        if (moneyBonus > 250) {
+            moneyBonus = 250;
+        }
+        currentPlayer.setMoney(currentPlayer.getMoney() + moneyBonus);
+        return moneyBonus;
     }
 
     public static void updateProduction() {
@@ -227,107 +372,4 @@ public final class GameManager {
         }
         visitedPlayers = new LinkedList<>();
     }
-
-    private static void closeAll() {
-        ArrayList<Button> staticButts = new ArrayList<>();
-        staticButts.add(Store.sCompleteButton);
-        staticButts.add(Pub.getsGambleButton());
-        staticButts.add(ControllerWampusGrounds.getsClaimButton());
-        staticButts.add(Town.getsPubButton());
-
-        for (Button b: staticButts) {
-            try {
-                if (b != null) {
-                    Stage stage = (Stage) b.getScene().getWindow();
-                    stage.close();
-                }
-            } catch (Exception e) {
-                System.out.println("oops");
-            }
-        }
-    }
-
-    // Getters/Setters
-    public static boolean isFree() {
-        return isFree;
-    }
-
-    public static boolean isNewRound() {
-        return newRound;
-    }
-
-    public static boolean isTownOpen() {
-        return townOpen;
-    }
-
-    public static int getPlayerNum() {
-        return playerNum;
-    }
-
-    public static int getTotalTurnsInitial() {
-        return totalTurnsInitial;
-    }
-
-    public static int getCurrentTurnNumber() {
-        return currentTurnNumber;
-    }
-
-    public static int getCurrentRoundNumber() {
-        return currentRoundNumber;
-    }
-
-    public static int getTimerLeft() {
-        return timerLeft;
-    }
-
-    public static GridPane getMapGrid() {
-        return mapGrid;
-    }
-
-    public static String getDifficulty() {
-        return difficulty;
-    }
-
-    public static Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public static PriorityQueue<Player> getOrderedPlayers() {
-        return orderedPlayers;
-    }
-    public static Queue<Player> getPlayersQueue() {
-        return players;
-    }
-
-    public static Timer getTimer() {
-        return timer;
-    }
-
-    public static void setDifficulty(String difficulty) {
-        GameManager.difficulty = difficulty;
-    }
-    public static void setTotalTurnsInitial(int totalTurnsInitial) {
-        GameManager.totalTurnsInitial = totalTurnsInitial;
-    }
-
-    public static void setCurrentRoundNumber(int currentRoundNumber) {
-        GameManager.currentRoundNumber = currentRoundNumber;
-    }
-
-    public static void setCurrentPlayer(Player currentPlayer) {
-        GameManager.currentPlayer = currentPlayer;
-    }
-
-    public static void setMapGrid(GridPane mapGrid) {
-        GameManager.mapGrid = mapGrid;
-    }
-
-    public static void setPlayerNum(int playerNum) {
-        GameManager.playerNum = playerNum;
-    }
-
-    public static void setTownOpen(boolean townOpen) {
-        GameManager.townOpen = townOpen;
-    }
-
 }

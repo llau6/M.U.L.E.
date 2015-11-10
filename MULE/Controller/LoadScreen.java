@@ -8,9 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,12 +19,6 @@ import java.util.ResourceBundle;
  */
 public class LoadScreen implements Initializable {
     @FXML
-    private Rectangle startRect;
-    @FXML
-    private Rectangle loadRect;
-    @FXML
-    private ImageView loadImg;
-    @FXML
     private Button newGameButton;
 
     @FXML
@@ -35,50 +26,30 @@ public class LoadScreen implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        startRect.setOnMouseEntered(event -> {
-            Image screen = new Image("MULE/View/Images/loadHover1.png");
-            loadImg.setImage(screen);
-            loadImg.setPreserveRatio(true);
-        });
-        startRect.setOnMouseExited(event -> {
-            Image screen = new Image("MULE/View/Images/loadScreen.png");
-            loadImg.setImage(screen);
-            loadImg.setPreserveRatio(true);
-        });
-        startRect.setOnMouseClicked((event) -> {
-            try {
-                Stage stage = (Stage) startRect.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("../View/configScreen.fxml"));
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                System.out.println("Oops, something went wrong!");
-            }
-        });
-        loadRect.setOnMouseEntered(event -> {
-            Image screen = new Image("MULE/View/Images/loadHover2.png");
-            loadImg.setImage(screen);
-            loadImg.setPreserveRatio(true);
-        });
-        loadRect.setOnMouseExited(event -> {
-            Image screen = new Image("MULE/View/Images/loadScreen.png");
-            loadImg.setImage(screen);
-            loadImg.setPreserveRatio(true);
-        });
-        loadRect.setOnMouseClicked((event) -> {
+        loadSave.setOnAction((event) -> {
             try {
                 Database.loadGameFromDB();
                 System.out.println(GameManager.players);
                 System.out.println(GameManager.getCurrentPlayer());
                 MapScreen.setIsLoadingFromDB(true);
-                Stage stage = (Stage) loadRect.getScene().getWindow();
+                Stage stage = (Stage) loadSave.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("../View/MapScreen.fxml"));
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        });
+        newGameButton.setOnAction((event) -> {
+            try {
+                Stage stage = (Stage) newGameButton.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("../View/config_settings.fxml"));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                System.out.println("Oops, something went wrong!");
             }
         });
     }

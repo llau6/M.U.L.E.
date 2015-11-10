@@ -3,23 +3,12 @@
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.23797607421875" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.LoadScreen">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.LoadScreen">
   <children>
-    <ImageView fx:id="loadImg" fitHeight="443.80749491339736" fitWidth="608.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@Images/loadScreen.png" />
-      </image>
-    </ImageView>
-    <Rectangle id="startSquare" fx:id="startRect" arcHeight="5.0" arcWidth="5.0" height="41.0" layoutX="105.0" layoutY="146.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="404.0">
-      <fill>
-        <Color blue="0.078" green="0.200" red="0.000" fx:id="x1" />
-      </fill>
-    </Rectangle>
-    <Rectangle id="startSquare" fx:id="loadRect" arcHeight="5.0" arcWidth="5.0" fill="$x1" height="41.0" layoutX="105.0" layoutY="256.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="411.0" />
+    <Button fx:id="loadSave" layoutX="236.0" layoutY="307.0" mnemonicParsing="false" text="Load from Save" />
+    <Button fx:id="newGameButton" layoutX="228.0" layoutY="220.0" mnemonicParsing="false" text="Start New Game" />
   </children>
 </AnchorPane>

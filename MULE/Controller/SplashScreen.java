@@ -6,10 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,26 +18,16 @@ import java.util.ResourceBundle;
  */
 public class SplashScreen implements Initializable {
     @FXML
-    private Rectangle startRect;
+    private Rectangle startRectangle;
 
     @FXML
-    private ImageView splashScreen;
+    private Button loadSave;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        startRect.setOnMouseEntered(event -> {
-            Image screen = new Image("MULE/View/Images/muleHover.png");
-            splashScreen.setImage(screen);
-            splashScreen.setPreserveRatio(true);
-            });
-        startRect.setOnMouseExited(event -> {
-            Image screen = new Image("MULE/View/Images/muleStart.png");
-            splashScreen.setImage(screen);
-            splashScreen.setPreserveRatio(true);
-        });
-        startRect.setOnMouseClicked((event) -> {
+        startRectangle.setOnMouseClicked((event) -> {
             try {
-                Stage stage = (Stage) startRect.getScene().getWindow();
+                Stage stage = (Stage) startRectangle.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("../View/LoadScreen.fxml"));
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
