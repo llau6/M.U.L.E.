@@ -12,7 +12,6 @@ public final class StoreManager {
     private static int foodPrice = 30;
     private static int energyPrice = 25;
     private static int orePrice = 50;
-    private static int mulePrice;
     private static boolean boughtMule;
     private static int prevMule;
     private static boolean firstMule = true;
@@ -117,6 +116,9 @@ public final class StoreManager {
     public static int calculateMulePrice(String type) {
         int mulePrice;
         int base = -100;
+        if (type == null) {
+            return 0;
+        }
         if (type.equals("Food")) {
             mulePrice = base - foodPrice;
         } else if (type.equals("Energy")) {
