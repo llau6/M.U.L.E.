@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="configGrid" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.ConfigScreen">
+  <children>
+    <Pane fx:id="configPane" prefHeight="275.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <children>
+        <MenuBar layoutX="0.0" layoutY="0.0">
+          <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Delete" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+        <Label layoutX="45.0" layoutY="81.0" text="Number of Players" />
+        <ComboBox fx:id="difficultyBox" editable="false" layoutX="175.0" layoutY="121.0" mouseTransparent="false" promptText="">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Beginner" />
+              <String fx:value="Standard" />
+              <String fx:value="Tournament" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label layoutX="60.0" layoutY="121.0" text="Select Difficulty" />
+        <Label layoutX="55.0" layoutY="164.0" text="Select Map Type" />
+        <ComboBox fx:id="mapCombo" layoutX="175.0" layoutY="161.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Desert" />
+              <String fx:value="Forest" />
+              <String fx:value="Grasslands" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Button id="myButton" fx:id="done" layoutX="162.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Done" textAlignment="LEFT" textOverrun="CENTER_ELLIPSIS">
+          <font>
+            <Font size="15.0" />
+          </font>
+        </Button>
+        <ComboBox fx:id="numPlayers" layoutX="175.0" layoutY="76.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="1" />
+              <String fx:value="2" />
+              <String fx:value="3" />
+              <String fx:value="4" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label id="required" fx:id="requiredNum" layoutX="244.0" layoutY="79.0" opacity="0.0" text="* required" textFill="RED">
+          <font>
+            <Font size="11.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label id="required" fx:id="requiredDifficulty" font="$x1" layoutX="318.0" layoutY="125.0" opacity="0.0" text="* required" textFill="RED" />
+        <Label id="required" fx:id="requiredMap" font="$x1" layoutX="306.0" layoutY="167.0" opacity="0.0" text="* required" textFill="RED" />
+        <Label fx:id="mule" layoutX="245.0" layoutY="35.0" opacity="0.77" text="M.U.L.E" textFill="#009962" textOverrun="ELLIPSIS">
+          <font>
+            <Font name="Berlin Sans FB Bold" size="18.0" />
+          </font>
+        </Label>
+        <ImageView fx:id="muleCat" fitHeight="65.75000012685017" fitWidth="95.28985595703125" layoutX="305.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@Images/walkingCatMule.gif" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="staticMule" fitHeight="65.75" fitWidth="87.66666666666666" layoutX="307.0" layoutY="16.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@Images/catMule.gif" />
+          </image>
+        </ImageView>
+      </children>
+      <effect>
+        <Glow />
+      </effect>
+    </Pane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>

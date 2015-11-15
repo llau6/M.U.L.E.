@@ -89,7 +89,9 @@ public class RoundScores implements Initializable {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            saveButton.setDisable(true);
+            GameManager.initiateRandom();
+            Stage stage = (Stage) nextRoundButton.getScene().getWindow();
+            stage.close();
         });
     }
 }

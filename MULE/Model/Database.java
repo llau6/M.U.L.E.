@@ -23,6 +23,7 @@ public class Database {
             Connection conn = DriverManager.getConnection(url, username, password);
             return conn;
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("Jatin probably doesn't have the server running right now");
         }
         return null;
