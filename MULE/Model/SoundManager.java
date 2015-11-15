@@ -1,7 +1,7 @@
 package MULE.Model;
 
 /**
- * Manages Sound Effects and Music
+ * Created by elliekang on 10/1/15.
  */
 import javafx.scene.media.AudioClip;
 
@@ -14,6 +14,8 @@ import java.util.concurrent.Executors;
 /**
  * Responsible for loading sound media to be played using an id or key.
  * Contains all sounds for use later.
+ *</pre>
+ <pre> * User: cdea
  */
 public class SoundManager {
     private ExecutorService soundPool = Executors.newFixedThreadPool(2);
@@ -22,8 +24,7 @@ public class SoundManager {
     /**
      * Constructor to create a simple thread pool.
      *
-     * @param numberOfThreads
-     * - number of threads to use media players in the map.
+     * @param numberOfThreads - number of threads to use media players in the map.
      */
     public SoundManager(int numberOfThreads) {
         soundPool = Executors.newFixedThreadPool(numberOfThreads);
@@ -33,8 +34,7 @@ public class SoundManager {
      * Load a sound into a map to later be played based on the id.
      *
      * @param id  - The identifier for a sound.
-     * @param url - The url location of the media or audio resource.
-     *            Usually in src/main/resources directory.
+     * @param url - The url location of the media or audio resource. Usually in src/main/resources directory.
      */
     public final void loadSoundEffects(String id, URL url) {
         AudioClip sound = new AudioClip(url.toExternalForm());
@@ -57,8 +57,7 @@ public class SoundManager {
     }
 
 //    public void playMusic() {
-//        javafx.scene.media.Media media =
-// new javafx.scene.media.Media(Paths.get("music.mp3").toUri().toString());
+//        javafx.scene.media.Media media = new javafx.scene.media.Media(Paths.get("music.mp3").toUri().toString());
 //        MediaPlayer player = new MediaPlayer(media);
 //        player.setAutoPlay(true);
 //    }
