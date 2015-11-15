@@ -3,42 +3,25 @@ package MULE.Model;
 import javafx.scene.image.Image;
 
 /**
- * Race of Mules
+ * Created by SeYeon on 9/7/2015.
  */
 public class Race {
     private String name;
     private Image image;
 
-    /**
-     * Race Constructor
-     * @param name of race
-     * @param filename Image of race
-     */
-    public Race(String name, String filename) {
-        this.name = name;
-        this.image = new Image(filename);
+    public  Race (String nameInput, String filenameInput) {
+        this.name = nameInput;
+        this.image = new Image(filenameInput);
     }
 
-    /**
-     * Gets the name of the race
-     * @return  name of race
-     */
     public final String getName() {
         return name;
     }
 
-    /**
-     * Gets the image of the race
-     * @return  image of race
-     */
     public final Image getImage() {
         return image;
     }
 
-    /**
-     * Convert race name to string
-     * @return name of race as a string
-     */
     public final String toString() {
         return name;
     }

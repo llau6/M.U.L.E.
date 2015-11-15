@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Manages the configuration and selection of players and difficulty screen
+ * Created by SeYeon on 9/14/2015.
  */
 public class ConfigScreen implements Initializable {
     @FXML
@@ -44,15 +44,12 @@ public class ConfigScreen implements Initializable {
     private Label requiredMap;
     @FXML
     private Label mule;
-    private static int playernum;
 
-    /**
-     * Gets the number of players
-     * @return number of players
-     */
     public static int getPlayernum() {
         return playernum;
     }
+
+    private static int playernum;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,19 +57,10 @@ public class ConfigScreen implements Initializable {
         animateLabel();
     }
 
-    /**
-     * Animates Map Label
-     */
     public void animateLabel() {
-        TranslateTransition translateTransition
-                = new TranslateTransition(
-                Duration.seconds(5), mule);
-        TranslateTransition translateTransition2
-                = new TranslateTransition(
-                Duration.seconds(3), muleCat);
-        RotateTransition rotateTransition
-                = new RotateTransition(
-                Duration.millis(950), mule);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), mule);
+        TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(3), muleCat);
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(950), mule);
 
         rotateTransition.setToAngle(40);
         rotateTransition.setFromAngle(-40);
@@ -92,31 +80,20 @@ public class ConfigScreen implements Initializable {
         translateTransition2.setCycleCount(4);
 
         ParallelTransition parallelTransition = new ParallelTransition();
-        parallelTransition.getChildren().addAll(
-                translateTransition
-                , translateTransition2
-                , rotateTransition);
+        parallelTransition.getChildren().addAll(translateTransition, translateTransition2, rotateTransition);
         parallelTransition.play();
 
         parallelTransition.setOnFinished(event -> {
-                muleCat.setImage(new Image("MULE/View/Images/catMule.gif"));
-    //            muleCat.setOpacity(0);
-    //            staticMule.setOpacity(1);
-            });
+            muleCat.setImage(new Image("MULE/View/Images/catMule.gif"));
+//            muleCat.setOpacity(0);
+//            staticMule.setOpacity(1);
+        });
     }
-
-    /**
-     * Updates the combo box with the value input by user
-     * @param event Button Press Event
-     * @throws IOException Exception
-     */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
-        GameManager.setDifficulty((String) difficultyBox
-                .getSelectionModel().getSelectedItem());
+        GameManager.setDifficulty((String) difficultyBox.getSelectionModel().getSelectedItem());
         Object o;
-        if (!numPlayers.getSelectionModel().isEmpty()
-                && !difficultyBox.getSelectionModel().isEmpty()
+        if (!numPlayers.getSelectionModel().isEmpty() && !difficultyBox.getSelectionModel().isEmpty()
                 && !mapCombo.getSelectionModel().isEmpty()) {
             o = numPlayers.getSelectionModel().getSelectedItem();
             playernum = Integer.parseInt((String) o);
@@ -126,8 +103,7 @@ public class ConfigScreen implements Initializable {
             //get reference to the button's stage
             stage = (Stage) done.getScene().getWindow();
             //load up other FXML document
-            root = FXMLLoader.load(getClass().getResource(
-                    "../View/playerInitScreen.fxml"));
+            root = loader.load(getClass().getResource("../View/playerInitScreen.fxml"));
             //create a new scene with root and set the stage
             Scene scene = new Scene(root, 400, 275);
             stage.setScene(scene);

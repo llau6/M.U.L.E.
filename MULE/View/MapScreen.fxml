@@ -10,20 +10,21 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="662.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.MapScreen">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="721.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.MapScreen">
   <children>
-    <Rectangle fx:id="mapColor" arcHeight="5.0" arcWidth="5.0" fill="#cce0ff" height="681.0000999999975" layoutX="0.0" layoutY="-5.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="662.0" />
-    <ImageView fitHeight="208.05301452501718" fitWidth="607.0" layoutX="30.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
+    <Rectangle fx:id="mapColor" arcHeight="5.0" arcWidth="5.0" fill="RED" height="737.0" layoutX="0.0" layoutY="1.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="721.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="674.0" layoutX="37.0" layoutY="32.0" opacity="0.7" stroke="#bfbfbf" strokeType="INSIDE" strokeWidth="2.5" width="652.0" />
+    <ImageView fitHeight="198.79859129587808" fitWidth="580.0" layoutX="73.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@Images/box.png" />
       </image>
     </ImageView>
-    <ImageView fitHeight="432.0" fitWidth="576.0" layoutX="45.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="mapImg" fitHeight="432.0" fitWidth="576.0" layoutX="73.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="@Images/gameMap.png" />
+        <Image url="@Images/gameMap.gif" />
       </image>
     </ImageView>
-    <GridPane fx:id="map" layoutX="45.0" layoutY="63.0" prefHeight="320.0" prefWidth="576.0">
+    <GridPane fx:id="map" layoutX="73.0" layoutY="93.0" prefHeight="320.0" prefWidth="576.0">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -69,7 +70,7 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-        <Button fx:id="townButton" mnemonicParsing="false" onAction="#handleButtonAction" opacity="0.05" prefHeight="73.75" prefWidth="82.0" text="Town" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -90,73 +91,101 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Pane layoutX="15.0" layoutY="428.0" prefHeight="174.0" prefWidth="621.0">
+    <Pane layoutX="91.0" layoutY="446.0" prefHeight="185.0" prefWidth="543.9998779296875">
       <children>
-        <HBox prefHeight="200.0" prefWidth="332.0" />
-        <Label fx:id="tileType" alignment="CENTER" contentDisplay="CENTER" layoutX="374.0" layoutY="0.0" prefHeight="32.431640625" prefWidth="190.0" text="" textAlignment="LEFT">
-          <font>
-            <Font name="Microsoft Uighur Bold" size="30.0" fx:id="x2" />
-          </font>
-        </Label>
-        <Button fx:id="claimLand" layoutX="465.0" layoutY="179.0" mnemonicParsing="false" text="Claim Land!">
-          <font>
-            <Font name="Microsoft Uighur" size="25.0" fx:id="x1" />
-          </font>
-        </Button>
-        <Label font="$x1" layoutX="398.0" layoutY="33.0" text="Food" />
-        <Label font="$x1" layoutX="392.0" layoutY="61.0" text="Energy" />
-        <Label font="$x1" layoutX="402.0" layoutY="87.0" text="Ore" />
-        <Label fx:id="selectedFood" font="$x1" layoutX="454.0" layoutY="33.0" text="--" />
-        <Label fx:id="selectedEnergy" font="$x1" layoutX="454.0" layoutY="61.0" text="--" />
-        <Label fx:id="selectedOre" font="$x1" layoutX="454.0" layoutY="87.0" text="--" />
-        <ImageView fx:id="selectedImage" fitHeight="83.14285278320312" fitWidth="59.69230748163407" layoutX="502.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
-        <Label font="$x1" layoutX="397.0" layoutY="110.0" text="Cost" />
-        <Label fx:id="selectedCost" font="$x1" layoutX="454.0" layoutY="110.0" text="--" />
-        <Button fx:id="skipButt" font="$x1" layoutX="313.0" layoutY="179.0" mnemonicParsing="false" prefWidth="129.0" text="Skip Turn" />
-        <VBox layoutX="14.0" layoutY="0.0" prefHeight="200.0" prefWidth="335.0">
+        <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="7.0" prefHeight="147.9998779296875" prefWidth="284.0" spacing="0.0">
           <children>
-            <Label fx:id="turnType" alignment="CENTER" font="$x2" prefHeight="24.0" prefWidth="334.0" text="FREE LAND GRANTS" />
-            <GridPane alignment="BOTTOM_CENTER" prefHeight="114.0" prefWidth="331.9999000000025" VBox.vgrow="NEVER">
+            <Label fx:id="turnType" alignment="CENTER" prefHeight="24.0" prefWidth="334.0" text="FREE LAND GRANTS">
+              <font>
+                <Font name="System Bold" size="20.0" fx:id="x2" />
+              </font>
+            </Label>
+            <GridPane alignment="CENTER_RIGHT" prefHeight="94.0" prefWidth="227.0">
               <children>
-                <Label fx:id="money" font="$x1" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-                <Label id="energy" fx:id="food" font="$x1" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-                <Label id="ore" fx:id="energy" font="$x1" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-                <Label id="food" fx:id="ore" font="$x1" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-                <Label fx:id="score" font="$x1" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
-                <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" text="Money" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" text="Food" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" text="Energy" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" text="Ore" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" minHeight="23.857177734375" prefHeight="23.857177734375" text="Score" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                <Label alignment="CENTER_RIGHT" prefWidth="65.00009999999747" text="Money" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <font>
+                    <Font name="System Bold" size="15.0" fx:id="x4" />
+                  </font>
+                </Label>
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="65.0" text="Food" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="65.0" text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="64.00009999999747" text="Ore" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="65.0" text="Score" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="money" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="113.5" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label fx:id="food" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="energy" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="ore" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label fx:id="score" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
+              <padding>
+                <Insets bottom="-20.0" />
+              </padding>
               <rowConstraints>
-                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="21.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="48.0" minHeight="3.0" prefHeight="21.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="54.0" minHeight="8.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="54.0" minHeight="8.0" prefHeight="23.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="41.0" prefHeight="28.0" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
           </children>
         </VBox>
+        <VBox alignment="TOP_CENTER" layoutX="314.0" layoutY="7.0" prefHeight="148.0" prefWidth="219.0">
+          <children>
+            <Label fx:id="tileType" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="32.431640625" prefWidth="190.0" text="TOWN IS OPEN" textAlignment="LEFT" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+              <children>
+                <GridPane prefHeight="100.0" prefWidth="122.0">
+                  <children>
+                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Food" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Ore" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Cost" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Label id="money" fx:id="selectedFood" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label id="money" fx:id="selectedEnergy" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label id="money" fx:id="selectedOre" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label id="money" fx:id="selectedCost" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <ImageView fx:id="selectedImage" fitHeight="91.92854323422972" fitWidth="65.99998474121094" pickOnBounds="true" preserveRatio="true" />
+              </children>
+            </HBox>
+          </children>
+        </VBox>
       </children>
     </Pane>
-    <Label alignment="CENTER" font="$x2" layoutX="35.0" layoutY="15.0" prefHeight="28.0" prefWidth="154.0" text="Current Player:" textOverrun="CLIP" />
-    <Label fx:id="currPlayer" alignment="TOP_LEFT" layoutX="193.0" layoutY="15.0" prefHeight="33.0" prefWidth="224.0" text="Label" textAlignment="CENTER">
+    <Label alignment="CENTER" font="$x2" layoutX="73.0" layoutY="51.0" prefHeight="28.0" prefWidth="154.0" text="Current Player:" textOverrun="CLIP" />
+    <Label fx:id="currPlayer" alignment="TOP_LEFT" layoutX="227.0" layoutY="52.0" prefHeight="33.0" prefWidth="162.0" text="Label" textAlignment="CENTER">
       <font>
-        <Font name="Microsoft Uighur" size="30.0" fx:id="x3" />
+        <Font size="20.0" fx:id="x3" />
       </font>
     </Label>
-    <Text fx:id="countDownText" fill="#eb0101" layoutX="478.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="136.27844831347466">
+    <Label fx:id="roundLabel" font="$x2" layoutX="540.0" layoutY="52.0" prefWidth="89.9998779296875" text="" />
+    <Button fx:id="skipButt" layoutX="379.0" layoutY="636.0" mnemonicParsing="false" prefWidth="129.0" text="Skip Turn">
       <font>
-        <Font name="Microsoft Uighur Bold" size="35.0" />
+        <Font name="Microsoft Uighur" size="25.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button fx:id="claimLand" font="$x1" layoutX="520.0" layoutY="636.0" mnemonicParsing="false" text="Claim Land!" />
+    <Label fx:id="round" font="$x3" layoutX="614.0" layoutY="50.0" minHeight="28.0" prefHeight="33.0" prefWidth="33.0" text="" />
+    <Text fx:id="countDownText" fill="BLACK" layoutX="118.0" layoutY="662.0" scaleX="1.3942043706830838" scaleY="1.4590874948428194" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left&quot;" wrappingWidth="136.27844831347466">
+      <font>
+        <Font name="System Bold" size="18.0" />
       </font>
     </Text>
-    <Label fx:id="roundLabel" font="$x2" layoutX="288.0" layoutY="17.0" prefWidth="101.0" text="" />
-    <Label fx:id="round" font="$x3" layoutX="369.0" layoutY="14.0" minHeight="28.0" prefHeight="28.0" prefWidth="33.0" text="" />
   </children>
 </AnchorPane>
