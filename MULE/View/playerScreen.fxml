@@ -13,7 +13,7 @@
   <children>
     <ImageView fitHeight="449.2500915527344" fitWidth="599.0001220703125" layoutX="1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULE/View/Images/grassBG.png" />
+        <Image url="@Images/grassBG.png" />
       </image>
     </ImageView>
     <Label layoutX="59.0" layoutY="108.0" minHeight="20.0" prefHeight="41.0" text="Name:">

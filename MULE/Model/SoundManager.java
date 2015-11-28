@@ -14,8 +14,8 @@ import java.util.concurrent.Executors;
 /**
  * Responsible for loading sound media to be played using an id or key.
  * Contains all sounds for use later.
- *</pre>
- <pre> * User: cdea
+ *
+ * * User: cdea
  */
 public class SoundManager {
     private ExecutorService soundPool = Executors.newFixedThreadPool(2);

@@ -12,7 +12,7 @@
   <children>
     <ImageView fitHeight="449.2500915527344" fitWidth="599.0001220703125" layoutX="1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULE/View/Images/grassBG.png" />
+        <Image url="@Images/grassBG.png" />
       </image>
     </ImageView>
     <Button fx:id="submitButton" layoutX="248.0" layoutY="363.0" mnemonicParsing="false" text="Submit">
@@ -60,9 +60,8 @@
             <Label font="$x2" minHeight="20.0" prefHeight="41.0" text="Map Type:" />
             <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="503.0" spacing="20.0">
               <children>
-                <RadioButton fx:id="radSomething1" font="$x1" mnemonicParsing="false" text="Something" />
-                <RadioButton fx:id="radSomething2" font="$x1" mnemonicParsing="false" text="Something" />
-                <RadioButton fx:id="radSomething3" font="$x1" mnemonicParsing="false" text="Something" />
+                <RadioButton id="radSomething1" fx:id="radMapStandard" font="$x1" mnemonicParsing="false" text="Standard" />
+                <RadioButton id="radSomething2" fx:id="radMapRandom" font="$x1" mnemonicParsing="false" text="Randomized" />
               </children>
             </HBox>
           </children>

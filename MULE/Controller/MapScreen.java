@@ -27,6 +27,7 @@ import javafx.scene.Node;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Queue;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
@@ -53,6 +54,8 @@ public class MapScreen implements Initializable {
     @FXML
     public Label ore;
     @FXML
+    public Label happiness;
+    @FXML
     public Label energy;
     @FXML
     public Label food;
@@ -69,6 +72,8 @@ public class MapScreen implements Initializable {
     @FXML
     private Label selectedOre;
     @FXML
+    private Label selectedHappiness;
+    @FXML
     private Label selectedEnergy;
     @FXML
     private Label selectedCost;
@@ -81,6 +86,7 @@ public class MapScreen implements Initializable {
     private static Label sEnergy;
     private static Label sMoney;
     private static Label sOre;
+    private static Label sHappiness;
     private static Label sFood;
     private static Label sScore;
     public static Text sCountDownText;
@@ -91,10 +97,9 @@ public class MapScreen implements Initializable {
     public static Label sSelectedText;
     public static ImageView sMapImg;
     public static Rectangle sMapColor;
-
+    private static int clickCount = 0;
     private int playerCount = 0;
     private int skipCount = 0;
-    private static int clickCount = 0;
 
     public static void setClickCount(int clickCount) {
         MapScreen.clickCount = clickCount;
@@ -102,11 +107,9 @@ public class MapScreen implements Initializable {
     public static int getClickCount() {
         return clickCount;
     }
-
     public static void setIsLoadingFromDB(boolean val) {
         isLoadingFromDB = val;
     }
-
     public static boolean isLoadingFromDB() {
         return isLoadingFromDB;
     }
@@ -118,6 +121,7 @@ public class MapScreen implements Initializable {
         sEnergy = energy;
         sMoney = money;
         sOre = ore;
+        sHappiness = happiness;
         sFood = food;
         sScore = score;
         sCountDownText = countDownText;
@@ -128,51 +132,118 @@ public class MapScreen implements Initializable {
         sSelectedImage = selectedImage;
         sSelectedText = tileType;
         sMapColor = mapColor;
+
         if (isLoadingFromDB) {
             MapScreen.updateResources();
             loadMap(GameManager.getPlayersQueue());
             claimLand.setDisable(true);
             GameManager.gamePlay(currPlayer, countDownText, turnType, round, skipButt);
-            initializeGridPane();
         } else {
             skipButt.setDisable(true);
             GameManager.setTotalTurnsInitial(GameManager.getPlayersQueue().size() * 2);
             GameManager.initLandSelection(currPlayer, countDownText);
-            GameManager.initializeMap();
-            initializeGridPane();
+            StoreManager.initializeStore();
             //soundManager.playMusic();
-
-            claimLand.setOnAction((event) -> {
-                GameManager.getTimer().cancel();
-                playerCount++;
-                if (playerCount + skipCount >= GameManager.getPlayersQueue().size()) {
-                    playerCount = 0;
-                    skipCount = 0;
-                }
-                // Purchasing property
-                if (GameManager.getCurrentPlayer().getMoney() >= 300) {
-                    if (!TileManager.isTaken()) {
-                        TileManager.setTaken(true);
-                        GameManager.getCurrentPlayer().setLandCount();
-                        TileManager.setPlayerLand();
-                        if (!GameManager.isFree()) {
-                            GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() - 300);
-                        }
-                        // So that player can select property again next turn
-                        GameManager.getCurrentPlayer().setClicked(false);
-                    }
-                    if (GameManager.getTotalTurnsInitial() != 0) {
-                        GameManager.initLandSelection(currPlayer, countDownText);
-                    } else {
-                        skipButt.setDisable(false);
-                        GameManager.buyLandSelection(currPlayer, countDownText, round, roundLabel, turnType, claimLand, skipButt);
-                    }
-                } else {
-                    claimLand.setDisable(true);
-                    claimLand.setText("Insufficient Funds!");
-                }
-            });
         }
+        initializeGridPane();
+        initializeButtons();
+        initializeMap();
+        GameManager.setMapGrid(map);
+    }
+
+    /**
+     * Initializes standard map or randomized map
+     */
+    public void initializeMap() {
+        Random ran = new Random();
+        String src;
+        ObservableList<Node> children = map.getChildren();
+        for (Node node : children) {
+            int i = GridPane.getRowIndex(node);
+            int j = GridPane.getColumnIndex(node);
+            if (node instanceof ImageView) {
+                // Standard game map
+                if (GameManager.getMapType().equals("Standard")) {
+                    if ((i == 0 && j == 2)
+                            || (i == 1 && j == 1)
+                            || (i == 2 && j == 8)) {
+                        TileManager.setTileTypes(i, j, TileType.MOUNTAIN1);
+                        src = TileType.MOUNTAIN1.getSrc();
+                    } else if ((i == 3 && j == 1)
+                            || (i == 3 && j == 6)
+                            || (i == 4 && j == 2)
+                            || (i == 4 && j == 8)) {
+                        TileManager.setTileTypes(i, j, TileType.MOUNTAIN2);
+                        src = TileType.MOUNTAIN2.getSrc();
+                    } else if ((i == 0 && j == 6)
+                            || (i == 1 && j == 8)
+                            || (i == 2 && j == 0)) {
+                        TileManager.setTileTypes(i, j, TileType.MOUNTAIN3);
+                        src = TileType.MOUNTAIN3.getSrc();
+                    } else {
+                        TileManager.setTileTypes(i, j, TileType.PLAIN);
+                        src = TileType.PLAIN.getSrc();
+                    }
+                // Random game map
+                } else {
+                    int x = ran.nextInt(10);
+                    if (x == 0) {
+                        TileManager.setTileTypes(i, j, TileType.MOUNTAIN1);
+                        src = TileType.MOUNTAIN1.getSrc();
+                    } else if (x == 1) {
+                        TileManager.setTileTypes(i, j, TileType.MOUNTAIN2);
+                        src = TileType.MOUNTAIN2.getSrc();
+                    } else if (x == 2) {
+                        TileManager.setTileTypes(i, j, TileType.MOUNTAIN3);
+                        src = TileType.MOUNTAIN3.getSrc();
+                    } else if (x == 3) {
+                        TileManager.setTileTypes(i, j, TileType.SHROOMS);
+                        src = TileType.SHROOMS.getSrc();
+                    } else {
+                        TileManager.setTileTypes(i, j, TileType.PLAIN);
+                        src = TileType.PLAIN.getSrc();
+                    }
+                }
+                ((ImageView) node).setImage(new Image(src));
+            }
+        }
+    }
+
+    /**
+     * Initializes the Skip Button and Claim Land Button
+     */
+    public void initializeButtons() {
+        claimLand.setOnAction((event) -> {
+            GameManager.getTimer().cancel();
+            playerCount++;
+            if (playerCount + skipCount >= GameManager.getPlayersQueue().size()) {
+                playerCount = 0;
+                skipCount = 0;
+            }
+            // Purchasing property
+            if (GameManager.getCurrentPlayer().getMoney() >= 300) {
+                if (!TileManager.isTaken()) {
+                    TileManager.setTaken(true);
+                    GameManager.getCurrentPlayer().setLandCount();
+                    TileManager.setPlayerLand();
+                    if (!GameManager.isFree()) {
+                        GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() - 300);
+                    }
+                    // So that player can select property again next turn
+                    GameManager.getCurrentPlayer().setClicked(false);
+                }
+                if (GameManager.getTotalTurnsInitial() != 0) {
+                    GameManager.initLandSelection(currPlayer, countDownText);
+                } else {
+                    skipButt.setDisable(false);
+                    GameManager.buyLandSelection(currPlayer, countDownText, round, roundLabel, turnType, claimLand, skipButt);
+                }
+            } else {
+                claimLand.setDisable(true);
+                claimLand.setText("Insufficient Funds!");
+            }
+        });
+
         skipButt.setOnAction((event) -> {
             GameManager.getTimer().cancel();
             if (claimLand.isDisable()) {
@@ -209,9 +280,11 @@ public class MapScreen implements Initializable {
             // So next player can purchase mule
             StoreManager.setBoughtMule(false);
         });
-        GameManager.setMapGrid(map);
-    } // End of initializing
+    }
 
+    /**
+     * Changes town image/label to open or closed
+     */
     public static void updateTown() {
         if (GameManager.isTownOpen()) {
             sMapImg.setImage(new Image("MULE/View/Images/gameOpen.gif"));
@@ -221,16 +294,24 @@ public class MapScreen implements Initializable {
             sMapImg.setImage(new Image("MULE/View/Images/gameMap.gif"));
         }
     }
+
+    /**
+     * Updates player's resource labels
+     */
     public static void updateResources() {
         sMoney.setText("" + GameManager.getCurrentPlayer().getMoney());
         sFood.setText("" + GameManager.getCurrentPlayer().getFoodCount());
         sEnergy.setText("" + GameManager.getCurrentPlayer().getEnergyCount());
         sOre.setText("" + GameManager.getCurrentPlayer().getOreCount());
+        sHappiness.setText("" + GameManager.getCurrentPlayer().getHappinessCount());
         GameManager.updateCurrentScore();
         sScore.setText("" + GameManager.getCurrentPlayer().getScore());
     }
 
-    // For database stuff
+    /**
+     * Reloads game state from database
+     * @param q Current player
+     */
     public void loadMap(Queue<Player> q) {
         ObservableList<Node> children = map.getChildren();
         for (int z = 0; z < children.size(); z++) {
@@ -266,7 +347,9 @@ public class MapScreen implements Initializable {
         }
     }
 
-    // Selecting/deselecting land & placing mules on the tiles
+    /**
+     * Selects/deselects land and places mule on the tiles
+     */
     public void initializeGridPane() {
         ObservableList<Node> children = map.getChildren();
         for (Node node : children) {
@@ -284,8 +367,9 @@ public class MapScreen implements Initializable {
                             currNode.setFill(Color.WHITE);
                             currNode.setOpacity(.34);
                             selectedFood.setText("--");
-                            selectedOre.setText("--");
                             selectedEnergy.setText("--");
+                            selectedOre.setText("--");
+                            selectedHappiness.setText("--");
                             selectedCost.setText("--");
                             if (GameManager.isTownOpen()) {
                                 tileType.setText("TOWN IS OPEN");
@@ -311,8 +395,13 @@ public class MapScreen implements Initializable {
                             tileType.setText(String.valueOf(selectedTileType.getName()));
                             selectedFood.setText(String.valueOf(selectedTileType.getFoodCount()));
                             selectedOre.setText(String.valueOf(selectedTileType.getOreCount()));
+                            selectedHappiness.setText(String.valueOf(selectedTileType.getHappinessCount()));
                             selectedEnergy.setText(String.valueOf(selectedTileType.getEnergyCount()));
-                            selectedCost.setText(String.valueOf(300));
+                            if (GameManager.getTotalTurnsInitial() > 0) {
+                                selectedCost.setText("FREE");
+                            } else {
+                                selectedCost.setText("300");
+                            }
                         }
                     });
                     // When the mouse moves off of a tile

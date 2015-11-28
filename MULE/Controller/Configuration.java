@@ -36,11 +36,9 @@ public class Configuration implements Initializable {
     @FXML
     private RadioButton radTournament;
     @FXML
-    private RadioButton radSomething1;
+    private RadioButton radMapStandard;
     @FXML
-    private RadioButton radSomething2;
-    @FXML
-    private RadioButton radSomething3;
+    private RadioButton radMapRandom;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ToggleGroup numGroup = new ToggleGroup();
@@ -53,16 +51,16 @@ public class Configuration implements Initializable {
         radStandard.setToggleGroup(difficultyGroup);
         radTournament.setToggleGroup(difficultyGroup);
         ToggleGroup mapGroup = new ToggleGroup();
-        radSomething1.setToggleGroup(mapGroup);
-        radSomething2.setToggleGroup(mapGroup);
-        radSomething3.setToggleGroup(mapGroup);
+        radMapStandard.setToggleGroup(mapGroup);
+        radMapRandom.setToggleGroup(mapGroup);
         rad1.setSelected(true);
         radBeginner.setSelected(true);
-        radSomething1.setSelected(true);
+        radMapStandard.setSelected(true);
     // Click submit button
         submitButton.setOnMouseClicked((event) -> {
             GameManager.setDifficulty(((RadioButton) difficultyGroup.getSelectedToggle()).getText());
             GameManager.setPlayerNum(Integer.parseInt(((RadioButton) numGroup.getSelectedToggle()).getText()));
+            GameManager.setMapType(((RadioButton) mapGroup.getSelectedToggle()).getText());
             try {
                 Stage stage = (Stage) submitButton.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("../View/playerScreen.fxml"));

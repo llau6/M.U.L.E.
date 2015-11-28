@@ -10,22 +10,87 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="721.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.MapScreen">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="828.0" prefWidth="784.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.MapScreen">
   <children>
-    <Rectangle fx:id="mapColor" arcHeight="5.0" arcWidth="5.0" fill="RED" height="737.0" layoutX="0.0" layoutY="1.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="721.0" />
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="674.0" layoutX="37.0" layoutY="32.0" opacity="0.7" stroke="#bfbfbf" strokeType="INSIDE" strokeWidth="2.5" width="652.0" />
-    <ImageView fitHeight="198.79859129587808" fitWidth="580.0" layoutX="73.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+    <Rectangle fx:id="mapColor" arcHeight="5.0" arcWidth="5.0" fill="RED" height="828.0" layoutX="0.0" layoutY="0.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="784.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="748.0" layoutX="44.0" layoutY="39.0" opacity="0.7" stroke="#bfbfbf" strokeType="INSIDE" strokeWidth="2.5" width="698.0" />
+    <ImageView fitHeight="372.95851135253906" fitWidth="625.9303562251825" layoutX="81.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/mapBorder.png" />
+      </image>
+    </ImageView>
+    <ImageView fitHeight="237.8680877685547" fitWidth="625.0473031613428" layoutX="81.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@Images/box.png" />
       </image>
     </ImageView>
-    <ImageView fx:id="mapImg" fitHeight="432.0" fitWidth="576.0" layoutX="73.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="mapImg" fitHeight="432.0" fitWidth="576.0" layoutX="105.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@Images/gameMap.gif" />
       </image>
     </ImageView>
-    <GridPane fx:id="map" layoutX="73.0" layoutY="93.0" prefHeight="320.0" prefWidth="576.0">
+    <Label fx:id="turnType" alignment="TOP_LEFT" layoutX="81.0" layoutY="55.0" prefHeight="34.0" prefWidth="346.0" text="FREE LAND GRANTS">
+      <font>
+        <Font name="System Bold" size="25.0" fx:id="x3" />
+      </font>
+    </Label>
+    <Label fx:id="roundLabel" font="$x3" layoutX="574.0" layoutY="55.0" prefWidth="91.9998779296875" text="Round" />
+    <Button fx:id="skipButt" layoutX="397.0" layoutY="725.0" mnemonicParsing="false" prefWidth="145.0" text="Skip Turn">
+      <font>
+        <Font name="System Bold" size="20.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Button fx:id="claimLand" font="$x2" layoutX="554.0" layoutY="725.0" mnemonicParsing="false" text="Claim Land!" />
+    <Label fx:id="round" layoutX="667.0" layoutY="55.0" minHeight="28.0" prefHeight="33.0" prefWidth="33.0" text="1">
+      <font>
+        <Font size="25.0" />
+      </font>
+    </Label>
+    <Text fx:id="countDownText" fill="BLACK" layoutX="116.0" layoutY="750.0" scaleX="1.3942043706830838" scaleY="1.4590874948428194" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left&quot;" wrappingWidth="136.27844831347466">
+      <font>
+        <Font name="System Bold" size="18.0" fx:id="x1" />
+      </font>
+    </Text>
+    <GridPane fx:id="map" layoutX="105.0" layoutY="116.0" prefHeight="320.0" prefWidth="576.0">
       <children>
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="0" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+        <ImageView fitHeight="63.99998474121094" fitWidth="63.99998474121094" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="64.5" opacity="0.0" strokeType="INSIDE" strokeWidth="4.4" width="64.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -91,41 +156,104 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Pane layoutX="91.0" layoutY="446.0" prefHeight="185.0" prefWidth="543.9998779296875">
+    <VBox alignment="TOP_CENTER" layoutX="264.0" layoutY="509.0" prefHeight="162.0" prefWidth="201.0" spacing="0.0">
       <children>
-        <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="7.0" prefHeight="147.9998779296875" prefWidth="284.0" spacing="0.0">
+        <Label alignment="TOP_LEFT" font="$x2" prefHeight="26.9998779296875" prefWidth="128.9998779296875" text="Resources" textOverrun="CLIP" />
+        <GridPane alignment="CENTER_RIGHT" prefHeight="120.0" prefWidth="187.0">
           <children>
-            <Label fx:id="turnType" alignment="CENTER" prefHeight="24.0" prefWidth="334.0" text="FREE LAND GRANTS">
+            <Label alignment="CENTER_RIGHT" prefWidth="77.0" text="Food" GridPane.columnIndex="0" GridPane.rowIndex="0">
               <font>
-                <Font name="System Bold" size="20.0" fx:id="x2" />
+                <Font name="System Bold" size="15.0" fx:id="x4" />
               </font>
             </Label>
-            <GridPane alignment="CENTER_RIGHT" prefHeight="94.0" prefWidth="227.0">
+            <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="77.0" text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="77.0" text="Ore" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="76.1829833984375" text="Happiness" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label fx:id="food" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x4" prefWidth="60.9998779296875" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label fx:id="energy" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x4" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="ore" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x4" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label id="score" fx:id="happiness" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x4" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="77.0" text="Money" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <Label id="score" fx:id="money" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x4" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <padding>
+            <Insets bottom="-20.0" />
+          </padding>
+          <rowConstraints>
+            <RowConstraints maxHeight="22.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+    </VBox>
+    <VBox alignment="BOTTOM_CENTER" layoutX="107.0" layoutY="512.0" minHeight="139.0" prefHeight="162.0" prefWidth="172.0" spacing="10.0">
+      <children>
+        <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="200.0">
+          <children>
+            <Label alignment="TOP_LEFT" font="$x1" prefHeight="24.0" prefWidth="66.0" text="Player:" textOverrun="CLIP" />
+            <Label fx:id="currPlayer" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="74.0" text="Label" textAlignment="CENTER">
+              <font>
+                <Font name="System Italic" size="18.0" fx:id="x5" />
+              </font>
+            </Label>
+          </children>
+        </HBox>
+        <ImageView id="selectedImage" fitHeight="82.19741048144259" fitWidth="76.18296813964844" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@Images/MULE_Mechtron.png" />
+          </image>
+        </ImageView>
+        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+          <children>
+            <Label alignment="TOP_LEFT" font="$x1" prefWidth="61.0" text="Score:" />
+            <Label fx:id="score" alignment="TOP_LEFT" contentDisplay="TOP" font="$x5" prefWidth="49.09149169921875" text="1000" textAlignment="RIGHT" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+    <VBox alignment="TOP_CENTER" layoutX="455.0" layoutY="511.0" prefHeight="171.0" prefWidth="262.185791015625" spacing="15.0">
+      <children>
+        <Label fx:id="tileType" alignment="TOP_LEFT" contentDisplay="CENTER" font="$x3" prefHeight="34.0" prefWidth="240.0" text="TOWN IS OPEN" textAlignment="LEFT" />
+        <HBox alignment="CENTER" prefHeight="101.0" prefWidth="248.185791015625" spacing="0.0">
+          <children>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="133.0" prefWidth="100.0" spacing="10.0">
               <children>
-                <Label alignment="CENTER_RIGHT" prefWidth="65.00009999999747" text="Money" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                  <font>
-                    <Font name="System Bold" size="15.0" fx:id="x4" />
-                  </font>
-                </Label>
-                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="65.0" text="Food" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="65.0" text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="64.00009999999747" text="Ore" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="65.0" text="Score" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <Label fx:id="money" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="113.5" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label fx:id="food" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label fx:id="energy" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label fx:id="ore" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label fx:id="score" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="114.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <ImageView fx:id="selectedImage" fitHeight="91.92854323422972" fitWidth="65.99998474121094" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@Images/townClosed.png" />
+                  </image>
+                </ImageView>
+                <HBox alignment="TOP_CENTER" prefHeight="24.0" prefWidth="80.0">
+                  <children>
+                    <Label alignment="TOP_LEFT" font="$x4" prefWidth="39.0" text="Cost:" />
+                    <Label id="money" fx:id="selectedCost" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" />
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
+            <GridPane prefHeight="101.0" prefWidth="166.675048828125">
+              <children>
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="76.1829833984375" text="Happiness" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="77.0" text="Ore" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="77.0" text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="77.0" text="Food" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label id="food" fx:id="selectedFood" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="31.0" text="--" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label id="food" fx:id="selectedEnergy" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="31.0" text="--" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label id="food" fx:id="selectedOre" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="31.0" text="--" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label id="food" fx:id="selectedHappiness" alignment="TOP_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="31.0" text="--" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
-              <padding>
-                <Insets bottom="-20.0" />
-              </padding>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -133,59 +261,8 @@
               </rowConstraints>
             </GridPane>
           </children>
-        </VBox>
-        <VBox alignment="TOP_CENTER" layoutX="314.0" layoutY="7.0" prefHeight="148.0" prefWidth="219.0">
-          <children>
-            <Label fx:id="tileType" alignment="CENTER" contentDisplay="CENTER" font="$x2" prefHeight="32.431640625" prefWidth="190.0" text="TOWN IS OPEN" textAlignment="LEFT" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-              <children>
-                <GridPane prefHeight="100.0" prefWidth="122.0">
-                  <children>
-                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Food" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Ore" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <Label alignment="CENTER_RIGHT" font="$x4" prefWidth="80.0" text="Cost" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <Label id="money" fx:id="selectedFood" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <Label id="money" fx:id="selectedEnergy" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label id="money" fx:id="selectedOre" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Label id="money" fx:id="selectedCost" alignment="CENTER_RIGHT" contentDisplay="RIGHT" font="$x4" prefWidth="39.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  </children>
-                  <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                </GridPane>
-                <ImageView fx:id="selectedImage" fitHeight="91.92854323422972" fitWidth="65.99998474121094" pickOnBounds="true" preserveRatio="true" />
-              </children>
-            </HBox>
-          </children>
-        </VBox>
+        </HBox>
       </children>
-    </Pane>
-    <Label alignment="CENTER" font="$x2" layoutX="73.0" layoutY="51.0" prefHeight="28.0" prefWidth="154.0" text="Current Player:" textOverrun="CLIP" />
-    <Label fx:id="currPlayer" alignment="TOP_LEFT" layoutX="227.0" layoutY="52.0" prefHeight="33.0" prefWidth="162.0" text="Label" textAlignment="CENTER">
-      <font>
-        <Font size="20.0" fx:id="x3" />
-      </font>
-    </Label>
-    <Label fx:id="roundLabel" font="$x2" layoutX="540.0" layoutY="52.0" prefWidth="89.9998779296875" text="" />
-    <Button fx:id="skipButt" layoutX="379.0" layoutY="636.0" mnemonicParsing="false" prefWidth="129.0" text="Skip Turn">
-      <font>
-        <Font name="Microsoft Uighur" size="25.0" fx:id="x1" />
-      </font>
-    </Button>
-    <Button fx:id="claimLand" font="$x1" layoutX="520.0" layoutY="636.0" mnemonicParsing="false" text="Claim Land!" />
-    <Label fx:id="round" font="$x3" layoutX="614.0" layoutY="50.0" minHeight="28.0" prefHeight="33.0" prefWidth="33.0" text="" />
-    <Text fx:id="countDownText" fill="BLACK" layoutX="118.0" layoutY="662.0" scaleX="1.3942043706830838" scaleY="1.4590874948428194" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left&quot;" wrappingWidth="136.27844831347466">
-      <font>
-        <Font name="System Bold" size="18.0" />
-      </font>
-    </Text>
+    </VBox>
   </children>
 </AnchorPane>
