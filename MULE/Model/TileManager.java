@@ -6,6 +6,8 @@ package MULE.Model;
 public final class TileManager {
     private TileManager() {}
     private static boolean[][] tiles = new boolean[5][9];
+
+    private static TileType[][] tileTypes = new TileType[5][9];
     private static int currRow;
     private static int currCol;
 
@@ -41,34 +43,21 @@ public final class TileManager {
         return tiles;
     }
 
+    public static void setTileTypes(int i, int j, TileType t) {
+        tileTypes[i][j] = t;
+    }
+
     public static void setTiles(boolean[][] updatedTiles) {
         tiles = updatedTiles;
     }
 
     public static TileType getTileType (int i, int j) {
-        TileType tile;
-        if ((i == 0 && j == 4)
-                || (i == 1 && j == 4)
-                || (i == 3 && j == 4)
-                || (i == 4 && j == 4)) {
-            tile = TileType.RIVER;
-        } else if ((i == 0 && j == 2)
-                || (i == 1 && j == 1)
-                || (i == 2 && j == 8)) {
-            tile = TileType.MOUNTAIN1;
-        } else if ((i == 3 && j == 1)
-                || (i == 3 && j == 6)
-                || (i == 4 && j == 2)
-                || (i == 4 && j == 8)) {
-            tile = TileType.MOUNTAIN2;
-        } else if ((i == 0 && j == 6)
-                || (i == 1 && j == 8)
-                || (i == 2 && j == 0)) {
-            tile = TileType.MOUNTAIN3;
+        if (i == 2 && (j == 3 || j == 5)) {
+            return TileType.PLAIN;
+        } else if (i != 2 && j == 4) {
+            return TileType.RIVER;
         } else {
-            tile = TileType.PLAIN;
+            return tileTypes[i][j];
         }
-        return tile;
     }
-
 }

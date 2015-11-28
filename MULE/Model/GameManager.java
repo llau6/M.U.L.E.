@@ -33,17 +33,19 @@ public final class GameManager {
     private static int currentRoundNumber = 1;
     private static GridPane mapGrid;
     private static String difficulty;
+    private static String mapType;
     private static Player currentPlayer;
     public static  Queue<Player> players = new LinkedList<>();
     private static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
     private static List<Player> visitedPlayers = new LinkedList<>();
     private static Timer timer;
 
-    public static void initializeMap() {
-        StoreManager.initializeStore();
-    }
-
-    //initial land selection phase
+    /**
+     * Free land grant
+     * First 2 turns for every player
+     * @param currPlayer Current Player Label
+     * @param countDownText Count Down Label
+     */
     public static void initLandSelection(Label currPlayer, Text countDownText) {
         townOpen = false;
         totalTurnsInitial--;
@@ -181,6 +183,9 @@ public final class GameManager {
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
 
+    /**
+     * Chances of a player getting a random event
+     */
     public static void initiateRandom() {
         int chance = (int) (Math.random() * 100 + 1);
         //int chance = 27;
@@ -200,6 +205,9 @@ public final class GameManager {
         }
     }
 
+    /**
+     * Updates resources gained from mules for every player every round
+     */
     public static void updateProduction() {
         orderedPlayers = new PriorityQueue<>();
         for (Player player : visitedPlayers) {
@@ -232,13 +240,16 @@ public final class GameManager {
         visitedPlayers = new LinkedList<>();
     }
 
+    /**
+     * Closes all the windows that are not the map screen
+     * Used when time runs out
+     */
     private static void closeAll() {
         ArrayList<Button> staticButts = new ArrayList<>();
         staticButts.add(Store.sCompleteButton);
         staticButts.add(Pub.getsGambleButton());
         staticButts.add(ControllerWampusGrounds.getsClaimButton());
         staticButts.add(Town.getsPubButton());
-
         for (Button b: staticButts) {
             try {
                 if (b != null) {
@@ -251,7 +262,6 @@ public final class GameManager {
         }
     }
 
-    // Getters/Setters
     public static boolean isFree() {
         return isFree;
     }
@@ -292,6 +302,8 @@ public final class GameManager {
         return difficulty;
     }
 
+    public static String getMapType() { return mapType; }
+
     public static Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -299,6 +311,7 @@ public final class GameManager {
     public static PriorityQueue<Player> getOrderedPlayers() {
         return orderedPlayers;
     }
+
     public static Queue<Player> getPlayersQueue() {
         return players;
     }
@@ -310,6 +323,11 @@ public final class GameManager {
     public static void setDifficulty(String difficulty) {
         GameManager.difficulty = difficulty;
     }
+
+    public static void setMapType(String mapType) {
+        GameManager.mapType = mapType;
+    }
+
     public static void setTotalTurnsInitial(int totalTurnsInitial) {
         GameManager.totalTurnsInitial = totalTurnsInitial;
     }
@@ -333,5 +351,4 @@ public final class GameManager {
     public static void setTownOpen(boolean townOpen) {
         GameManager.townOpen = townOpen;
     }
-
 }

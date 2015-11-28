@@ -13,6 +13,7 @@ public class Player implements Comparable<Player> {
     private int foodCount;
     private int energyCount;
     private int oreCount;
+    private int happinessCount;
     private int landCount;
     private int score;
     private String curMule;
@@ -26,6 +27,7 @@ public class Player implements Comparable<Player> {
         this.score = 0;
         this.landCount = 0;
         this.oreCount = 0;
+        this.happinessCount = 0;
         if (GameManager.getDifficulty().equals("Beginner")) {
             foodCount = 8;
             energyCount = 4;
@@ -45,6 +47,8 @@ public class Player implements Comparable<Player> {
     public final int getEnergyCount() { return energyCount; }
 
     public final int getOreCount() { return oreCount; }
+
+    public final int getHappinessCount() { return happinessCount; }
 
     public final int getLandCount() { return landCount; }
 
@@ -78,6 +82,10 @@ public class Player implements Comparable<Player> {
 
     public final void setOreCount(int oreCount) {
         this.oreCount = oreCount;
+    }
+
+    public final void setHappinessCount(int shroomCount) {
+        this.happinessCount = shroomCount;
     }
 
     public final void setLandCount() {
