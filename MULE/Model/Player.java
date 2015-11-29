@@ -9,10 +9,11 @@ public class Player implements Comparable<Player> {
     private String name;
     private Color color;
     private Race race;
-    private int money = 1000;
+    private int money;
     private int foodCount;
     private int energyCount;
     private int oreCount;
+    private int happinessCount;
     private int landCount;
     private int score;
     private String curMule;
@@ -26,12 +27,26 @@ public class Player implements Comparable<Player> {
         this.score = 0;
         this.landCount = 0;
         this.oreCount = 0;
+        this.happinessCount = 0;
         if (GameManager.getDifficulty().equals("Beginner")) {
             foodCount = 8;
             energyCount = 4;
         } else {
             foodCount = 4;
             energyCount = 2;
+        }
+        if (race.toString().equals("Human")) {
+            this.money = 600;
+        } else if (race.toString().equals("Flapper")) {
+            this.money = 1600;
+        } else if (race.toString().equals("Leggite")) {
+            this.money = 1700;
+        } else if (race.toString().equals("Packer")) {
+            this.money = 900;
+        } else if (race.toString().equals("Spheroid")) {
+            this.money = 300;
+        } else {
+            this.money = 1000;
         }
     }
     public final String getName() { return name; }
@@ -45,6 +60,8 @@ public class Player implements Comparable<Player> {
     public final int getEnergyCount() { return energyCount; }
 
     public final int getOreCount() { return oreCount; }
+
+    public final int getHappinessCount() { return happinessCount; }
 
     public final int getLandCount() { return landCount; }
 
@@ -78,6 +95,10 @@ public class Player implements Comparable<Player> {
 
     public final void setOreCount(int oreCount) {
         this.oreCount = oreCount;
+    }
+
+    public final void setHappinessCount(int shroomCount) {
+        this.happinessCount = shroomCount;
     }
 
     public final void setLandCount() {

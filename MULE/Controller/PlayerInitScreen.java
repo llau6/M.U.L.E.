@@ -94,7 +94,7 @@ public class PlayerInitScreen implements Initializable {
         comboData.add(new Race("Humanoid", "MULE/View/Images/MULE_Humanoid.png"));
         comboData.add(new Race("Leggite", "MULE/View/Images/MULE_Leggite.png"));
         comboData.add(new Race("Flapper", "MULE/View/Images/MULE_Flapper.png"));
-        comboData.add(new Race("Bonzoid", "MULE/View/Images/MULE_Bonzoid.png"));
+        comboData.add(new Race("Bonzoid", "MULE/View/Images/MULE_bonzoidRed1.png"));
         comboData.add(new Race("Mechtron", "MULE/View/Images/MULE_Mechtron.png"));
         comboData.add(new Race("Gollumer", "MULE/View/Images/MULE_Gollumer.png"));
         raceBox.setItems(comboData);

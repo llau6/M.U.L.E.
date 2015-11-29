@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -33,18 +34,20 @@ public final class GameManager {
     private static int currentRoundNumber = 1;
     private static GridPane mapGrid;
     private static String difficulty;
+    private static String mapType;
+    private static String colorName;
     private static Player currentPlayer;
     public static  Queue<Player> players = new LinkedList<>();
     private static PriorityQueue<Player> orderedPlayers = new PriorityQueue<>();
     private static List<Player> visitedPlayers = new LinkedList<>();
     private static Timer timer;
 
-    public static void initializeMap() {
-        StoreManager.initializeStore();
-    }
-
-    //initial land selection phase
-    public static void initLandSelection(Label currPlayer, Text countDownText) {
+    /**
+     * Free land grant
+     * First 2 turns for every player
+     * @param countDownText Count Down Label
+     */
+    public static void initLandSelection(Text countDownText) {
         townOpen = false;
         totalTurnsInitial--;
         final int[] countDown = {50};
@@ -68,14 +71,12 @@ public final class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = players.remove();
-        MapScreen.sMapColor.setFill(currentPlayer.getColor());
-        currPlayer.setText(currentPlayer.getName());
-        MapScreen.updateResources();
+        updateGUI();
         players.add(currentPlayer);
     }
 
     //initial land selection phase after first two turn
-    public static void buyLandSelection(Label currPlayer, Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton) {
+    public static void buyLandSelection(Text countDownText, Label round, Label roundLabel, Label turnType, Button claimLand, Button skipButton) {
         isFree = false;
         turnType.setText("INITIAL LAND SELECTION");
         claimLand.setDisable(false);
@@ -107,9 +108,7 @@ public final class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = orderedPlayers.remove();
-        MapScreen.sMapColor.setFill(currentPlayer.getColor());
-        currPlayer.setText(currentPlayer.getName());
-        MapScreen.updateResources();
+        updateGUI();
         visitedPlayers.add(currentPlayer);
         if (currentTurnNumber == players.size()) {
             currentRoundNumber++;
@@ -124,7 +123,8 @@ public final class GameManager {
         }
     }
 
-    public static void gamePlay(Label currPlayer, Text countDownText, Label turnType, Label round, Button skipButton) {
+    public static void gamePlay(Text countDownText, Label turnType, Label round, Button skipButton) {
+        initiateRandom();
         townOpen = true;
         MapScreen.updateTown();
         newRound = false;
@@ -157,9 +157,7 @@ public final class GameManager {
             }
         }, 1000, 1000); //Every 1 second
         currentPlayer = orderedPlayers.remove();
-        MapScreen.sMapColor.setFill(currentPlayer.getColor());
-        currPlayer.setText(currentPlayer.getName());
-        MapScreen.updateResources();
+        updateGUI();
         visitedPlayers.add(currentPlayer);
         if (currentTurnNumber == players.size()) {
             currentRoundNumber++;
@@ -168,6 +166,22 @@ public final class GameManager {
         } else {
             currentTurnNumber++;
         }
+    }
+
+    private static void updateGUI() {
+        MapScreen.sMapColor.setFill(currentPlayer.getColor());
+        if (("" +  currentPlayer.getColor()).equals("0xffa500ff")) {
+            colorName = "Orange";
+        } else if (("" +  currentPlayer.getColor()).equals("0xff0000ff")) {
+            colorName = "Red";
+        } else if (("" +  currentPlayer.getColor()).equals("0x008000ff")) {
+            colorName = "Green";
+        } else if (("" +  currentPlayer.getColor()).equals("0x0000ffff")) {
+            colorName = "Blue";
+        }
+        MapScreen.sPlayerImg.setImage(new Image("MULE/View/Images/" + currentPlayer.getRace() + colorName + ".png"));
+        MapScreen.sCurrPlayer.setText(currentPlayer.getName());
+        MapScreen.updateResources();
     }
 
     public static void updateCurrentScore() {
@@ -181,25 +195,30 @@ public final class GameManager {
                 + currentPlayer.getEnergyCount() + currentPlayer.getOreCount() + currentPlayer.getFoodCount());
     }
 
+    /**
+     * Chances of a player getting a random event
+     */
     public static void initiateRandom() {
         int chance = (int) (Math.random() * 100 + 1);
         //int chance = 27;
         if (chance <= 27) {
-            RandomEvent randomEvent = new RandomEvent();
-            randomEvent.initialize();
+            //RandomEvent.initialize();
             try {
                 Stage stage = new Stage();
-                Parent root = FXMLLoader.load(GameManager.class.getResource("../View/randomEvent.fxml"));
+                Parent root = FXMLLoader.load(GameManager.class.getResource("../View/EventScreen.fxml"));
                 stage.setScene(new Scene(root));
                 stage.setTitle("Random Event!!");
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.show();
             } catch(IOException e) {
-                System.out.println("hi!!!!");
+                System.out.println("Could not open Random Events Screen.");
             }
         }
     }
 
+    /**
+     * Updates resources gained from mules for every player every round
+     */
     public static void updateProduction() {
         orderedPlayers = new PriorityQueue<>();
         for (Player player : visitedPlayers) {
@@ -232,13 +251,16 @@ public final class GameManager {
         visitedPlayers = new LinkedList<>();
     }
 
+    /**
+     * Closes all the windows that are not the map screen
+     * Used when time runs out
+     */
     private static void closeAll() {
         ArrayList<Button> staticButts = new ArrayList<>();
         staticButts.add(Store.sCompleteButton);
         staticButts.add(Pub.getsGambleButton());
         staticButts.add(ControllerWampusGrounds.getsClaimButton());
         staticButts.add(Town.getsPubButton());
-
         for (Button b: staticButts) {
             try {
                 if (b != null) {
@@ -251,7 +273,6 @@ public final class GameManager {
         }
     }
 
-    // Getters/Setters
     public static boolean isFree() {
         return isFree;
     }
@@ -292,6 +313,8 @@ public final class GameManager {
         return difficulty;
     }
 
+    public static String getMapType() { return mapType; }
+
     public static Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -299,6 +322,7 @@ public final class GameManager {
     public static PriorityQueue<Player> getOrderedPlayers() {
         return orderedPlayers;
     }
+
     public static Queue<Player> getPlayersQueue() {
         return players;
     }
@@ -310,6 +334,11 @@ public final class GameManager {
     public static void setDifficulty(String difficulty) {
         GameManager.difficulty = difficulty;
     }
+
+    public static void setMapType(String mapType) {
+        GameManager.mapType = mapType;
+    }
+
     public static void setTotalTurnsInitial(int totalTurnsInitial) {
         GameManager.totalTurnsInitial = totalTurnsInitial;
     }
@@ -333,5 +362,4 @@ public final class GameManager {
     public static void setTownOpen(boolean townOpen) {
         GameManager.townOpen = townOpen;
     }
-
 }

@@ -13,7 +13,7 @@
   <children>
     <ImageView fitHeight="449.2500915527344" fitWidth="599.0001220703125" layoutX="1.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULE/View/Images/grassBG.png" />
+        <Image url="@Images/grassBG.png" />
       </image>
     </ImageView>
     <Label layoutX="59.0" layoutY="108.0" minHeight="20.0" prefHeight="41.0" text="Name:">
@@ -65,13 +65,13 @@
         <Font name="System Bold" size="15.0" fx:id="x3" />
       </font>
     </Label>
-    <Label id="sameName" font="$x3" layoutX="155.0" layoutY="88.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Name required">
+    <Label id="sameName" fx:id="requireName" font="$x3" layoutX="155.0" layoutY="88.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Name required">
       <textFill>
         <Color blue="0.000" green="0.239" red="1.000" fx:id="x4" />
       </textFill>
     </Label>
-    <Label id="sameName" font="$x3" layoutX="157.0" layoutY="160.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Race required" textFill="$x4" />
-    <Label id="sameName" font="$x3" layoutX="154.0" layoutY="235.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Color required" textFill="$x4" />
+    <Label id="sameName" fx:id="requireRace" font="$x3" layoutX="157.0" layoutY="160.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Race required" textFill="$x4" />
+    <Label id="sameName" fx:id="requireColor" font="$x3" layoutX="154.0" layoutY="235.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Color required" textFill="$x4" />
     <Label id="sameName" fx:id="sameColor" font="$x3" layoutX="155.0" layoutY="235.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="*Color is taken" textFill="$x4" />
   </children>
 </AnchorPane>

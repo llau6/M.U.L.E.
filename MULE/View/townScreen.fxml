@@ -16,20 +16,20 @@
         <Image url="@Images/town.png" />
       </image>
     </ImageView>
-    <ImageView fitHeight="176.5512237548828" fitWidth="515.0927721515068" layoutX="30.0" layoutY="478.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fitHeight="174.38986380893687" fitWidth="518.8953247070312" layoutX="26.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="@Images/box.png" />
+        <Image url="@Images/townBox.png" />
       </image>
     </ImageView>
-    <Label alignment="TOP_LEFT" layoutX="72.0" layoutY="514.0" prefHeight="85.0" prefWidth="287.0" text="Welcome to my town.">
+    <Label alignment="TOP_LEFT" layoutX="72.0" layoutY="514.0" prefHeight="85.0" prefWidth="390.0" text="Welcome to my town.">
       <font>
-        <Font name="Microsoft Uighur" size="45.0" fx:id="x1" />
+        <Font name="System Bold" size="25.0" fx:id="x1" />
       </font>
     </Label>
     <Label alignment="TOP_LEFT" font="$x1" layoutX="72.0" layoutY="569.0" prefHeight="59.0" prefWidth="439.0" text="Please choose your destination." />
     <Button fx:id="pub_button" layoutX="483.0" layoutY="64.0" mnemonicParsing="false" text="Pub">
       <font>
-        <Font name="Berlin Sans FB" size="15.0" fx:id="x2" />
+        <Font name="System Bold" size="15.0" fx:id="x2" />
       </font>
     </Button>
     <Button fx:id="store_button" font="$x2" layoutX="474.0" layoutY="267.0" mnemonicParsing="false" text="Store" />
