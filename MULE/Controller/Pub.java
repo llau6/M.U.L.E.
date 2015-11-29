@@ -2,6 +2,7 @@ package MULE.Controller;
 
 import MULE.Model.GameManager;
 import MULE.Model.PubManager;
+import MULE.Model.SoundManager;
 import MULE.Model.StoreManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,6 +34,7 @@ public class Pub implements Initializable {
     private Rectangle gambleRect;
     @FXML
     private ImageView pubImg;
+    private SoundManager soundManager;
 
     private boolean hasGambled;
     private static Button sGambleButton;
@@ -41,6 +44,13 @@ public class Pub implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            soundManager = new SoundManager(5, 4);
+            soundManager.playMusic();
+        } catch (MalformedURLException ex) {
+            System.out.println("music error");
+        }
+
         sGambleButton = back_button;
         gambleRect.setOnMouseEntered(event -> {
             if (!hasGambled) {
@@ -67,11 +77,16 @@ public class Pub implements Initializable {
                 MapScreen.updateResources();
                 GameManager.setTownOpen(false);
                 MapScreen.updateTown();
+
+                soundManager.shutdown();
+                MapScreen.soundManager.playMusic();
+
                 //GameManager.getTimer().cancel();
                 Stage stage = (Stage) back_button.getScene().getWindow();
                 stage.close();
             } else {
                 try {
+                    soundManager.shutdown();
                     Stage stage = (Stage) back_button.getScene().getWindow();
                     if (hasGambled) {
                         stage.close();

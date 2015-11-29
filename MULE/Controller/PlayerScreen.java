@@ -121,6 +121,7 @@ public class PlayerScreen implements Initializable {
                     stage.setScene(scene);
                     stage.show();
                 } else {
+                    SplashScreen.soundManager.shutdown();
                     FXMLLoader loader = new FXMLLoader();
                     stage = (Stage) submitButton.getScene().getWindow();
                     root = loader.load(getClass().getResource("../View/MapScreen.fxml"));

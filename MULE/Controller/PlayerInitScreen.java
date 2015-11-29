@@ -3,6 +3,7 @@ package MULE.Controller;
 import MULE.Model.GameManager;
 import MULE.Model.Player;
 import MULE.Model.Race;
+import MULE.Model.SoundManager;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,8 +77,6 @@ public class PlayerInitScreen implements Initializable {
     GridPane test;
 
     /**
-     *
-     *
      * @param url
      * @param rb
      */
@@ -125,10 +124,11 @@ public class PlayerInitScreen implements Initializable {
                     return object.getName();
                 }
             }
+
             @Override
             public Race fromString(String string) {
-                    return null;
-                }
+                return null;
+            }
         });
 
         raceBox.setOnAction((event) -> {
@@ -178,6 +178,7 @@ public class PlayerInitScreen implements Initializable {
                     stage.setScene(scene);
                     stage.show();
                 } else {
+                    SplashScreen.soundManager.shutdown();
                     FXMLLoader loader = new FXMLLoader();
                     //get reference to the button's stage
                     stage = (Stage) myButton.getScene().getWindow();

@@ -1,11 +1,13 @@
 package MULE.Controller;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 import MULE.Model.GameManager;
+import MULE.Model.SoundManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,8 +46,16 @@ public class ControllerWampusGrounds implements Initializable {
     private int numTurns;
 
     private static Button sClaimButton;
+    private SoundManager soundManager;
 
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            soundManager = new SoundManager(3, 6);
+            //soundManager.playSound("hunting");
+            soundManager.playMusic();
+        } catch (MalformedURLException ex) {
+            System.out.println("sound error");
+        }
         sClaimButton = claimButton;
         claimButton.setDisable(true);
 
@@ -113,6 +123,7 @@ public class ControllerWampusGrounds implements Initializable {
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
         MapScreen.updateResources();
+        soundManager.shutdown();
         Stage stage = (Stage) claimButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
         Scene scene = new Scene(root);
@@ -125,6 +136,7 @@ public class ControllerWampusGrounds implements Initializable {
         //add code here to give currentPlayer some amount of money    --James
         GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() + 50);
         MapScreen.updateResources();
+        soundManager.shutdown();
         Stage stage = (Stage) claimButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
         Scene scene = new Scene(root);
