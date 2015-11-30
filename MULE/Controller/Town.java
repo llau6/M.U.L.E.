@@ -1,5 +1,6 @@
 package MULE.Controller;
 
+import MULE.Model.SoundManager;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,6 +45,9 @@ public class Town implements Initializable {
     private static Button sPubButton;
     private boolean invoked = false;
 
+    private SoundManager soundManager;
+
+
     @FXML
     private ImageView character;
     private int up = 0;
@@ -52,9 +57,61 @@ public class Town implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        sPubButton = pub_button;
-        pub_button.setOnAction((event) -> {
-        });
+        try {
+            soundManager = new SoundManager(10, 3);
+            //soundManager.playSound("town");
+            soundManager.playMusic();
+
+            sPubButton = pub_button;
+            pub_button.setOnAction((event) -> {
+                soundManager.shutdown();
+
+            });
+
+            store_button.setOnAction((event) -> {
+                soundManager.shutdown();
+                //load up other FXML document
+                try {
+                    Stage stage = (Stage) store_button.getScene().getWindow();
+                    Parent root;
+                    //get reference to the button's stage
+                    root = FXMLLoader.load(getClass().getResource("../View/Store.fxml"));
+                    //create a new scene with root and set the stage
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    System.out.println("oops");
+                }
+            });
+
+            backButton.setOnAction((event) -> {
+                soundManager.shutdown();
+                MapScreen.soundManager.playMusic();
+                //load up other FXML document
+                Stage stage = (Stage) backButton.getScene().getWindow();
+                stage.close();
+            });
+
+        } catch (MalformedURLException ex) {
+            System.out.println("sound error");
+        }
+
+
+
+    }
+
+    @FXML
+    private void handleWampusAction(ActionEvent event) throws IOException {
+        soundManager.shutdown();
+        Stage stage = (Stage) wampusButton.getScene().getWindow();
+        Parent root;
+        //get reference to the button's stage
+        root = FXMLLoader.load(getClass().getResource("../View/WampusGrounds.fxml"));
+        //create a new scene with root and set the stage
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

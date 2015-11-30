@@ -2,6 +2,7 @@ package MULE.Controller;
 
 import MULE.Model.Database;
 import MULE.Model.GameManager;
+import MULE.Model.SoundManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -81,5 +82,6 @@ public class LoadScreen implements Initializable {
                 e.printStackTrace();
             }
         });
+
     }
 }
