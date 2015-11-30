@@ -59,38 +59,10 @@ public class Town implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             soundManager = new SoundManager(10, 3);
-            //soundManager.playSound("town");
             soundManager.playMusic();
 
             sPubButton = pub_button;
             pub_button.setOnAction((event) -> {
-                soundManager.shutdown();
-
-            });
-
-            store_button.setOnAction((event) -> {
-                soundManager.shutdown();
-                //load up other FXML document
-                try {
-                    Stage stage = (Stage) store_button.getScene().getWindow();
-                    Parent root;
-                    //get reference to the button's stage
-                    root = FXMLLoader.load(getClass().getResource("../View/Store.fxml"));
-                    //create a new scene with root and set the stage
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    System.out.println("oops");
-                }
-            });
-
-            backButton.setOnAction((event) -> {
-                soundManager.shutdown();
-                MapScreen.soundManager.playMusic();
-                //load up other FXML document
-                Stage stage = (Stage) backButton.getScene().getWindow();
-                stage.close();
             });
 
         } catch (MalformedURLException ex) {
@@ -99,19 +71,6 @@ public class Town implements Initializable {
 
 
 
-    }
-
-    @FXML
-    private void handleWampusAction(ActionEvent event) throws IOException {
-        soundManager.shutdown();
-        Stage stage = (Stage) wampusButton.getScene().getWindow();
-        Parent root;
-        //get reference to the button's stage
-        root = FXMLLoader.load(getClass().getResource("../View/WampusGrounds.fxml"));
-        //create a new scene with root and set the stage
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     @FXML
@@ -245,6 +204,8 @@ public class Town implements Initializable {
     }
 
     private void closeTown() {
+        soundManager.shutdown();
+        MapScreen.soundManager.playMusic();
         Stage stage = (Stage) character.getScene().getWindow();
         stage.close();
     }
@@ -252,6 +213,7 @@ public class Town implements Initializable {
     private void goToPlaces(String toWhere) {
         //load up other FXML document
         try {
+            soundManager.shutdown();
             Stage stage = (Stage) character.getScene().getWindow();
             Parent root;
             //get reference to the button's stage
