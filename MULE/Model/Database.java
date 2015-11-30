@@ -18,7 +18,7 @@ public class Database {
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://localhost:8889/WildCats";
             String username = "root";
-            String password = "wildcats123";
+            String password = "root";
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, username, password);
             return conn;
@@ -101,6 +101,7 @@ public class Database {
             GameManager.setCurrentRoundNumber(queryGame.getInt("round"));
             deserializeBool(queryGame.getString("boolArr"));
         }
+        GameManager.setMapType("Standard");
 
         //loads store info
         PreparedStatement storeStatement = con.prepareStatement("SELECT * FROM storeData");
@@ -118,7 +119,18 @@ public class Database {
         while (query.next()) {
             //creates each player
             String raceName = query.getString("race");
-            Player p = new Player(query.getString("name"), new Race(raceName, "MULE/View/images/MULE_" + raceName + ".png"), Color.web(query.getString("color")));
+            String colorName = "";
+            Color color = Color.web(query.getString("color"));
+            if (("" +  color).equals("0xffa500ff")) {
+                colorName = "Orange";
+            } else if (("" +  color).equals("0xff0000ff")) {
+                colorName = "Red";
+            } else if (("" +  color).equals("0x008000ff")) {
+                colorName = "Green";
+            } else if (("" +  color).equals("0x0000ffff")) {
+                colorName = "Blue";
+            }
+            Player p = new Player(query.getString("name"), new Race(raceName, "MULE/View/Images/" + raceName + colorName + ".png"), color);
             p.setFoodCount(query.getInt("foodCount"));
             p.setEnergyCount(query.getInt("energyCount"));
             p.setOreCount(query.getInt("oreCount"));

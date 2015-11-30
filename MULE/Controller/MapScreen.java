@@ -84,6 +84,7 @@ public class MapScreen implements Initializable {
     @FXML
     public Text countDownText;
 
+    public static GridPane sMap;
     public static Label sCurrPlayer;
     private static Label sEnergy;
     private static Label sMoney;
@@ -120,6 +121,7 @@ public class MapScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        sMap = map;
         sCurrPlayer = currPlayer;
         sEnergy = energy;
         sMoney = money;
@@ -188,7 +190,7 @@ public class MapScreen implements Initializable {
                         TileManager.setTileTypes(i, j, TileType.PLAIN);
                         src = TileType.PLAIN.getSrc();
                     }
-                // Random game map
+                    // Random game map
                 } else {
                     int x = ran.nextInt(10);
                     if (x == 0) {
@@ -271,9 +273,10 @@ public class MapScreen implements Initializable {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+                } else {
+                    GameManager.gamePlay(countDownText, turnType, round, skipButt);
+                    map.setCursor(Cursor.DEFAULT);
                 }
-                GameManager.gamePlay(countDownText, turnType, round, skipButt);
-                map.setCursor(Cursor.DEFAULT);
             } else {
                 if (playerCount + skipCount == GameManager.getPlayersQueue().size()) {
                     playerCount = 0;
