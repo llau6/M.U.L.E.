@@ -46,6 +46,8 @@ public class MapScreen implements Initializable {
     @FXML
     private ImageView mapImg;
     @FXML
+    private ImageView playerImg;
+    @FXML
     public Label turnType;
     @FXML
     public Label currPlayer;
@@ -96,6 +98,7 @@ public class MapScreen implements Initializable {
     public static Button sSkipButton;
     public static Label sSelectedText;
     public static ImageView sMapImg;
+    public static ImageView sPlayerImg;
     public static Rectangle sMapColor;
     private static int clickCount = 0;
     private int playerCount = 0;
@@ -132,16 +135,17 @@ public class MapScreen implements Initializable {
         sSelectedImage = selectedImage;
         sSelectedText = tileType;
         sMapColor = mapColor;
+        sPlayerImg = playerImg;
 
         if (isLoadingFromDB) {
             MapScreen.updateResources();
             loadMap(GameManager.getPlayersQueue());
             claimLand.setDisable(true);
-            GameManager.gamePlay(currPlayer, countDownText, turnType, round, skipButt);
+            GameManager.gamePlay(countDownText, turnType, round, skipButt);
         } else {
             skipButt.setDisable(true);
             GameManager.setTotalTurnsInitial(GameManager.getPlayersQueue().size() * 2);
-            GameManager.initLandSelection(currPlayer, countDownText);
+            GameManager.initLandSelection(countDownText);
             StoreManager.initializeStore();
             //soundManager.playMusic();
         }
@@ -233,10 +237,10 @@ public class MapScreen implements Initializable {
                     GameManager.getCurrentPlayer().setClicked(false);
                 }
                 if (GameManager.getTotalTurnsInitial() != 0) {
-                    GameManager.initLandSelection(currPlayer, countDownText);
+                    GameManager.initLandSelection(countDownText);
                 } else {
                     skipButt.setDisable(false);
-                    GameManager.buyLandSelection(currPlayer, countDownText, round, roundLabel, turnType, claimLand, skipButt);
+                    GameManager.buyLandSelection(countDownText, round, roundLabel, turnType, claimLand, skipButt);
                 }
             } else {
                 claimLand.setDisable(true);
@@ -268,14 +272,14 @@ public class MapScreen implements Initializable {
                         System.out.println(e);
                     }
                 }
-                GameManager.gamePlay(currPlayer, countDownText, turnType, round, skipButt);
+                GameManager.gamePlay(countDownText, turnType, round, skipButt);
                 map.setCursor(Cursor.DEFAULT);
             } else {
                 if (playerCount + skipCount == GameManager.getPlayersQueue().size()) {
                     playerCount = 0;
                     skipCount = 0;
                 }
-                GameManager.buyLandSelection(currPlayer, countDownText, round, roundLabel, turnType, claimLand, skipButt);
+                GameManager.buyLandSelection(countDownText, round, roundLabel, turnType, claimLand, skipButt);
             }
             // So next player can purchase mule
             StoreManager.setBoughtMule(false);
@@ -357,7 +361,6 @@ public class MapScreen implements Initializable {
             int j = GridPane.getColumnIndex(node);
             if (node instanceof Rectangle) {
                 Rectangle currNode = (Rectangle) node;
-
                 // If statement to get rid of stupid yellow squiggly lines.
                 if (currNode != null) {
                     // When the mouse hovers over a tile

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.2379540039037" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.RandomEvent">
+  <children>
+    <ImageView fx:id="eventImg" fitHeight="449.25" fitWidth="599.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/diamondBG.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="treasureImage" fitHeight="252.0" fitWidth="252.0" layoutX="166.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/staticTreasure.gif" />
+      </image>
+    </ImageView>
+    <Rectangle fx:id="chestRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" layoutX="218.0" layoutY="209.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="157.0" />
+  </children>
+</AnchorPane>

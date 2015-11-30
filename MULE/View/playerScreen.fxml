@@ -65,13 +65,13 @@
         <Font name="System Bold" size="15.0" fx:id="x3" />
       </font>
     </Label>
-    <Label id="sameName" font="$x3" layoutX="155.0" layoutY="88.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Name required">
+    <Label id="sameName" fx:id="requireName" font="$x3" layoutX="155.0" layoutY="88.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Name required">
       <textFill>
         <Color blue="0.000" green="0.239" red="1.000" fx:id="x4" />
       </textFill>
     </Label>
-    <Label id="sameName" font="$x3" layoutX="157.0" layoutY="160.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Race required" textFill="$x4" />
-    <Label id="sameName" font="$x3" layoutX="154.0" layoutY="235.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Color required" textFill="$x4" />
+    <Label id="sameName" fx:id="requireRace" font="$x3" layoutX="157.0" layoutY="160.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Race required" textFill="$x4" />
+    <Label id="sameName" fx:id="requireColor" font="$x3" layoutX="154.0" layoutY="235.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="* Color required" textFill="$x4" />
     <Label id="sameName" fx:id="sameColor" font="$x3" layoutX="155.0" layoutY="235.0" minHeight="20.0" opacity="0.0" prefHeight="32.0" text="*Color is taken" textFill="$x4" />
   </children>
 </AnchorPane>
