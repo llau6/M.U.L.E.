@@ -34,7 +34,9 @@ public class Pub implements Initializable {
     private Rectangle gambleRect;
     @FXML
     private ImageView pubImg;
-    private SoundManager soundManager;
+
+    public static SoundManager soundManager;
+
 
     private boolean hasGambled;
     private static Button sGambleButton;
@@ -46,11 +48,11 @@ public class Pub implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             soundManager = new SoundManager(5, 4);
+            //soundManager.playSound("hunting");
             soundManager.playMusic();
         } catch (MalformedURLException ex) {
-            System.out.println("music error");
+            System.out.println("sound error");
         }
-
         sGambleButton = back_button;
         gambleRect.setOnMouseEntered(event -> {
             if (!hasGambled) {
@@ -74,19 +76,18 @@ public class Pub implements Initializable {
         });
         back_button.setOnAction((event) -> {
             if (hasGambled) {
+                soundManager.shutdown();
+                MapScreen.soundManager.playMusic();
                 MapScreen.updateResources();
                 GameManager.setTownOpen(false);
                 MapScreen.updateTown();
-
-                soundManager.shutdown();
-                MapScreen.soundManager.playMusic();
-
                 //GameManager.getTimer().cancel();
                 Stage stage = (Stage) back_button.getScene().getWindow();
                 stage.close();
             } else {
+                soundManager.shutdown();
+                Town.soundManager.playMusic();
                 try {
-                    soundManager.shutdown();
                     Stage stage = (Stage) back_button.getScene().getWindow();
                     if (hasGambled) {
                         stage.close();

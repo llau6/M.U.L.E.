@@ -45,9 +45,6 @@ public class Town implements Initializable {
     private static Button sPubButton;
     private boolean invoked = false;
 
-    private SoundManager soundManager;
-
-
     @FXML
     private ImageView character;
     private int up = 0;
@@ -55,63 +52,20 @@ public class Town implements Initializable {
     private int down = 0;
     private int right = 0;
 
+    public static SoundManager soundManager;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             soundManager = new SoundManager(10, 3);
             //soundManager.playSound("town");
             soundManager.playMusic();
-
-            sPubButton = pub_button;
-            pub_button.setOnAction((event) -> {
-                soundManager.shutdown();
-
-            });
-
-            store_button.setOnAction((event) -> {
-                soundManager.shutdown();
-                //load up other FXML document
-                try {
-                    Stage stage = (Stage) store_button.getScene().getWindow();
-                    Parent root;
-                    //get reference to the button's stage
-                    root = FXMLLoader.load(getClass().getResource("../View/Store.fxml"));
-                    //create a new scene with root and set the stage
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    System.out.println("oops");
-                }
-            });
-
-            backButton.setOnAction((event) -> {
-                soundManager.shutdown();
-                MapScreen.soundManager.playMusic();
-                //load up other FXML document
-                Stage stage = (Stage) backButton.getScene().getWindow();
-                stage.close();
-            });
-
-        } catch (MalformedURLException ex) {
-            System.out.println("sound error");
+        } catch (MalformedURLException e) {
+            System.out.println("Music fail");
         }
-
-
-
-    }
-
-    @FXML
-    private void handleWampusAction(ActionEvent event) throws IOException {
-        soundManager.shutdown();
-        Stage stage = (Stage) wampusButton.getScene().getWindow();
-        Parent root;
-        //get reference to the button's stage
-        root = FXMLLoader.load(getClass().getResource("../View/WampusGrounds.fxml"));
-        //create a new scene with root and set the stage
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        sPubButton = pub_button;
+        pub_button.setOnAction((event) -> {
+        });
     }
 
     @FXML
@@ -153,6 +107,7 @@ public class Town implements Initializable {
     }
 
     private void transitionToOtherPlaces(String toWhere) {
+        soundManager.shutdown();
         if (!invoked) {
             invoked = true;
             character.setImage(new Image("MULE/View/Images/lightExplode.gif"));
@@ -245,6 +200,17 @@ public class Town implements Initializable {
     }
 
     private void closeTown() {
+        if (Store.soundManager != null) {
+            Store.soundManager.shutdown();
+        }
+        if (Pub.soundManager != null) {
+            Pub.soundManager.shutdown();
+        }
+        if (ControllerWampusGrounds.soundManager != null) {
+            ControllerWampusGrounds.soundManager.shutdown();
+        }
+        Town.soundManager.shutdown();
+        MapScreen.soundManager.playMusic();
         Stage stage = (Stage) character.getScene().getWindow();
         stage.close();
     }

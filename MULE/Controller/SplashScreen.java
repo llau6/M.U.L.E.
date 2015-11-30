@@ -49,8 +49,6 @@ public class SplashScreen implements Initializable {
             });
             startRect.setOnMouseClicked((event) -> {
                 try {
-                    //soundManager.shutdown();
-
                     Stage stage = (Stage) startRect.getScene().getWindow();
                     Parent root = FXMLLoader.load(getClass().getResource("../View/LoadScreen.fxml"));
                     Scene scene = new Scene(root);

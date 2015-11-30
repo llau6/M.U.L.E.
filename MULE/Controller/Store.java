@@ -121,7 +121,7 @@ public class Store implements Initializable {
     private Label muleRestriction;
 
     public static Button sCompleteButton;
-    private SoundManager soundManager;
+    public static SoundManager soundManager;
 
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -348,12 +348,13 @@ public class Store implements Initializable {
             });
 
             backButton.setOnAction((event) -> {
+                soundManager.shutdown();
+                Town.soundManager.playMusic();
                 StoreManager.setBuy(false);
                 StoreManager.setSell(false);
                 StoreManager.setFirstMule(true);
                 StoreManager.setPrevMule(0);
                 try {
-                    soundManager.shutdown();
                     Stage stage = (Stage) backButton.getScene().getWindow();
                     Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
                     Scene scene = new Scene(root);

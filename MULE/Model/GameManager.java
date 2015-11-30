@@ -257,6 +257,11 @@ public final class GameManager {
      */
     private static void closeAll() {
         ArrayList<Button> staticButts = new ArrayList<>();
+        Store.soundManager.shutdown();
+        Pub.soundManager.shutdown();
+        ControllerWampusGrounds.soundManager.shutdown();
+        Town.soundManager.shutdown();
+        MapScreen.soundManager.playMusic();
         staticButts.add(Store.sCompleteButton);
         staticButts.add(Pub.getsGambleButton());
         staticButts.add(ControllerWampusGrounds.getsClaimButton());
