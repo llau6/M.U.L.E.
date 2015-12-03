@@ -205,7 +205,7 @@
             </Label>
           </children>
         </HBox>
-        <ImageView id="selectedImage" fitHeight="82.19741048144259" fitWidth="76.18296813964844" pickOnBounds="true" preserveRatio="true">
+        <ImageView id="selectedImage" fx:id="playerImg" fitHeight="82.19741048144259" fitWidth="76.18296813964844" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@Images/MULE_Mechtron.png" />
           </image>

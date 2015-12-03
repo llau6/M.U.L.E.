@@ -9,7 +9,7 @@ public class Player implements Comparable<Player> {
     private String name;
     private Color color;
     private Race race;
-    private int money = 1000;
+    private int money;
     private int foodCount;
     private int energyCount;
     private int oreCount;
@@ -34,6 +34,19 @@ public class Player implements Comparable<Player> {
         } else {
             foodCount = 4;
             energyCount = 2;
+        }
+        if (race.toString().equals("Human")) {
+            this.money = 600;
+        } else if (race.toString().equals("Flapper")) {
+            this.money = 1600;
+        } else if (race.toString().equals("Leggite")) {
+            this.money = 1700;
+        } else if (race.toString().equals("Packer")) {
+            this.money = 900;
+        } else if (race.toString().equals("Spheroid")) {
+            this.money = 300;
+        } else {
+            this.money = 1000;
         }
     }
     public final String getName() { return name; }

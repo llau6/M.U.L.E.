@@ -2,6 +2,7 @@ package MULE.Controller;
 
 import MULE.Model.GameManager;
 import MULE.Model.PubManager;
+import MULE.Model.SoundManager;
 import MULE.Model.StoreManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +35,9 @@ public class Pub implements Initializable {
     @FXML
     private ImageView pubImg;
 
+    public static SoundManager soundManager;
+
+
     private boolean hasGambled;
     private static Button sGambleButton;
     public static Button getsGambleButton() {
@@ -41,6 +46,13 @@ public class Pub implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            soundManager = new SoundManager(5, 4);
+            //soundManager.playSound("hunting");
+            soundManager.playMusic();
+        } catch (MalformedURLException ex) {
+            System.out.println("sound error");
+        }
         sGambleButton = back_button;
         gambleRect.setOnMouseEntered(event -> {
             if (!hasGambled) {
@@ -64,6 +76,8 @@ public class Pub implements Initializable {
         });
         back_button.setOnAction((event) -> {
             if (hasGambled) {
+                soundManager.shutdown();
+                MapScreen.soundManager.playMusic();
                 MapScreen.updateResources();
                 GameManager.setTownOpen(false);
                 MapScreen.updateTown();
@@ -71,6 +85,8 @@ public class Pub implements Initializable {
                 Stage stage = (Stage) back_button.getScene().getWindow();
                 stage.close();
             } else {
+                soundManager.shutdown();
+                Town.soundManager.playMusic();
                 try {
                     Stage stage = (Stage) back_button.getScene().getWindow();
                     if (hasGambled) {

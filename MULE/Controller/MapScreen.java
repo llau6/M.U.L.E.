@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Queue;
 import java.util.Random;
@@ -45,6 +46,8 @@ public class MapScreen implements Initializable {
     private ImageView selectedImage;
     @FXML
     private ImageView mapImg;
+    @FXML
+    private ImageView playerImg;
     @FXML
     public Label turnType;
     @FXML
@@ -82,6 +85,7 @@ public class MapScreen implements Initializable {
     @FXML
     public Text countDownText;
 
+    public static GridPane sMap;
     public static Label sCurrPlayer;
     private static Label sEnergy;
     private static Label sMoney;
@@ -96,6 +100,7 @@ public class MapScreen implements Initializable {
     public static Button sSkipButton;
     public static Label sSelectedText;
     public static ImageView sMapImg;
+    public static ImageView sPlayerImg;
     public static Rectangle sMapColor;
     private static int clickCount = 0;
     private int playerCount = 0;
@@ -113,10 +118,17 @@ public class MapScreen implements Initializable {
     public static boolean isLoadingFromDB() {
         return isLoadingFromDB;
     }
-    private final SoundManager soundManager = new SoundManager(3);
+    public static SoundManager soundManager;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            soundManager = new SoundManager(20, 5);
+            soundManager.playMusic();
+        } catch (MalformedURLException e) {
+            System.out.println("sound error");
+        }
+        sMap = map;
         sCurrPlayer = currPlayer;
         sEnergy = energy;
         sMoney = money;
@@ -132,16 +144,17 @@ public class MapScreen implements Initializable {
         sSelectedImage = selectedImage;
         sSelectedText = tileType;
         sMapColor = mapColor;
+        sPlayerImg = playerImg;
 
         if (isLoadingFromDB) {
             MapScreen.updateResources();
             loadMap(GameManager.getPlayersQueue());
             claimLand.setDisable(true);
-            GameManager.gamePlay(currPlayer, countDownText, turnType, round, skipButt);
+            GameManager.gamePlay(countDownText, turnType, round, skipButt);
         } else {
             skipButt.setDisable(true);
             GameManager.setTotalTurnsInitial(GameManager.getPlayersQueue().size() * 2);
-            GameManager.initLandSelection(currPlayer, countDownText);
+            GameManager.initLandSelection(countDownText);
             StoreManager.initializeStore();
             //soundManager.playMusic();
         }
@@ -184,7 +197,7 @@ public class MapScreen implements Initializable {
                         TileManager.setTileTypes(i, j, TileType.PLAIN);
                         src = TileType.PLAIN.getSrc();
                     }
-                // Random game map
+                    // Random game map
                 } else {
                     int x = ran.nextInt(10);
                     if (x == 0) {
@@ -233,10 +246,10 @@ public class MapScreen implements Initializable {
                     GameManager.getCurrentPlayer().setClicked(false);
                 }
                 if (GameManager.getTotalTurnsInitial() != 0) {
-                    GameManager.initLandSelection(currPlayer, countDownText);
+                    GameManager.initLandSelection(countDownText);
                 } else {
                     skipButt.setDisable(false);
-                    GameManager.buyLandSelection(currPlayer, countDownText, round, roundLabel, turnType, claimLand, skipButt);
+                    GameManager.buyLandSelection(countDownText, round, roundLabel, turnType, claimLand, skipButt);
                 }
             } else {
                 claimLand.setDisable(true);
@@ -267,15 +280,16 @@ public class MapScreen implements Initializable {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+                } else {
+                    GameManager.gamePlay(countDownText, turnType, round, skipButt);
+                    map.setCursor(Cursor.DEFAULT);
                 }
-                GameManager.gamePlay(currPlayer, countDownText, turnType, round, skipButt);
-                map.setCursor(Cursor.DEFAULT);
             } else {
                 if (playerCount + skipCount == GameManager.getPlayersQueue().size()) {
                     playerCount = 0;
                     skipCount = 0;
                 }
-                GameManager.buyLandSelection(currPlayer, countDownText, round, roundLabel, turnType, claimLand, skipButt);
+                GameManager.buyLandSelection(countDownText, round, roundLabel, turnType, claimLand, skipButt);
             }
             // So next player can purchase mule
             StoreManager.setBoughtMule(false);
@@ -357,7 +371,6 @@ public class MapScreen implements Initializable {
             int j = GridPane.getColumnIndex(node);
             if (node instanceof Rectangle) {
                 Rectangle currNode = (Rectangle) node;
-
                 // If statement to get rid of stupid yellow squiggly lines.
                 if (currNode != null) {
                     // When the mouse hovers over a tile
@@ -419,6 +432,7 @@ public class MapScreen implements Initializable {
                         }
                     });
                     currNode.setOnMouseClicked(event -> {
+                        soundManager.shutdown();
                         // If Town is clicked
                         if (i == 2 && j == 4) {
                             if (GameManager.isTownOpen()) {
@@ -430,7 +444,7 @@ public class MapScreen implements Initializable {
                                     stage.initModality(Modality.APPLICATION_MODAL);
                                     stage.show();
                                 } catch (IOException e) {
-                                    System.out.println("op");
+                                    e.printStackTrace();
                                 }
                             }
                         }

@@ -1,5 +1,6 @@
 package MULE.Controller;
 
+import MULE.Model.SoundManager;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,8 +52,17 @@ public class Town implements Initializable {
     private int down = 0;
     private int right = 0;
 
+    public static SoundManager soundManager;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            soundManager = new SoundManager(10, 3);
+            //soundManager.playSound("town");
+            soundManager.playMusic();
+        } catch (MalformedURLException e) {
+            System.out.println("Music fail");
+        }
         sPubButton = pub_button;
         pub_button.setOnAction((event) -> {
         });
@@ -96,6 +107,7 @@ public class Town implements Initializable {
     }
 
     private void transitionToOtherPlaces(String toWhere) {
+        soundManager.shutdown();
         if (!invoked) {
             invoked = true;
             character.setImage(new Image("MULE/View/Images/lightExplode.gif"));
@@ -188,6 +200,17 @@ public class Town implements Initializable {
     }
 
     private void closeTown() {
+        if (Store.soundManager != null) {
+            Store.soundManager.shutdown();
+        }
+        if (Pub.soundManager != null) {
+            Pub.soundManager.shutdown();
+        }
+        if (ControllerWampusGrounds.soundManager != null) {
+            ControllerWampusGrounds.soundManager.shutdown();
+        }
+        Town.soundManager.shutdown();
+        MapScreen.soundManager.playMusic();
         Stage stage = (Stage) character.getScene().getWindow();
         stage.close();
     }
