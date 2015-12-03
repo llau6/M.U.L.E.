@@ -5,6 +5,7 @@ import MULE.Model.GameManager;
 import MULE.Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -47,6 +48,7 @@ public class RoundScores implements Initializable {
     @FXML
     private Label fourthScore;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         roundLabel.setText("End of Round " + (GameManager.getCurrentRoundNumber() - 1));
@@ -78,9 +80,10 @@ public class RoundScores implements Initializable {
         }
         saveButton.setDisable(false);
         nextRoundButton.setOnAction((event) -> {
-            GameManager.initiateRandom();
             Stage stage = (Stage) nextRoundButton.getScene().getWindow();
             stage.close();
+            GameManager.gamePlay(MapScreen.sCountDownText, MapScreen.sTurnType, MapScreen.sRound, MapScreen.sSkipButton);
+            MapScreen.sMap.setCursor(Cursor.DEFAULT);
         });
 
         saveButton.setOnAction((event) -> {
@@ -89,9 +92,10 @@ public class RoundScores implements Initializable {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            GameManager.initiateRandom();
             Stage stage = (Stage) nextRoundButton.getScene().getWindow();
             stage.close();
+            GameManager.gamePlay(MapScreen.sCountDownText, MapScreen.sTurnType, MapScreen.sRound, MapScreen.sSkipButton);
+            MapScreen.sMap.setCursor(Cursor.DEFAULT);
         });
     }
 }

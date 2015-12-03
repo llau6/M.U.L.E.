@@ -3,6 +3,7 @@ package MULE.Controller;
 import MULE.Model.Database;
 import MULE.Model.GameManager;
 import MULE.Model.SoundManager;
+import com.sun.javafx.tools.ant.Info;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -68,6 +69,7 @@ public class LoadScreen implements Initializable {
             loadImg.setPreserveRatio(true);
         });
         loadRect.setOnMouseClicked((event) -> {
+            SplashScreen.soundManager.shutdown();
             try {
                 Database.loadGameFromDB();
                 System.out.println(GameManager.players);

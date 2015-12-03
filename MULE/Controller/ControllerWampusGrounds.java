@@ -46,9 +46,10 @@ public class ControllerWampusGrounds implements Initializable {
     private int numTurns;
 
     private static Button sClaimButton;
-    private SoundManager soundManager;
+    public static SoundManager soundManager;
 
     public void initialize(URL url, ResourceBundle rb) {
+        Town.soundManager.shutdown();
         try {
             soundManager = new SoundManager(3, 6);
             //soundManager.playSound("hunting");
@@ -122,6 +123,8 @@ public class ControllerWampusGrounds implements Initializable {
 
     @FXML
     private void handleTownAction(ActionEvent event) throws IOException {
+        soundManager.shutdown();
+        Town.soundManager.playMusic();
         MapScreen.updateResources();
         soundManager.shutdown();
         Stage stage = (Stage) claimButton.getScene().getWindow();
@@ -133,10 +136,10 @@ public class ControllerWampusGrounds implements Initializable {
 
     @FXML
     private void handleClaimAction(ActionEvent event) throws IOException {
-        //add code here to give currentPlayer some amount of money    --James
+        soundManager.shutdown();
+        Town.soundManager.playMusic();
         GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() + 50);
         MapScreen.updateResources();
-        soundManager.shutdown();
         Stage stage = (Stage) claimButton.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
         Scene scene = new Scene(root);

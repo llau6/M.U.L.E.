@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.23797607421875" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.EventPopUp">
+  <children>
+    <ImageView fitHeight="449.25" fitWidth="599.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/stoneBG.png" />
+      </image>
+    </ImageView>
+    <Label id="label" fx:id="eventMessage" alignment="TOP_LEFT" disable="false" focusTraversable="false" layoutX="65.0" layoutY="56.0" prefHeight="261.0" prefWidth="478.0" text="Messagedddddddddddddddddddddddddddddddddddddddd" textOverrun="ELLIPSIS" wrapText="true">
+      <font>
+        <Font name="System Bold" size="35.0" />
+      </font>
+    </Label>
+    <Button fx:id="okayButton" layoutX="269.0" layoutY="341.0" mnemonicParsing="false" text="OK">
+      <font>
+        <Font name="System Bold" size="20.0" />
+      </font>
+    </Button>
+  </children>
+</AnchorPane>

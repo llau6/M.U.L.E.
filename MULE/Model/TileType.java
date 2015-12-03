@@ -9,7 +9,7 @@ public enum TileType {
     MOUNTAIN1(1, 1, 2, 0, "Brown Mountains", "MULE/View/Images/BrownMtn.png"),
     MOUNTAIN2(1, 1, 3, 0, "Blue Mountains", "MULE/View/Images/BlueMtn.png"),
     MOUNTAIN3(1, 1, 4, 0, "Small Mountains", "MULE/View/Images/SmallMtn.png"),
-    SHROOMS(1, 0, 0, 10, "Shrooms", "MULE/View/Images/Shrooms.png");
+    SHROOMS(1, 0, 0, 10, "Mushrooms", "MULE/View/Images/Shrooms.png");
 
     private int foodCount;
     private int energyCount;
