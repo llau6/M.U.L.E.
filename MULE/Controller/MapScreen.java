@@ -432,11 +432,11 @@ public class MapScreen implements Initializable {
                         }
                     });
                     currNode.setOnMouseClicked(event -> {
-                        soundManager.shutdown();
                         // If Town is clicked
                         if (i == 2 && j == 4) {
                             if (GameManager.isTownOpen()) {
                                 try {
+                                    soundManager.shutdown();
                                     Stage stage = new Stage();
                                     Parent root = FXMLLoader.load(getClass().getResource("../View/townScreen.fxml"));
                                     stage.setScene(new Scene(root));
