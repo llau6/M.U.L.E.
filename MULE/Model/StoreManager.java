@@ -25,11 +25,21 @@ public final class StoreManager {
             energyQty = 16;
             oreQty = 0;
             muleQty = 25;
+        } else if (GameManager.getDifficulty().equals("Tournament")) {
+            foodQty = 6;
+            energyQty = 6;
+            oreQty = 6;
+            muleQty = 10;
         } else {
             foodQty = 8;
             energyQty = 8;
             oreQty = 8;
             muleQty = 14;
+        }
+        if (GameManager.getDifficulty().equals("Tournament")) {
+            foodPrice = 40;
+            energyPrice = 35;
+            orePrice = 55;
         }
     }
 

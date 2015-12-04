@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.2379540039037" prefWidth="600.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.RRandomEvent">
+  <children>
+    <ImageView fx:id="eventImg" fitHeight="449.25" fitWidth="599.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/diamondBG.png" />
+      </image>
+    </ImageView>
+    <ImageView id="treasureImage" fx:id="fancyTreasureImage" fitHeight="252.0" fitWidth="252.0" layoutX="166.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/staticFancyTreasure.gif" />
+      </image>
+    </ImageView>
+    <Rectangle fx:id="chestRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="132.0" layoutX="218.0" layoutY="209.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="157.0" />
+    <Label alignment="CENTER" layoutX="166.0" layoutY="350.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" prefHeight="41.0" prefWidth="262.0" text="*THIS WILL EFFECT ALL PLAYERS!" textAlignment="LEFT" textFill="#202020">
+      <font>
+        <Font size="17.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>
