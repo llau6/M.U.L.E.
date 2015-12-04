@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 
 /**
@@ -29,13 +30,18 @@ public class WinningScreen implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int i = GameManager.getPlayerNum();
-        for (Player p: GameManager.getOrderedPlayers()) {
-            if (i == 1) {
-                playerLabel.setText(p.getName());
-                scoreLabel.setText(String.valueOf(p.getScore()));
-            }
-            i--;
+        System.out.println(GameManager.getOrderedPlayers().size());
+        PriorityQueue<Player> sortedPlayers = new PriorityQueue<>();
+        for (Player p: GameManager.getPlayersQueue()) {
+            sortedPlayers.add(p);
         }
+        Player winner = null;
+        while (!sortedPlayers.isEmpty()) {
+            winner = sortedPlayers.remove();
+        }
+        playerLabel.setText(winner.getName());
+        scoreLabel.setText(String.valueOf(winner.getScore()));
+
         continueButton.setOnAction((event) -> {
             Stage stage = (Stage) continueButton.getScene().getWindow();
             stage.close();
