@@ -47,7 +47,12 @@ public class RoundScores implements Initializable {
     private Label thirdScore;
     @FXML
     private Label fourthScore;
-
+    @FXML
+    private Label p2;
+    @FXML
+    private Label p3;
+    @FXML
+    private Label p4;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -55,25 +60,28 @@ public class RoundScores implements Initializable {
         int i = GameManager.getPlayerNum();
         for (Player p: GameManager.getOrderedPlayers()) {
             if (i == 1) {
-                firstPlayer.setText("Player: " + p.getName());
+                firstPlayer.setText(p.getName());
                 firstScore.setText("Score: " + p.getScore());
             } else if (i == 2) {
+                p2.setOpacity(1.0);
                 secondLabel.setOpacity(1.0);
                 secondPlayer.setOpacity(1.0);
                 secondScore.setOpacity(1.0);
-                secondPlayer.setText("Player: " + p.getName());
+                secondPlayer.setText(p.getName());
                 secondScore.setText("Score: " + p.getScore());
             } else if (i == 3) {
+                p3.setOpacity(1.0);
                 thirdLabel.setOpacity(1.0);
                 thirdPlayer.setOpacity(1.0);
                 thirdScore.setOpacity(1.0);
-                thirdPlayer.setText("Player: " + p.getName());
+                thirdPlayer.setText(p.getName());
                 thirdScore.setText("Score: " + p.getScore());
             } else if (i == 4) {
+                p4.setOpacity(1.0);
                 fourthLabel.setOpacity(1.0);
                 fourthPlayer.setOpacity(1.0);
                 fourthScore.setOpacity(1.0);
-                fourthPlayer.setText("Player: " + p.getName());
+                fourthPlayer.setText(p.getName());
                 fourthScore.setText("Score: " + p.getScore());
             }
             i--;

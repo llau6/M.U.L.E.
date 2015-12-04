@@ -26,22 +26,46 @@
         <Font name="System Bold" size="30.0" fx:id="x3" />
       </font>
     </Label>
-    <Label fx:id="firstPlayer" layoutX="139.0" layoutY="108.0" prefWidth="223.0" text="Player:">
-      <font>
-        <Font name="System Bold" size="25.0" fx:id="x2" />
-      </font>
-    </Label>
-    <Label fx:id="firstScore" font="$x2" layoutX="397.0" layoutY="108.0" prefWidth="152.0" text="Score: " />
-    <Label fx:id="secondPlayer" font="$x2" layoutX="139.0" layoutY="152.0" opacity="0.0" prefWidth="223.0" text="Player:" />
-    <Label fx:id="secondScore" font="$x2" layoutX="397.0" layoutY="152.0" opacity="0.0" prefWidth="152.0" text="Score: " />
-    <Label fx:id="thirdPlayer" font="$x2" layoutX="139.0" layoutY="195.0" opacity="0.0" prefWidth="223.0" text="Player:" />
-    <Label fx:id="thirdScore" font="$x2" layoutX="397.0" layoutY="195.0" opacity="0.0" prefWidth="152.0" text="Score: " />
-    <Label fx:id="fourthPlayer" font="$x2" layoutX="139.0" layoutY="240.0" opacity="0.0" prefWidth="223.0" text="Player:" />
-    <Label fx:id="fourthScore" font="$x2" layoutX="397.0" layoutY="240.0" opacity="0.0" prefWidth="152.0" text="Score: " />
-    <Label fx:id="firstLabel" font="$x2" layoutX="67.0" layoutY="108.0" prefWidth="52.0" text="1st" />
-    <Label fx:id="secondLabel" font="$x2" layoutX="67.0" layoutY="152.0" opacity="0.0" prefWidth="52.0" text="2nd" />
-    <Label fx:id="thirdLabel" font="$x2" layoutX="67.0" layoutY="195.0" opacity="0.0" prefWidth="66.0" text="3rd" />
-    <Label fx:id="fourthLabel" font="$x2" layoutX="67.0" layoutY="240.0" opacity="0.0" prefWidth="52.0" text="4th" />
     <Label font="$x3" layoutX="139.0" layoutY="295.0" prefWidth="323.0" text="Do you want to save?" />
+    <HBox layoutX="67.0" layoutY="97.0" prefHeight="40.0" prefWidth="482.0">
+      <children>
+        <Label fx:id="firstLabel" prefWidth="80.0" text="1st">
+          <font>
+            <Font name="System Bold" size="25.0" fx:id="x2" />
+          </font>
+        </Label>
+        <Label id="firstPlayer" font="$x2" prefWidth="97.0" text="Player:" />
+        <Label fx:id="firstPlayer" prefWidth="169.0" text="Player">
+          <font>
+            <Font name="System Italic" size="25.0" fx:id="x4" />
+          </font>
+        </Label>
+        <Label fx:id="firstScore" font="$x2" prefWidth="152.0" text="Score: " />
+      </children>
+    </HBox>
+    <HBox layoutX="67.0" layoutY="149.0" prefHeight="40.0" prefWidth="483.0">
+      <children>
+        <Label fx:id="secondLabel" font="$x2" opacity="0.0" prefWidth="75.9998779296875" text="2nd" />
+        <Label id="firstPlayer" fx:id="p2" font="$x2" opacity="0.0" prefWidth="92.9998779296875" text="Player:" />
+        <Label fx:id="secondPlayer" font="$x4" opacity="0.0" prefWidth="164.99990000000253" text="Player" />
+        <Label fx:id="secondScore" font="$x2" opacity="0.0" prefWidth="148.0" text="Score: " />
+      </children>
+    </HBox>
+    <HBox layoutX="65.0" layoutY="199.0" prefHeight="40.0" prefWidth="481.9999000000025">
+      <children>
+        <Label fx:id="thirdLabel" font="$x2" opacity="0.0" prefWidth="76.0" text="3rd" />
+        <Label id="firstPlayer" fx:id="p3" font="$x2" opacity="0.0" prefWidth="91.0" text="Player:" />
+        <Label fx:id="thirdPlayer" font="$x4" opacity="0.0" prefWidth="165.0" text="Player" />
+        <Label fx:id="thirdScore" font="$x2" opacity="0.0" prefWidth="152.0" text="Score: " />
+      </children>
+    </HBox>
+    <HBox layoutX="67.0" layoutY="248.0" prefHeight="40.0" prefWidth="482.0">
+      <children>
+        <Label fx:id="fourthLabel" font="$x2" opacity="0.0" prefWidth="76.0" text="4th" />
+        <Label id="firstPlayer" fx:id="p4" font="$x2" opacity="0.0" prefWidth="92.0" text="Player:" />
+        <Label fx:id="fourthPlayer" font="$x4" opacity="0.0" prefWidth="165.0" text="Player" />
+        <Label fx:id="fourthScore" font="$x2" opacity="0.0" prefWidth="152.0" text="Score: " />
+      </children>
+    </HBox>
   </children>
 </AnchorPane>
