@@ -61,7 +61,7 @@ public class Town implements Initializable {
             //soundManager.playSound("town");
             soundManager.playMusic();
         } catch (MalformedURLException e) {
-            System.out.println("Music fail");
+            System.out.println("Music failed in Town.");
         }
         sPubButton = pub_button;
         pub_button.setOnAction((event) -> {
@@ -71,8 +71,6 @@ public class Town implements Initializable {
     @FXML
     private void onKeyPressedTown (KeyEvent k) {
         int offset = 5;
-        System.out.println("x: " + character.getX());
-        System.out.println("y: " + character.getY());
         if(k.getCode()== KeyCode.DOWN && isOnRoad()[0]) {
             character.setImage(new Image("MULE/View/Images/walking/frontWalking/frontWalking_" + (down%4+1) + ".png"));
             character.setY(character.getY() + offset);
@@ -173,14 +171,14 @@ public class Town implements Initializable {
                     }
                     if (character.getY() <= -345 || (character.getY() <= -145 && character.getY() > -320)) {
                         onRoad[1] = false;
-                        System.out.println(onRoad[0]);
                     }
                 }
                 if (character.getX() < 200) {
                     onRoad[3] = true;
                 } else {
                     if (character.getY() < -120 && character.getY() > -150) {
-                        transitionToOtherPlaces("Store");
+                        ///////////////////////HEREEEEEEEEEEEE
+                        transitionToOtherPlaces("StoreScreen");
                     } else {
                         transitionToOtherPlaces("Pub");
                     }
@@ -219,7 +217,7 @@ public class Town implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println("oops");
+            System.out.println("Could not load a new screen while in the Town.");
         }
     }
 }

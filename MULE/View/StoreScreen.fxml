@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.4168480468725" prefWidth="873.2860107421875" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.StoreScreen">
+  <children>
+    <ImageView fitHeight="509.4168701171875" fitWidth="873.2860212663383" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/storeOpaque.png" />
+      </image>
+    </ImageView>
+    <Rectangle arcHeight="0.0" arcWidth="0.0" disable="false" fill="WHITE" focusTraversable="false" height="413.8000183105469" layoutX="615.0" layoutY="48.0" opacity="0.83" smooth="true" strokeLineCap="SQUARE" strokeLineJoin="MITER" strokeType="CENTERED" strokeWidth="10.0" width="218.00003051757812">
+      <stroke>
+        <Color blue="0.624" green="0.624" red="0.624" fx:id="x3" />
+      </stroke>
+    </Rectangle>
+    <VBox alignment="BOTTOM_CENTER" layoutX="621.0" layoutY="84.0" minHeight="139.0" prefHeight="176.0" prefWidth="209.0" spacing="20.0">
+      <children>
+        <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="200.0">
+          <children>
+            <Label alignment="TOP_LEFT" prefHeight="34.0" prefWidth="91.0" text="Player:" textOverrun="CLIP">
+              <font>
+                <Font name="System Bold" size="25.0" fx:id="x2" />
+              </font>
+            </Label>
+            <Label id="currPlayer" fx:id="playerLabel" alignment="CENTER_LEFT" prefHeight="33.999900000002526" prefWidth="73.9998779296875" text="Label" textAlignment="CENTER">
+              <font>
+                <Font name="System Italic" size="25.0" />
+              </font>
+            </Label>
+          </children>
+        </HBox>
+        <ImageView id="selectedImage" fx:id="playerImg" fitHeight="136.81419237664988" fitWidth="126.80340576171875" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@Images/MULE_Mechtron.png" />
+          </image>
+        </ImageView>
+      </children>
+    </VBox>
+    <GridPane alignment="CENTER_RIGHT" layoutX="642.0" layoutY="262.0" prefHeight="120.0" prefWidth="187.0">
+      <children>
+        <Label alignment="CENTER_RIGHT" prefWidth="77.0" text="Food" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <font>
+            <Font name="System Bold" size="15.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label alignment="CENTER_RIGHT" font="$x1" prefWidth="77.0" text="Energy" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label alignment="CENTER_RIGHT" font="$x1" prefWidth="77.0" text="Ore" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label alignment="CENTER_RIGHT" font="$x1" prefWidth="76.1829833984375" text="Happiness" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label id="food" fx:id="foodLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x1" prefWidth="60.9998779296875" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label id="energy" fx:id="energyLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x1" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label id="ore" fx:id="oreLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x1" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label id="score" fx:id="happinessLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x1" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label alignment="CENTER_RIGHT" font="$x1" prefWidth="77.0" text="Money" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label id="score" fx:id="moneyLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" font="$x1" prefWidth="61.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <padding>
+        <Insets bottom="-20.0" />
+      </padding>
+      <rowConstraints>
+        <RowConstraints maxHeight="22.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Rectangle arcHeight="0.0" arcWidth="0.0" disable="false" fill="WHITE" focusTraversable="false" height="412.8000183105469" layoutX="339.0" layoutY="49.0" opacity="0.83" smooth="true" stroke="#9f9f9f" strokeLineCap="SQUARE" strokeLineJoin="MITER" strokeType="CENTERED" strokeWidth="10.0" width="253.43484497070312" />
+    <Label alignment="CENTER" font="$x2" layoutX="370.0" layoutY="68.0" prefWidth="195.00009999999747" text="Purchase Mule" />
+    <Rectangle arcHeight="0.0" arcWidth="0.0" disable="false" fill="WHITE" focusTraversable="false" height="412.8000183105469" layoutX="41.0" layoutY="49.0" opacity="0.83" smooth="true" stroke="$x3" strokeLineCap="SQUARE" strokeLineJoin="MITER" strokeType="CENTERED" strokeWidth="10.0" width="277.0000305175781" />
+    <ImageView fitHeight="76.0" fitWidth="80.07142673068576" layoutX="55.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/Food.png" />
+      </image>
+    </ImageView>
+    <ImageView fitHeight="80.00009237060294" fitWidth="84.2858109235456" layoutX="54.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/Energy.png" />
+      </image>
+    </ImageView>
+    <ImageView fitHeight="77.0" fitWidth="81.12499319540487" layoutX="53.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/ore.png" />
+      </image>
+    </ImageView>
+    <Label alignment="CENTER" font="$x2" layoutX="83.0" layoutY="69.0" prefWidth="195.00009999999747" text="Resources" />
+    <VBox layoutX="143.0" layoutY="134.0" prefHeight="66.99990000000253" prefWidth="74.0001220703125">
+      <children>
+        <Label font="$x1" prefWidth="91.0" text="Food" />
+        <HBox prefHeight="20.0" prefWidth="74.0">
+          <children>
+            <Label font="$x1" prefWidth="38.0" text="Qty:" />
+            <Label fx:id="foodQty" font="$x1" prefWidth="36.9998779296875" text="18" />
+          </children>
+        </HBox>
+        <Label alignment="TOP_LEFT" font="$x1" prefWidth="91.00009999999747" text="Price: 30" />
+      </children>
+    </VBox>
+    <Label layoutX="359.0" layoutY="414.0" prefWidth="91.0" text="Quantity:">
+      <font>
+        <Font name="System Bold" size="18.0" fx:id="x7" />
+      </font>
+    </Label>
+    <Button fx:id="mulePurchase" font="$x1" layoutX="485.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" text="Purchase" />
+    <Button fx:id="resourcePurchase" font="$x1" layoutX="83.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" text="Purchase" />
+    <Button id="sellPurchase" fx:id="resourceSell" font="$x1" layoutX="189.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="90.0" text="Sell" />
+    <Button fx:id="backButton" font="$x1" layoutX="682.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" text="Go Back" />
+    <Button fx:id="foodUp" layoutX="263.0" layoutY="141.0" mnemonicParsing="false" prefWidth="38.0" text="+" />
+    <Button fx:id="foodDown" layoutX="263.0" layoutY="168.0" minWidth="24.0" mnemonicParsing="false" prefWidth="37.0" text="-" />
+    <Button fx:id="energyUp" layoutX="264.0" layoutY="231.0" mnemonicParsing="false" prefWidth="38.0" text="+" />
+    <Button fx:id="energyDown" layoutX="264.0" layoutY="258.0" mnemonicParsing="false" prefWidth="37.000099999997474" text="-" />
+    <Button fx:id="oreUp" layoutX="263.0" layoutY="321.0" mnemonicParsing="false" prefWidth="38.0" text="+" />
+    <Button fx:id="oreDown" layoutX="263.0" layoutY="348.0" mnemonicParsing="false" prefWidth="37.000099999997474" text="-" />
+    <Rectangle fx:id="foodMule" arcHeight="5.0" arcWidth="5.0" fill="BLACK" height="136.814208984375" layoutX="360.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="347.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/muleFood.gif" />
+      </image>
+    </ImageView>
+    <Label font="$x1" layoutX="367.0" layoutY="215.0" prefWidth="91.0" text="Price: 130" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="367.0" layoutY="234.0" prefWidth="91.9998779296875" text="Food" />
+    <Rectangle fx:id="energyMule" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="136.814208984375" layoutX="476.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="99.0" />
+    <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="465.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/muleEnergy.gif" />
+      </image>
+    </ImageView>
+    <Label font="$x1" layoutX="486.0" layoutY="210.0" prefWidth="91.0" text="Price: 125" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="486.0" layoutY="229.0" prefWidth="91.00009999999747" text="Energy" />
+    <Rectangle fx:id="oreMule" arcHeight="5.0" arcWidth="5.0" height="136.814208984375" layoutX="360.0" layoutY="262.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0">
+      <fill>
+        <Color blue="0.200" green="0.129" red="0.000" fx:id="x4" />
+      </fill>
+    </Rectangle>
+    <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="346.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/muleOre.gif" />
+      </image>
+    </ImageView>
+    <Label font="$x1" layoutX="367.0" layoutY="352.0" prefWidth="91.0" text="Price: 150" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="367.0" layoutY="371.0" prefWidth="91.00009999999747" text="Smithore" />
+    <Rectangle fx:id="happinessMule" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="476.0" layoutY="263.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="465.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/muleHappiness.gif" />
+      </image>
+    </ImageView>
+    <Label font="$x1" layoutX="486.0" layoutY="352.0" prefWidth="91.0" text="Price: 170" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="486.0" layoutY="371.0" prefWidth="91.00009999999747" text="Happiness" />
+    <Label fx:id="muleQty" font="$x7" layoutX="441.0" layoutY="414.0" prefWidth="37.0" text="20" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="34.0" layoutX="217.0" layoutY="156.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.9" width="38.0" />
+    <Label fx:id="enterFood" layoutX="224.0" layoutY="158.0" prefWidth="24.0" text="0">
+      <font>
+        <Font name="System Bold" size="20.0" fx:id="x5" />
+      </font>
+    </Label>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="34.0" layoutX="217.0" layoutY="249.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.9" width="38.0" />
+    <Label fx:id="enterEnergy" font="$x5" layoutX="224.0" layoutY="251.0" prefWidth="24.0" text="0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="34.0" layoutX="217.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.9" width="38.0" />
+    <Label fx:id="enterOre" font="$x5" layoutX="224.0" layoutY="341.0" prefWidth="24.0" text="0" />
+    <VBox layoutX="143.0" layoutY="229.0" prefHeight="66.99990000000253" prefWidth="74.0001220703125">
+      <children>
+        <Label font="$x1" prefWidth="91.0" text="Energy" />
+        <HBox prefHeight="20.0" prefWidth="74.0">
+          <children>
+            <Label font="$x1" prefWidth="38.0" text="Qty:" />
+            <Label fx:id="energyQty" font="$x1" prefWidth="36.9998779296875" text="18" />
+          </children>
+        </HBox>
+        <Label alignment="TOP_LEFT" font="$x1" prefWidth="91.00009999999747" text="Price: 25" />
+      </children>
+    </VBox>
+    <VBox layoutX="143.0" layoutY="315.0" prefHeight="66.99990000000253" prefWidth="74.0001220703125">
+      <children>
+        <Label font="$x1" prefWidth="91.0" text="Ore" />
+        <HBox prefHeight="20.0" prefWidth="74.0">
+          <children>
+            <Label font="$x1" prefWidth="38.0" text="Qty:" />
+            <Label fx:id="oreQty" font="$x1" prefWidth="36.9998779296875" text="18" />
+          </children>
+        </HBox>
+        <Label alignment="TOP_LEFT" font="$x1" prefWidth="91.00009999999747" text="Price: 50" />
+      </children>
+    </VBox>
+    <Label id="cannotBuy" fx:id="lowStoreResources" font="$x1" layoutX="61.0" layoutY="106.0" opacity="0.0" prefWidth="254.0" text="*Insufficient store resources" textFill="RED" />
+    <Label id="cannotBuy" fx:id="lowPlayerResources" font="$x1" layoutX="61.0" layoutY="106.0" opacity="0.0" prefWidth="254.0" text="*Insufficient player resources" textFill="RED" />
+    <Label id="cannotBuy" fx:id="lowResourcesFunds" font="$x1" layoutX="61.0" layoutY="106.0" opacity="0.0" prefWidth="254.0" text="*Insufficient funds" textFill="RED" />
+    <Label id="cannotBuy" fx:id="lowMuleFunds" font="$x1" layoutX="359.0" layoutY="98.0" opacity="0.0" prefWidth="254.0" text="*Insufficient funds" textFill="RED" />
+    <Rectangle id="oreMule" fx:id="oreMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="360.0" layoutY="266.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <Rectangle id="oreMule" fx:id="foodMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="359.0" layoutY="123.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <Rectangle id="oreMule" fx:id="energyMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="476.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <Rectangle id="oreMule" fx:id="happinessMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="476.0" layoutY="262.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+  </children>
+</AnchorPane>
