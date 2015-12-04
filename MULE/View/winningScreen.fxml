@@ -36,5 +36,10 @@
       </font>
     </Label>
     <Label fx:id="scoreLabel" alignment="CENTER" font="$x2" layoutX="240.0" layoutY="258.0" minHeight="35.0" prefHeight="47.0001220703125" prefWidth="120.0" text="1000" wrapText="true" />
+    <ImageView fitHeight="94.06999987855744" fitWidth="136.33333587646484" layoutX="378.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/walkingCatMule.gif" />
+      </image>
+    </ImageView>
   </children>
 </AnchorPane>
