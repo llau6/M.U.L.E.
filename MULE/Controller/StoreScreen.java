@@ -439,8 +439,6 @@ public class StoreScreen implements Initializable {
 
             backButton.setOnAction((event) -> {
                 soundManager.shutdown();
-                Town.soundManager.playMusic();
-                soundManager.shutdown();
                 MapScreen.soundManager.playMusic();
                 Stage stage = (Stage) mulePurchase.getScene().getWindow();
                 MapScreen.updateResources();

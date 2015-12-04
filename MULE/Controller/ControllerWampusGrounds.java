@@ -49,7 +49,7 @@ public class ControllerWampusGrounds implements Initializable {
     public static SoundManager soundManager;
 
     public void initialize(URL url, ResourceBundle rb) {
-        Town.soundManager.shutdown();
+        //Town.soundManager.shutdown();
         try {
             soundManager = new SoundManager(3, 6);
             //soundManager.playSound("hunting");
