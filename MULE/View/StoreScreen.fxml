@@ -114,9 +114,9 @@
       </font>
     </Label>
     <Button fx:id="mulePurchase" font="$x1" layoutX="485.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" text="Purchase" />
-    <Button fx:id="resourcePurchase" font="$x1" layoutX="82.0" layoutY="404.0" mnemonicParsing="false" prefHeight="34.0" text="Purchase" />
-    <Button id="sellPurchase" fx:id="resourceSell" font="$x1" layoutX="188.0" layoutY="404.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="90.0" text="Sell" />
-    <Button fx:id="backButton" font="$x1" layoutX="682.0" layoutY="404.0" mnemonicParsing="false" prefHeight="34.0" text="Go Back" />
+    <Button fx:id="resourcePurchase" font="$x1" layoutX="83.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" text="Purchase" />
+    <Button id="sellPurchase" fx:id="resourceSell" font="$x1" layoutX="189.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="90.0" text="Sell" />
+    <Button fx:id="backButton" font="$x1" layoutX="682.0" layoutY="409.0" mnemonicParsing="false" prefHeight="34.0" text="Go Back" />
     <Button fx:id="foodUp" layoutX="263.0" layoutY="141.0" mnemonicParsing="false" prefWidth="38.0" text="+" />
     <Button fx:id="foodDown" layoutX="263.0" layoutY="168.0" minWidth="24.0" mnemonicParsing="false" prefWidth="37.0" text="-" />
     <Button fx:id="energyUp" layoutX="264.0" layoutY="231.0" mnemonicParsing="false" prefWidth="38.0" text="+" />
@@ -132,13 +132,13 @@
     <Label font="$x1" layoutX="367.0" layoutY="215.0" prefWidth="91.0" text="Price: 130" />
     <Label alignment="TOP_LEFT" font="$x1" layoutX="367.0" layoutY="234.0" prefWidth="91.9998779296875" text="Food" />
     <Rectangle fx:id="energyMule" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="136.814208984375" layoutX="476.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="99.0" />
-    <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="465.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="465.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/muleEnergy.gif" />
       </image>
     </ImageView>
-    <Label font="$x1" layoutX="486.0" layoutY="215.0" prefWidth="91.0" text="Price: 125" />
-    <Label alignment="TOP_LEFT" font="$x1" layoutX="486.0" layoutY="234.0" prefWidth="91.00009999999747" text="Energy" />
+    <Label font="$x1" layoutX="486.0" layoutY="210.0" prefWidth="91.0" text="Price: 125" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="486.0" layoutY="229.0" prefWidth="91.00009999999747" text="Energy" />
     <Rectangle fx:id="oreMule" arcHeight="5.0" arcWidth="5.0" height="136.814208984375" layoutX="360.0" layoutY="262.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0">
       <fill>
         <Color blue="0.200" green="0.129" red="0.000" fx:id="x4" />

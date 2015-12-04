@@ -408,17 +408,33 @@ public class StoreScreen implements Initializable {
             });
 
             mulePurchase.setOnAction((event) -> {
-                mulePurchase.setDisable(true);
-                StoreManager.setAlmostBought(true);
+                int price = 0;
                 GameManager.getCurrentPlayer().setCurMule(chosenMule);
-                MapScreen.updateResources();
-                if (StoreManager.isAlmostBought()) {
-                    StoreManager.setBoughtMule(true);
+                if (chosenMule.equals("Food")) {
+                    price = 130;
+                } else if (chosenMule.equals("Energy")) {
+                    price = 125;
+                } else if (chosenMule.equals("Ore")) {
+                    price = 150;
+                } else if (chosenMule.equals("Happiness")) {
+                    price = 170;
                 }
-                StoreManager.setMuleQuantity(Integer.parseInt(muleQty.getText()) - 1);
-                Image image = new Image("MULE/View/Images/walkingCatMuleCursor.gif");
-                GameManager.getMapGrid().setCursor(new ImageCursor(image));
-                MapScreen.setClickCount(0);
+                if (price > GameManager.getCurrentPlayer().getMoney()) {
+                    lowMuleFunds.setOpacity(1.0);
+                } else {
+                    mulePurchase.setDisable(true);
+                    StoreManager.setAlmostBought(true);
+                    GameManager.getCurrentPlayer().setMoney(GameManager.getCurrentPlayer().getMoney() - price);
+                    moneyLabel.setText(String.valueOf(GameManager.getCurrentPlayer().getMoney()));
+                    MapScreen.updateResources();
+                    if (StoreManager.isAlmostBought()) {
+                        StoreManager.setBoughtMule(true);
+                    }
+                    StoreManager.setMuleQuantity(Integer.parseInt(muleQty.getText()) - 1);
+                    Image image = new Image("MULE/View/Images/walkingCatMuleCursor.gif");
+                    GameManager.getMapGrid().setCursor(new ImageCursor(image));
+                    MapScreen.setClickCount(0);
+                }
             });
 
             backButton.setOnAction((event) -> {
