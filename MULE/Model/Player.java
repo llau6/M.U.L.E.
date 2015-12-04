@@ -131,6 +131,8 @@ public class Player implements Comparable<Player> {
             set = 3;
         } else if (s.equals("Ore")) {
             set = 4;
+        } else if (s.equals("Happiness")) {
+            set = 5;
         }
         this.lands[i][j] = set;
     }

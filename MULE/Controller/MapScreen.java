@@ -280,6 +280,7 @@ public class MapScreen implements Initializable {
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+
                 } else {
                     GameManager.gamePlay(countDownText, turnType, round, skipButt);
                     map.setCursor(Cursor.DEFAULT);

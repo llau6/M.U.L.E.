@@ -50,19 +50,25 @@ public final class GameManager {
     public static void initLandSelection(Text countDownText) {
         townOpen = false;
         totalTurnsInitial--;
-        final int[] countDown = {50};
-        countDownText.setText("Time left:" + countDown[0]);
+        final int timeDifficulty;
+        final int[] countDown = {50, 30};
+        if (GameManager.getDifficulty().equals("Tournament")) {
+            timeDifficulty = 1;
+        } else {
+            timeDifficulty = 0;
+        }
+        countDownText.setText("Time left:" + countDown[timeDifficulty]);
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        countDown[0]--;
-                        countDownText.setText("Time left: " + countDown[0]);
-                        timerLeft = countDown[0];
+                        countDown[timeDifficulty]--;
+                        countDownText.setText("Time left: " + countDown[timeDifficulty]);
+                        timerLeft = countDown[timeDifficulty];
 
-                        if (countDown[0] <= 0) {
+                        if (countDown[timeDifficulty] <= 0) {
                             timer.cancel();
                             countDownText.setText("Out of time!");
                         }
@@ -84,19 +90,25 @@ public final class GameManager {
         skipButton.setText("Skip Turn");
         roundLabel.setText("Round:");
         round.setText("" + currentRoundNumber);
-        final int[] countDown = {50};
-        countDownText.setText("Time left: " + countDown[0]);
+        final int timeDifficulty;
+        final int[] countDown = {50, 30};
+        if (GameManager.getDifficulty().equals("Tournament")) {
+            timeDifficulty = 1;
+        } else {
+            timeDifficulty = 0;
+        }
+        countDownText.setText("Time left: " + countDown[timeDifficulty]);
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        countDownText.setText("Time left: " + countDown[0]);
-                        countDown[0]--;
-                        countDownText.setText("Time left: " + countDown[0]);
-                        timerLeft = countDown[0];
-                        if (countDown[0] <= 0) {
+                        countDownText.setText("Time left: " + countDown[timeDifficulty]);
+                        countDown[timeDifficulty]--;
+                        countDownText.setText("Time left: " + countDown[timeDifficulty]);
+                        timerLeft = countDown[timeDifficulty];
+                        if (countDown[timeDifficulty] <= 0) {
                             timer.cancel();
                             countDownText.setText("Out of time!");
                             claimLand.setText("Too late!");
@@ -125,6 +137,9 @@ public final class GameManager {
 
     public static void gamePlay(Text countDownText, Label turnType, Label round, Button skipButton) {
         initiateRandom();
+        if (newRound) {
+            initiateRoundRandom();
+        }
         townOpen = true;
         MapScreen.updateTown();
         newRound = false;
@@ -132,19 +147,25 @@ public final class GameManager {
         skipButton.setText("End Turn");
         turnType.setText("TURN-BASED GAMEPLAY");
         round.setText("" + currentRoundNumber);
-        final int[] countDown = {50};
-        countDownText.setText("Time left: " + countDown[0]);
+        final int[] countDown = {50, 30};
+        final int timeDifficulty;
+        if (GameManager.getDifficulty().equals("Tournament")) {
+            timeDifficulty = 1;
+        } else {
+            timeDifficulty = 0;
+        }
+        countDownText.setText("Time left: " + countDown[timeDifficulty]);
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        countDownText.setText("Time left: " + countDown[0]);
-                        countDown[0]--;
-                        countDownText.setText("Time left: " + countDown[0]);
-                        timerLeft = countDown[0];
-                        if (countDown[0] <= 0) {
+                        countDownText.setText("Time left: " + countDown[timeDifficulty]);
+                        countDown[timeDifficulty]--;
+                        countDownText.setText("Time left: " + countDown[timeDifficulty]);
+                        timerLeft = countDown[timeDifficulty];
+                        if (countDown[timeDifficulty] <= 0) {
                             timer.cancel();
                             countDownText.setText("Out of time!");
                             townOpen = false;
@@ -216,6 +237,25 @@ public final class GameManager {
         }
     }
 
+    //round event
+    public static void initiateRoundRandom() {
+        int chance = (int) (Math.random() * 100 + 1);
+        //int chance = 15;
+        if (chance <= 15) {
+            try {
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(GameManager.class.getResource("../View/RRandomEvent.fxml"));
+                stage.setScene(new Scene(root));
+                stage.setTitle("Round Random Event");
+                //this line was the culprit of the crashes for some reason...
+                //stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch(IOException e) {
+                System.out.println("Could not open Round Random Events Screen.");
+            }
+        }
+    }
+
     /**
      * Updates resources gained from mules for every player every round
      */
@@ -227,6 +267,7 @@ public final class GameManager {
             // [2] = Owns Food Mule
             // [3] = Owns Energy Mule
             // [4] = Owns Ore Mule
+            // [5] = Owns Happiness Mule
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 9; j++) {
                     int landNum = lands[i][j];
@@ -240,6 +281,9 @@ public final class GameManager {
                             player.setEnergyCount(player.getEnergyCount() - 1);
                         } else if (landNum == 4) {
                             player.setOreCount(player.getOreCount() + tileType.getOreCount());
+                            player.setEnergyCount(player.getEnergyCount() - 1);
+                        } else if (landNum == 5) {
+                            player.setHappinessCount(player.getHappinessCount() + tileType.getHappinessCount());
                             player.setEnergyCount(player.getEnergyCount() - 1);
                         }
                     }

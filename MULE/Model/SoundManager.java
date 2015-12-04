@@ -3,6 +3,7 @@ package MULE.Model;
 /**
  * Created by elliekang on 10/1/15.
  */
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.applet.Applet;
@@ -98,7 +99,7 @@ public class SoundManager {
     }
 
     public void playSel(String path) {
-        javafx.scene.media.Media media = new javafx.scene.media.Media(Paths.get(path).toUri().toString());
+        Media media = new Media(Paths.get(path).toUri().toString());
         player = new MediaPlayer(media);
         player.setAutoPlay(true);
     }
