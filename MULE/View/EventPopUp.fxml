@@ -15,7 +15,7 @@
         <Image url="@Images/stoneBG.png" />
       </image>
     </ImageView>
-    <Label id="label" fx:id="eventMessage" alignment="TOP_LEFT" disable="false" focusTraversable="false" layoutX="65.0" layoutY="56.0" prefHeight="261.0" prefWidth="478.0" text="Messagedddddddddddddddddddddddddddddddddddddddd" textOverrun="ELLIPSIS" wrapText="true">
+    <Label id="label" fx:id="eventMessage" alignment="CENTER" disable="false" focusTraversable="false" layoutX="65.0" layoutY="56.0" prefHeight="261.0" prefWidth="478.0" text="Messagedddddddddddddddddddddddddddddddddddddddd" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true">
       <font>
         <Font name="System Bold" size="35.0" />
       </font>

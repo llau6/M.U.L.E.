@@ -14,7 +14,7 @@
   <children>
     <ImageView fitHeight="509.4168701171875" fitWidth="873.2860212663383" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/storeOpaque.png" />
+        <Image url="@Images/storeOpaque.png" />
       </image>
     </ImageView>
     <Rectangle arcHeight="0.0" arcWidth="0.0" disable="false" fill="WHITE" focusTraversable="false" height="413.8000183105469" layoutX="615.0" layoutY="48.0" opacity="0.83" smooth="true" strokeLineCap="SQUARE" strokeLineJoin="MITER" strokeType="CENTERED" strokeWidth="10.0" width="218.00003051757812">
@@ -82,17 +82,17 @@
     <Rectangle arcHeight="0.0" arcWidth="0.0" disable="false" fill="WHITE" focusTraversable="false" height="412.8000183105469" layoutX="41.0" layoutY="49.0" opacity="0.83" smooth="true" stroke="$x3" strokeLineCap="SQUARE" strokeLineJoin="MITER" strokeType="CENTERED" strokeWidth="10.0" width="277.0000305175781" />
     <ImageView fitHeight="76.0" fitWidth="80.07142673068576" layoutX="55.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/Food.png" />
+        <Image url="@Images/Food.png" />
       </image>
     </ImageView>
     <ImageView fitHeight="80.00009237060294" fitWidth="84.2858109235456" layoutX="54.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/Energy.png" />
+        <Image url="@Images/Energy.png" />
       </image>
     </ImageView>
     <ImageView fitHeight="77.0" fitWidth="81.12499319540487" layoutX="53.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/ore.png" />
+        <Image url="@Images/ore.png" />
       </image>
     </ImageView>
     <Label alignment="CENTER" font="$x2" layoutX="83.0" layoutY="69.0" prefWidth="195.00009999999747" text="Resources" />
@@ -126,7 +126,7 @@
     <Rectangle fx:id="foodMule" arcHeight="5.0" arcWidth="5.0" fill="BLACK" height="136.814208984375" layoutX="360.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
     <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="347.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/muleFood.gif" />
+        <Image url="@Images/muleFood.gif" />
       </image>
     </ImageView>
     <Label font="$x1" layoutX="367.0" layoutY="215.0" prefWidth="91.0" text="Price: 130" />
@@ -134,7 +134,7 @@
     <Rectangle fx:id="energyMule" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="136.814208984375" layoutX="476.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="99.0" />
     <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="465.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/muleEnergy.gif" />
+        <Image url="@Images/muleEnergy.gif" />
       </image>
     </ImageView>
     <Label font="$x1" layoutX="486.0" layoutY="210.0" prefWidth="91.0" text="Price: 125" />
@@ -146,7 +146,7 @@
     </Rectangle>
     <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="346.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/muleOre.gif" />
+        <Image url="@Images/muleOre.gif" />
       </image>
     </ImageView>
     <Label font="$x1" layoutX="367.0" layoutY="352.0" prefWidth="91.0" text="Price: 150" />
@@ -154,7 +154,7 @@
     <Rectangle fx:id="happinessMule" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="476.0" layoutY="263.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
     <ImageView fitHeight="90.0" fitWidth="130.4347862081325" layoutX="465.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
       <image>
-        <Image url="file:/C:/Users/Lily/Documents/untitled1/src/MULEProj/MULE/View/Images/muleHappiness.gif" />
+        <Image url="@Images/muleHappiness.gif" />
       </image>
     </ImageView>
     <Label font="$x1" layoutX="486.0" layoutY="352.0" prefWidth="91.0" text="Price: 170" />
@@ -198,13 +198,9 @@
     <Label id="cannotBuy" fx:id="lowPlayerResources" font="$x1" layoutX="61.0" layoutY="106.0" opacity="0.0" prefWidth="254.0" text="*Insufficient player resources" textFill="RED" />
     <Label id="cannotBuy" fx:id="lowResourcesFunds" font="$x1" layoutX="61.0" layoutY="106.0" opacity="0.0" prefWidth="254.0" text="*Insufficient funds" textFill="RED" />
     <Label id="cannotBuy" fx:id="lowMuleFunds" font="$x1" layoutX="359.0" layoutY="98.0" opacity="0.0" prefWidth="254.0" text="*Insufficient funds" textFill="RED" />
-    <Rectangle id="oreMule" fx:id="oreMuleHover" arcHeight="5.0" arcWidth="5.0" height="136.814208984375" layoutX="360.0" layoutY="266.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0">
-      <fill>
-        <Color blue="0.200" green="0.129" red="0.000" fx:id="x6" />
-      </fill>
-    </Rectangle>
-    <Rectangle id="oreMule" fx:id="foodMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x6" height="136.814208984375" layoutX="359.0" layoutY="123.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
-    <Rectangle id="oreMule" fx:id="energyMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x6" height="136.814208984375" layoutX="476.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
-    <Rectangle id="oreMule" fx:id="happinessMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x6" height="136.814208984375" layoutX="476.0" layoutY="262.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <Rectangle id="oreMule" fx:id="oreMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="360.0" layoutY="266.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <Rectangle id="oreMule" fx:id="foodMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="359.0" layoutY="123.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <Rectangle id="oreMule" fx:id="energyMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="476.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
+    <Rectangle id="oreMule" fx:id="happinessMuleHover" arcHeight="5.0" arcWidth="5.0" fill="$x4" height="136.814208984375" layoutX="476.0" layoutY="262.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="99.0" />
   </children>
 </AnchorPane>

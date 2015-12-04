@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="776.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MULE.Controller.EndingScreen">
+  <children>
+    <ImageView id="imgBG" fx:id="endingBG" fitHeight="581.25" fitWidth="775.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Images/ending.png" />
+      </image>
+    </ImageView>
+    <Rectangle fx:id="playRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="45.0" layoutX="258.0" layoutY="387.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="269.0" />
+  </children>
+</AnchorPane>
