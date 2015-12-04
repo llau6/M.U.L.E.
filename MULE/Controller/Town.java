@@ -198,15 +198,6 @@ public class Town implements Initializable {
     }
 
     private void closeTown() {
-        if (Store.soundManager != null) {
-            Store.soundManager.shutdown();
-        }
-        if (Pub.soundManager != null) {
-            Pub.soundManager.shutdown();
-        }
-        if (ControllerWampusGrounds.soundManager != null) {
-            ControllerWampusGrounds.soundManager.shutdown();
-        }
         Town.soundManager.shutdown();
         MapScreen.soundManager.playMusic();
         Stage stage = (Stage) character.getScene().getWindow();
@@ -216,6 +207,7 @@ public class Town implements Initializable {
     private void goToPlaces(String toWhere) {
         //load up other FXML document
         try {
+            soundManager.shutdown();
             Stage stage = (Stage) character.getScene().getWindow();
             Parent root;
             //get reference to the button's stage

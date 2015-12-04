@@ -18,7 +18,7 @@ public class Database {
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://localhost:8889/WildCats";
             String username = "root";
-            String password = "root";
+            String password = "wildcats123";
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, username, password);
             return conn;
@@ -144,6 +144,7 @@ public class Database {
         for (Player p : GameManager.players) {
             GameManager.getOrderedPlayers().add(p);
         }
+        GameManager.setPlayerNum(GameManager.players.size());
     }
 
 

@@ -28,7 +28,7 @@ public class RRoundMessagePop {
             taxes[i] = 5 + (i * 2);
         }
         int rand = (int)(Math.random() * taxes.length);
-        taxMessage.setText(taxes[rand] + ".0% will be deducted from you money!");
+        taxMessage.setText(taxes[rand] + ".0% will be deducted from your money!");
         initiateEvent(rand);
         okayButton.setOnMouseClicked((event) -> {
             ((Stage) okayButton.getScene().getWindow()).close();

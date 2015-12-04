@@ -26,6 +26,7 @@ public class SoundManager {
     private Map<String, AudioClip> soundEffectsMap = new HashMap<>();
     private int soundNum;
     private MediaPlayer player;
+    private boolean isPlaying;
 
     /**
      * Constructor to create a simple thread pool.
@@ -35,6 +36,7 @@ public class SoundManager {
     public SoundManager(int numberOfThreads, int soundSelection) throws MalformedURLException {
         soundPool = Executors.newFixedThreadPool(numberOfThreads);
         soundNum = soundSelection;
+        isPlaying = false;
         //loadSoundEffects();
     }
 
@@ -102,6 +104,7 @@ public class SoundManager {
         Media media = new Media(Paths.get(path).toUri().toString());
         player = new MediaPlayer(media);
         player.setAutoPlay(true);
+        isPlaying = true;
     }
 
 //    /**
@@ -113,6 +116,10 @@ public class SoundManager {
 
     public void shutdown() {
         player.stop();
+        isPlaying = false;
     }
 
+    public boolean isPlaying() {
+        return isPlaying;
+    }
 }
