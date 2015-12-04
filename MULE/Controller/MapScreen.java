@@ -258,41 +258,58 @@ public class MapScreen implements Initializable {
         });
 
         skipButt.setOnAction((event) -> {
-            GameManager.getTimer().cancel();
-            if (claimLand.isDisable()) {
-                claimLand.setText("Claim Land!");
-                claimLand.setDisable(false);
-            }
-            skipCount++;
-            if (skipCount >= GameManager.getPlayersQueue().size() || isLoadingFromDB) {
-                claimLand.setDisable(true);
-                if (GameManager.isNewRound()) {
-                    GameManager.updateProduction();
-                    //IFFFY
-                    Stage stage = new Stage();
-                    Parent root = null;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("../View/saveScreen.fxml"));
-                        stage.setScene(new Scene(root));
-                        stage.setTitle("Save Screen");
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.show();
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                } else {
-                    GameManager.gamePlay(countDownText, turnType, round, skipButt);
-                    map.setCursor(Cursor.DEFAULT);
+            // Game is over
+            if (GameManager.getCurrentRoundNumber() == 13) {
+                Stage stage = (Stage) skipButt.getScene().getWindow();
+                stage.close();
+                stage = new Stage();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("../View/winningScreen.fxml"));
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Save Screen");
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.show();
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
             } else {
-                if (playerCount + skipCount == GameManager.getPlayersQueue().size()) {
-                    playerCount = 0;
-                    skipCount = 0;
+                GameManager.getTimer().cancel();
+                if (claimLand.isDisable()) {
+                    claimLand.setText("Claim Land!");
+                    claimLand.setDisable(false);
                 }
-                GameManager.buyLandSelection(countDownText, round, roundLabel, turnType, claimLand, skipButt);
+                skipCount++;
+                if (skipCount >= GameManager.getPlayersQueue().size() || isLoadingFromDB) {
+                    claimLand.setDisable(true);
+                    if (GameManager.isNewRound()) {
+                        GameManager.updateProduction();
+                        //IFFFY
+                        Stage stage = new Stage();
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("../View/saveScreen.fxml"));
+                            stage.setScene(new Scene(root));
+                            stage.setTitle("Save Screen");
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.show();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    } else {
+                        GameManager.gamePlay(countDownText, turnType, round, skipButt);
+                        map.setCursor(Cursor.DEFAULT);
+                    }
+                } else {
+                    if (playerCount + skipCount == GameManager.getPlayersQueue().size()) {
+                        playerCount = 0;
+                        skipCount = 0;
+                    }
+                    GameManager.buyLandSelection(countDownText, round, roundLabel, turnType, claimLand, skipButt);
+                }
+                // So next player can purchase mule
+                StoreManager.setBoughtMule(false);
             }
-            // So next player can purchase mule
-            StoreManager.setBoughtMule(false);
         });
     }
 

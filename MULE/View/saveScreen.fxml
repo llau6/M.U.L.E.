@@ -27,7 +27,7 @@
       </font>
     </Label>
     <Label font="$x3" layoutX="139.0" layoutY="295.0" prefWidth="323.0" text="Do you want to save?" />
-    <HBox layoutX="67.0" layoutY="97.0" prefHeight="40.0" prefWidth="482.0">
+    <HBox layoutX="81.0" layoutY="97.0" prefHeight="40.0" prefWidth="445.0">
       <children>
         <Label fx:id="firstLabel" prefWidth="80.0" text="1st">
           <font>
@@ -43,7 +43,7 @@
         <Label fx:id="firstScore" font="$x2" prefWidth="152.0" text="Score: " />
       </children>
     </HBox>
-    <HBox layoutX="67.0" layoutY="149.0" prefHeight="40.0" prefWidth="483.0">
+    <HBox layoutX="81.0" layoutY="149.0" prefHeight="40.0" prefWidth="445.0">
       <children>
         <Label fx:id="secondLabel" font="$x2" opacity="0.0" prefWidth="75.9998779296875" text="2nd" />
         <Label id="firstPlayer" fx:id="p2" font="$x2" opacity="0.0" prefWidth="92.9998779296875" text="Player:" />
@@ -51,7 +51,7 @@
         <Label fx:id="secondScore" font="$x2" opacity="0.0" prefWidth="148.0" text="Score: " />
       </children>
     </HBox>
-    <HBox layoutX="65.0" layoutY="199.0" prefHeight="40.0" prefWidth="481.9999000000025">
+    <HBox layoutX="81.0" layoutY="199.0" prefHeight="40.0" prefWidth="445.0">
       <children>
         <Label fx:id="thirdLabel" font="$x2" opacity="0.0" prefWidth="76.0" text="3rd" />
         <Label id="firstPlayer" fx:id="p3" font="$x2" opacity="0.0" prefWidth="91.0" text="Player:" />
@@ -59,7 +59,7 @@
         <Label fx:id="thirdScore" font="$x2" opacity="0.0" prefWidth="152.0" text="Score: " />
       </children>
     </HBox>
-    <HBox layoutX="67.0" layoutY="248.0" prefHeight="40.0" prefWidth="482.0">
+    <HBox layoutX="81.0" layoutY="248.0" prefHeight="40.0" prefWidth="445.0">
       <children>
         <Label fx:id="fourthLabel" font="$x2" opacity="0.0" prefWidth="76.0" text="4th" />
         <Label id="firstPlayer" fx:id="p4" font="$x2" opacity="0.0" prefWidth="92.0" text="Player:" />
